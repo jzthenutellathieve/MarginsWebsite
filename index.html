@@ -74,28 +74,183 @@ body {
 .btn-text { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-family: 'Inter', sans-serif; }
 .btn-text:hover { color: var(--blue); border-color: var(--blue); }
 
-/* ── HOME ── */
-.hero { border-bottom: 1px solid var(--rule); padding-bottom: 3rem; margin-bottom: 3rem; display: grid; grid-template-columns: 1fr 340px; gap: 3rem; align-items: start; }
-.hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--blue); margin-bottom: 1rem; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 0.75rem; }
-.hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--blue); }
-.hero-headline { font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4vw, 3.8rem); font-weight: 700; line-height: 1.08; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
-.hero-headline em { font-style: italic; font-weight: 400; color: var(--ink-mid); }
-.hero-standfirst { font-family: 'Source Serif 4', serif; font-size: 1.05rem; line-height: 1.75; color: var(--ink-mid); max-width: 58ch; margin-bottom: 2rem; border-left: 3px solid var(--blue); padding-left: 1.25rem; }
+/* ── HOME HERO ── */
+.hero {
+  position: relative;
+  margin: 0 -3rem 3rem;
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  min-height: 520px;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Full-bleed carousel behind everything */
+.hero-carousel-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-img-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.hero-img-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.hero-img-slide.active { opacity: 1; }
+.hero-img-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* Dark gradient over image so text is readable */
+.hero-carousel-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(26,24,20,0.82) 0%,
+    rgba(26,24,20,0.55) 55%,
+    rgba(26,24,20,0.15) 100%
+  );
+  z-index: 1;
+}
+
+/* Text content over image */
+.hero-main {
+  position: relative;
+  z-index: 2;
+  padding: 4rem 3rem 3rem;
+  max-width: 660px;
+}
+.hero-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(212,150,120,0.9);
+  margin-bottom: 1.25rem;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: rgba(212,150,120,0.9);
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+  color: #F8F6F1;
+}
+.hero-headline em {
+  font-style: italic;
+  font-weight: 400;
+  color: rgba(242,238,230,0.75);
+}
+.hero-standfirst {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: rgba(242,238,230,0.8);
+  max-width: 52ch;
+  margin-bottom: 2rem;
+  border-left: 2px solid rgba(176,48,32,0.7);
+  padding-left: 1.1rem;
+}
 .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
-.hero-sidebar { border-left: 1px solid var(--rule); padding-left: 2rem; }
-.hero-img-carousel { position: relative; width: 100%; height: 100%; min-height: 340px; overflow: hidden; background: var(--paper-warm); }
-.hero-img-track { position: relative; width: 100%; height: 100%; }
-.hero-img-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.6s ease; }
-.hero-img-slide.active { opacity: 1; position: relative; }
-.hero-img-slide img { width: 100%; height: 300px; object-fit: cover; display: block; }
-.hero-img-caption { font-size: 0.68rem; color: var(--ink-dim); font-family: 'Inter', sans-serif; padding: 0.6rem 0.75rem; line-height: 1.4; background: rgba(248,246,241,0.9); }
-.hero-img-dots { position: absolute; bottom: 2.8rem; left: 50%; transform: translateX(-50%); display: flex; gap: 0.4rem; z-index: 3; }
-.hero-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.5); border: none; cursor: pointer; padding: 0; transition: background 0.2s; }
-.hero-dot.active { background: white; }
-.hero-img-prev, .hero-img-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(248,246,241,0.85); border: 1px solid var(--rule); color: var(--ink); width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.85rem; z-index: 3; transition: background 0.2s; }
-.hero-img-prev { left: 0.5rem; }
-.hero-img-next { right: 0.5rem; }
-.hero-img-prev:hover, .hero-img-next:hover { background: var(--paper-warm); }
+.btn-primary-light {
+  padding: 0.75rem 1.75rem;
+  background: var(--blue);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary-light:hover { background: #8C1A1A; }
+.btn-text-light {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: rgba(242,238,230,0.85);
+  border-bottom: 1px solid rgba(242,238,230,0.4);
+  padding-bottom: 1px;
+  background: none;
+  border-top: none; border-left: none; border-right: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.2s, border-color 0.2s;
+}
+.btn-text-light:hover { color: white; border-color: rgba(242,238,230,0.8); }
+
+/* Carousel controls — bottom right */
+.hero-carousel-controls {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-img-dots { display: flex; gap: 0.4rem; }
+.hero-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+.hero-dot.active { background: white; transform: scale(1.3); }
+.hero-img-prev, .hero-img-next {
+  width: 34px; height: 34px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: white;
+  font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s;
+  backdrop-filter: blur(4px);
+}
+.hero-img-prev:hover, .hero-img-next:hover { background: rgba(255,255,255,0.22); }
+
+/* Caption — bottom left */
+.hero-img-caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 3rem;
+  z-index: 3;
+  font-size: 0.65rem;
+  color: rgba(255,255,255,0.5);
+  font-family: 'Inter', sans-serif;
+  font-style: italic;
+  max-width: 40ch;
+  line-height: 1.4;
+  pointer-events: none;
+}
 
 /* Pillars */
 .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
@@ -391,36 +546,42 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 <div class="page active" id="home">
   <main style="max-width:1200px;margin:0 auto;padding:3rem;">
     <div class="hero reveal">
+      <!-- Full-bleed carousel background -->
+      <div class="hero-carousel-bg">
+        <div class="hero-img-track" id="hero-track">
+          <div class="hero-img-slide active">
+            <img src="/images/iStock-960934400.jpg" alt="Aerial view of dredging vessel in turquoise waters" loading="eager">
+          </div>
+          <div class="hero-img-slide">
+            <img src="/images/iStock-157603815.jpg" alt="Hopper dredger rainbowing sand onto coastline" loading="lazy">
+          </div>
+        </div>
+      </div>
+
+      <!-- Text overlay -->
       <div class="hero-main">
         <div class="hero-eyebrow">Solutions Journalism</div>
         <h2 class="hero-headline">Reporting on displacement —<br>and <em>what's being built</em><br>to end it.</h2>
         <p class="hero-standfirst">
-          Investigative reporting on refugees, asylum seekers, and marginalized communities facing forced displacement — alongside the housing initiatives, water technologies, and policy solutions that could change their lives, and the barriers keeping those solutions from spreading.
+          Investigative reporting on refugees, asylum seekers, and marginalized communities facing forced displacement — alongside the housing initiatives, water technologies, and policy solutions that could change their lives.
         </p>
         <div class="hero-actions">
-          <button class="btn-primary" onclick="showPage('reporting')">Read the Reporting</button>
-          <button class="btn-text" onclick="showPage('solutions')">Explore Solutions →</button>
+          <button class="btn-primary-light" onclick="showPage('reporting')">Read the Reporting</button>
+          <button class="btn-text-light" onclick="showPage('solutions')">Explore Solutions →</button>
         </div>
       </div>
-      <div class="hero-sidebar">
-        <div class="hero-img-carousel" id="hero-carousel">
-          <div class="hero-img-track" id="hero-track">
-            <div class="hero-img-slide active">
-              <img src="/images/iStock-960934400.jpg" alt="Aerial view of dredging vessel in turquoise waters" loading="eager">
-              <div class="hero-img-caption">A dredging vessel disperses sediment into coastal waters off the UAE. Photo: iStock / kertu_ee</div>
-            </div>
-            <div class="hero-img-slide">
-              <img src="/images/iStock-157603815.jpg" alt="Hopper dredger rainbowing sand onto coastline" loading="lazy">
-              <div class="hero-img-caption">A hopper dredger 'rainbows' dredged sand onto a forming coastline. Photo: iStock / Freezingtime</div>
-            </div>
-          </div>
-          <div class="hero-img-dots" id="hero-dots">
-            <button class="hero-dot active" onclick="goSlide(0)"></button>
-            <button class="hero-dot" onclick="goSlide(1)"></button>
-          </div>
-          <button class="hero-img-prev" onclick="prevSlide()">←</button>
-          <button class="hero-img-next" onclick="nextSlide()">→</button>
+
+      <!-- Caption bottom left -->
+      <div class="hero-img-caption" id="hero-caption">A dredging vessel disperses sediment into coastal waters off the UAE. Photo: iStock / kertu_ee</div>
+
+      <!-- Controls bottom right -->
+      <div class="hero-carousel-controls">
+        <div class="hero-img-dots" id="hero-dots">
+          <button class="hero-dot active" onclick="goSlide(0)"></button>
+          <button class="hero-dot" onclick="goSlide(1)"></button>
         </div>
+        <button class="hero-img-prev" onclick="prevSlide()">←</button>
+        <button class="hero-img-next" onclick="nextSlide()">→</button>
       </div>
     </div>
 
@@ -759,20 +920,25 @@ function renderHomeArticles() {
 }
 
 // ── HERO IMAGE CAROUSEL ──
+const heroCaptions = [
+  'A dredging vessel disperses sediment into coastal waters off the UAE. Photo: iStock / kertu_ee',
+  'A hopper dredger rainbows dredged sand onto a forming coastline. Photo: iStock / Freezingtime'
+];
 let currentSlide = 0;
 function goSlide(n) {
   const slides = document.querySelectorAll('.hero-img-slide');
   const dots = document.querySelectorAll('.hero-dot');
-  const track = document.getElementById('hero-track');
   if (!slides.length) return;
+  slides[currentSlide]?.classList.remove('active');
   currentSlide = (n + slides.length) % slides.length;
-  track.style.transform = `translateX(-${currentSlide * 100}%)`;
+  slides[currentSlide]?.classList.add('active');
   dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+  const cap = document.getElementById('hero-caption');
+  if (cap) cap.textContent = heroCaptions[currentSlide] || '';
 }
 function nextSlide() { goSlide(currentSlide + 1); }
 function prevSlide() { goSlide(currentSlide - 1); }
-// Auto-advance every 5s
-setInterval(() => { if (document.getElementById('hero-track')) nextSlide(); }, 5000);
+setInterval(() => { if (document.querySelector('.hero-img-slide')) nextSlide(); }, 5000);
 
 // ── RENDER REPORTING ──
 function renderReporting() {
