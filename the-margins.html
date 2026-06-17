@@ -1,0 +1,1560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Margins — Solutions journalism on displacement, housing, and water</title>
+<meta name="description" content="Solutions journalism on displacement, housing, and water. Field reporting on the crises that follow forced migration.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --paper: #F8F6F1;
+  --paper-warm: #F2EEE7;
+  --ink: #1A1814;
+  --ink-mid: #3D3830;
+  --ink-light: #6B6357;
+  --ink-dim: #A09890;
+  --rule: #D8D2C8;
+  --rule-light: #EAE6DF;
+  --red: #B03020;
+  --red-light: #D94030;
+  --red-bg: rgba(176,48,32,0.06);
+}
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── MASTHEAD ── */
+.masthead {
+  background: var(--paper);
+  border-bottom: 3px solid var(--ink);
+  padding: 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow 0.3s;
+}
+.masthead.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+
+.masthead-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  border-bottom: 1px solid var(--rule);
+}
+.masthead-date {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+}
+.masthead-title {
+  text-align: center;
+}
+.masthead-title h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+}
+.masthead-title h1 span { color: var(--red); }
+.masthead-tagline {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-top: 0.2rem;
+}
+.masthead-cta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.btn-subscribe {
+  padding: 0.45rem 1.1rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-subscribe:hover { background: var(--red); }
+
+.masthead-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 0 3rem;
+}
+.masthead-nav a {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  padding: 0.7rem 1.25rem;
+  border-bottom: 2px solid transparent;
+  transition: border-color 0.2s, color 0.2s;
+}
+.masthead-nav a:hover,
+.masthead-nav a.active { border-bottom-color: var(--red); color: var(--red); }
+
+/* ── PAGES ── */
+.page { display: none; }
+.page.active { display: block; }
+
+/* ── HOME ── */
+#home {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+
+/* Hero — full-width editorial headline */
+.hero {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 3rem;
+  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 3rem;
+  align-items: start;
+}
+.hero-main {}
+.hero-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 1rem;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1px;
+  background: var(--red);
+}
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.4rem, 4.5vw, 4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.5rem;
+}
+.hero-headline em {
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-mid);
+}
+.hero-standfirst {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: var(--ink-mid);
+  max-width: 56ch;
+  margin-bottom: 2rem;
+  border-left: 3px solid var(--red);
+  padding-left: 1.25rem;
+}
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.btn-primary {
+  padding: 0.7rem 1.5rem;
+  background: var(--red);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: var(--ink); }
+.btn-text {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  cursor: pointer;
+}
+.btn-text:hover { color: var(--red); border-color: var(--red); }
+
+/* Hero sidebar */
+.hero-sidebar {
+  border-left: 1px solid var(--rule);
+  padding-left: 2rem;
+}
+.sidebar-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.sidebar-stat {
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+.sidebar-stat:last-child { border-bottom: none; }
+.sidebar-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.sidebar-desc {
+  font-size: 0.8rem;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+/* Two pillars */
+.pillars {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 3rem;
+}
+.pillar-card {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 2rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+.pillar-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--red);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s;
+}
+.pillar-card:hover { background: white; }
+.pillar-card:hover::after { transform: scaleX(1); }
+.pillar-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 0.75rem;
+}
+.pillar-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+}
+.pillar-card p {
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  line-height: 1.65;
+}
+.pillar-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-family: 'Inter', sans-serif;
+}
+
+/* Latest articles */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.section-rule h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  white-space: nowrap;
+}
+.section-rule::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+.section-rule-right {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--red);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: 'Inter', sans-serif;
+}
+.section-rule-right:hover { text-decoration: underline; }
+
+.article-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.article-card {
+  background: white;
+  border: 1px solid var(--rule-light);
+  padding: 1.75rem;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+.article-card:hover {
+  border-color: var(--rule);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+}
+.article-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+.article-tag {
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: var(--red);
+  background: var(--red-bg);
+  padding: 0.2rem 0.5rem;
+}
+.article-date {
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  font-family: 'Inter', sans-serif;
+}
+.article-read-time {
+  font-size: 0.68rem;
+  color: var(--ink-dim);
+  font-family: 'Inter', sans-serif;
+  margin-left: auto;
+}
+.article-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+.article-card:hover h3 { color: var(--red); }
+.article-card p {
+  font-size: 0.83rem;
+  color: var(--ink-light);
+  line-height: 1.65;
+}
+.article-award {
+  margin-top: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-dim);
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid var(--rule-light);
+  padding-top: 0.75rem;
+  font-style: italic;
+}
+
+/* ── REPORTING PAGE ── */
+#reporting {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+.reporting-header {
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+.reporting-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.reporting-header p {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  max-width: 60ch;
+}
+.tag-filter {
+  display: flex;
+  gap: 0;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+.tag-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.25rem;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  color: var(--ink-light);
+  transition: color 0.2s, border-color 0.2s;
+  margin-bottom: -1px;
+}
+.tag-btn:hover { color: var(--ink); }
+.tag-btn.active { color: var(--red); border-bottom-color: var(--red); }
+
+.article-list { display: flex; flex-direction: column; gap: 0; }
+.article-row {
+  display: grid;
+  grid-template-columns: 100px 1fr auto;
+  gap: 2rem;
+  align-items: start;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--rule-light);
+  cursor: pointer;
+  transition: background 0.15s;
+  text-decoration: none;
+  color: inherit;
+}
+.article-row:first-child { border-top: 1px solid var(--rule-light); }
+.article-row:hover { background: white; margin: 0 -1rem; padding-left: 1rem; padding-right: 1rem; }
+.row-date {
+  font-size: 0.72rem;
+  color: var(--ink-dim);
+  font-family: 'Inter', sans-serif;
+  padding-top: 0.2rem;
+  line-height: 1.4;
+}
+.row-content {}
+.row-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 0.4rem;
+  transition: color 0.2s;
+}
+.article-row:hover .row-title { color: var(--red); }
+.row-excerpt {
+  font-size: 0.82rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+}
+.row-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.4rem;
+  padding-top: 0.2rem;
+}
+
+/* ── ARTICLE PAGE ── */
+#article {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 3rem 2rem;
+}
+.article-back {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  font-family: 'Inter', sans-serif;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 2.5rem;
+  padding: 0;
+  transition: color 0.2s;
+}
+.article-back:hover { color: var(--red); }
+.article-header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 2rem;
+  margin-bottom: 2rem;
+}
+.article-award-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  color: var(--red);
+  border: 1px solid rgba(176,48,32,0.3);
+  padding: 0.25rem 0.6rem;
+  margin-bottom: 1rem;
+}
+.article-h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+.article-subtitle {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: var(--ink-mid);
+  margin-bottom: 1.5rem;
+}
+.article-byline {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  font-size: 0.78rem;
+  color: var(--ink-light);
+  font-family: 'Inter', sans-serif;
+}
+.byline-name { color: var(--ink); font-weight: 500; }
+.byline-sep { color: var(--rule); }
+
+.article-body { font-family: 'Source Serif 4', serif; }
+.article-body p {
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--ink-mid);
+  margin-bottom: 1.5rem;
+}
+.article-body h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 2.5rem 0 1rem;
+  color: var(--ink);
+}
+.article-pullquote {
+  border-left: 4px solid var(--red);
+  margin: 2.5rem 0;
+  padding: 0.5rem 0 0.5rem 1.5rem;
+}
+.article-pullquote blockquote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 0.75rem;
+}
+.article-pullquote cite {
+  font-size: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-dim);
+  font-style: normal;
+  letter-spacing: 0.05em;
+}
+.article-stat-block {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+}
+.stat-number {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  white-space: nowrap;
+}
+.stat-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  color: var(--ink-light);
+  line-height: 1.5;
+}
+
+/* ── TENG-UV PAGE ── */
+#technology {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+.tech-hero {
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 2.5rem;
+  margin-bottom: 3rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 4rem;
+  align-items: end;
+}
+.tech-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 1rem;
+}
+.tech-hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.tech-hero-sub {
+  font-size: 0.95rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+  max-width: 50ch;
+}
+.tech-headline-stat {
+  text-align: right;
+}
+.tech-big-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+.tech-big-label {
+  font-size: 0.8rem;
+  color: var(--ink-light);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.4;
+}
+
+.tech-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-bottom: 3rem;
+}
+.tech-card {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 2rem;
+}
+.tech-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.tech-card p {
+  font-size: 0.88rem;
+  color: var(--ink-light);
+  line-height: 1.7;
+}
+
+/* comparison table */
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0 3rem;
+}
+.compare-table th {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  padding: 0.75rem 1rem;
+  border-bottom: 2px solid var(--ink);
+  text-align: left;
+}
+.compare-table th:first-child { width: 35%; }
+.compare-table td {
+  font-size: 0.88rem;
+  padding: 0.9rem 1rem;
+  border-bottom: 1px solid var(--rule-light);
+  color: var(--ink-mid);
+  font-family: 'Source Serif 4', serif;
+  vertical-align: top;
+}
+.compare-table tr:hover td { background: white; }
+.compare-table .highlight { color: var(--red); font-weight: 500; font-family: 'Inter', sans-serif; }
+.compare-table .good { color: #2A6B3C; }
+.compare-table .bad { color: #8B3020; }
+
+.tech-cta {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 3rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 3rem;
+  align-items: center;
+}
+.tech-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.tech-cta p {
+  font-size: 0.88rem;
+  color: rgba(242,238,231,0.7);
+  line-height: 1.65;
+}
+.btn-cta-white {
+  padding: 0.85rem 2rem;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.btn-cta-white:hover { background: var(--red); color: white; }
+
+/* ── HOUSING PAGE ── */
+#housing {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem;
+}
+.housing-header {
+  border-bottom: 3px solid var(--ink);
+  padding-bottom: 2rem;
+  margin-bottom: 3rem;
+}
+.housing-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.housing-header p {
+  font-size: 1rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
+  max-width: 65ch;
+  font-family: 'Source Serif 4', serif;
+}
+.housing-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+}
+.housing-main p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: var(--ink-mid);
+  margin-bottom: 1.5rem;
+}
+.housing-main h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin: 2rem 0 1rem;
+}
+.housing-sidebar {}
+.sidebar-block {
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  background: white;
+}
+.sidebar-block h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule-light);
+}
+.sidebar-block p {
+  font-size: 0.82rem;
+  color: var(--ink-light);
+  line-height: 1.65;
+  margin-bottom: 0.75rem;
+}
+.sidebar-block a {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--red);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  margin-top: 0.25rem;
+}
+.sidebar-block a:hover { text-decoration: underline; }
+.housing-stat-row {
+  display: flex;
+  gap: 2px;
+  margin-bottom: 3rem;
+}
+.housing-stat {
+  flex: 1;
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+}
+.housing-stat .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--red);
+  line-height: 1;
+  margin-bottom: 0.3rem;
+}
+.housing-stat .desc {
+  font-size: 0.78rem;
+  color: var(--ink-light);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.4;
+}
+
+/* ── ABOUT PAGE ── */
+#about {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+#about .section-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 0.75rem;
+}
+#about h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 3px solid var(--ink);
+}
+#about p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.05rem;
+  line-height: 1.8;
+  color: var(--ink-mid);
+  margin-bottom: 1.5rem;
+}
+#about strong { color: var(--ink); font-weight: 400; }
+.affil-list {
+  margin: 2.5rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.affil-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1.5rem;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule-light);
+  font-size: 0.88rem;
+}
+.affil-row:last-child { border-bottom: none; }
+.affil-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  padding-top: 0.1rem;
+}
+.affil-value {
+  font-family: 'Source Serif 4', serif;
+  color: var(--ink-mid);
+}
+.contact-block {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.contact-block p {
+  font-size: 0.88rem;
+  margin-bottom: 0.75rem;
+}
+.contact-block a {
+  color: var(--red);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 2.5rem 3rem;
+  margin-top: 5rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+}
+.footer-left h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.3rem;
+}
+.footer-left h3 span { color: var(--red-light); }
+.footer-left p {
+  font-size: 0.75rem;
+  color: rgba(248,246,241,0.5);
+  font-family: 'Inter', sans-serif;
+}
+.footer-right {
+  font-size: 0.72rem;
+  color: rgba(248,246,241,0.4);
+  font-family: 'Inter', sans-serif;
+  text-align: right;
+  line-height: 1.7;
+}
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .masthead-top { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
+  .masthead-title h1 { font-size: 1.5rem; }
+  .masthead-nav { padding: 0 1rem; overflow-x: auto; justify-content: flex-start; }
+  .hero, .tech-hero, .housing-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .hero-sidebar { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 1.5rem; }
+  .pillars, .article-grid, .tech-grid { grid-template-columns: 1fr; }
+  .tech-headline-stat { text-align: left; }
+  #home, #reporting, #technology, #housing { padding: 2rem 1.5rem; }
+  #article, #about { padding: 2rem 1.5rem; }
+  .article-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .row-date { display: flex; gap: 1rem; }
+  .row-meta { flex-direction: row; align-items: center; }
+  .tech-cta { grid-template-columns: 1fr; gap: 1.5rem; }
+  .housing-stat-row { flex-wrap: wrap; }
+  footer { grid-template-columns: 1fr; }
+  .footer-right { text-align: left; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead" id="masthead">
+  <div class="masthead-top">
+    <div class="masthead-date" id="masthead-date"></div>
+    <div class="masthead-title">
+      <h1 onclick="showPage('home')"><span>T</span>he Margins</h1>
+      <div class="masthead-tagline">Solutions journalism on displacement, housing, and water</div>
+    </div>
+    <div class="masthead-cta">
+      <a href="https://substack.com" target="_blank" class="btn-subscribe">Subscribe</a>
+    </div>
+  </div>
+  <nav class="masthead-nav">
+    <a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a>
+    <a href="#" onclick="showPage('reporting')" id="nav-reporting">Reporting</a>
+    <a href="#" onclick="showPage('technology')" id="nav-technology">TENG-UV Technology</a>
+    <a href="#" onclick="showPage('housing')" id="nav-housing">Housing</a>
+    <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+  </nav>
+</header>
+
+<!-- HOME -->
+<div class="page active" id="home">
+  <main style="max-width:1200px;margin:0 auto;padding:3rem;">
+
+    <!-- Hero -->
+    <div class="hero reveal">
+      <div class="hero-main">
+        <div class="hero-eyebrow">Solutions Journalism</div>
+        <h2 class="hero-headline">Reporting from<br><em>the edges</em> of the<br>resettlement system.</h2>
+        <p class="hero-standfirst">
+          Field research and investigative reporting on displacement, housing access, and water infrastructure — with a focus on solutions that are being built right now, and why they're not spreading fast enough.
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showPage('reporting')">Read the Reporting</button>
+          <button class="btn-text" onclick="showPage('technology')">See the Technology →</button>
+        </div>
+      </div>
+      <div class="hero-sidebar">
+        <div class="sidebar-label">Why this matters</div>
+        <div class="sidebar-stat">
+          <div class="sidebar-num">50M</div>
+          <div class="sidebar-desc">Bangladeshis projected to be displaced from coastal areas by 2050 due to river erosion linked to sand mining</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-num">$8.57</div>
+          <div class="sidebar-desc">Annual cost per person of TENG-UV water disinfection — a solution that requires no grid or chemicals</div>
+        </div>
+        <div class="sidebar-stat">
+          <div class="sidebar-num">2,500</div>
+          <div class="sidebar-desc">Houses swept away in Vietnam's Mekong Delta between 2018 and 2022 due to illegal sand dredging</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Two pillars -->
+    <div class="pillars reveal">
+      <a class="pillar-card" onclick="showPage('reporting')">
+        <div class="pillar-tag">Investigative Reporting</div>
+        <h3>Field dispatches and data investigations on forced migration</h3>
+        <p>From illegal sand cartels in Southeast Asia to refugee housing gaps in Los Angeles — grounded in fieldwork and primary sources.</p>
+        <div class="pillar-arrow">Read the reporting →</div>
+      </a>
+      <a class="pillar-card" onclick="showPage('technology')">
+        <div class="pillar-tag">Technology Advocacy</div>
+        <h3>A $8.57/person water solution that NGOs aren't using yet</h3>
+        <p>TENG-UV disinfection works without a power grid, costs under $9 per person per year, and has peer-reviewed evidence behind it. Here's why it should be in every resettlement toolkit.</p>
+        <div class="pillar-arrow">See the technology →</div>
+      </a>
+    </div>
+
+    <!-- Latest articles -->
+    <div class="reveal">
+      <div class="section-rule">
+        <h2>Latest Reporting</h2>
+        <button class="section-rule-right" onclick="showPage('reporting')">All articles →</button>
+      </div>
+    </div>
+    <div class="article-grid reveal" id="home-articles"></div>
+
+  </main>
+</div>
+
+<!-- REPORTING -->
+<div class="page" id="reporting">
+  <main>
+    <div style="max-width:1100px;margin:0 auto;padding:3rem;">
+      <div class="reporting-header reveal">
+        <h2>Reporting</h2>
+        <p>Investigations, field dispatches, and data-driven analysis on displacement, housing, and water access.</p>
+      </div>
+      <div class="tag-filter reveal" id="tag-filter"></div>
+      <div class="article-list reveal" id="article-list"></div>
+    </div>
+  </main>
+</div>
+
+<!-- ARTICLE -->
+<div class="page" id="article">
+  <main>
+    <div id="article-content"></div>
+  </main>
+</div>
+
+<!-- TECHNOLOGY -->
+<div class="page" id="technology">
+  <main>
+    <div style="max-width:1100px;margin:0 auto;padding:3rem;">
+      <div class="tech-hero reveal">
+        <div>
+          <div class="tech-eyebrow">Technology Advocacy · TENG-UV Water Disinfection</div>
+          <h2>Clean water for refugee families. No grid required.</h2>
+          <p class="tech-hero-sub">
+            Triboelectric nanogenerator ultraviolet (TENG-UV) disinfection is a peer-reviewed, human-powered water purification technology that works in off-grid settings. It produces no chemical byproducts, requires no external power source, and costs a fraction of conventional solutions. Refugee resettlement organizations should be using it. Most aren't. Here's why they should.
+          </p>
+        </div>
+        <div class="tech-headline-stat">
+          <div class="tech-big-num" id="cost-counter">$0</div>
+          <div class="tech-big-label">per person<br>per year</div>
+        </div>
+      </div>
+
+      <div class="tech-grid reveal">
+        <div class="tech-card">
+          <h3>How it works</h3>
+          <p>TENG-UV harnesses mechanical motion — walking, pressing, or turning — to generate electrical charge through the triboelectric effect. That charge powers UV-C LEDs that deactivate pathogens in water without chemicals. The device is self-contained, portable, and requires no batteries or grid connection.</p>
+        </div>
+        <div class="tech-card">
+          <h3>Why it fits resettlement</h3>
+          <p>Newly resettled refugee families often live in housing with inconsistent utilities and limited access to clean drinking water. Conventional filtration requires replacement cartridges. Boiling requires fuel. TENG-UV requires neither. One device, maintained correctly, works for years at under $9 per person annually.</p>
+        </div>
+        <div class="tech-card">
+          <h3>The research behind it</h3>
+          <p>The underlying technology is documented in a peer-reviewed paper published in ACS Nano, in collaboration with researchers at Tsinghua University. The paper demonstrates efficacy against E. coli and other waterborne pathogens at disinfection rates exceeding 99.9%.</p>
+        </div>
+        <div class="tech-card">
+          <h3>What a pilot would look like</h3>
+          <p>A small-scale pilot with a resettlement agency would involve deploying devices with 10–20 families over 6 months, collecting water quality and usage data, and producing a field report for wider dissemination. We are actively seeking partner organizations to run this pilot.</p>
+        </div>
+      </div>
+
+      <div class="reveal" style="margin-bottom:3rem;">
+        <div class="section-rule"><h2>TENG-UV vs. Conventional Solutions</h2></div>
+        <table class="compare-table">
+          <thead>
+            <tr>
+              <th>Method</th>
+              <th>Annual Cost / Person</th>
+              <th>Grid Required</th>
+              <th>Chemical Byproducts</th>
+              <th>Off-grid Capable</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong class="highlight">TENG-UV</strong></td>
+              <td class="good">$8.57</td>
+              <td class="good">No</td>
+              <td class="good">None</td>
+              <td class="good">Yes</td>
+            </tr>
+            <tr>
+              <td>Bottled water</td>
+              <td class="bad">$200–600+</td>
+              <td>No</td>
+              <td>Plastic waste</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Reverse osmosis filter</td>
+              <td class="bad">$100–300</td>
+              <td class="bad">Yes</td>
+              <td>Wastewater</td>
+              <td class="bad">No</td>
+            </tr>
+            <tr>
+              <td>Chlorination tablets</td>
+              <td>$15–40</td>
+              <td>No</td>
+              <td class="bad">Chlorine residue</td>
+              <td>Yes</td>
+            </tr>
+            <tr>
+              <td>Boiling</td>
+              <td>Fuel cost varies</td>
+              <td>No</td>
+              <td class="bad">Carbon emissions</td>
+              <td>Yes</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tech-cta reveal">
+        <div>
+          <h3>Partner with us to run a pilot.</h3>
+          <p>We are looking for resettlement agencies, NGOs, and research institutions interested in field-testing TENG-UV with refugee families in the greater Los Angeles area. The pilot is low-cost, data-generating, and publishable. If your organization works directly with resettled families, we want to hear from you.</p>
+        </div>
+        <a href="mailto:your@email.com" class="btn-cta-white">Get in touch →</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- HOUSING -->
+<div class="page" id="housing">
+  <main>
+    <div style="max-width:1100px;margin:0 auto;padding:3rem;">
+      <div class="housing-header reveal">
+        <h2>Housing & Displacement</h2>
+        <p>Refugee families in the greater Los Angeles area face a housing market that was not designed for them — high rents, landlord reluctance, and resettlement timelines that don't match market realities. This is what we're documenting and working to change.</p>
+      </div>
+
+      <div class="housing-stat-row reveal">
+        <div class="housing-stat">
+          <div class="num">—</div>
+          <div class="desc">Families supported through CWS OC housing navigation (updating as work progresses)</div>
+        </div>
+        <div class="housing-stat">
+          <div class="num">$3,000</div>
+          <div class="desc">Typical monthly income ceiling for a newly resettled family of 3 — against LA median rent of $2,200+</div>
+        </div>
+        <div class="housing-stat">
+          <div class="num">90</div>
+          <div class="desc">Days of initial resettlement support from federal funding — often not enough to secure stable housing</div>
+        </div>
+      </div>
+
+      <div class="housing-grid">
+        <div class="housing-main reveal">
+          <p>When a refugee family is approved for resettlement in the United States, the clock starts immediately. Federal funding covers 90 days of intensive support — help finding housing, enrolling children in school, applying for benefits. After that, families are largely on their own in one of the most expensive rental markets in the country.</p>
+          <h3>What Housing Navigation Actually Looks Like</h3>
+          <p>Through volunteer work with Church World Service Orange County, I've observed the housing navigation process firsthand. Volunteers search Craigslist, Facebook Marketplace, and direct landlord networks to find units within a family's budget. They contact landlords, explain the refugee resettlement context, assist with applications, and coordinate move-in logistics — including furniture assembly.</p>
+          <p>The limiting factor is rarely the family's qualifications. It's landlord reluctance, competition from other renters, and the narrow window in which housing must be secured before other resettlement milestones are affected.</p>
+          <h3>What We're Documenting</h3>
+          <p>This section will grow as our housing navigation work develops. We are currently tracking cases, collecting data on search timelines, and building a clearer picture of where the system breaks down — and where targeted interventions could help.</p>
+          <p>Field notes from housing navigation work are published in the <button class="btn-text" onclick="showPage('reporting')" style="font-size:inherit">Reporting</button> section.</p>
+        </div>
+        <div class="housing-sidebar reveal" style="transition-delay:0.12s">
+          <div class="sidebar-block">
+            <h4>Need housing help?</h4>
+            <p>If you or your family needs resettlement support including housing navigation, contact Church World Service Orange County directly.</p>
+            <a href="https://cwsglobal.org" target="_blank">CWS Orange County →</a>
+            <a href="tel:+17145555555">Call CWS OC →</a>
+          </div>
+          <div class="sidebar-block">
+            <h4>Volunteer with CWS OC</h4>
+            <p>CWS Orange County has active volunteer teams in housing navigation, tutoring, resource research, and more. Weekly commitment, fieldwork and remote options.</p>
+            <a href="https://cwsglobal.org/volunteer" target="_blank">See volunteer roles →</a>
+          </div>
+          <div class="sidebar-block">
+            <h4>About this work</h4>
+            <p>This documentation is produced by Jerry Zou, a volunteer working with Church World Service Orange County. All family data is anonymized.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ABOUT -->
+<div class="page" id="about">
+  <main>
+    <div style="max-width:680px;margin:0 auto;padding:4rem 2rem;">
+      <div class="section-eyebrow reveal">About</div>
+      <h2 class="reveal">Jerry Zou</h2>
+
+      <div class="reveal">
+        <p>I'm a junior at The Webb Schools in Claremont, California, working at the intersection of investigative journalism and solutions research on displacement, housing, and water access.</p>
+        <p>The Margins began with a question I couldn't let go of: what happens to a displaced family <strong>after</strong> the crisis that moves them? The Wangfulaw fire in Hong Kong, the sand cartels of the Mekong Delta, the refugee families in Anaheim searching for a stable apartment — these are connected problems, and they share a common failure: the solutions that exist aren't reaching the people who need them.</p>
+        <p>My research background is in biosignal processing and environmental sensing. I'm a first author on a published IEEE Sensors Journal paper on EEG-based neural interfaces, and I research at Caltech's CHIC Lab. That technical grounding is what led me to TENG-UV — a water disinfection technology with strong peer-reviewed evidence that remains almost entirely unknown in refugee resettlement circles.</p>
+        <p>This publication is my attempt to close that gap: rigorous field reporting, honest about limitations, with a clear view toward what can actually be done.</p>
+      </div>
+
+      <div class="affil-list reveal">
+        <div class="affil-row">
+          <div class="affil-label">School</div>
+          <div class="affil-value">The Webb Schools, Claremont CA — Class of 2027</div>
+        </div>
+        <div class="affil-row">
+          <div class="affil-label">Research</div>
+          <div class="affil-value">Caltech CHIC Lab; first-author publication, IEEE Sensors Journal</div>
+        </div>
+        <div class="affil-row">
+          <div class="affil-label">Volunteer</div>
+          <div class="affil-value">Volunteer working with Church World Service Orange County</div>
+        </div>
+        <div class="affil-row">
+          <div class="affil-label">Collaboration</div>
+          <div class="affil-value">TENG-UV research with Prof. Xingwei Wang, Tsinghua University</div>
+        </div>
+        <div class="affil-row">
+          <div class="affil-label">Recognition</div>
+          <div class="affil-value">Award-winning essay, Harvard International Review 2025</div>
+        </div>
+      </div>
+
+      <div class="contact-block reveal">
+        <p>For research collaboration, partnership inquiries, or press:</p>
+        <a href="mailto:your@email.com">your@email.com</a>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    <h3><span>T</span>he Margins</h3>
+    <p>Solutions journalism on displacement, housing, and water · Independent publication</p>
+  </div>
+  <div class="footer-right">
+    Volunteer working with Church World Service Orange County<br>
+    © 2025–2026 Jerry Zou · All rights reserved
+  </div>
+</footer>
+
+<script>
+// ── DATA ──
+const articles = [
+  {
+    id: "sand-cartels-southeast-asia",
+    title: "Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement",
+    subtitle: "How Singapore's land reclamation ambitions are displacing coastal communities across the Mekong Delta — and why current solutions are failing.",
+    tag: "Displacement",
+    date: "June 2025",
+    readTime: "8 min",
+    award: "Award-winning essay, Harvard International Review 2025",
+    excerpt: "An estimated 20 to 50 million Bangladeshis are projected to be displaced from coastal areas due to river erosion by 2050. The relentless extraction of sand in Southeast Asia is leaving communities facing an uncertain future.",
+    content: [
+      { type: "pullquote", text: "In my house, the walls were filled with sand for more than half the height. One night, I lost everything. Now I have no place to stay.", attribution: "Local housewife, Rojoniline village, northern Bangladesh" },
+      { type: "paragraph", text: "Her family was forced to leave their home after sediment-heavy flash floods — driven by unchecked sand mining in the area — overwhelmed their village. This is just one example among countless cases of displacement caused by sand mining worldwide." },
+      { type: "stat", number: "20–50M", label: "Bangladeshis projected to be displaced from coastal areas due to river erosion by 2050" },
+      { type: "paragraph", text: "The relentless extraction of sand in Southeast Asia is leaving communities like Rojoniline facing an uncertain future, only to fulfill Singapore's land reclamation ambitions. As a key source for its artificial land expansion, Singapore's high demand for imported sand from countries like Cambodia and Indonesia has led to excessive sand mining, causing land loss and forced displacement. Despite efforts to outlaw sand mining and transnational trade, attempts to curb sand smuggling have largely failed." },
+      { type: "heading", text: "The Expense Beneath a Growing Nation" },
+      { type: "paragraph", text: "Between 1997 and 2017, Indonesia, Malaysia, Cambodia, and Vietnam — historically Singapore's largest sand exporters — banned sand exports due to environmental concerns. However, Singapore, having spent another $57.5 million on sand imports in 2023, has continued prioritizing land reclamation as a driver of economic and infrastructural development since independence." },
+      { type: "paragraph", text: "To achieve its goal of expanding to 766 square kilometers by 2030, the country has increasingly relied on illegal channels to meet its growing sand demand. In Vietnam, investigative journalist Le Dinh Tuyen uncovered that licensed mining operations in the Mekong Delta met only 10–20% of actual market demand, suggesting that most sand extraction occurs illegally through unregulated dredging." },
+      { type: "stat", number: "585", label: "Major erosion hotspots recorded in Vietnam in 2023, spanning 741 kilometers" },
+      { type: "paragraph", text: "Between 2018 and 2022, 2,500 houses were swept away across An Giang, Dong Thap, Can Tho, Vinh Long, and Ca Mau provinces. These losses disrupted rural livelihoods, damaged infrastructure, and forced families into precarious relocation. The destruction extends beyond housing — farms, fishponds, and roads have also been lost." },
+      { type: "heading", text: "Loopholes, Profits, and Corruption" },
+      { type: "paragraph", text: "The illicit sand trade thrives on economic incentives, technical loopholes, and institutional gaps. The primary driver is soaring demand for Singapore's land reclamation, propelling sand consumption and market value to an expected 955 million tons and $28.6 billion by 2035. The substantial profits from sand mining often outweigh the risks of illegal operations." },
+      { type: "paragraph", text: "Institutional weaknesses, including fragmented jurisdiction and corruption, reinforce these illegal activities. Provincial governments often act in isolation with minimal coordination, and in some cases, local officials have colluded with smugglers, issuing unauthorized permits or ignoring violations altogether." },
+      { type: "heading", text: "The Fragility of Modern Solutions" },
+      { type: "paragraph", text: "In 2023, the UN Environment Programme launched Marine Sand Watch that uses satellite data to track dredging vessels and detect sand extraction within marine protected areas. However, Marine Sand Watch covers only about 60% of the global dredging fleet and lacks enforcement power, reducing its role to monitoring rather than prevention." },
+      { type: "paragraph", text: "Similarly, AIS vessel tracking can be manipulated — vessels may disable transponders, falsify GPS data, or bypass detection entirely. Moreover, it functions reactively, recording breaches after they occur rather than preventing them in real-time. Many local authorities also lack the resources to respond swiftly." },
+      { type: "heading", text: "Beyond Surveillance: Structural and Systemic Strategies" },
+      { type: "paragraph", text: "A decentralized blockchain-based permit and tracking system can improve monitoring of illicit sand mining. Each shipment would be attached to a unique, immutable digital permit containing verifiable data such as extraction volume, coordinates, and time. Drones equipped with LiDAR and AI mapping can cross-check these parameters on-site. Unlike AIS and satellite systems that are vulnerable to manipulation, this system links each transaction to a traceable record, closing loopholes like forged invoices or disabled transponders." },
+      { type: "paragraph", text: "Policymakers, especially in import-reliant nations like Singapore, must take responsibility not just for their supply chains but for the lives displaced in the process. Global stewardship of sand as a shared resource is no longer optional — it is urgent." }
+    ]
+  }
+];
+
+const tags = ["All", "Displacement", "Housing", "Water", "Technology"];
+let currentTag = "All";
+
+// ── NAVIGATION ──
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.masthead-nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  const navEl = document.getElementById('nav-' + pageId);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0, 0);
+  if (pageId === 'home') renderHomeArticles();
+  if (pageId === 'reporting') renderReporting();
+  setTimeout(initReveal, 50);
+  return false;
+}
+
+// ── RENDER HOME ARTICLES ──
+function renderHomeArticles() {
+  const el = document.getElementById('home-articles');
+  el.innerHTML = articles.map(a => `
+    <div class="article-card" onclick="showArticle('${a.id}')">
+      <div class="article-meta">
+        <span class="article-tag">${a.tag}</span>
+        <span class="article-date">${a.date}</span>
+        <span class="article-read-time">${a.readTime} read</span>
+      </div>
+      <h3>${a.title}</h3>
+      <p>${a.excerpt}</p>
+      ${a.award ? `<div class="article-award">★ ${a.award}</div>` : ''}
+    </div>
+  `).join('');
+}
+
+// ── RENDER REPORTING ──
+function renderReporting() {
+  // Tag filter
+  const tf = document.getElementById('tag-filter');
+  tf.innerHTML = tags.map(t => `
+    <button class="tag-btn ${t === currentTag ? 'active' : ''}" onclick="filterTag('${t}')">${t}</button>
+  `).join('');
+  // Article list
+  const filtered = currentTag === 'All' ? articles : articles.filter(a => a.tag === currentTag);
+  const el = document.getElementById('article-list');
+  el.innerHTML = filtered.map(a => `
+    <div class="article-row" onclick="showArticle('${a.id}')">
+      <div class="row-date">${a.date}<br><span style="color:var(--ink-dim);font-size:0.68rem">${a.readTime}</span></div>
+      <div class="row-content">
+        <div class="row-title">${a.title}</div>
+        <div class="row-excerpt">${a.excerpt}</div>
+        ${a.award ? `<div style="margin-top:0.5rem;font-size:0.68rem;color:var(--ink-dim);font-style:italic">★ ${a.award}</div>` : ''}
+      </div>
+      <div class="row-meta">
+        <span class="article-tag">${a.tag}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterTag(tag) {
+  currentTag = tag;
+  renderReporting();
+}
+
+// ── SHOW ARTICLE ──
+function showArticle(id) {
+  const a = articles.find(x => x.id === id);
+  if (!a) return;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('article').classList.add('active');
+  document.querySelectorAll('.masthead-nav a').forEach(x => x.classList.remove('active'));
+  document.getElementById('nav-reporting').classList.add('active');
+
+  const body = a.content.map(block => {
+    if (block.type === 'paragraph') return `<p>${block.text}</p>`;
+    if (block.type === 'heading') return `<h2>${block.text}</h2>`;
+    if (block.type === 'pullquote') return `
+      <div class="article-pullquote">
+        <blockquote>"${block.text}"</blockquote>
+        <cite>— ${block.attribution}</cite>
+      </div>`;
+    if (block.type === 'stat') return `
+      <div class="article-stat-block">
+        <div class="stat-number">${block.number}</div>
+        <div class="stat-desc">${block.label}</div>
+      </div>`;
+    return '';
+  }).join('');
+
+  document.getElementById('article-content').innerHTML = `
+    <div id="article" style="max-width:720px;margin:0 auto;padding:3rem 2rem;">
+      <button class="article-back" onclick="showPage('reporting')">← Back to Reporting</button>
+      <div class="article-header">
+        ${a.award ? `<div class="article-award-badge">★ ${a.award}</div>` : ''}
+        <h1 class="article-h1">${a.title}</h1>
+        <p class="article-subtitle">${a.subtitle}</p>
+        <div class="article-byline">
+          <span class="byline-name">Jerry Zou</span>
+          <span class="byline-sep">|</span>
+          <span>${a.date}</span>
+          <span class="byline-sep">|</span>
+          <span>${a.readTime} read</span>
+          <span class="byline-sep">|</span>
+          <span class="article-tag">${a.tag}</span>
+        </div>
+      </div>
+      <div class="article-body">${body}</div>
+    </div>
+  `;
+  window.scrollTo(0, 0);
+  setTimeout(initReveal, 50);
+}
+
+// ── COST COUNTER ANIMATION ──
+function animateCost() {
+  const el = document.getElementById('cost-counter');
+  if (!el) return;
+  const target = 8.57;
+  let current = 0;
+  const duration = 1800;
+  const steps = 60;
+  const increment = target / steps;
+  let step = 0;
+  const timer = setInterval(() => {
+    current += increment;
+    step++;
+    if (step >= steps) { el.textContent = '$8.57'; clearInterval(timer); return; }
+    el.textContent = '$' + current.toFixed(2);
+  }, duration / steps);
+}
+
+// Cost counter triggers when technology page is shown
+const origShowPage = showPage;
+window.showPage = function(id) {
+  origShowPage(id);
+  if (id === 'technology') setTimeout(animateCost, 400);
+};
+
+// ── SCROLL REVEAL ──
+function initReveal() {
+  const els = document.querySelectorAll('.reveal:not(.visible)');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  els.forEach(el => observer.observe(el));
+}
+
+// ── MASTHEAD SCROLL ──
+window.addEventListener('scroll', () => {
+  document.getElementById('masthead').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+// ── DATE ──
+document.getElementById('masthead-date').textContent =
+  new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+// ── INIT ──
+renderHomeArticles();
+setTimeout(initReveal, 100);
+</script>
+</body>
+</html>
