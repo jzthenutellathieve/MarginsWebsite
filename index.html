@@ -80,19 +80,19 @@ body {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   overflow: hidden;
-  min-height: 580px;
+  min-height: 640px;
   display: flex;
   align-items: flex-end;
 }
 
-/* Article overlay — bottom right */
+/* Article overlay — bottom right above controls */
 .hero-article-overlay {
   position: absolute;
-  bottom: 2.5rem;
+  bottom: 5rem;
   right: 2.5rem;
   z-index: 4;
-  max-width: 320px;
-  background: rgba(26,24,20,0.72);
+  max-width: 300px;
+  background: rgba(26,24,20,0.78);
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255,255,255,0.12);
   padding: 1.25rem 1.5rem;
@@ -156,9 +156,10 @@ body {
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(26,24,20,0.82) 0%,
-    rgba(26,24,20,0.55) 55%,
-    rgba(26,24,20,0.15) 100%
+    rgba(26,24,20,0.92) 0%,
+    rgba(26,24,20,0.80) 35%,
+    rgba(26,24,20,0.45) 60%,
+    rgba(26,24,20,0.10) 100%
   );
   z-index: 1;
 }
@@ -167,8 +168,9 @@ body {
 .hero-main {
   position: relative;
   z-index: 2;
-  padding: 4rem 3rem 3rem;
-  max-width: 660px;
+  padding: 5rem 4rem 4rem;
+  max-width: 580px;
+  width: 52%;
 }
 .hero-eyebrow {
   font-size: 0.65rem;
@@ -190,11 +192,11 @@ body {
 }
 .hero-headline {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.4rem, 4.5vw, 4.2rem);
+  font-size: clamp(2rem, 3.5vw, 3.4rem);
   font-weight: 700;
-  line-height: 1.06;
+  line-height: 1.1;
   letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   color: #F8F6F1;
 }
 .hero-headline em {
@@ -204,10 +206,10 @@ body {
 }
 .hero-standfirst {
   font-family: 'Source Serif 4', serif;
-  font-size: 0.98rem;
+  font-size: 0.92rem;
   line-height: 1.75;
   color: rgba(242,238,230,0.8);
-  max-width: 52ch;
+  max-width: 48ch;
   margin-bottom: 2rem;
   border-left: 2px solid rgba(176,48,32,0.7);
   padding-left: 1.1rem;
