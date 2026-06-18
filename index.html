@@ -504,12 +504,24 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 
 
 /* ── MISSION BLOCK ── */
+/* ── MISSION BLOCK ── */
 .mission-block { margin: 0 -3rem 3rem; background: var(--ink); padding: 4rem 3rem; }
-.mission-inner { max-width: 1200px; margin: 0 auto; }
+.mission-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.mission-left {}
+.mission-right {}
 .mission-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(212,150,120,0.8); font-family: 'Inter', sans-serif; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
 .mission-label::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(212,150,120,0.8); }
-.mission-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.2vw, 1.75rem); font-style: italic; font-weight: 400; color: #F8F6F1; line-height: 1.5; max-width: 70ch; margin-bottom: 1.5rem; border: none; padding: 0; }
-.mission-body { font-family: 'Source Serif 4', serif; font-size: 0.9rem; color: rgba(242,238,230,0.85); line-height: 1.8; max-width: 65ch; margin-bottom: 3rem; }
+.mission-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.2vw, 1.75rem); font-style: italic; font-weight: 400; color: #F8F6F1; line-height: 1.5; margin-bottom: 2rem; border: none; padding: 0; }
+.mission-body { font-family: 'Source Serif 4', serif; font-size: 0.9rem; color: rgba(242,238,230,0.85); line-height: 1.8; margin-bottom: 1.25rem; }
+.mission-join { display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1.75rem; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; color: rgba(242,238,230,0.9); text-decoration: none; border-bottom: 1px solid rgba(242,238,230,0.3); padding-bottom: 2px; transition: border-color 0.2s, color 0.2s; }
+.mission-join:hover { color: white; border-color: rgba(242,238,230,0.8); }
 .mission-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem; }
 .mission-stat { padding-right: 2rem; }
 .mission-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 0.4rem; }
@@ -613,13 +625,24 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
     <!-- MISSION STATEMENT -->
     <div class="mission-block reveal">
       <div class="mission-inner">
-        <div class="mission-label">Our approach</div>
-        <blockquote class="mission-quote">
-          Solutions journalism doesn't look away from the problem. It asks what's being done about it — rigorously, honestly, without pretending the answers are simple.
-        </blockquote>
-        <p class="mission-body">
-          The Margins covers forced displacement through two lenses: the investigative reporting that documents what's going wrong, and the solutions research that asks what could go right. Every story we publish connects a real crisis to a real response — and interrogates why that response isn't spreading faster.
-        </p>
+        <div class="mission-left">
+          <div class="mission-label">Why We Exist</div>
+          <blockquote class="mission-quote">
+            Born to report stories no one was covering. Evolved to translate technologies no one was advancing.
+          </blockquote>
+          <a href="mailto:jerryzou2021@gmail.com" class="mission-join">Want to contribute? Join us →</a>
+        </div>
+        <div class="mission-right">
+          <p class="mission-body">
+            The Margins began in 2024 as an independent effort to document the displaced populations in Southeast Asia that rarely make headlines — not only recognized refugees, but also the underreported victims who are systematically invisible: communities displaced under trafficking, migrant workers in legal gray zones left uncompensated.
+          </p>
+          <p class="mission-body">
+            We then encountered a second problem: solutions to these crises exist, but they rarely reach the people who need them. An ultra-low-cost water disinfection technology that can provide clean water for millions of refugees around the globe — and no resettlement organizations have ever heard of it.
+          </p>
+          <p class="mission-body">
+            This is the purpose of solutions journalism. We are STEM-trained but field-grounded. We are here to report the problems, find what works, document why it works, and put it in front of the NGOs, advocates, and society.
+          </p>
+        </div>
       </div>
     </div>
 
