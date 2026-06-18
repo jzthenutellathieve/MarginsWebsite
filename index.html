@@ -77,13 +77,53 @@ body {
 /* ── HOME HERO ── */
 .hero {
   position: relative;
-  margin: 0 -3rem 0;
-  border-bottom: none;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
   overflow: hidden;
-  min-height: 520px;
+  min-height: 580px;
   display: flex;
   align-items: flex-end;
 }
+
+/* Article overlay — bottom right */
+.hero-article-overlay {
+  position: absolute;
+  bottom: 2.5rem;
+  right: 2.5rem;
+  z-index: 4;
+  max-width: 320px;
+  background: rgba(26,24,20,0.72);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 1.25rem 1.5rem;
+  transition: background 0.2s;
+}
+.hero-article-overlay:hover { background: rgba(26,24,20,0.88); }
+.hero-article-tag {
+  font-size: 0.58rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(212,150,120,0.9);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 0.5rem;
+}
+.hero-article-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #F8F6F1;
+  line-height: 1.4;
+  margin-bottom: 0.75rem;
+}
+.hero-article-read {
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(242,238,230,0.6);
+  font-family: 'Inter', sans-serif;
+  transition: color 0.2s;
+}
+.hero-article-overlay:hover .hero-article-read { color: rgba(242,238,230,0.95); }
 
 /* Full-bleed carousel behind everything */
 .hero-carousel-bg {
@@ -458,60 +498,6 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 .footer-left p { font-size: 0.75rem; color: rgba(247,249,251,0.45); font-family: 'Inter', sans-serif; }
 .footer-right { font-size: 0.72rem; color: rgba(247,249,251,0.35); font-family: 'Inter', sans-serif; text-align: right; line-height: 1.7; }
 
-/* ── HERO IMAGE CAROUSEL ── */
-.hero-img-carousel {
-  position: relative;
-  border: 1px solid var(--rule);
-  overflow: hidden;
-  background: var(--paper-warm);
-}
-.hero-img-track { display: flex; transition: transform 0.5s cubic-bezier(0.25,0.46,0.45,0.94); }
-.hero-img-slide { min-width: 100%; position: relative; flex-shrink: 0; }
-.hero-img-slide img { width: 100%; height: 260px; object-fit: cover; display: block; }
-.hero-img-caption {
-  padding: 0.6rem 0.75rem;
-  font-size: 0.68rem;
-  color: var(--ink-dim);
-  font-family: 'Inter', sans-serif;
-  line-height: 1.4;
-  background: #FFFFFF;
-  border-top: 1px solid var(--rule-light);
-}
-.hero-img-prev, .hero-img-next {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-60%);
-  background: rgba(255,255,255,0.9);
-  border: 1px solid var(--rule);
-  width: 30px; height: 30px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  color: var(--ink);
-  display: flex; align-items: center; justify-content: center;
-  transition: background 0.2s;
-  z-index: 2;
-}
-.hero-img-prev:hover, .hero-img-next:hover { background: white; }
-.hero-img-prev { left: 0.5rem; }
-.hero-img-next { right: 0.5rem; }
-.hero-img-dots {
-  display: flex;
-  gap: 0.4rem;
-  justify-content: center;
-  padding: 0.5rem;
-  background: #FFFFFF;
-}
-.hero-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  border: none;
-  background: var(--rule);
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.2s;
-}
-.hero-dot.active { background: var(--blue); }
-
 
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: none; }
@@ -559,47 +545,54 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 
 <!-- HOME -->
 <div class="page active" id="home">
-  <main style="max-width:1200px;margin:0 auto;padding:3rem;">
-    <div class="hero reveal">
-      <!-- Full-bleed carousel background -->
-      <div class="hero-carousel-bg">
-        <div class="hero-img-track" id="hero-track">
-          <div class="hero-img-slide active">
-            <img src="/images/iStock-960934400.jpg" alt="Aerial view of dredging vessel in turquoise waters" loading="eager">
-          </div>
-          <div class="hero-img-slide">
-            <img src="/images/iStock-157603815.jpg" alt="Hopper dredger rainbowing sand onto coastline" loading="lazy">
-          </div>
+  <!-- FULL BLEED HERO — outside max-width container -->
+  <div class="hero reveal">
+    <div class="hero-carousel-bg">
+      <div class="hero-img-track" id="hero-track">
+        <div class="hero-img-slide active">
+          <img src="/images/iStock-960934400.jpg" alt="Aerial view of dredging vessel in turquoise waters" loading="eager">
         </div>
-      </div>
-
-      <!-- Text overlay -->
-      <div class="hero-main">
-        <div class="hero-eyebrow">Solutions Journalism</div>
-        <h2 class="hero-headline">Reporting on displacement —<br>and <em>what's being built</em><br>to end it.</h2>
-        <p class="hero-standfirst">
-          Investigative reporting on refugees, asylum seekers, and marginalized communities facing forced displacement — alongside the housing initiatives, water technologies, and policy solutions that could change their lives.
-        </p>
-        <div class="hero-actions">
-          <button class="btn-primary-light" onclick="showPage('reporting')">Read the Reporting</button>
-          <button class="btn-text-light" onclick="showPage('solutions')">Explore Solutions →</button>
+        <div class="hero-img-slide">
+          <img src="/images/iStock-157603815.jpg" alt="Hopper dredger rainbowing sand onto coastline" loading="lazy">
         </div>
-      </div>
-
-      <!-- Caption bottom left -->
-      <div class="hero-img-caption" id="hero-caption">A dredging vessel disperses sediment into coastal waters off the UAE. Photo: iStock / kertu_ee</div>
-
-      <!-- Controls bottom right -->
-      <div class="hero-carousel-controls">
-        <div class="hero-img-dots" id="hero-dots">
-          <button class="hero-dot active" onclick="goSlide(0)"></button>
-          <button class="hero-dot" onclick="goSlide(1)"></button>
-        </div>
-        <button class="hero-img-prev" onclick="prevSlide()">←</button>
-        <button class="hero-img-next" onclick="nextSlide()">→</button>
       </div>
     </div>
 
+    <!-- Text overlay -->
+    <div class="hero-main">
+      <div class="hero-eyebrow">Solutions Journalism</div>
+      <h2 class="hero-headline">Reporting on displacement —<br>and <em>what's being built</em><br>to end it.</h2>
+      <p class="hero-standfirst">
+        Investigative reporting on refugees, asylum seekers, and marginalized communities facing forced displacement — alongside the housing initiatives, water technologies, and policy solutions that could change their lives.
+      </p>
+      <div class="hero-actions">
+        <button class="btn-primary-light" onclick="showPage('reporting')">Read the Reporting</button>
+        <button class="btn-text-light" onclick="showPage('solutions')">Explore Solutions →</button>
+      </div>
+    </div>
+
+    <!-- Article title overlay — bottom right above controls -->
+    <div class="hero-article-overlay" id="hero-article-overlay" onclick="showArticle('sand-cartels-southeast-asia')" style="cursor:pointer">
+      <div class="hero-article-tag" id="hero-overlay-tag">Displacement</div>
+      <div class="hero-article-title" id="hero-overlay-title">Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement</div>
+      <div class="hero-article-read">Read article →</div>
+    </div>
+
+    <!-- Caption -->
+    <div class="hero-img-caption" id="hero-caption">A dredging vessel disperses sediment into coastal waters off the UAE. Photo: iStock / kertu_ee</div>
+
+    <!-- Controls -->
+    <div class="hero-carousel-controls">
+      <div class="hero-img-dots" id="hero-dots">
+        <button class="hero-dot active" onclick="goSlide(0)"></button>
+        <button class="hero-dot" onclick="goSlide(1)"></button>
+      </div>
+      <button class="hero-img-prev" onclick="prevSlide()">←</button>
+      <button class="hero-img-next" onclick="nextSlide()">→</button>
+    </div>
+  </div>
+
+  <main style="max-width:1200px;margin:0 auto;padding:3rem 3rem 0">
     <div class="pillars reveal">
       <a class="pillar-card" onclick="showPage('reporting')">
         <div class="pillar-tag">Investigative Reporting</div>
