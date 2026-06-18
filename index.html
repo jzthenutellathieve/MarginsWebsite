@@ -509,11 +509,11 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 .mission-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(212,150,120,0.8); font-family: 'Inter', sans-serif; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
 .mission-label::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(212,150,120,0.8); }
 .mission-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.2vw, 1.75rem); font-style: italic; font-weight: 400; color: #F8F6F1; line-height: 1.5; max-width: 70ch; margin-bottom: 1.5rem; border: none; padding: 0; }
-.mission-body { font-family: 'Source Serif 4', serif; font-size: 0.9rem; color: rgba(242,238,230,0.55); line-height: 1.8; max-width: 65ch; margin-bottom: 3rem; }
+.mission-body { font-family: 'Source Serif 4', serif; font-size: 0.9rem; color: rgba(242,238,230,0.85); line-height: 1.8; max-width: 65ch; margin-bottom: 3rem; }
 .mission-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 2rem; }
 .mission-stat { padding-right: 2rem; }
 .mission-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 0.4rem; }
-.mission-desc { font-size: 0.75rem; color: rgba(242,238,230,0.4); font-family: 'Inter', sans-serif; line-height: 1.5; }
+.mission-desc { font-size: 0.75rem; color: rgba(242,238,230,0.7); font-family: 'Inter', sans-serif; line-height: 1.5; }
 
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: none; }
@@ -609,6 +609,36 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
   </div>
 
   <main style="max-width:1200px;margin:0 auto;padding:3rem 3rem 0">
+
+    <!-- MISSION STATEMENT -->
+    <div class="mission-block reveal">
+      <div class="mission-inner">
+        <div class="mission-label">Our approach</div>
+        <blockquote class="mission-quote">
+          Solutions journalism doesn't look away from the problem. It asks what's being done about it — rigorously, honestly, without pretending the answers are simple.
+        </blockquote>
+        <p class="mission-body">
+          The Margins covers forced displacement through two lenses: the investigative reporting that documents what's going wrong, and the solutions research that asks what could go right. Every story we publish connects a real crisis to a real response — and interrogates why that response isn't spreading faster.
+        </p>
+      </div>
+    </div>
+
+    <!-- LATEST REPORTING CAROUSEL -->
+    <div class="reveal">
+      <div class="section-rule">
+        <h2>Latest Reporting</h2>
+        <button class="section-rule-right" onclick="showPage('reporting')">All articles →</button>
+      </div>
+    </div>
+    <div class="carousel-wrap reveal">
+      <div class="carousel-track" id="home-articles"></div>
+      <div class="carousel-nav">
+        <button class="carousel-btn" id="carousel-prev" aria-label="Previous">←</button>
+        <button class="carousel-btn" id="carousel-next" aria-label="Next">→</button>
+      </div>
+    </div>
+
+    <!-- PILLARS -->
     <div class="pillars reveal">
       <a class="pillar-card" onclick="showPage('reporting')">
         <div class="pillar-tag">Investigative Reporting</div>
@@ -624,59 +654,6 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
       </a>
     </div>
 
-
-    <!-- MISSION STATEMENT -->
-    <div class="mission-band reveal">
-      <div class="mission-inner">
-        <div class="mission-quote">
-          "The solutions exist. The gap is in who knows about them — and who has access."
-        </div>
-        <div class="mission-body">
-          <p>The Margins covers the crises that follow forced displacement — housing instability, water access, structural invisibility — and the interventions that are actually working. We report from the field, document what the data shows, and make the case for solutions that deserve wider reach.</p>
-          <p>This is independent solutions journalism. No institutional backing, no advocacy agenda. Just the work.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="reveal">
-    <div class="mission-block reveal">
-      <div class="mission-inner">
-        <div class="mission-label">Our approach</div>
-        <blockquote class="mission-quote">
-          Solutions journalism doesn't look away from the problem. It asks what's being done about it — rigorously, honestly, without pretending the answers are simple.
-        </blockquote>
-        <p class="mission-body">
-          The Margins covers forced displacement through two lenses: the investigative reporting that documents what's going wrong, and the solutions research that asks what could go right. Every story we publish connects a real crisis to a real response — and interrogates why that response isn't spreading faster.
-        </p>
-        <div class="mission-stats">
-          <div class="mission-stat">
-            <div class="mission-num">50M</div>
-            <div class="mission-desc">People projected to be displaced from coastal areas by 2050</div>
-          </div>
-          <div class="mission-stat">
-            <div class="mission-num">$8.57</div>
-            <div class="mission-desc">Annual cost per person of TENG-UV clean water — a solution most NGOs don't know exists</div>
-          </div>
-          <div class="mission-stat">
-            <div class="mission-num">90</div>
-            <div class="mission-desc">Days of federal support for a newly resettled refugee family in the US</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-      <div class="section-rule">
-        <h2>Latest Reporting</h2>
-        <button class="section-rule-right" onclick="showPage('reporting')">All articles →</button>
-      </div>
-    </div>
-    <div class="carousel-wrap reveal">
-      <div class="carousel-track" id="home-articles"></div>
-      <div class="carousel-nav">
-        <button class="carousel-btn" id="carousel-prev" aria-label="Previous">←</button>
-        <button class="carousel-btn" id="carousel-next" aria-label="Next">→</button>
-      </div>
-    </div>
   </main>
 </div>
 
