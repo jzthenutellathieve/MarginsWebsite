@@ -82,9 +82,11 @@ body {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
   overflow: hidden;
-  min-height: 720px;
+  min-height: 620px;
+  height: 88vh;
+  max-height: 820px;
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 /* Article overlay — mid right */
@@ -168,9 +170,11 @@ body {
 
 /* Text content over image */
 .hero-main {
-  position: relative;
+  position: absolute;
+  bottom: 12rem;
+  left: 0;
   z-index: 2;
-  padding: 3rem 4rem;
+  padding: 0 4rem;
   max-width: 560px;
   width: 50%;
 }
@@ -216,7 +220,7 @@ body {
   border-left: 2px solid rgba(176,48,32,0.7);
   padding-left: 1rem;
 }
-.hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: nowrap; margin-top: 1.75rem; }
 .btn-primary-light {
   padding: 0.75rem 1.75rem;
   background: var(--blue);
@@ -232,9 +236,11 @@ body {
 }
 .btn-primary-light:hover { background: #8C1A1A; }
 .btn-text-light {
+  display: inline-flex;
+  align-items: center;
   font-size: 0.75rem;
   font-weight: 500;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(242,238,230,0.85);
   border-bottom: 1px solid rgba(242,238,230,0.4);
@@ -244,6 +250,7 @@ body {
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
 }
 .btn-text-light:hover { color: white; border-color: rgba(242,238,230,0.8); }
 
@@ -948,15 +955,25 @@ function showPage(pageId, pushState = true) {
 
 // Handle browser back/forward buttons
 window.addEventListener('popstate', (e) => {
-  const pageId = e.state?.pageId || 'home';
-  showPage(pageId, false);
+  if (e.state?.pageId === 'article' && e.state?.articleId) {
+    showArticle(e.state.articleId, false);
+  } else {
+    const pageId = e.state?.pageId || 'home';
+    showPage(pageId, false);
+  }
 });
 
 // Handle direct URL access on load
 window.addEventListener('DOMContentLoaded', () => {
-  const path = window.location.pathname.replace('/', '') || 'home';
-  const validPages = ['home', 'reporting', 'solutions', 'about', 'article'];
-  const pageId = validPages.includes(path) ? path : 'home';
+  const path = window.location.pathname;
+  if (path.startsWith('/reporting/')) {
+    const articleId = path.replace('/reporting/', '');
+    const exists = articles.find(a => a.id === articleId);
+    if (exists) { showArticle(articleId, false); return; }
+  }
+  const segment = path.replace('/', '').split('/')[0] || 'home';
+  const validPages = ['home', 'reporting', 'solutions', 'about'];
+  const pageId = validPages.includes(segment) ? segment : 'home';
   showPage(pageId, false);
 });
 
@@ -1049,13 +1066,16 @@ function renderReporting() {
 function filterTag(tag) { currentTag = tag; renderReporting(); }
 
 // ── SHOW ARTICLE ──
-function showArticle(id) {
+function showArticle(id, pushState = true) {
   const a = articles.find(x => x.id === id);
   if (!a) return;
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('article').classList.add('active');
   document.querySelectorAll('.masthead-nav a').forEach(x => x.classList.remove('active'));
   document.getElementById('nav-reporting').classList.add('active');
+  if (pushState) {
+    history.pushState({ pageId: 'article', articleId: id }, '', '/reporting/' + id);
+  }
 
   const body = a.content.map(block => {
     if (block.type === 'paragraph') return `<p>${block.text}</p>`;
