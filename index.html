@@ -566,10 +566,10 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
     </div>
   </div>
   <nav class="masthead-nav">
-    <a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a>
-    <a href="#" onclick="showPage('reporting')" id="nav-reporting">Reporting</a>
-    <a href="#" onclick="showPage('solutions')" id="nav-solutions">Solutions</a>
-    <a href="#" onclick="showPage('about')" id="nav-about">About</a>
+    <a href="/" onclick="showPage('home');return false;" id="nav-home" class="active">Home</a>
+    <a href="/reporting" onclick="showPage('reporting');return false;" id="nav-reporting">Reporting</a>
+    <a href="/solutions" onclick="showPage('solutions');return false;" id="nav-solutions">Solutions</a>
+    <a href="/about" onclick="showPage('about');return false;" id="nav-about">About</a>
   </nav>
 </header>
 
@@ -927,7 +927,7 @@ const tags = ["All", "Displacement", "Housing", "Water", "Technology"];
 let currentTag = "All";
 
 // ── NAVIGATION ──
-function showPage(pageId) {
+function showPage(pageId, pushState = true) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.masthead-nav a').forEach(a => a.classList.remove('active'));
   document.getElementById(pageId).classList.add('active');
@@ -938,8 +938,27 @@ function showPage(pageId) {
   if (pageId === 'reporting') renderReporting();
   if (pageId === 'solutions') setTimeout(animateCost, 400);
   setTimeout(initReveal, 50);
+  // Update URL
+  if (pushState) {
+    const path = pageId === 'home' ? '/' : '/' + pageId;
+    history.pushState({ pageId }, '', path);
+  }
   return false;
 }
+
+// Handle browser back/forward buttons
+window.addEventListener('popstate', (e) => {
+  const pageId = e.state?.pageId || 'home';
+  showPage(pageId, false);
+});
+
+// Handle direct URL access on load
+window.addEventListener('DOMContentLoaded', () => {
+  const path = window.location.pathname.replace('/', '') || 'home';
+  const validPages = ['home', 'reporting', 'solutions', 'about', 'article'];
+  const pageId = validPages.includes(path) ? path : 'home';
+  showPage(pageId, false);
+});
 
 // ── SOLUTIONS TABS ──
 function switchTab(tab) {
