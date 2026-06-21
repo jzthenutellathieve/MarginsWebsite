@@ -84,7 +84,7 @@ body {
 .hero-article-overlay {
   position: absolute;
   bottom: 12rem;
-  left: 2.5rem;
+  right: 2.5rem;
   z-index: 4;
   max-width: 300px;
   background: rgba(26,24,20,0.84);
@@ -107,16 +107,16 @@ body {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(to left, rgba(26,24,20,0.92) 0%, rgba(26,24,20,0.80) 35%, rgba(26,24,20,0.45) 60%, rgba(26,24,20,0.10) 100%);
+  background: linear-gradient(to right, rgba(26,24,20,0.92) 0%, rgba(26,24,20,0.80) 35%, rgba(26,24,20,0.45) 60%, rgba(26,24,20,0.10) 100%);
   z-index: 1;
 }
-.hero-main { position: absolute; bottom: 12rem; right: 0; z-index: 2; padding: 0 4rem; max-width: 560px; width: 50%; text-align: right; }
-.hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(212,150,120,0.9); margin-bottom: 1rem; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: flex-end; gap: 0.75rem; }
-.hero-eyebrow::after { content: ''; display: block; width: 24px; height: 1px; background: rgba(212,150,120,0.9); }
+.hero-main { position: absolute; bottom: 12rem; left: 0; z-index: 2; padding: 0 4rem; max-width: 560px; width: 50%; text-align: left; }
+.hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(212,150,120,0.9); margin-bottom: 1rem; font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: flex-start; gap: 0.75rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(212,150,120,0.9); }
 .hero-headline { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 2.8vw, 3rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.015em; margin-bottom: 1.25rem; color: #F8F6F1; }
 .hero-headline em { font-style: italic; font-weight: 400; color: rgba(242,238,230,0.75); }
-.hero-standfirst { font-family: 'Source Serif 4', serif; font-size: 0.9rem; line-height: 1.75; color: rgba(242,238,230,0.78); max-width: 46ch; margin: 0 0 2rem auto; border-right: 2px solid rgba(176,48,32,0.7); padding-right: 1rem; }
-.hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: nowrap; justify-content: flex-end; margin-top: 1.75rem; }
+.hero-standfirst { font-family: 'Source Serif 4', serif; font-size: 0.9rem; line-height: 1.75; color: rgba(242,238,230,0.78); max-width: 46ch; margin-bottom: 2rem; border-left: 2px solid rgba(176,48,32,0.7); padding-left: 1rem; }
+.hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: nowrap; justify-content: flex-start; margin-top: 1.75rem; }
 .btn-primary-light { padding: 0.75rem 1.75rem; background: var(--blue); color: white; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
 .btn-primary-light:hover { background: #8C1A1A; }
 .btn-text-light { display: inline-flex; align-items: center; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,238,230,0.85); border-bottom: 1px solid rgba(242,238,230,0.4); padding-bottom: 1px; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
@@ -231,7 +231,93 @@ body {
 .hero-solutions { border-bottom: 3px solid #353535; }
 /* divider hidden — border replaces it */
 .hero-divider { display: none; }
-/* ── HOME PILLARS ── */
+/* logo badge on hero */
+.hero-partner-logos {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+}
+.hero-logo-first {
+  height: 36px;
+  width: auto;
+  display: block;
+  opacity: 0.88;
+  filter: brightness(1.1);
+}
+.hero-logo-cityu-wrap {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  padding: 4px 8px;
+}
+.hero-logo-cityu {
+  height: 26px;
+  width: auto;
+  display: block;
+  opacity: 0.9;
+}
+/* ── PARTNERSHIP LOGOS ── */
+.hero-partner-logos {
+  position: absolute;
+  bottom: 1.75rem;
+  right: 2rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.partner-label {
+  font-size: 0.5rem;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(242,238,230,0.4);
+  white-space: nowrap;
+}
+.hero-partner-logo {
+  background: rgba(255,255,255,0.93);
+  padding: 0.28rem 0.5rem;
+  display: flex;
+  align-items: center;
+}
+.hero-partner-logo img {
+  height: 26px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+.article-partner-strip {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--rule-light);
+  flex-wrap: wrap;
+}
+.article-partner-strip-label {
+  font-size: 0.6rem;
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.article-partner-logo {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule-light);
+  padding: 0.25rem 0.5rem;
+}
+.article-partner-logo img {
+  height: 20px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+/* ── PILLARS ── */
 .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
 .pillar-card { background: #FAFAF8; border: 1px solid var(--rule); padding: 2rem; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
 .pillar-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
@@ -906,6 +992,16 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
         <button class="btn-text-light" onclick="showArticle('tehg-uv-water-access')">Journalism piece →</button>
       </div>
     </div>
+    <!-- Partner logos: bottom-right -->
+    <div class="hero-partner-logos">
+      <span class="partner-label">Research in connection with</span>
+      <div class="hero-partner-logo">
+        <img src="/images/first_logo2.jpg" alt="UN-FIRST — Fostering Innovation for Resilience and Sustainable Transformation">
+      </div>
+      <div class="hero-partner-logo">
+        <img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong">
+      </div>
+    </div>
   </div>
 
   <!-- DIVIDER between two heroes -->
@@ -1114,7 +1210,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
         <div class="teng-section reveal">
           <div class="teng-section-head"><div class="teng-section-num">2</div> How the TEHG-UV device works — and why it took this long to build</div>
           <div class="teng-prose">
-            <p>Published in <em>ACS Nano</em> in 2026 by researchers at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability, the TEHG-UV system solves an engineering problem that had blocked portable UV disinfection for decades.</p>
+            <p>Published in <em>ACS Nano</em> in 2026 by Wang Xingwei and colleagues at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability — with co-corresponding author Prof. Zhiguo Yuan, who leads the UN-FIRST initiative at City University of Hong Kong under UNESCO endorsement — the TEHG-UV system solves an engineering problem that had blocked portable UV disinfection for decades.</p>
             <p>UV mercury lamps are the most proven, most cost-effective germicidal technology available — producing UV-C light at 254 nm that directly damages pathogen DNA without chemical residues, with service lives exceeding one year. The obstacle: activating one requires ~917 volts at startup, dropping to ~300 V for sustained operation. The lamp's internal resistance swings across five orders of magnitude in a single cycle — from gigaohms to kilohms. No conventional portable power source could match this two-phase electrical profile. That is what has kept UV disinfection grid-dependent until now.</p>
           </div>
 
@@ -1291,7 +1387,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
           <div class="teng-section-head"><div class="teng-section-num">5</div> Where this advocacy comes from</div>
           <div class="teng-context">
             <div class="teng-context-label">Research Context</div>
-            <p>This page is not independent commentary on someone else's research. It grows from an ongoing collaboration with the research group behind the technology. Xingwei Wang, first author of the <em>ACS Nano</em> paper, is a researcher at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability. This collaboration operates under the <strong>UN-FIRST framework</strong> — Fostering Innovation for Resilience and Sustainable Transformation — officially endorsed by UNESCO under the International Decade of Sciences for Sustainable Development (2024–2033), based at City University of Hong Kong.</p>
+            <p>This page is not independent commentary on someone else's research. It grows from an ongoing collaboration with the research group behind the technology. Xingwei Wang, first author of the <em>ACS Nano</em> paper, is a researcher at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability, where this research was conducted. Prof. Zhiguo Yuan (City University of Hong Kong), co-corresponding author, leads the <strong>UN-FIRST initiative</strong> — Fostering Innovation for Resilience and Sustainable Transformation — officially endorsed by UNESCO under the International Decade of Sciences for Sustainable Development (2024–2033). This research was conducted in connection with that framework.</p>
             <p>The technical work belongs to its authors. The contribution of <em>The Margins</em> is the humanitarian framing: the specific question of how this technology applies to refugee and resettlement contexts, what adaptation would be required, and how to communicate those questions to the organizations that need to hear them. Our ongoing work includes a public-facing technical summary for NGO program staff, needs assessments with resettlement organizations, and a policy brief connecting the research to UNHCR WASH frameworks.</p>
           </div>
         </div>
@@ -1394,7 +1490,7 @@ const articles = [
   {
     id: "tehg-uv-water-access",
     title: "The Device That Could Change Refugee Water Access — If Anyone Builds the Bridge",
-    subtitle: "Researchers at Tsinghua University have published a human-powered water disinfection system that exceeds WHO standards and costs $8.57 per person per year. The science is done. The translation work — from laboratory result to deployed tool — has not yet begun.",
+    subtitle: "Research conducted at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability has produced a human-powered water disinfection system that exceeds WHO standards and costs $8.57 per person per year. The science is done. The translation work — from laboratory result to deployed tool — has not yet begun.",
     tag: "Technology",
     date: "June 20, 2026",
     readTime: "12 min",
@@ -1403,7 +1499,7 @@ const articles = [
     content: [
       { type: "paragraph", text: "In Dabat Bosin, a refugee site in Sudan, people received 4 liters of water per person per day in 2024. The minimum standard established by UNHCR for post-emergency humanitarian response is 20 liters. A person needs roughly 2.5 liters just to survive." },
       { type: "paragraph", text: "UNHCR documented this. They published it. The figure appears in their 2024 WASH Annual Report, released in April 2025, in a sentence describing it as evidence of \"the urgent need for continued efforts to ensure lifesaving water access in all refugee operations.\"" },
-      { type: "paragraph", text: "The urgent need has been documented for decades. The continued efforts are real and often effective. What is missing is not acknowledgment or commitment — it is a technology capable of providing safe water at the household level, in the immediate aftermath of displacement, without any external dependency: no fuel, no electricity, no chemical supply chain, no centralized infrastructure. That technology now exists. It was published in ACS Nano in February 2026, out of Tsinghua University's State Key Laboratory of Regional Environment and Sustainability. It costs $8.57 per person per year. It fits in a shoebox. The question is not whether the science is there. It is whether the people who need to act on it are paying attention." },
+      { type: "paragraph", text: "The urgent need has been documented for decades. The continued efforts are real and often effective. What is missing is not acknowledgment or commitment — it is a technology capable of providing safe water at the household level, in the immediate aftermath of displacement, without any external dependency: no fuel, no electricity, no chemical supply chain, no centralized infrastructure. That technology now exists. It was published in ACS Nano in February 2026, by a team led by Wang Xingwei at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability, with co-corresponding author Prof. Zhiguo Yuan, who leads the UN-FIRST initiative at City University of Hong Kong under UNESCO endorsement. It costs $8.57 per person per year. It fits in a shoebox. The question is not whether the science is there. It is whether the people who need to act on it are paying attention." },
       { type: "heading", text: "The Failure Mode of Existing Approaches" },
       { type: "stat", number: "117.3M", label: "People forcibly displaced worldwide as of June 2025 (UNHCR Mid-Year Trends, 2025)" },
       { type: "paragraph", text: "For displaced populations, access to safe drinking water is not a quality-of-life concern. Approximately 3.4 million deaths globally each year are linked to pathogenic contamination in water, the majority in children under five. Waterborne diseases including cholera, dysentery, and hepatitis E are documented hazards in camp environments; UNHCR's 2024 WASH report describes WASH interventions functioning as a \"critical defence\" against disease outbreaks across 11 countries." },
@@ -1674,6 +1770,12 @@ function showArticle(id, pushState = true) {
           <span class="byline-sep">|</span>
           <span class="article-tag">${a.tag}</span>
         </div>
+        ${a.id === 'tehg-uv-water-access' ? `
+        <div class="article-partner-strip">
+          <span class="article-partner-strip-label">Research in connection with</span>
+          <div class="article-partner-logo"><img src="/images/first_logo2.jpg" alt="UN-FIRST"></div>
+          <div class="article-partner-logo"><img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong"></div>
+        </div>` : ''}
       </div>
       <div class="article-body">${body}</div>
       ${citations}
