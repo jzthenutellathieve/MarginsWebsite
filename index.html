@@ -128,7 +128,7 @@ body {
 .hero-img-prev, .hero-img-next { width: 44px; height: 44px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.6); color: white; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
 .hero-img-prev:hover, .hero-img-next:hover { background: rgba(255,255,255,0.32); border-color: white; }
 .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to bottom, transparent, var(--paper)); z-index: 2; pointer-events: none; }
-.hero-img-caption { position: absolute; top: 1.25rem; right: 2rem; z-index: 3; font-size: 0.58rem; color: rgba(255,255,255,0.82); font-family: 'Inter', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; pointer-events: none; text-align: right; opacity: 0.65; }
+.hero-img-caption { position: absolute; bottom: 1.25rem; right: 2rem; z-index: 3; font-size: 0.58rem; color: rgba(255,255,255,0.82); font-family: 'Inter', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; pointer-events: none; text-align: right; opacity: 0.65; }
 /* ── TEHG SOLUTIONS HERO (top hero, LEFT-aligned text) ── */
 .hero-solutions {
   position: relative;
@@ -153,17 +153,17 @@ body {
 /* No bottom fade — replaced with hard rule */
 .hero-solutions-caption {
   position: absolute;
-  top: 1.25rem;
+  bottom: 1.25rem;
   right: 2rem;
   z-index: 3;
   font-size: 0.58rem;
-  color: rgba(255,255,255,0.7);
+  color: rgba(255,255,255,0.75);
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   pointer-events: none;
   text-align: right;
-  opacity: 0.65;
+  opacity: 0.7;
 }
 .hero-solutions-main {
   position: absolute;
@@ -234,26 +234,26 @@ body {
 /* ── PARTNERSHIP LOGOS ── */
 .hero-partner-logos {
   position: absolute;
-  bottom: 1.75rem;
+  top: 1.5rem;
   right: 2rem;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 0.55rem;
+  gap: 0.5rem;
 }
 .partner-label {
-  font-size: 0.52rem;
+  font-size: 0.62rem;
   font-family: 'Inter', sans-serif;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: rgba(242,238,230,0.55);
+  color: rgba(255,255,255,0.88);
   white-space: nowrap;
   text-align: right;
 }
 .hero-partner-logo-row {
   display: flex;
-  gap: 0.75rem;
+  gap: 1rem;
   align-items: center;
 }
 .hero-partner-logo {
@@ -269,7 +269,7 @@ body {
   mix-blend-mode: multiply;
 }
 .hero-partner-logo.logo-first img { height: 52px; }
-.hero-partner-logo.logo-cityu img { height: 44px; }
+.hero-partner-logo.logo-cityu img { height: 56px; }
 .article-partner-strip {
   display: flex;
   align-items: center;
@@ -299,7 +299,7 @@ body {
   mix-blend-mode: multiply;
 }
 .article-partner-logo.logo-first img { height: 36px; }
-.article-partner-logo.logo-cityu img { height: 30px; }
+.article-partner-logo.logo-cityu img { height: 32px; }
 /* ── PILLARS ── */
 .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
 .pillar-card { background: #FAFAF8; border: 1px solid var(--rule); padding: 2rem; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
@@ -977,7 +977,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
     </div>
     <!-- Partner logos: bottom-right -->
     <div class="hero-partner-logos">
-      <span class="partner-label">Research in partnership with</span>
+      <span class="partner-label">A UN-FIRST · CityU Initiative</span>
       <div class="hero-partner-logo-row">
         <div class="hero-partner-logo logo-first">
           <img src="/images/first_logo2.jpg" alt="UN-FIRST — Fostering Innovation for Resilience and Sustainable Transformation">
@@ -986,6 +986,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
           <img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong">
         </div>
       </div>
+      <span class="partner-label" style="font-size:0.5rem;color:rgba(255,255,255,0.55);letter-spacing:0.1em;">Research in partnership with</span>
     </div>
   </div>
 
@@ -1762,7 +1763,10 @@ function showArticle(id, pushState = true) {
         </div>
         ${a.id === 'tehg-uv-water-access' ? `
         <div class="article-partner-strip">
-          <span class="article-partner-strip-label">Research in partnership with</span>
+          <div style="display:flex;flex-direction:column;gap:0.3rem;">
+            <span class="article-partner-strip-label" style="color:var(--ink-mid);font-size:0.65rem;">A UN-FIRST · CityU Initiative</span>
+            <span class="article-partner-strip-label">Research in partnership with</span>
+          </div>
           <div class="article-partner-logo logo-first"><img src="/images/first_logo2.jpg" alt="UN-FIRST"></div>
           <div class="article-partner-logo logo-cityu"><img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong"></div>
         </div>` : ''}
