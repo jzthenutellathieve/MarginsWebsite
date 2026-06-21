@@ -231,35 +231,6 @@ body {
 .hero-solutions { border-bottom: 3px solid #353535; }
 /* divider hidden — border replaces it */
 .hero-divider { display: none; }
-/* logo badge on hero */
-.hero-partner-logos {
-  position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 4;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 0.5rem;
-}
-.hero-logo-first {
-  height: 36px;
-  width: auto;
-  display: block;
-  opacity: 0.88;
-  filter: brightness(1.1);
-}
-.hero-logo-cityu-wrap {
-  background: rgba(255,255,255,0.15);
-  backdrop-filter: blur(4px);
-  padding: 4px 8px;
-}
-.hero-logo-cityu {
-  height: 26px;
-  width: auto;
-  display: block;
-  opacity: 0.9;
-}
 /* ── PARTNERSHIP LOGOS ── */
 .hero-partner-logos {
   position: absolute;
@@ -267,56 +238,68 @@ body {
   right: 2rem;
   z-index: 3;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.55rem;
 }
 .partner-label {
-  font-size: 0.5rem;
+  font-size: 0.52rem;
   font-family: 'Inter', sans-serif;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: rgba(242,238,230,0.4);
+  color: rgba(242,238,230,0.55);
   white-space: nowrap;
+  text-align: right;
+}
+.hero-partner-logo-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
 }
 .hero-partner-logo {
-  background: rgba(255,255,255,0.93);
-  padding: 0.28rem 0.5rem;
+  background: transparent;
+  padding: 0;
   display: flex;
   align-items: center;
 }
 .hero-partner-logo img {
-  height: 26px;
   width: auto;
   display: block;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
+.hero-partner-logo.logo-first img { height: 52px; }
+.hero-partner-logo.logo-cityu img { height: 44px; }
 .article-partner-strip {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-top: 1rem;
-  padding-top: 1rem;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
   border-top: 1px solid var(--rule-light);
   flex-wrap: wrap;
 }
 .article-partner-strip-label {
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   font-family: 'Inter', sans-serif;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ink-dim);
 }
 .article-partner-logo {
-  background: var(--paper-warm);
-  border: 1px solid var(--rule-light);
-  padding: 0.25rem 0.5rem;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 .article-partner-logo img {
-  height: 20px;
   width: auto;
   display: block;
   object-fit: contain;
+  mix-blend-mode: multiply;
 }
+.article-partner-logo.logo-first img { height: 36px; }
+.article-partner-logo.logo-cityu img { height: 30px; }
 /* ── PILLARS ── */
 .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
 .pillar-card { background: #FAFAF8; border: 1px solid var(--rule); padding: 2rem; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
@@ -994,12 +977,14 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
     </div>
     <!-- Partner logos: bottom-right -->
     <div class="hero-partner-logos">
-      <span class="partner-label">Research in connection with</span>
-      <div class="hero-partner-logo">
-        <img src="/images/first_logo2.jpg" alt="UN-FIRST — Fostering Innovation for Resilience and Sustainable Transformation">
-      </div>
-      <div class="hero-partner-logo">
-        <img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong">
+      <span class="partner-label">Research in partnership with</span>
+      <div class="hero-partner-logo-row">
+        <div class="hero-partner-logo logo-first">
+          <img src="/images/first_logo2.jpg" alt="UN-FIRST — Fostering Innovation for Resilience and Sustainable Transformation">
+        </div>
+        <div class="hero-partner-logo logo-cityu">
+          <img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong">
+        </div>
       </div>
     </div>
   </div>
@@ -1389,6 +1374,11 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
             <div class="teng-context-label">Research Context</div>
             <p>This page is not independent commentary on someone else's research. It grows from an ongoing collaboration with the research group behind the technology. Xingwei Wang, first author of the <em>ACS Nano</em> paper, is a researcher at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability, where this research was conducted. Prof. Zhiguo Yuan (City University of Hong Kong), co-corresponding author, leads the <strong>UN-FIRST initiative</strong> — Fostering Innovation for Resilience and Sustainable Transformation — officially endorsed by UNESCO under the International Decade of Sciences for Sustainable Development (2024–2033). This research was conducted in connection with that framework.</p>
             <p>The technical work belongs to its authors. The contribution of <em>The Margins</em> is the humanitarian framing: the specific question of how this technology applies to refugee and resettlement contexts, what adaptation would be required, and how to communicate those questions to the organizations that need to hear them. Our ongoing work includes a public-facing technical summary for NGO program staff, needs assessments with resettlement organizations, and a policy brief connecting the research to UNHCR WASH frameworks.</p>
+            <div style="display:flex;align-items:center;gap:1rem;margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid rgba(255,255,255,0.1);">
+              <span style="font-size:0.55rem;font-family:'Inter',sans-serif;letter-spacing:0.12em;text-transform:uppercase;color:rgba(242,238,230,0.4);white-space:nowrap;">Research in partnership with</span>
+              <div class="article-partner-logo logo-first" style="background:transparent;"><img src="/images/first_logo2.jpg" alt="UN-FIRST" style="mix-blend-mode:multiply;height:34px;width:auto;"></div>
+              <div class="article-partner-logo logo-cityu" style="background:transparent;"><img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong" style="mix-blend-mode:multiply;height:28px;width:auto;"></div>
+            </div>
           </div>
         </div>
 
@@ -1772,9 +1762,9 @@ function showArticle(id, pushState = true) {
         </div>
         ${a.id === 'tehg-uv-water-access' ? `
         <div class="article-partner-strip">
-          <span class="article-partner-strip-label">Research in connection with</span>
-          <div class="article-partner-logo"><img src="/images/first_logo2.jpg" alt="UN-FIRST"></div>
-          <div class="article-partner-logo"><img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong"></div>
+          <span class="article-partner-strip-label">Research in partnership with</span>
+          <div class="article-partner-logo logo-first"><img src="/images/first_logo2.jpg" alt="UN-FIRST"></div>
+          <div class="article-partner-logo logo-cityu"><img src="/images/CityU_logo.svg.jpg" alt="City University of Hong Kong"></div>
         </div>` : ''}
       </div>
       <div class="article-body">${body}</div>
