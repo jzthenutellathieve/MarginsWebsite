@@ -128,7 +128,7 @@ body {
 .hero-img-prev, .hero-img-next { width: 44px; height: 44px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.6); color: white; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
 .hero-img-prev:hover, .hero-img-next:hover { background: rgba(255,255,255,0.32); border-color: white; }
 .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to bottom, transparent, var(--paper)); z-index: 2; pointer-events: none; }
-.hero-img-caption { position: absolute; bottom: 1.25rem; right: 2rem; z-index: 3; font-size: 0.58rem; color: rgba(255,255,255,0.82); font-family: 'Inter', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; pointer-events: none; text-align: right; opacity: 0.65; }
+.hero-img-caption { position: absolute; top: 1.25rem; right: 2rem; z-index: 3; font-size: 0.58rem; color: rgba(255,255,255,0.82); font-family: 'Inter', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; pointer-events: none; text-align: right; opacity: 0.65; }
 /* ── TEHG SOLUTIONS HERO (top hero, LEFT-aligned text) ── */
 .hero-solutions {
   position: relative;
@@ -947,7 +947,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 <!-- HOME -->
 <div class="page active" id="home">
   <!-- TEHG-UV SOLUTIONS HERO (top) -->
-  <div class="hero-solutions reveal">
+  <div class="hero-solutions">
     <div class="hero-solutions-bg">
       <img src="/images/iStock-2264095162.jpg" alt="Children carrying water containers in Ethiopia" loading="eager">
     </div>
@@ -994,7 +994,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
   <div class="hero-divider"></div>
 
   <!-- JOURNALISM HERO (original, below) -->
-  <div class="hero reveal">
+  <div class="hero">
     <div class="hero-carousel-bg">
       <div class="hero-img-track" id="hero-track">
         <div class="hero-img-slide active">
@@ -1188,7 +1188,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
           <!-- World map -->
           <div style="margin: 2rem 0;">
             <img src="/images/Worldmap.jpg" alt="World map showing share of population with access to safely managed drinking water" style="width:100%;display:block;border:1px solid var(--rule);">
-            <div class="teng-source-item" style="margin-top:0.5rem;">Share of population with access to safely managed drinking water. Lighter shading = less access. Data: WHO/UNICEF JMP via Our World in Data, 2024 · CC BY</div>
+            <div class="teng-source-item" style="margin-top:0.5rem;">Share of population with access to safely managed drinking water. Lighter shading = less access. Data: WHO/UNICEF JMP via Our World in Data, 2022 · CC BY</div>
           </div>
         </div>
 
