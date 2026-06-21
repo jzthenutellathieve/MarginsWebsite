@@ -12,7 +12,6 @@
 <link href="https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300;1,8..60,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 :root {
   --paper: #F8F6F1;
   --paper-warm: #F2EEE7;
@@ -27,7 +26,6 @@
   --blue-dim: rgba(176,48,32,0.06);
   --blue-bg: rgba(176,48,32,0.06);
 }
-
 html { scroll-behavior: smooth; font-size: 16px; }
 body {
   background: var(--paper);
@@ -37,7 +35,6 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-
 /* ── MASTHEAD ── */
 .masthead {
   background: #FAFAF8;
@@ -58,24 +55,20 @@ body {
 .masthead-date { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); font-family: 'Inter', sans-serif; }
 .masthead-title { text-align: center; }
 .masthead-title h1 { font-family: 'UnifrakturMaguntia', cursive; font-size: 2.4rem; font-weight: 400; letter-spacing: 0.02em; color: var(--ink); cursor: pointer; line-height: 1; }
-.masthead-title h1 span { color: var(--blue); }
 .masthead-tagline { font-size: 0.63rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-light); margin-top: 0.2rem; }
 .btn-subscribe { padding: 0.45rem 1.1rem; background: var(--ink); color: #fff; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s; }
 .btn-subscribe:hover { background: var(--blue); }
 .masthead-nav { display: flex; justify-content: center; padding: 0 3rem; }
 .masthead-nav a { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); text-decoration: none; padding: 0.7rem 1.25rem; border-bottom: 2px solid transparent; transition: border-color 0.2s, color 0.2s; }
 .masthead-nav a:hover, .masthead-nav a.active { border-bottom-color: var(--blue); color: var(--blue); }
-
 /* ── PAGES ── */
 .page { display: none; }
 .page.active { display: block; }
-
 /* ── BUTTONS ── */
 .btn-primary { padding: 0.7rem 1.5rem; background: var(--blue); color: white; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: background 0.2s; }
 .btn-primary:hover { background: var(--ink); }
 .btn-text { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--ink); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-family: 'Inter', sans-serif; }
 .btn-text:hover { color: var(--blue); border-color: var(--blue); }
-
 /* ── HOME HERO ── */
 .hero {
   position: relative;
@@ -88,8 +81,6 @@ body {
   display: flex;
   align-items: flex-end;
 }
-
-/* Article overlay — mid right */
 .hero-article-overlay {
   position: absolute;
   bottom: 12rem;
@@ -103,224 +94,42 @@ body {
   transition: background 0.2s;
 }
 .hero-article-overlay:hover { background: rgba(26,24,20,0.96); }
-.hero-article-tag {
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: rgba(212,150,120,0.9);
-  font-family: 'Inter', sans-serif;
-  margin-bottom: 0.5rem;
-}
-.hero-article-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: #F8F6F1;
-  line-height: 1.4;
-  margin-bottom: 0.75rem;
-}
-.hero-article-read {
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: rgba(242,238,230,0.6);
-  font-family: 'Inter', sans-serif;
-  transition: color 0.2s;
-}
+.hero-article-tag { font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(212,150,120,0.9); font-family: 'Inter', sans-serif; margin-bottom: 0.5rem; }
+.hero-article-title { font-family: 'Playfair Display', serif; font-size: 0.95rem; font-weight: 600; color: #F8F6F1; line-height: 1.4; margin-bottom: 0.75rem; }
+.hero-article-read { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(242,238,230,0.6); font-family: 'Inter', sans-serif; transition: color 0.2s; }
 .hero-article-overlay:hover .hero-article-read { color: rgba(242,238,230,0.95); }
-
-/* Full-bleed carousel behind everything */
-.hero-carousel-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-.hero-img-track {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
-.hero-img-slide {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-}
+.hero-carousel-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-img-track { position: relative; width: 100%; height: 100%; }
+.hero-img-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.8s ease; }
 .hero-img-slide.active { opacity: 1; }
-.hero-img-slide img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-/* Dark gradient over image so text is readable */
+.hero-img-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .hero-carousel-bg::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(26,24,20,0.92) 0%,
-    rgba(26,24,20,0.80) 35%,
-    rgba(26,24,20,0.45) 60%,
-    rgba(26,24,20,0.10) 100%
-  );
+  background: linear-gradient(to right, rgba(26,24,20,0.92) 0%, rgba(26,24,20,0.80) 35%, rgba(26,24,20,0.45) 60%, rgba(26,24,20,0.10) 100%);
   z-index: 1;
 }
-
-/* Text content over image */
-.hero-main {
-  position: absolute;
-  bottom: 12rem;
-  left: 0;
-  z-index: 2;
-  padding: 0 4rem;
-  max-width: 560px;
-  width: 50%;
-}
-.hero-eyebrow {
-  font-size: 0.65rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(212,150,120,0.9);
-  margin-bottom: 1rem;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-.hero-eyebrow::before {
-  content: '';
-  display: block;
-  width: 24px;
-  height: 1px;
-  background: rgba(212,150,120,0.9);
-}
-.hero-headline {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 2.8vw, 3rem);
-  font-weight: 700;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
-  margin-bottom: 1.25rem;
-  color: #F8F6F1;
-}
-.hero-headline em {
-  font-style: italic;
-  font-weight: 400;
-  color: rgba(242,238,230,0.75);
-}
-.hero-standfirst {
-  font-family: 'Source Serif 4', serif;
-  font-size: 0.9rem;
-  line-height: 1.75;
-  color: rgba(242,238,230,0.78);
-  max-width: 46ch;
-  margin-bottom: 2rem;
-  border-left: 2px solid rgba(176,48,32,0.7);
-  padding-left: 1rem;
-}
+.hero-main { position: absolute; bottom: 12rem; left: 0; z-index: 2; padding: 0 4rem; max-width: 560px; width: 50%; }
+.hero-eyebrow { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(212,150,120,0.9); margin-bottom: 1rem; font-family: 'Inter', sans-serif; display: flex; align-items: center; gap: 0.75rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(212,150,120,0.9); }
+.hero-headline { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 2.8vw, 3rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.015em; margin-bottom: 1.25rem; color: #F8F6F1; }
+.hero-headline em { font-style: italic; font-weight: 400; color: rgba(242,238,230,0.75); }
+.hero-standfirst { font-family: 'Source Serif 4', serif; font-size: 0.9rem; line-height: 1.75; color: rgba(242,238,230,0.78); max-width: 46ch; margin-bottom: 2rem; border-left: 2px solid rgba(176,48,32,0.7); padding-left: 1rem; }
 .hero-actions { display: flex; gap: 1.5rem; align-items: center; flex-wrap: nowrap; margin-top: 1.75rem; }
-.btn-primary-light {
-  padding: 0.75rem 1.75rem;
-  background: var(--blue);
-  color: white;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  border: none;
-  cursor: pointer;
-  transition: background 0.2s;
-}
+.btn-primary-light { padding: 0.75rem 1.75rem; background: var(--blue); color: white; font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; border: none; cursor: pointer; transition: background 0.2s; }
 .btn-primary-light:hover { background: #8C1A1A; }
-.btn-text-light {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(242,238,230,0.85);
-  border-bottom: 1px solid rgba(242,238,230,0.4);
-  padding-bottom: 1px;
-  background: none;
-  border-top: none; border-left: none; border-right: none;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  transition: color 0.2s, border-color 0.2s;
-  white-space: nowrap;
-}
+.btn-text-light { display: inline-flex; align-items: center; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(242,238,230,0.85); border-bottom: 1px solid rgba(242,238,230,0.4); padding-bottom: 1px; background: none; border-top: none; border-left: none; border-right: none; cursor: pointer; font-family: 'Inter', sans-serif; transition: color 0.2s, border-color 0.2s; white-space: nowrap; }
 .btn-text-light:hover { color: white; border-color: rgba(242,238,230,0.8); }
-
-/* Carousel controls — bottom right */
-.hero-carousel-controls {
-  position: absolute;
-  bottom: 8rem;
-  right: 2.5rem;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-}
+.hero-carousel-controls { position: absolute; bottom: 8rem; right: 2.5rem; z-index: 3; display: flex; align-items: center; gap: 0.6rem; }
 .hero-img-dots { display: flex; gap: 0.5rem; align-items: center; }
-.hero-dot {
-  width: 7px; height: 7px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.35);
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.2s, transform 0.2s;
-}
+.hero-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.35); border: none; cursor: pointer; padding: 0; transition: background 0.2s, transform 0.2s; }
 .hero-dot.active { background: white; transform: scale(1.4); }
-.hero-img-prev, .hero-img-next {
-  width: 44px; height: 44px;
-  background: rgba(255,255,255,0.18);
-  border: 1px solid rgba(255,255,255,0.6);
-  color: white;
-  font-size: 1.1rem;
-  display: flex; align-items: center; justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-}
-.hero-img-prev:hover, .hero-img-next:hover {
-  background: rgba(255,255,255,0.32);
-  border-color: white;
-}
-
-/* Smooth fade from hero into page */
-.hero::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 80px;
-  background: linear-gradient(to bottom, transparent, var(--paper));
-  z-index: 2;
-  pointer-events: none;
-}
-
-/* Caption — top right */
-.hero-img-caption {
-  position: absolute;
-  top: 1.25rem;
-  right: 2rem;
-  z-index: 3;
-  font-size: 0.58rem;
-  color: rgba(255,255,255,0.82);
-  font-family: 'Inter', sans-serif;
-  font-style: normal;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  pointer-events: none;
-  background: none;
-  padding: 0;
-  text-align: right;
-  opacity: 0.65;
-}
-
-/* Pillars */
+.hero-img-prev, .hero-img-next { width: 44px; height: 44px; background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.6); color: white; font-size: 1.1rem; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.2s, border-color 0.2s; }
+.hero-img-prev:hover, .hero-img-next:hover { background: rgba(255,255,255,0.32); border-color: white; }
+.hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 80px; background: linear-gradient(to bottom, transparent, var(--paper)); z-index: 2; pointer-events: none; }
+.hero-img-caption { position: absolute; top: 1.25rem; right: 2rem; z-index: 3; font-size: 0.58rem; color: rgba(255,255,255,0.82); font-family: 'Inter', sans-serif; letter-spacing: 0.1em; text-transform: uppercase; pointer-events: none; text-align: right; opacity: 0.65; }
+/* ── HOME PILLARS ── */
 .pillars { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
 .pillar-card { background: #FAFAF8; border: 1px solid var(--rule); padding: 2rem; cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
 .pillar-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--blue); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
@@ -330,59 +139,23 @@ body {
 .pillar-card h3 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 600; margin-bottom: 0.75rem; line-height: 1.25; }
 .pillar-card p { font-size: 0.85rem; color: var(--ink-light); line-height: 1.65; }
 .pillar-arrow { display: inline-flex; align-items: center; gap: 0.4rem; margin-top: 1.25rem; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); font-family: 'Inter', sans-serif; }
-
-/* Section rule */
+/* ── SECTION RULE ── */
 .section-rule { display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem; }
 .section-rule h2 { font-family: 'Inter', sans-serif; font-size: 0.68rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-light); white-space: nowrap; }
 .section-rule::after { content: ''; flex: 1; height: 1px; background: var(--rule); }
 .section-rule-right { margin-left: auto; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--blue); text-decoration: none; cursor: pointer; background: none; border: none; font-family: 'Inter', sans-serif; }
 .section-rule-right:hover { text-decoration: underline; }
-
-/* Article carousel */
+/* ── CAROUSEL ── */
 .carousel-wrap { position: relative; margin: 0 -3rem; }
-.carousel-track {
-  display: flex;
-  gap: 0;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  padding: 0 3rem;
-  cursor: grab;
-}
+.carousel-track { display: flex; gap: 0; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; -ms-overflow-style: none; padding: 0 3rem; cursor: grab; }
 .carousel-track::-webkit-scrollbar { display: none; }
 .carousel-track.grabbing { cursor: grabbing; }
-.article-card {
-  flex: 0 0 380px;
-  scroll-snap-align: start;
-  background: #FFFFFF;
-  border: 1px solid var(--rule-light);
-  cursor: pointer;
-  transition: border-color 0.25s, box-shadow 0.25s;
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-}
+.article-card { flex: 0 0 380px; scroll-snap-align: start; background: #FFFFFF; border: 1px solid var(--rule-light); cursor: pointer; transition: border-color 0.25s, box-shadow 0.25s; text-decoration: none; color: inherit; display: flex; flex-direction: column; position: relative; overflow: hidden; }
 .article-card:hover { border-color: var(--blue); box-shadow: 0 6px 32px rgba(176,48,32,0.08); }
-.article-card-img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-  display: block;
-  background: var(--paper-warm);
-  position: relative;
-  overflow: hidden;
-}
+.article-card-img { width: 100%; height: 220px; object-fit: cover; display: block; background: var(--paper-warm); position: relative; overflow: hidden; }
 .article-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
 .article-card:hover .article-card-img img { transform: scale(1.03); }
-.article-card-img-placeholder {
-  width: 100%; height: 220px;
-  background: linear-gradient(135deg, var(--paper-warm) 0%, var(--rule-light) 100%);
-  display: flex; align-items: center; justify-content: center;
-}
+.article-card-img-placeholder { width: 100%; height: 220px; background: linear-gradient(135deg, var(--paper-warm) 0%, var(--rule-light) 100%); display: flex; align-items: center; justify-content: center; }
 .article-card-img-placeholder span { font-size: 2.5rem; opacity: 0.3; }
 .article-card-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
 .article-meta { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
@@ -396,7 +169,6 @@ body {
 .article-card:hover h3 { color: var(--blue); }
 .article-card p { font-size: 0.82rem; color: var(--ink-light); line-height: 1.65; }
 .article-award { margin-top: 1rem; font-size: 0.65rem; color: var(--ink-dim); font-family: 'Inter', sans-serif; border-top: 1px solid var(--rule-light); padding-top: 0.75rem; font-style: italic; }
-
 /* ── REPORTING ── */
 .reporting-header { border-bottom: 3px solid #353535; padding-bottom: 1.5rem; margin-bottom: 2rem; }
 .reporting-header h2 { font-family: 'Playfair Display', serif; font-size: 2.4rem; font-weight: 700; margin-bottom: 0.5rem; }
@@ -413,12 +185,11 @@ body {
 .row-title { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; line-height: 1.3; margin-bottom: 0.4rem; transition: color 0.2s; }
 .article-row:hover .row-title { color: var(--blue); }
 .row-excerpt { font-size: 0.82rem; color: var(--ink-light); line-height: 1.6; }
-
 /* ── ARTICLE ── */
 .article-back { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-light); font-family: 'Inter', sans-serif; background: none; border: none; cursor: pointer; display: flex; align-items: center; gap: 0.4rem; margin-bottom: 2.5rem; padding: 0; transition: color 0.2s; }
 .article-back:hover { color: var(--blue); }
 .article-header { border-bottom: 1px solid var(--rule); padding-bottom: 2rem; margin-bottom: 2rem; }
-.article-award-badge { display: inline-block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; font-family: 'Inter', sans-serif; color: var(--blue); border: 1px solid rgba(29,78,216,0.3); padding: 0.25rem 0.6rem; margin-bottom: 1rem; }
+.article-award-badge { display: inline-block; font-size: 0.65rem; letter-spacing: 0.12em; text-transform: uppercase; font-family: 'Inter', sans-serif; color: var(--blue); border: 1px solid rgba(176,48,32,0.3); padding: 0.25rem 0.6rem; margin-bottom: 1rem; }
 .article-h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 700; line-height: 1.15; letter-spacing: -0.01em; margin-bottom: 1rem; }
 .article-subtitle { font-family: 'Source Serif 4', serif; font-size: 1.05rem; line-height: 1.65; color: var(--ink-mid); margin-bottom: 1.5rem; }
 .article-byline { display: flex; align-items: center; gap: 1rem; font-size: 0.78rem; color: var(--ink-light); font-family: 'Inter', sans-serif; flex-wrap: wrap; }
@@ -433,14 +204,10 @@ body {
 .article-stat-block { background: var(--paper-warm); border: 1px solid var(--rule); padding: 1.5rem 2rem; margin: 2rem 0; display: flex; align-items: baseline; gap: 1.25rem; }
 .stat-number { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 700; color: var(--blue); line-height: 1; white-space: nowrap; }
 .stat-desc { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: var(--ink-light); line-height: 1.5; }
-
-/* Image with caption */
 .article-image { margin: 2.5rem 0; }
 .article-image img { width: 100%; display: block; }
 .article-caption { font-size: 0.78rem; font-family: 'Inter', sans-serif; color: var(--ink-dim); margin-top: 0.6rem; line-height: 1.5; }
 .article-caption span { color: var(--ink-light); }
-
-/* Citations */
 .article-citations { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
 .article-citations h3 { font-family: 'Inter', sans-serif; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-dim); margin-bottom: 1rem; }
 .citation-item { font-size: 0.78rem; font-family: 'Inter', sans-serif; color: var(--ink-light); line-height: 1.6; margin-bottom: 0.5rem; padding-left: 1.5rem; position: relative; }
@@ -459,28 +226,459 @@ body {
 .sol-panel { display: none; }
 .sol-panel.active { display: block; }
 
-/* TENG-UV inside solutions */
-.tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 3rem; }
-.tech-card { background: #FAFAF8; border: 1px solid var(--rule); padding: 2rem; }
-.tech-card h3 { font-family: 'Playfair Display', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 0.75rem; color: var(--ink); }
-.tech-card p { font-size: 0.88rem; color: var(--ink-light); line-height: 1.7; }
-.big-stat-block { display: flex; align-items: baseline; gap: 1rem; margin-bottom: 2.5rem; padding: 2rem; background: var(--blue-dim); border: 1px solid var(--blue); }
-.big-num { font-family: 'Playfair Display', serif; font-size: 4.5rem; font-weight: 700; color: var(--blue); line-height: 1; }
-.big-num-label { font-family: 'Inter', sans-serif; font-size: 0.9rem; color: var(--ink-mid); line-height: 1.5; }
-.compare-table { width: 100%; border-collapse: collapse; margin: 2rem 0 3rem; }
-.compare-table th { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-light); padding: 0.75rem 1rem; border-bottom: 2px solid var(--ink); text-align: left; }
-.compare-table td { font-size: 0.88rem; padding: 0.9rem 1rem; border-bottom: 1px solid var(--rule-light); color: var(--ink-mid); font-family: 'Source Serif 4', serif; vertical-align: top; }
-.compare-table tr:hover td { background: #FAFAF8; }
-.compare-table .highlight { color: var(--blue); font-weight: 600; font-family: 'Inter', sans-serif; }
-.compare-table .good { color: #166534; }
-.compare-table .bad { color: #991B1B; }
-.sol-cta { background: var(--ink); color: var(--paper); padding: 2.5rem; display: grid; grid-template-columns: 1fr auto; gap: 3rem; align-items: center; margin-top: 2rem; }
-.sol-cta h3 { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem; }
-.sol-cta p { font-size: 0.88rem; color: rgba(247,249,251,0.65); line-height: 1.65; }
-.btn-cta-light { padding: 0.85rem 2rem; background: var(--paper); color: var(--ink); font-family: 'Inter', sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; white-space: nowrap; transition: background 0.2s; }
-.btn-cta-light:hover { background: var(--blue); color: white; }
+/* ══════════════════════════════════════════
+   TENG-UV TECHNOLOGY PAGE — complete redesign
+   ══════════════════════════════════════════ */
 
-/* Housing inside solutions */
+/* Hero banner */
+.teng-hero {
+  position: relative;
+  background: var(--ink);
+  overflow: hidden;
+  margin: 0 -3rem 0;
+  padding: 5rem 3rem 4rem;
+}
+.teng-hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 5rem;
+  align-items: end;
+}
+.teng-hero-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(212,150,120,0.85);
+  font-family: 'Inter', sans-serif;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.teng-hero-label::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 1px;
+  background: rgba(212,150,120,0.85);
+}
+.teng-hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  font-weight: 700;
+  color: #F8F6F1;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.5rem;
+}
+.teng-hero-deck {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: rgba(242,238,230,0.75);
+  max-width: 52ch;
+  border-left: 2px solid rgba(176,48,32,0.7);
+  padding-left: 1.25rem;
+  margin-bottom: 2rem;
+}
+.teng-hero-doi {
+  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  color: rgba(242,238,230,0.35);
+  letter-spacing: 0.04em;
+}
+.teng-hero-doi a { color: rgba(212,150,120,0.7); text-decoration: none; }
+.teng-hero-doi a:hover { color: rgba(212,150,120,1); }
+
+/* Three anchor stats — right column of hero */
+.teng-hero-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.teng-hero-stat {
+  padding: 1.5rem 1.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.teng-hero-stat:last-child { border-bottom: none; }
+.teng-hero-stat-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--blue-light);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+}
+.teng-hero-stat-label {
+  font-size: 0.75rem;
+  color: rgba(242,238,230,0.6);
+  font-family: 'Inter', sans-serif;
+  line-height: 1.45;
+}
+.teng-hero-stat-source {
+  font-size: 0.62rem;
+  color: rgba(242,238,230,0.3);
+  font-family: 'Inter', sans-serif;
+  margin-top: 0.3rem;
+  font-style: italic;
+}
+
+/* Page body wrapper */
+.teng-body {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 4rem 0 2rem;
+}
+
+/* Section title */
+.teng-section-head {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.teng-section-num {
+  width: 22px;
+  height: 22px;
+  background: var(--blue);
+  color: white;
+  font-size: 0.6rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Prose blocks */
+.teng-prose {
+  font-family: 'Source Serif 4', serif;
+  font-size: 1rem;
+  line-height: 1.82;
+  color: var(--ink-mid);
+  margin-bottom: 2.5rem;
+}
+.teng-prose p { margin-bottom: 1.25rem; }
+.teng-prose p:last-child { margin-bottom: 0; }
+
+/* Section wrapper spacing */
+.teng-section { margin-bottom: 4rem; }
+
+/* Critical failure callout — replaces the bullet list */
+.teng-failure-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin: 2rem 0;
+}
+.teng-failure-card {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--rule);
+  padding: 1.5rem;
+}
+.teng-failure-card.critical { border-top-color: var(--blue); }
+.teng-failure-method {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 0.6rem;
+}
+.teng-failure-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.3;
+}
+.teng-failure-card p {
+  font-size: 0.8rem;
+  color: var(--ink-light);
+  line-height: 1.6;
+  font-family: 'Source Serif 4', serif;
+}
+
+/* Extreme case callout */
+.teng-extreme {
+  background: var(--ink);
+  padding: 1.75rem 2rem;
+  margin: 2rem 0;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.teng-extreme-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--blue-light);
+  line-height: 1;
+  white-space: nowrap;
+}
+.teng-extreme-text {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.92rem;
+  color: rgba(242,238,230,0.8);
+  line-height: 1.65;
+}
+.teng-extreme-text strong {
+  color: #F8F6F1;
+  font-weight: 600;
+}
+
+/* Three-step explainer */
+.teng-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--rule);
+  margin: 2rem 0;
+}
+.teng-step {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+.teng-step:last-child { border-bottom: none; }
+.teng-step-num {
+  background: var(--ink);
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.teng-step-body {
+  padding: 1.5rem 1.75rem;
+  background: #FAFAF8;
+}
+.teng-step-body h4 {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 0.5rem;
+}
+.teng-step-body p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.9rem;
+  color: var(--ink-mid);
+  line-height: 1.7;
+}
+.teng-step-body .teng-spec {
+  display: inline-block;
+  background: var(--ink);
+  color: #F8F6F1;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  padding: 0.15rem 0.5rem;
+  margin: 0.6rem 0.25rem 0 0;
+  letter-spacing: 0.04em;
+}
+
+/* Performance data bar */
+.teng-perf-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 100px;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--rule-light);
+}
+.teng-perf-row:first-child { border-top: 1px solid var(--rule-light); }
+.teng-perf-label { font-size: 0.78rem; font-family: 'Inter', sans-serif; color: var(--ink-light); }
+.teng-perf-bar-wrap { background: var(--rule-light); height: 6px; }
+.teng-perf-bar { height: 6px; background: var(--blue); transition: width 1s ease; }
+.teng-perf-value { font-size: 0.78rem; font-family: 'Inter', sans-serif; color: var(--ink); font-weight: 600; text-align: right; }
+
+/* Alignment grid */
+.teng-align-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin: 2rem 0;
+}
+.teng-align-card {
+  padding: 1.75rem;
+  background: #FAFAF8;
+  border: 1px solid var(--rule);
+}
+.teng-align-card.gap-card {
+  background: var(--paper-warm);
+  border-color: var(--rule);
+  border-top: 3px solid #9A7B4F;
+}
+.teng-align-card.match-card {
+  background: #F6FAF6;
+  border-color: #C8DCC8;
+  border-top: 3px solid #2D6A2D;
+}
+.teng-align-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.match-card .teng-align-label { color: #2D6A2D; }
+.gap-card .teng-align-label { color: #9A7B4F; }
+.teng-align-item {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  font-size: 0.85rem;
+  font-family: 'Source Serif 4', serif;
+  color: var(--ink-mid);
+  line-height: 1.6;
+}
+.teng-align-item:last-child { border-bottom: none; padding-bottom: 0; }
+.teng-align-item strong { font-weight: 600; color: var(--ink); display: block; font-family: 'Inter', sans-serif; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 0.2rem; }
+
+/* Comparison table */
+.teng-compare-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0 2.5rem; font-size: 0.82rem; }
+.teng-compare-table thead tr { background: var(--ink); }
+.teng-compare-table th { font-family: 'Inter', sans-serif; font-size: 0.62rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(248,246,241,0.7); padding: 0.9rem 1rem; text-align: left; }
+.teng-compare-table th:first-child { color: #F8F6F1; }
+.teng-compare-table td { font-size: 0.82rem; padding: 0.85rem 1rem; border-bottom: 1px solid var(--rule-light); color: var(--ink-mid); font-family: 'Source Serif 4', serif; vertical-align: middle; }
+.teng-compare-table tr:hover td { background: #FAFAF8; }
+.teng-compare-table .row-highlight td { background: rgba(176,48,32,0.04); }
+.teng-compare-table .row-highlight td:first-child { font-weight: 600; color: var(--blue); font-family: 'Inter', sans-serif; }
+.teng-check { color: #2D6A2D; font-weight: 600; }
+.teng-cross { color: #991B1B; font-weight: 600; }
+.teng-neutral { color: var(--ink-dim); }
+
+/* Research context block */
+.teng-context {
+  background: var(--paper-warm);
+  border: 1px solid var(--rule);
+  border-left: 4px solid var(--blue);
+  padding: 2rem 2.25rem;
+  margin: 2rem 0;
+}
+.teng-context-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'Inter', sans-serif;
+  color: var(--blue);
+  margin-bottom: 0.75rem;
+}
+.teng-context p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.9rem;
+  color: var(--ink-mid);
+  line-height: 1.75;
+  margin-bottom: 0.75rem;
+}
+.teng-context p:last-child { margin-bottom: 0; }
+
+/* CTA */
+.teng-cta {
+  background: var(--ink);
+  padding: 3rem;
+  margin: 3rem -3rem 0;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4rem;
+  align-items: center;
+}
+.teng-cta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #F8F6F1;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+.teng-cta p {
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.88rem;
+  color: rgba(242,238,230,0.6);
+  line-height: 1.7;
+}
+.teng-cta-actions { display: flex; flex-direction: column; gap: 1rem; align-items: flex-end; white-space: nowrap; }
+.btn-cta-primary {
+  padding: 0.9rem 2rem;
+  background: var(--blue);
+  color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-cta-primary:hover { background: #8C1A1A; }
+.btn-cta-secondary {
+  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  color: rgba(242,238,230,0.5);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(242,238,230,0.2);
+  padding-bottom: 1px;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.btn-cta-secondary:hover { color: rgba(242,238,230,0.9); border-color: rgba(242,238,230,0.6); }
+
+/* Source block */
+.teng-sources {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+.teng-sources-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 1rem;
+}
+.teng-source-item {
+  font-size: 0.75rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--ink-light);
+  line-height: 1.6;
+  margin-bottom: 0.35rem;
+  padding-left: 1rem;
+  position: relative;
+}
+.teng-source-item::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--ink-dim);
+}
+
+/* ── HOUSING (Solutions tab 2) ── */
 .housing-stat-row { display: flex; gap: 2px; margin-bottom: 3rem; }
 .housing-stat { flex: 1; background: #FAFAF8; border: 1px solid var(--rule); padding: 1.5rem; }
 .housing-stat .num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 0.3rem; }
@@ -504,27 +702,9 @@ body {
 .contact-block a { color: var(--blue); font-family: 'Inter', sans-serif; font-size: 0.9rem; font-weight: 500; text-decoration: none; }
 .contact-block a:hover { text-decoration: underline; }
 
-/* ── FOOTER ── */
-footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; margin-top: 5rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
-.footer-left h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
-.footer-left h3 span { color: #545480; }
-.footer-left p { font-size: 0.75rem; color: rgba(247,249,251,0.45); font-family: 'Inter', sans-serif; }
-.footer-right { font-size: 0.72rem; color: rgba(247,249,251,0.35); font-family: 'Inter', sans-serif; text-align: right; line-height: 1.7; }
-
-
-/* ── MISSION BLOCK ── */
 /* ── MISSION BLOCK ── */
 .mission-block { margin: 0 -3rem 3rem; background: var(--ink); padding: 4rem 3rem; }
-.mission-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
-}
-.mission-left {}
-.mission-right {}
+.mission-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 .mission-label { font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(212,150,120,0.8); font-family: 'Inter', sans-serif; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
 .mission-label::before { content: ''; display: block; width: 24px; height: 1px; background: rgba(212,150,120,0.8); }
 .mission-quote { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem, 2.2vw, 1.75rem); font-style: italic; font-weight: 400; color: #F8F6F1; line-height: 1.5; margin-bottom: 2rem; border: none; padding: 0; }
@@ -536,25 +716,35 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 .mission-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; color: var(--blue); line-height: 1; margin-bottom: 0.4rem; }
 .mission-desc { font-size: 0.75rem; color: rgba(242,238,230,0.7); font-family: 'Inter', sans-serif; line-height: 1.5; }
 
+/* ── REVEAL ── */
 .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
 .reveal.visible { opacity: 1; transform: none; }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; margin-top: 5rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+.footer-left h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; }
+.footer-left p { font-size: 0.75rem; color: rgba(247,249,251,0.45); font-family: 'Inter', sans-serif; }
+.footer-right { font-size: 0.72rem; color: rgba(247,249,251,0.35); font-family: 'Inter', sans-serif; text-align: right; line-height: 1.7; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .masthead-top { padding: 1rem 1.5rem; flex-wrap: wrap; gap: 0.5rem; }
   .masthead-nav { padding: 0 1rem; overflow-x: auto; justify-content: flex-start; }
-  .hero, .housing-grid { grid-template-columns: 1fr; gap: 2rem; }
-  .hero-sidebar { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 1.5rem; }
-  .pillars, .article-grid, .tech-grid { grid-template-columns: 1fr; }
-  .big-stat-block { flex-direction: column; gap: 0.5rem; }
-  .sol-cta { grid-template-columns: 1fr; gap: 1.5rem; }
-  .housing-stat-row { flex-wrap: wrap; }
+  .pillars, .housing-grid, .teng-align-grid, .teng-failure-grid { grid-template-columns: 1fr; }
+  .teng-hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .teng-cta { grid-template-columns: 1fr; gap: 2rem; }
+  .teng-cta-actions { align-items: flex-start; }
+  .teng-hero { padding: 3rem 1.5rem; margin: 0 -1.5rem; }
+  .teng-cta { margin: 3rem -1.5rem 0; padding: 2rem 1.5rem; }
   .article-row { grid-template-columns: 1fr; gap: 0.5rem; }
+  .housing-stat-row { flex-wrap: wrap; }
   footer { grid-template-columns: 1fr; }
   .footer-right { text-align: left; }
+  .mission-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
+  .teng-perf-bar { transition: none; }
 }
 </style>
 </head>
@@ -582,7 +772,6 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 
 <!-- HOME -->
 <div class="page active" id="home">
-  <!-- FULL BLEED HERO — outside max-width container -->
   <div class="hero reveal">
     <div class="hero-carousel-bg">
       <div class="hero-img-track" id="hero-track">
@@ -594,31 +783,21 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
         </div>
       </div>
     </div>
-
-    <!-- Text overlay -->
     <div class="hero-main">
       <div class="hero-eyebrow">Solutions Journalism</div>
       <h2 class="hero-headline">Reporting on displacement —<br>and <em>what's being built</em><br>to end it.</h2>
-      <p class="hero-standfirst">
-        Investigative reporting on refugees, asylum seekers, and marginalized communities facing forced displacement — alongside the housing initiatives, water technologies, and policy solutions that could change their lives.
-      </p>
+      <p class="hero-standfirst">Investigative reporting on refugees, asylum seekers, and marginalized communities facing forced displacement — alongside the housing initiatives, water technologies, and policy solutions that could change their lives.</p>
       <div class="hero-actions">
         <button class="btn-primary-light" onclick="showPage('reporting')">Read the Reporting</button>
         <button class="btn-text-light" onclick="showPage('solutions')">Explore Solutions →</button>
       </div>
     </div>
-
-    <!-- Article title overlay — bottom right above controls -->
     <div class="hero-article-overlay" id="hero-article-overlay" onclick="showArticle('sand-cartels-southeast-asia')" style="cursor:pointer">
       <div class="hero-article-tag" id="hero-overlay-tag">Displacement</div>
       <div class="hero-article-title" id="hero-overlay-title">Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement</div>
       <div class="hero-article-read">Read article →</div>
     </div>
-
-    <!-- Caption -->
     <div class="hero-img-caption" id="hero-caption">iStock / kertu_ee</div>
-
-    <!-- Controls -->
     <div class="hero-carousel-controls">
       <div class="hero-img-dots" id="hero-dots">
         <button class="hero-dot active" onclick="goSlide(0)"></button>
@@ -630,32 +809,21 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
   </div>
 
   <main style="max-width:1200px;margin:0 auto;padding:3rem 3rem 0">
-
-    <!-- MISSION STATEMENT -->
     <div class="mission-block reveal">
       <div class="mission-inner">
         <div class="mission-left">
           <div class="mission-label">Why We Exist</div>
-          <blockquote class="mission-quote">
-            Born to report stories no one was covering. Evolved to translate technologies no one was advancing.
-          </blockquote>
+          <blockquote class="mission-quote">Born to report stories no one was covering. Evolved to translate technologies no one was advancing.</blockquote>
           <a href="mailto:jerryzou2021@gmail.com" class="mission-join">Want to contribute? Join us →</a>
         </div>
         <div class="mission-right">
-          <p class="mission-body">
-            The Margins initiative began in 2024 as an independent effort to document the displaced populations in Southeast Asia that rarely make headlines — not only recognized refugees, but also the underreported victims who are systematically invisible: communities displaced under trafficking, migrant workers in legal gray zones left uncompensated.
-          </p>
-          <p class="mission-body">
-            We then encountered a second problem: solutions to these crises exist, but they rarely reach the people who need them. An ultra-low-cost water disinfection technology that can provide clean water for millions of refugees around the globe — and no resettlement organizations have ever heard of it.
-          </p>
-          <p class="mission-body">
-            This is the purpose of solutions journalism. We are STEM-trained but field-grounded. We are here to report the problems, find what works, document why it works, and put it in front of the NGOs, advocates, and society.
-          </p>
+          <p class="mission-body">The Margins initiative began in 2024 as an independent effort to document the displaced populations in Southeast Asia that rarely make headlines — not only recognized refugees, but also the underreported victims who are systematically invisible: communities displaced under trafficking, migrant workers in legal gray zones left uncompensated.</p>
+          <p class="mission-body">We then encountered a second problem: solutions to these crises exist, but they rarely reach the people who need them. An ultra-low-cost water disinfection technology that can provide clean water for millions of refugees around the globe — and no resettlement organizations have ever heard of it.</p>
+          <p class="mission-body">This is the purpose of solutions journalism. We are STEM-trained but field-grounded. We are here to report the problems, find what works, document why it works, and put it in front of the NGOs, advocates, and society.</p>
         </div>
       </div>
     </div>
 
-    <!-- LATEST REPORTING CAROUSEL -->
     <div class="reveal">
       <div class="section-rule">
         <h2>Latest Reporting</h2>
@@ -670,7 +838,6 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
       </div>
     </div>
 
-    <!-- PILLARS -->
     <div class="pillars reveal">
       <a class="pillar-card" onclick="showPage('reporting')">
         <div class="pillar-tag">Investigative Reporting</div>
@@ -685,7 +852,6 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
         <div class="pillar-arrow">See the solutions →</div>
       </a>
     </div>
-
   </main>
 </div>
 
@@ -714,98 +880,275 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
       <h2>What's being built — and why it's not spreading fast enough.</h2>
       <p>Solutions journalism isn't advocacy. It's rigorous reporting on interventions that have evidence behind them — honest about what works, what doesn't, and what's missing. These are the two areas where we're doing that work directly.</p>
     </div>
-
     <div class="solutions-tabs reveal">
-      <button class="sol-tab active" onclick="switchTab('water')">Water Access · TENG-UV</button>
-      <button class="sol-tab" onclick="switchTab('housing')">Housing Navigation</button>
+      <button class="sol-tab active" onclick="switchTab(event,'water')">Water Access · TENG-UV</button>
+      <button class="sol-tab" onclick="switchTab(event,'housing')">Housing Navigation</button>
     </div>
 
-    <!-- WATER TAB -->
+    <!-- ══ WATER / TENG-UV TAB ══ -->
     <div class="sol-panel active" id="tab-water">
-      <div class="big-stat-block reveal">
-        <div class="big-num" id="cost-counter">$0</div>
-        <div class="big-num-label">per person / per year<br><span style="font-size:0.8rem;color:var(--ink-dim)">Annual cost of TENG-UV water disinfection for one person</span></div>
+
+      <!-- HERO BANNER -->
+      <div class="teng-hero reveal">
+        <div class="teng-hero-inner">
+          <div>
+            <div class="teng-hero-label">Water Access · Technology Advocacy</div>
+            <h2>Clean Water Without Power Lines</h2>
+            <p class="teng-hero-deck">A device the size of a shoebox purifies 10 liters of drinking water in 15 minutes using nothing but human motion — no grid, no fuel, no chemical byproducts. Published in <em>ACS Nano</em>, 2026. Cost: $8.57 per person per year. Refugee resettlement organizations should know it exists.</p>
+            <div class="teng-hero-doi">
+              Primary source: Wang et al., <em>ACS Nano</em>, 2026 ·
+              <a href="https://doi.org/10.1021/acsnano.5c13095" target="_blank">DOI: 10.1021/acsnano.5c13095</a>
+            </div>
+          </div>
+          <div class="teng-hero-stats">
+            <div class="teng-hero-stat">
+              <div class="teng-hero-stat-num">18 L</div>
+              <div class="teng-hero-stat-label">Average daily water per refugee across UNHCR operations globally in 2024 — still below the 20 L post-emergency minimum</div>
+              <div class="teng-hero-stat-source">UNHCR 2024 WASH Annual Report, April 2025</div>
+            </div>
+            <div class="teng-hero-stat">
+              <div class="teng-hero-stat-num">69%</div>
+              <div class="teng-hero-stat-label">Of monitored UNHCR settlement sites where water provision fell below minimum standards in 2024</div>
+              <div class="teng-hero-stat-source">UNHCR 2024 WASH Annual Report, April 2025</div>
+            </div>
+            <div class="teng-hero-stat">
+              <div class="teng-hero-stat-num">4 L</div>
+              <div class="teng-hero-stat-label">Daily water per person in Dabat Bosin, Sudan — the most severe case documented in 2024. The standard is 20 L.</div>
+              <div class="teng-hero-stat-source">UNHCR 2024 WASH Annual Report, April 2025</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="tech-grid reveal">
-        <div class="tech-card">
-          <h3>The problem</h3>
-          <p>Newly resettled refugee families in the US frequently live in housing with inconsistent utilities. Access to reliably clean drinking water is not guaranteed. Conventional filtration requires replacement cartridges and power. Bottled water costs $200–600+ per person annually. Boiling requires fuel. There is no standard solution deployed at the resettlement level.</p>
-        </div>
-        <div class="tech-card">
-          <h3>What TENG-UV does</h3>
-          <p>Triboelectric nanogenerator ultraviolet (TENG-UV) disinfection converts mechanical motion — pressing, walking, turning — into electrical charge that powers UV-C LEDs, which deactivate pathogens in water. No grid required. No chemical byproducts. No replacement parts. Efficacy exceeds 99.9% against E. coli in peer-reviewed testing published in ACS Nano.</p>
-        </div>
-        <div class="tech-card">
-          <h3>Why it fits resettlement</h3>
-          <p>The device is self-contained, portable, and durable. One unit, properly maintained, provides disinfection for years. At $8.57 per person annually, it costs less than a single case of bottled water. It requires no external infrastructure and no ongoing supply chain. These are exactly the constraints that define refugee resettlement contexts.</p>
-        </div>
-        <div class="tech-card">
-          <h3>What a pilot would look like</h3>
-          <p>A pilot with a resettlement agency would deploy devices with 10–20 families over six months, collect water quality and usage data, and produce a field report for wider dissemination. We are actively seeking partner organizations. The research collaboration is with Prof. Xingwei Wang at Tsinghua University, published under the UN-FIRST / UNESCO framework.</p>
-        </div>
-      </div>
+      <!-- BODY -->
+      <div class="teng-body">
 
-      <div class="reveal" style="margin-bottom:2rem;">
-        <div class="section-rule"><h2>TENG-UV vs. Conventional Methods</h2></div>
-        <table class="compare-table">
-          <thead>
-            <tr>
-              <th>Method</th>
-              <th>Annual Cost / Person</th>
-              <th>Grid Required</th>
-              <th>Chemical Byproducts</th>
-              <th>Off-grid Capable</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong class="highlight">TENG-UV</strong></td>
-              <td class="good">$8.57</td>
-              <td class="good">No</td>
-              <td class="good">None</td>
-              <td class="good">Yes</td>
-            </tr>
-            <tr>
-              <td>Bottled water</td>
-              <td class="bad">$200–600+</td>
-              <td>No</td>
-              <td>Plastic waste</td>
-              <td>Yes</td>
-            </tr>
-            <tr>
-              <td>Reverse osmosis filter</td>
-              <td class="bad">$100–300</td>
-              <td class="bad">Yes</td>
-              <td>Wastewater</td>
-              <td class="bad">No</td>
-            </tr>
-            <tr>
-              <td>Chlorination tablets</td>
-              <td>$15–40</td>
-              <td>No</td>
-              <td class="bad">Chlorine residue</td>
-              <td>Yes</td>
-            </tr>
-            <tr>
-              <td>Boiling</td>
-              <td>Fuel cost varies</td>
-              <td>No</td>
-              <td class="bad">Carbon emissions</td>
-              <td>Yes</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <!-- SECTION 1: THE GAP -->
+        <div class="teng-section reveal">
+          <div class="teng-section-head"><div class="teng-section-num">1</div> Why existing solutions fail at the moment they matter most</div>
+          <div class="teng-prose">
+            <p>Every dominant water purification method used in humanitarian settings — solar chlorination, boiling, SODIS, UV-LED — shares a structural weakness. Each depends on something that cannot be guaranteed in the hours and days immediately following displacement: stable infrastructure, consistent fuel, sunlight, or battery power. The failure mode is not rare. It is the default condition for newly displaced families.</p>
+          </div>
 
-      <div class="sol-cta reveal">
-        <div>
-          <h3>Partner with us to run a pilot.</h3>
-          <p>We are looking for resettlement agencies, NGOs, and research institutions interested in field-testing TENG-UV with refugee families in the greater Los Angeles area. Low-cost, data-generating, and publishable. If your organization works directly with resettled families, get in touch.</p>
+          <div class="teng-failure-grid">
+            <div class="teng-failure-card critical">
+              <div class="teng-failure-method">Solar-Chlorination</div>
+              <h4>Months to deploy. Millions to build.</h4>
+              <p>Requires boreholes, pipe networks, and solar arrays. Serves established camps well. Cannot respond in the first 72 hours after displacement — exactly when infection risk peaks.</p>
+            </div>
+            <div class="teng-failure-card">
+              <div class="teng-failure-method">Boiling</div>
+              <h4>Depends on fuel that isn't there.</h4>
+              <p>WHO's household-level recommendation. Requires LPG, wood, or kerosene — rationed commodities in camp environments. Adds indoor air pollution, deforestation, and burn risk to existing harm.</p>
+            </div>
+            <div class="teng-failure-card">
+              <div class="teng-failure-method">SODIS / Solar Disinfection</div>
+              <h4>Up to 48 hours per batch. Fails in cloud.</h4>
+              <p>Transparent bottles left in sunlight. No cost, but no speed. Fails entirely without consistent solar exposure. In emergencies, it is too slow to be useful.</p>
+            </div>
+          </div>
+
+          <div class="teng-extreme">
+            <div class="teng-extreme-num">4 L</div>
+            <div class="teng-extreme-text">
+              <strong>Dabat Bosin, Sudan — 2024.</strong> People in this settlement received four liters of water per person per day. The UNHCR post-emergency minimum is 20 liters. A person requires roughly 2.5 liters just to survive. This is not an outlier. Across 69% of monitored UNHCR sites, water provision fell below minimum standards that year.
+            </div>
+          </div>
         </div>
-        <a href="mailto:jerryzou2021@gmail.com" class="btn-cta-light">Get in touch →</a>
-      </div>
-    </div>
+
+        <!-- SECTION 2: THE TECHNOLOGY -->
+        <div class="teng-section reveal">
+          <div class="teng-section-head"><div class="teng-section-num">2</div> How the TEHG-UV device works — and why it took this long to build</div>
+          <div class="teng-prose">
+            <p>Published in <em>ACS Nano</em> in 2026 by researchers at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability, the TEHG-UV system solves an engineering problem that had blocked portable UV disinfection for decades.</p>
+            <p>UV mercury lamps are the most proven, most cost-effective germicidal technology available — producing UV-C light at 254 nm that directly damages pathogen DNA without chemical residues, with service lives exceeding one year. The obstacle: activating one requires ~917 volts at startup, dropping to ~300 V for sustained operation. The lamp's internal resistance swings across five orders of magnitude in a single cycle — from gigaohms to kilohms. No conventional portable power source could match this two-phase electrical profile. That is what has kept UV disinfection grid-dependent until now.</p>
+          </div>
+
+          <div class="teng-steps">
+            <div class="teng-step">
+              <div class="teng-step-num">1</div>
+              <div class="teng-step-body">
+                <h4>Generate electricity from motion</h4>
+                <p>A hand crank or foot pedal drives two generators simultaneously. The <strong>triboelectric nanogenerator (TENG)</strong> exploits contact electrification between polyurethane and PTFE — materials with a large work-function difference (3.8–4.0 eV vs. 5.1–5.4 eV) — to produce high-voltage, low-current output. The <strong>electromagnetic generator (EMG)</strong> uses Faraday's law of induction to produce lower-voltage, higher-current output. A 1:4 belt drive (hand) or 1:20 (foot) converts comfortable human motion into the generator speeds required.</p>
+                <span class="teng-spec">TENG: up to 3.5 kV · 50 μA</span>
+                <span class="teng-spec">EMG: ~300 V · 10 mA</span>
+                <span class="teng-spec">Human input: 60–120 rpm</span>
+              </div>
+            </div>
+            <div class="teng-step">
+              <div class="teng-step-num">2</div>
+              <div class="teng-step-body">
+                <h4>Activate the UV lamp — both phases</h4>
+                <p>A switching circuit directs the TENG's high-voltage output to ignite the mercury lamp (startup phase: ~917 V required), then switches to the EMG's sustained current to maintain operation (~300 V, 10 mA). The TEHG system's combined impedance varies from MΩ to kΩ — dynamically matching the lamp's five-orders-of-magnitude resistance swing. Neither generator alone could do this. Together, they form a complete power source for UV disinfection without any external energy.</p>
+              </div>
+            </div>
+            <div class="teng-step">
+              <div class="teng-step-num">3</div>
+              <div class="teng-step-body">
+                <h4>Disinfect — completely, quickly, with no chemical residue</h4>
+                <p>UV-C at 254 nm damages pathogen DNA, preventing reproduction. The device was tested against three pathogens representing the full spectrum of waterborne threats: <em>E. coli</em> (Gram-negative indicator), <em>B. subtilis</em> in spore-forming state (the hardest to inactivate due to thick cell wall), and MS2 bacteriophage (model for enteric viruses). Complete 8-log inactivation — 99.999999% reduction — was achieved for all three. Tests in real river water showed comparable results to tap water.</p>
+                <span class="teng-spec">8-log pathogen removal</span>
+                <span class="teng-spec">Exceeds WHO 4-log standard</span>
+                <span class="teng-spec">No chemical byproducts</span>
+                <span class="teng-spec">Real river water validated</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="teng-prose" style="margin-top:1.5rem;">
+            <p>At 80 rpm hand-cranking, the device purifies 500 mL in 5 minutes. The foot-pedal configuration drives multiple UV lamps simultaneously (~30 W output), producing 10 liters of safe drinking water in 15 minutes — meeting the WHO daily standard for a 4-person household. After 50 hours of continuous operation, TENG output retained 97.7% of initial voltage. Across 80 consecutive disinfection cycles, complete pathogen removal was maintained. Estimated component lifespan: minimum six months under daily household use.</p>
+          </div>
+
+          <!-- Performance bars -->
+          <div style="margin:2rem 0">
+            <div class="teng-perf-row">
+              <div class="teng-perf-label">Pathogen removal</div>
+              <div class="teng-perf-bar-wrap"><div class="teng-perf-bar perf-bar" data-w="100" style="width:0%"></div></div>
+              <div class="teng-perf-value">8-log (100%)</div>
+            </div>
+            <div class="teng-perf-row">
+              <div class="teng-perf-label">Output retention (50 hr)</div>
+              <div class="teng-perf-bar-wrap"><div class="teng-perf-bar perf-bar" data-w="97.7" style="width:0%"></div></div>
+              <div class="teng-perf-value">97.7%</div>
+            </div>
+            <div class="teng-perf-row">
+              <div class="teng-perf-label">Households served / $</div>
+              <div class="teng-perf-bar-wrap"><div class="teng-perf-bar perf-bar" data-w="91" style="width:0%"></div></div>
+              <div class="teng-perf-value">$8.57 / yr</div>
+            </div>
+            <div class="teng-perf-row">
+              <div class="teng-perf-label">WHO standard threshold</div>
+              <div class="teng-perf-bar-wrap"><div class="teng-perf-bar" style="width:40%;background:var(--rule);"></div></div>
+              <div class="teng-perf-value">4-log (min)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 3: ALIGNMENT -->
+        <div class="teng-section reveal">
+          <div class="teng-section-head"><div class="teng-section-num">3</div> Designed for underdeveloped regions. Applicable to displacement. The distinction matters.</div>
+          <div class="teng-prose">
+            <p>The TEHG-UV was designed for families in rural low-income regions with inadequate electrical infrastructure — not specifically for refugee populations. These are related but distinct groups. Being precise about where the overlap is genuine and where gaps remain is not a weakness of this advocacy. It is the condition of its credibility.</p>
+          </div>
+
+          <div class="teng-align-grid">
+            <div class="teng-align-card match-card">
+              <div class="teng-align-label">✓ Genuine alignment</div>
+              <div class="teng-align-item"><strong>Grid-free operation</strong>In acute displacement — border crossings, temporary settlements, dispersed housing — grid access ranges from intermittent to nonexistent. The TEHG-UV requires no external energy source. This is its core design rationale.</div>
+              <div class="teng-align-item"><strong>Household scale</strong>UNHCR WASH infrastructure is overwhelmingly centralized. The gap is at the household level for families in temporary or dispersed housing — exactly what the TEHG-UV was designed for.</div>
+              <div class="teng-align-item"><strong>Chemical-free output</strong>No residual chlorine, no chemical knowledge required to verify safety. For families navigating unfamiliar systems under acute stress, this matters operationally and psychologically.</div>
+              <div class="teng-align-item"><strong>All-weather, all-context</strong>Functions in rain, cloud, and darkness. Not hostage to fuel supply chains or solar availability. Human mechanical energy is the only resource required — available everywhere, always.</div>
+            </div>
+            <div class="teng-align-card gap-card">
+              <div class="teng-align-label">⚠ Gaps — honestly stated</div>
+              <div class="teng-align-item"><strong>Not field-validated</strong>Laboratory-tested and prototype-tested. Not yet validated in displacement settings. This is the most significant gap, and the most important work ahead.</div>
+              <div class="teng-align-item"><strong>Microbial only</strong>Does not remove chemical contaminants, heavy metals, or suspended solids. Where source water has chemical contamination, upstream filtration (e.g. sand filter) is needed first.</div>
+              <div class="teng-align-item"><strong>Adult operation</strong>60–120 rpm cranking requirement. Comfortable for healthy adults; may challenge elderly users or children. The authors acknowledge this as a known limitation.</div>
+              <div class="teng-align-item"><strong>Mercury lamp handling</strong>Requires standard disposal protocols to prevent mercury contamination from broken lamps — a logistical requirement for any deployment program.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 4: COMPARISON -->
+        <div class="teng-section reveal">
+          <div class="teng-section-head"><div class="teng-section-num">4</div> How TEHG-UV compares to established methods</div>
+          <table class="teng-compare-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>External energy</th>
+                <th>Chemical byproducts</th>
+                <th>Works without sun/grid</th>
+                <th>Household scale</th>
+                <th>Annual cost / person</th>
+                <th>WHO standard</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="row-highlight">
+                <td>TEHG-UV <em>(this technology)</em></td>
+                <td class="teng-check">None</td>
+                <td class="teng-check">None</td>
+                <td class="teng-check">Yes</td>
+                <td class="teng-check">Yes</td>
+                <td class="teng-check">$8.57</td>
+                <td class="teng-check">Exceeds (8-log)</td>
+              </tr>
+              <tr>
+                <td>Solar-Chlorination</td>
+                <td class="teng-neutral">Solar</td>
+                <td class="teng-cross">Chlorine residue</td>
+                <td class="teng-neutral">Partial</td>
+                <td class="teng-cross">Camp-scale only</td>
+                <td class="teng-cross">High capital</td>
+                <td class="teng-check">Meets</td>
+              </tr>
+              <tr>
+                <td>Boiling</td>
+                <td class="teng-cross">Fuel required</td>
+                <td class="teng-neutral">Combustion</td>
+                <td class="teng-check">Yes</td>
+                <td class="teng-check">Yes</td>
+                <td class="teng-neutral">Fuel-dependent</td>
+                <td class="teng-check">Meets</td>
+              </tr>
+              <tr>
+                <td>SODIS</td>
+                <td class="teng-check">None</td>
+                <td class="teng-check">None</td>
+                <td class="teng-cross">Sunlight needed</td>
+                <td class="teng-check">Yes</td>
+                <td class="teng-check">Near zero</td>
+                <td class="teng-neutral">6–48 hr cycle</td>
+              </tr>
+              <tr>
+                <td>UV-LED</td>
+                <td class="teng-cross">Battery / grid</td>
+                <td class="teng-check">None</td>
+                <td class="teng-cross">No</td>
+                <td class="teng-check">Yes</td>
+                <td class="teng-neutral">Battery cost</td>
+                <td class="teng-check">Meets</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- SECTION 5: RESEARCH CONTEXT -->
+        <div class="teng-section reveal">
+          <div class="teng-section-head"><div class="teng-section-num">5</div> Where this advocacy comes from</div>
+          <div class="teng-context">
+            <div class="teng-context-label">Research Context</div>
+            <p>This page is not independent commentary on someone else's research. It grows from an ongoing collaboration with the research group behind the technology. Xingwei Wang, first author of the <em>ACS Nano</em> paper, is a researcher at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability. This collaboration operates under the <strong>UN-FIRST framework</strong> — Fostering Innovation for Resilience and Sustainable Transformation — officially endorsed by UNESCO under the International Decade of Sciences for Sustainable Development (2024–2033), based at City University of Hong Kong.</p>
+            <p>The technical work belongs to its authors. The contribution of <em>The Margins</em> is the humanitarian framing: the specific question of how this technology applies to refugee and resettlement contexts, what adaptation would be required, and how to communicate those questions to the organizations that need to hear them. Our ongoing work includes a public-facing technical summary for NGO program staff, needs assessments with resettlement organizations, and a policy brief connecting the research to UNHCR WASH frameworks.</p>
+          </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="teng-cta reveal">
+          <div>
+            <h3>Partner with us to run a pilot.</h3>
+            <p>We are looking for resettlement agencies, humanitarian NGOs, and research institutions interested in field-validating the TEHG-UV technology with refugee populations. The science is done. The translation work — from laboratory result to deployed tool — is what's needed next, and it requires partners with access to the field.</p>
+          </div>
+          <div class="teng-cta-actions">
+            <a href="mailto:jerryzou2021@gmail.com" class="btn-cta-primary">Get in touch →</a>
+            <a href="https://doi.org/10.1021/acsnano.5c13095" target="_blank" class="btn-cta-secondary">Read the ACS Nano paper →</a>
+          </div>
+        </div>
+
+        <!-- SOURCES -->
+        <div class="teng-sources reveal">
+          <div class="teng-sources-label">Sources</div>
+          <div class="teng-source-item">Wang, X. et al. "A Simple Disinfection Device for Families in Underdeveloped Regions." <em>ACS Nano</em>, 2026. DOI: 10.1021/acsnano.5c13095</div>
+          <div class="teng-source-item">UNHCR. <em>2024 WASH Annual Report</em>. April 2025. unhcr.org</div>
+          <div class="teng-source-item">UNHCR. <em>Mid-Year Trends: Forcibly Displaced Populations</em>. June 2025. unhcr.org</div>
+          <div class="teng-source-item">Jeon, J. et al. "Advances in Triboelectric Nanogenerators for Microbial Disinfection." <em>Micromachines</em> 16(3), 281. February 2025.</div>
+          <div class="teng-source-item">Kim, Y.-J. et al. "Walking-Induced Electrostatic Charges Enable in Situ Electroporated Disinfection in Portable Water Bottles." <em>Nature Water</em> 2, 360–369. 2024.</div>
+          <div class="teng-source-item">Huo, Z.-Y., Kim, Y.-J., Kim, S.-W. "Contact Electrification-Induced Personal Sanitation." <em>Nature Reviews Clean Technology</em> 1, 673–674. 2025.</div>
+        </div>
+
+      </div><!-- /teng-body -->
+    </div><!-- /tab-water -->
 
     <!-- HOUSING TAB -->
     <div class="sol-panel" id="tab-housing">
@@ -823,7 +1166,6 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
           <div class="desc">Days of initial federal resettlement support — often not enough to secure stable housing in LA/OC</div>
         </div>
       </div>
-
       <div class="housing-grid reveal">
         <div class="housing-main">
           <p>When a refugee family is approved for resettlement in the United States, the clock starts immediately. Federal funding covers 90 days of intensive support. After that, families are largely on their own in one of the most expensive rental markets in the country.</p>
@@ -831,7 +1173,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
           <p>Through volunteer work with Church World Service Orange County, I've observed the housing navigation process firsthand. Volunteers search Craigslist, Facebook Marketplace, and direct landlord networks to find units within a family's budget. They contact landlords, explain the refugee resettlement context, assist with applications, and coordinate move-in logistics — including furniture assembly.</p>
           <p>The limiting factor is rarely the family's qualifications. It's landlord reluctance, competition from other renters, and the narrow window in which housing must be secured before other resettlement milestones are affected.</p>
           <h3>What We're Documenting</h3>
-          <p>This section grows as our housing navigation work develops. We are tracking cases, collecting data on search timelines, and building a clearer picture of where the system breaks down — and where targeted interventions could help. Field notes are published in the <button class="btn-text" onclick="showPage('reporting')" style="font-size:inherit">Reporting</button> section.</p>
+          <p>This section grows as our housing navigation work develops. We are tracking cases, collecting data on search timelines, and building a clearer picture of where the system breaks down — and where targeted interventions could help.</p>
         </div>
         <div class="housing-sidebar">
           <div class="sidebar-block">
@@ -841,7 +1183,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
           </div>
           <div class="sidebar-block">
             <h4>Volunteer with CWS OC</h4>
-            <p>CWS Orange County has active volunteer teams in housing navigation, tutoring, resource research, and more. Weekly commitment, fieldwork and remote options.</p>
+            <p>CWS Orange County has active volunteer teams in housing navigation, tutoring, resource research, and more.</p>
             <a href="https://cwsglobal.org/volunteer" target="_blank">See volunteer roles →</a>
           </div>
         </div>
@@ -856,9 +1198,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
     <div id="about-page">
       <div class="section-eyebrow reveal">About</div>
       <h2 class="reveal">Xingtong Jerry Zou</h2>
-      <div class="about-placeholder reveal">
-        Bio coming soon.
-      </div>
+      <div class="about-placeholder reveal">Bio coming soon.</div>
       <div class="contact-block reveal">
         <p>For research collaboration, partnership inquiries, or press:</p>
         <a href="mailto:jerryzou2021@gmail.com">jerryzou2021@gmail.com</a>
@@ -873,14 +1213,55 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
     <h3>The Margins</h3>
     <p>Solutions journalism on displaced populations · Independent publication</p>
   </div>
-  <div class="footer-right">
-    © 2024–2025 Xingtong Jerry Zou · All rights reserved
-  </div>
+  <div class="footer-right">© 2024–2025 Xingtong Jerry Zou · All rights reserved</div>
 </footer>
 
 <script>
 // ── DATA ──
 const articles = [
+  {
+    id: "tehg-uv-water-access",
+    title: "The Device That Could Change Refugee Water Access — If Anyone Builds the Bridge",
+    subtitle: "Researchers at Tsinghua University have published a human-powered water disinfection system that exceeds WHO standards and costs $8.57 per person per year. The science is done. The translation work — from laboratory result to deployed tool — has not yet begun.",
+    tag: "Technology",
+    date: "June 20, 2026",
+    readTime: "12 min",
+    thumbnail: null,
+    excerpt: "In Dabat Bosin, Sudan, people received 4 liters of water per day in 2024. The minimum standard is 20. A technology published in ACS Nano this year could help. No resettlement organization has been told it exists.",
+    content: [
+      { type: "paragraph", text: "In Dabat Bosin, a refugee site in Sudan, people received 4 liters of water per person per day in 2024. The minimum standard established by UNHCR for post-emergency humanitarian response is 20 liters. A person needs roughly 2.5 liters just to survive." },
+      { type: "paragraph", text: "UNHCR documented this. They published it. The figure appears in their 2024 WASH Annual Report, released in April 2025, in a sentence describing it as evidence of \"the urgent need for continued efforts to ensure lifesaving water access in all refugee operations.\"" },
+      { type: "paragraph", text: "The urgent need has been documented for decades. The continued efforts are real and often effective. What is missing is not acknowledgment or commitment — it is a technology capable of providing safe water at the household level, in the immediate aftermath of displacement, without any external dependency: no fuel, no electricity, no chemical supply chain, no centralized infrastructure. That technology now exists. It was published in ACS Nano in February 2026, out of Tsinghua University's State Key Laboratory of Regional Environment and Sustainability. It costs $8.57 per person per year. It fits in a shoebox. The question is not whether the science is there. It is whether the people who need to act on it are paying attention." },
+      { type: "heading", text: "The Failure Mode of Existing Approaches" },
+      { type: "stat", number: "117.3M", label: "People forcibly displaced worldwide as of June 2025 (UNHCR Mid-Year Trends, 2025)" },
+      { type: "paragraph", text: "For displaced populations, access to safe drinking water is not a quality-of-life concern. Approximately 3.4 million deaths globally each year are linked to pathogenic contamination in water, the majority in children under five. Waterborne diseases including cholera, dysentery, and hepatitis E are documented hazards in camp environments; UNHCR's 2024 WASH report describes WASH interventions functioning as a \"critical defence\" against disease outbreaks across 11 countries." },
+      { type: "paragraph", text: "UNHCR's responses to this challenge are not ineffective. In 2024, the organization responded to refugee emergencies across nine countries, supporting over 1.5 million refugees with WASH interventions. In Chad, where more than 239,000 Sudanese refugees crossed the border in a short period, UNHCR deployed emergency water systems that achieved nearly 13 liters per person per day — still below the 20-liter minimum standard, despite immediate response. This is not a failure of effort. It is a structural constraint: large-scale water systems cannot mobilize as fast as people flee." },
+      { type: "paragraph", text: "The WHO recommends boiling as the household-level solution when infrastructure is unavailable. The ACS Nano paper engages this directly. Boiling requires energy — LPG, wood fuel, or kerosene — and carries its own consequences: deforestation, indoor air pollution, risk of burns, and reliance on a supply chain that may be exactly as disrupted as everything else in an acute emergency. Solar disinfection (SODIS) requires 6 to 48 hours per batch, and fails without consistent sunlight. Chlorination tablets leave chemical residues in water. UV-LED systems need power." },
+      { type: "heading", text: "The Engineering Solution" },
+      { type: "paragraph", text: "The core insight of the TEHG-UV system is that the unusual electrical requirements of UV mercury lamps — high voltage to start, moderate sustained voltage to operate, a five-order-of-magnitude swing in internal resistance across the cycle — are not a problem that requires a bigger battery. They are a problem that can be solved by designing two generators whose combined output precisely matches each phase of the lamp's operating cycle." },
+      { type: "paragraph", text: "The first generator is triboelectric. When two materials with very different electron affinities are brought into contact and then separated, charge accumulates on their surfaces. The team chose polyurethane and PTFE for their large work function difference, which drives efficient electron transfer during contact-separation cycles. Formed into a rotating disk structure, the TENG produces open-circuit voltages up to 3.5 kilovolts at low current — the startup voltage the mercury lamp requires." },
+      { type: "paragraph", text: "The second generator is electromagnetic. Using Faraday's law of induction — rotating magnets past copper coils — the EMG produces around 300 volts at 10 milliamps of sustained current. This is what the lamp needs to stay on. Both generators are driven by the same mechanical input — hand crank or foot pedal — through a transmission system that converts comfortable human motion into the speeds that the generators require." },
+      { type: "pullquote", text: "Complete 8-log inactivation — a reduction of 99.999999% — was achieved against E. coli, B. subtilis in spore-forming state, and MS2 bacteriophage. Results in real river water were comparable to tap water.", attribution: "Wang et al., ACS Nano, 2026" },
+      { type: "paragraph", text: "The disinfection performance was tested with rigor across three pathogens: E. coli as the standard Gram-negative indicator; B. subtilis in its spore-forming state, among the hardest to inactivate due to its complex cell wall; and MS2 bacteriophage as a proxy for enteric viruses. The foot-pedal configuration, using a 1:20 transmission ratio and ~30 watts of output power to drive four UV lamps simultaneously, produced 10 liters of safe drinking water in 15 minutes. After 80 consecutive disinfection cycles, complete inactivation was maintained. After 50 hours of continuous TENG operation, output voltage retained 97.7 percent of initial value." },
+      { type: "heading", text: "The Translation Problem" },
+      { type: "paragraph", text: "This is a laboratory result. A very good one, in a top-tier peer-reviewed journal, from researchers with serious credentials and a clear-eyed acknowledgment of limitations. It is not a field-deployed technology, and the gap between those two things is large and well-documented." },
+      { type: "paragraph", text: "Humanitarian procurement operates under risk-averse logic for good reason. The organizations responsible for water access in refugee settings are accountable to donors and, more fundamentally, to the populations they serve. Adopting an unvalidated technology in a humanitarian context is not a neutral operational decision. If a device fails in a camp, people get sick. This creates powerful institutional incentives toward tested, certified, established approaches — even when those approaches have documented limitations." },
+      { type: "paragraph", text: "The TENG-based disinfection field has developed rapidly. A February 2025 review in Micromachines surveyed advances in TENG-based disinfection across water, air, surfaces, and wound sterilization. A 2024 paper in Nature Water demonstrated walking-powered electrostatic disinfection integrated into portable water bottles. A 2025 commentary in Nature Reviews Clean Technology framed contact electrification-based personal sanitation as a distinct emerging category. The science is moving quickly. The implementation pathway is not." },
+      { type: "heading", text: "What a Path Forward Looks Like" },
+      { type: "paragraph", text: "The first gap is translation. A paper in ACS Nano is not a document that a Church World Service program officer, a UNHCR WASH coordinator, or a resettlement case manager can act on directly. The distance between the technical literature and the language of humanitarian implementation is real and rarely bridged." },
+      { type: "paragraph", text: "The second gap is needs specificity. Before any pilot deployment makes sense, the question must be answered with precision: where exactly in the refugee resettlement and displacement process does the water access failure occur? Is it in the first 72 hours after crossing a border? In transitional housing during early resettlement? In dispersed rural camp populations beyond the reach of centralized borehole systems? Different gaps require different solutions, and the TEHG-UV is better suited to some than others." },
+      { type: "paragraph", text: "The third gap is field validation design. A meaningful pilot would assess not just whether the device purifies water — the laboratory evidence suggests it does — but whether it can be operated consistently by elderly individuals and those unfamiliar with the mechanism, maintained without technical support, cleaned and stored in temporary housing conditions, and culturally accepted in specific community contexts." },
+      { type: "paragraph", text: "The 2024 UNHCR WASH Annual Report, published in April 2025, contains a sentence that has stayed with me: \"Many refugees remain severely underserved.\" What is slightly different today is that a device exists — peer-reviewed, laboratory-validated, affordable, and chemical-free — that is specifically designed for the conditions that make refugees severely underserved: no grid, no fuel, no infrastructure, no time. The work ahead is the less glamorous work of translation, convening, and institutional navigation. That process has to start somewhere. This is where we are starting." }
+    ],
+    citations: [
+      { num: 1, text: "Wang, X. et al. \"A Simple Disinfection Device for Families in Underdeveloped Regions.\" ACS Nano, 2026.", url: "https://doi.org/10.1021/acsnano.5c13095" },
+      { num: 2, text: "UNHCR. 2024 WASH Annual Report. April 2025.", url: "https://www.unhcr.org/sites/default/files/2025-04/2024-wash-annual-report.pdf" },
+      { num: 3, text: "UNHCR. Mid-Year Trends: Forcibly Displaced Populations. June 2025.", url: "https://www.unhcr.org" },
+      { num: 4, text: "Jeon, J. et al. \"Advances in Triboelectric Nanogenerators for Microbial Disinfection.\" Micromachines 16(3), 281. February 2025.", url: "https://doi.org/10.3390/mi16030281" },
+      { num: 5, text: "Kim, Y.-J. et al. \"Walking-Induced Electrostatic Charges Enable in Situ Electroporated Disinfection.\" Nature Water 2, 360–369. 2024." },
+      { num: 6, text: "Huo, Z.-Y. et al. \"Contact Electrification-Induced Personal Sanitation.\" Nature Reviews Clean Technology 1, 673–674. 2025." }
+    ]
+  },
   {
     id: "sand-cartels-southeast-asia",
     title: "Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement",
@@ -915,17 +1296,15 @@ const articles = [
     ],
     citations: [
       { num: 1, text: "Mongabay (2025). Illegal seabed dredging surges as Indonesia resumes sand exports.", url: "https://news.mongabay.com/2025/02/sea-sand-dredging-indonesia-fisheries-export-marine-ecosystem-singapore/" },
-      { num: 2, text: "Science of the Total Environment (2024). Peer-reviewed study on sand dredging and marine ecosystem impacts.", url: "https://www.sciencedirect.com/science/article/pii/S0048969724017625" },
+      { num: 2, text: "Science of the Total Environment (2024). Sand dredging and marine ecosystem impacts.", url: "https://www.sciencedirect.com/science/article/pii/S0048969724017625" },
       { num: 3, text: "Stanford Ocean Solutions (2024). Sand dredging encroaches on marine protected areas.", url: "https://oceansolutions.stanford.edu/news/sand-dredging-encroaches-marine-protected-areas-scientists-find" },
       { num: 4, text: "AGU Water Resources Research (2021). River sand mining and hydrological impacts.", url: "https://agupubs.onlinelibrary.wiley.com/doi/full/10.1029/2021WR030241" },
-      { num: 5, text: "VICE (2021). Illegal sand mining is creating an ecological crisis in Bangladesh. By Kat Williams.", url: "https://www.vice.com/en/article/illegal-sand-mining-is-creating-an-ecological-crisis-in-bangladesh/" },
-      { num: 6, text: "SG101 / Singapore Government. Sand and land reclamation in Singapore.", url: "https://www.sg101.gov.sg/environment/case-studies/sand/" },
+      { num: 5, text: "VICE (2021). Illegal sand mining is creating an ecological crisis in Bangladesh.", url: "https://www.vice.com/en/article/illegal-sand-mining-is-creating-an-ecological-crisis-in-bangladesh/" },
+      { num: 6, text: "SG101. Sand and land reclamation in Singapore.", url: "https://www.sg101.gov.sg/environment/case-studies/sand/" },
       { num: 7, text: "Eco-Business (2023). Indonesia's risky gamble with sea sand exports.", url: "https://www.eco-business.com/news/indonesias-risky-gamble-with-sea-sand-exports/" },
       { num: 8, text: "Earth Journalism Network. Investigation leads to crackdown on illegal sand mining.", url: "https://earthjournalism.net/what-we-do/project-updates/ejn-supported-investigation-leads-to-crackdown-on-illegal-sand-mining-0" },
-      { num: 9, text: "ResearchGate (2025). The management of offshore sand mining: a systematic literature review.", url: "https://www.researchgate.net/publication/387801736_THE_MANAGEMENT_OF_OFFSHORE_SAND_MINING_A_SYSTEMATIC_LITERATURE_REVIEW" },
-      { num: 10, text: "Vietnam Agriculture & Environment (2024). AIS monitoring system: tracking mineral mining vessels.", url: "https://van.nongnghiepmoitruong.vn/ais-monitoring-system-the-magic-eyes-for-tracing-mineral-mining-d751795.html" },
-      { num: 11, text: "UC Berkeley Research (2024). New research aims to curb illegal sand mining with data-driven mapping tools.", url: "https://vcresearch.berkeley.edu/news/new-research-aims-curb-illegal-sand-mining-data-driven-mapping-tools" },
-      { num: 12, text: "Global Fishing Watch. Research project: disabled AIS signals and vessel tracking evasion.", url: "https://globalfishingwatch.org/research-project-disabled-signals/" }
+      { num: 9, text: "UC Berkeley Research (2024). Curbing illegal sand mining with data-driven mapping tools.", url: "https://vcresearch.berkeley.edu/news/new-research-aims-curb-illegal-sand-mining-data-driven-mapping-tools" },
+      { num: 10, text: "Global Fishing Watch. Research project: disabled AIS signals.", url: "https://globalfishingwatch.org/research-project-disabled-signals/" }
     ]
   }
 ];
@@ -943,9 +1322,10 @@ function showPage(pageId, pushState = true) {
   window.scrollTo(0, 0);
   if (pageId === 'home') renderHomeArticles();
   if (pageId === 'reporting') renderReporting();
-  if (pageId === 'solutions') setTimeout(animateCost, 400);
+  if (pageId === 'solutions') {
+    setTimeout(() => animatePerfBars(), 400);
+  }
   setTimeout(initReveal, 50);
-  // Update URL
   if (pushState) {
     const path = pageId === 'home' ? '/' : '/' + pageId;
     history.pushState({ pageId }, '', path);
@@ -953,7 +1333,6 @@ function showPage(pageId, pushState = true) {
   return false;
 }
 
-// Handle browser back/forward buttons
 window.addEventListener('popstate', (e) => {
   if (e.state?.pageId === 'article' && e.state?.articleId) {
     showArticle(e.state.articleId, false);
@@ -963,7 +1342,6 @@ window.addEventListener('popstate', (e) => {
   }
 });
 
-// Handle direct URL access on load
 window.addEventListener('DOMContentLoaded', () => {
   const path = window.location.pathname;
   if (path.startsWith('/reporting/')) {
@@ -978,12 +1356,20 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ── SOLUTIONS TABS ──
-function switchTab(tab) {
+function switchTab(e, tab) {
   document.querySelectorAll('.sol-tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.sol-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('tab-' + tab).classList.add('active');
-  event.target.classList.add('active');
-  if (tab === 'water') setTimeout(animateCost, 200);
+  e.target.classList.add('active');
+  if (tab === 'water') setTimeout(() => animatePerfBars(), 200);
+}
+
+// ── PERFORMANCE BARS ──
+function animatePerfBars() {
+  document.querySelectorAll('.perf-bar').forEach(bar => {
+    const w = parseFloat(bar.dataset.w);
+    bar.style.width = w + '%';
+  });
 }
 
 // ── RENDER HOME ARTICLES ──
@@ -1009,8 +1395,6 @@ function renderHomeArticles() {
         </div>
       </div>`;
   }).join('');
-
-  // Article carousel drag & nav
   const track = el;
   let isDown = false, startX, scrollLeft;
   track.addEventListener('mousedown', e => { isDown = true; track.classList.add('grabbing'); startX = e.pageX - track.offsetLeft; scrollLeft = track.scrollLeft; });
@@ -1021,11 +1405,8 @@ function renderHomeArticles() {
   document.getElementById('carousel-next')?.addEventListener('click', () => { track.scrollBy({ left: 400, behavior: 'smooth' }); });
 }
 
-// ── HERO IMAGE CAROUSEL ──
-const heroCaptions = [
-  'iStock / kertu_ee',
-  'iStock / Freezingtime'
-];
+// ── HERO CAROUSEL ──
+const heroCaptions = ['iStock / kertu_ee', 'iStock / Freezingtime'];
 let currentSlide = 0;
 function goSlide(n) {
   const slides = document.querySelectorAll('.hero-img-slide');
@@ -1045,9 +1426,9 @@ setInterval(() => { if (document.querySelector('.hero-img-slide')) nextSlide(); 
 // ── RENDER REPORTING ──
 function renderReporting() {
   const tf = document.getElementById('tag-filter');
-  tf.innerHTML = tags.map(t => `
-    <button class="tag-btn ${t === currentTag ? 'active' : ''}" onclick="filterTag('${t}')">${t}</button>
-  `).join('');
+  tf.innerHTML = tags.map(t =>
+    `<button class="tag-btn ${t === currentTag ? 'active' : ''}" onclick="filterTag('${t}')">${t}</button>`
+  ).join('');
   const filtered = currentTag === 'All' ? articles : articles.filter(a => a.tag === currentTag);
   const el = document.getElementById('article-list');
   el.innerHTML = filtered.map(a => `
@@ -1062,7 +1443,6 @@ function renderReporting() {
     </div>
   `).join('');
 }
-
 function filterTag(tag) { currentTag = tag; renderReporting(); }
 
 // ── SHOW ARTICLE ──
@@ -1076,38 +1456,19 @@ function showArticle(id, pushState = true) {
   if (pushState) {
     history.pushState({ pageId: 'article', articleId: id }, '', '/reporting/' + id);
   }
-
   const body = a.content.map(block => {
     if (block.type === 'paragraph') return `<p>${block.text}</p>`;
     if (block.type === 'heading') return `<h2>${block.text}</h2>`;
-    if (block.type === 'pullquote') return `
-      <div class="article-pullquote">
-        <blockquote>"${block.text}"</blockquote>
-        <cite>— ${block.attribution}</cite>
-      </div>`;
-    if (block.type === 'stat') return `
-      <div class="article-stat-block">
-        <div class="stat-number">${block.number}</div>
-        <div class="stat-desc">${block.label}</div>
-      </div>`;
-    if (block.type === 'image') return `
-      <div class="article-image">
-        <img src="${block.src}" alt="${block.alt}" onerror="this.style.display='none'">
-        <div class="article-caption">${block.caption} <span>Photo: ${block.source}</span></div>
-      </div>`;
+    if (block.type === 'pullquote') return `<div class="article-pullquote"><blockquote>"${block.text}"</blockquote><cite>— ${block.attribution}</cite></div>`;
+    if (block.type === 'stat') return `<div class="article-stat-block"><div class="stat-number">${block.number}</div><div class="stat-desc">${block.label}</div></div>`;
+    if (block.type === 'image') return `<div class="article-image"><img src="${block.src}" alt="${block.alt}" onerror="this.style.display='none'"><div class="article-caption">${block.caption} <span>Photo: ${block.source}</span></div></div>`;
     return '';
   }).join('');
-
   const citations = a.citations ? `
     <div class="article-citations">
       <h3>Sources & Citations</h3>
-      ${a.citations.map(c => `
-        <div class="citation-item" data-num="${c.num}">
-          ${c.url ? `<a href="${c.url}" target="_blank">${c.text}</a>` : c.text}
-        </div>
-      `).join('')}
+      ${a.citations.map(c => `<div class="citation-item" data-num="${c.num}">${c.url ? `<a href="${c.url}" target="_blank">${c.text}</a>` : c.text}</div>`).join('')}
     </div>` : '';
-
   document.getElementById('article-content').innerHTML = `
     <div style="max-width:720px;margin:0 auto;padding:3rem 2rem;">
       <button class="article-back" onclick="showPage('reporting')">← Back to Reporting</button>
@@ -1127,29 +1488,16 @@ function showArticle(id, pushState = true) {
       </div>
       <div class="article-body">${body}</div>
       ${citations}
-    </div>
-  `;
+    </div>`;
   window.scrollTo(0, 0);
   setTimeout(initReveal, 50);
-}
-
-// ── COST COUNTER ──
-function animateCost() {
-  const el = document.getElementById('cost-counter');
-  if (!el) return;
-  let step = 0; const steps = 60;
-  const timer = setInterval(() => {
-    step++;
-    el.textContent = '$' + ((8.57 / steps) * step).toFixed(2);
-    if (step >= steps) { el.textContent = '$8.57'; clearInterval(timer); }
-  }, 1800 / steps);
 }
 
 // ── SCROLL REVEAL ──
 function initReveal() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0.08, rootMargin: '0px 0px -20px 0px' });
   document.querySelectorAll('.reveal:not(.visible)').forEach(el => observer.observe(el));
 }
 
