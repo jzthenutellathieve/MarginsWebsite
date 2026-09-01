@@ -1009,6 +1009,9 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
         <div class="hero-img-slide">
           <img src="/images/iStock-499538949.jpg" alt="Woman in UNHCR refugee camp with water containers" loading="lazy" style="object-position: center 20%;">
         </div>
+        <div class="hero-img-slide">
+          <img src="/images/iStock-2225342668.jpg" alt="Refugees gathering around UNICEF water tank near Mosul" loading="lazy">
+        </div>
       </div>
     </div>
     <div class="hero-main">
@@ -1032,6 +1035,7 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
         <button class="hero-dot" onclick="goSlide(1)"></button>
         <button class="hero-dot" onclick="goSlide(2)"></button>
         <button class="hero-dot" onclick="goSlide(3)"></button>
+        <button class="hero-dot" onclick="goSlide(4)"></button>
       </div>
       <button class="hero-img-prev" onclick="prevSlide()">←</button>
       <button class="hero-img-next" onclick="nextSlide()">→</button>
@@ -1479,6 +1483,53 @@ footer { background: var(--ink); color: var(--paper); padding: 2.5rem 3rem; marg
 // ── DATA ──
 const articles = [
   {
+    id: "refugee-water-crisis-27000-problem",
+    title: "The $27,000 Problem: Why the World's Refugee Camps Keep Running Dry",
+    subtitle: "From Burundi to Kenya to Jordan, refugee water systems keep failing in the same way. The pattern is not bad luck. It is how humanitarian water is designed, funded, and left to break.",
+    tag: "Water",
+    date: "August 5, 2026",
+    readTime: "9 min",
+    thumbnail: "/images/iStock-471519333.jpg",
+    excerpt: "Sifa spends 210,000 Burundian francs each month on water for her family of ten. The camp's pump has been broken for six months. Replacing it would cost $27,000. The money has not been raised.",
+    content: [
+      { type: "pullquote", text: "We don't even have the budget to buy flour and medicine.", attribution: "UNHCR frontline staff, Nakivale refugee settlement, Uganda" },
+      { type: "paragraph", text: "Sifa, a mother of ten, lives in the Musasa refugee camp in northern Burundi. She spends approximately 210,000 Burundian francs each month to purchase at least seven barrels of water for her family — money that comes from World Food Programme assistance. After paying for water, the remaining funds are barely enough to cover food or medical expenses. The camp's main water pump has been broken for over six months, and replacing the necessary parts would cost around $27,000. Because the funds have yet to be raised, the more than 9,000 Congolese refugees in Musasa still lack a reliable water supply." },
+      { type: "paragraph", text: "This is not merely the story of a single unfortunate refugee camp. Similar situations are playing out across multiple continents in camps that were established long ago, some having existed for decades. The pattern is always the same: infrastructure fails, yet there are no funds for repairs; while officials wait in vain for funding that may never materialize, thousands of refugees are forced to travel long distances for water, pay exorbitant prices, and suffer from water-related illnesses. This is the daily reality confronting a share of the roughly 122 million people forcibly displaced worldwide as of late 2025 — the largest displaced population UNHCR has ever recorded." },
+      { type: "heading", text: "A Pattern, Not an Accident" },
+      { type: "paragraph", text: "In Uganda's Nakivale, one of Africa's oldest refugee settlements housing over 150,000 people, public taps and wells have been dry for more than three months. Refugees are now forced to walk eight kilometers to Lake Nakivale to fetch water or buy water delivered by bicycle, often at prices many cannot afford. Health workers in the camp report a rise in cases of cholera and typhoid, particularly among children and pregnant women. Even the camp's hospital has run out of drinking water. When asked why the water shortage remains unresolved, frontline UNHCR staff gave an answer that illuminates the systemic crisis: they no longer have the budget to cover even flour and medicine. Water is not competing with luxuries — it is losing to food and medical care for a shrinking pool of funds." },
+      { type: "paragraph", text: "In Kenya's Dadaab refugee complex — home to over 240,000 refugees — at least four deep-water wells in the Hagadera camp have broken down over the past year. Officials state that severe funding shortages have prevented proper repairs. Rising temperatures have driven up water demand, yet the supply system has ground to a halt. One refugee described rationing her daily water supply across cooking, drinking, and personal hygiene — her children often go to sleep hungry because there is no water to cook meals." },
+      { type: "image", src: "/images/iStock-471519333.jpg", alt: "Somali refugees collecting water at the Dadaab refugee complex, Kenya, surrounded by yellow jerry cans at a communal tap stand", caption: "Refugees collect water at Dadaab, Kenya's largest refugee complex. In 2026, at least four deep-water wells in the Hagadera section broke down within a single year — and remained unrepaired.", source: "iStock / journalturk · Editorial use" },
+      { type: "stat", number: "25%", label: "Drop in UNHCR available funding by end of 2025 — the lowest level since 2015, when the global displaced population was half its current size" },
+      { type: "paragraph", text: "These are not isolated breakdowns. They are the ripple effects of a funding collapse across the entire international humanitarian system. By the end of 2025, UNHCR's available funding stood at approximately $3.9 billion — a drop of roughly 25% from the previous year and the lowest level since 2015, when the global displaced population was only half what it is today. Nearly 5,000 UNHCR staff lost their jobs, and around 185 field offices were downsized or closed. Early pledges toward the agency's $8.5 billion fundraising goal for 2026 indicated that, by the time of the annual pledging conference, less than one-fifth of the required total had been secured. In Kenya, the funding gap drove ration cuts that reduced World Food Programme assistance in Kakuma to roughly 28% of a minimum food basket's value — prompting more than 9,000 South Sudanese refugees to return home rather than remain in a camp that could no longer guarantee their food supply." },
+      { type: "heading", text: "Why the Taps Stay Dry" },
+      { type: "paragraph", text: "Recurring failures often stem from structural decisions made long before the pump breaks. The Zaatari refugee camp in Jordan, which has hosted Syrian refugees since 2012, is a prime example. For years, the Jordanian government was reluctant to approve UNICEF's plans to build permanent water infrastructure, fearing that laying pipelines and constructing treatment plants would signal that Syrian refugees were there to stay. The camp relied on water trucking instead — an expensive stopgap further complicated by widespread contractor fraud, as documented in a study published by Forced Migration Review. Even after a permanent pipeline network was completed around 2019, a 2022 survey found that 30% of Zaatari households still reported insufficient water supply, forcing the camp to resume water trucking every summer." },
+      { type: "image", src: "/images/iStock-2225342668.jpg", alt: "Children and families queuing beside a large rusting water tank in a Syrian refugee camp near Aleppo", caption: "Refugees queue at a water tank in a camp near Aleppo, Syria, 2025. The tank itself — rusted, temporary, trucked in — illustrates the infrastructure logic that has governed humanitarian water supply for over a decade: stopgaps that were never meant to last, in settlements that never ended.", source: "iStock / Mantvydas Krikstaponis · Editorial use" },
+      { type: "paragraph", text: "The case of Zaatari also reveals how little anyone actually knows about where the money goes. Researchers from the International Institute for Environment and Development spent three years trying to calculate the actual investment in Zaatari's water system — and found it impossible. An independent UNICEF-commissioned evaluation stated bluntly: 'Neither the Jordan Country Office nor the WASH team tracked or recorded relevant expenditures for management purposes.' Between 2013 and 2017, approximately $355 million was invested in WASH projects for refugees in Jordan, followed by another $139 million between 2018 and 2022. No party — including the implementing agencies — could specify how much was spent on Zaatari, or provide an inventory of what was procured. Without that data, diagnosing failures or preventing them in the next camp is impossible." },
+      { type: "stat", number: "$355M", label: "Invested in WASH projects for Jordan refugees 2013–2017, with no party able to specify how much was spent on Zaatari or what it bought" },
+      { type: "paragraph", text: "Fraud compounded the opacity. An internal UN investigation launched in Uganda in 2018 exposed irregularities in water trucking contracts, fuel misappropriation, and food distribution fraud. An independent audit found that a road repair contract worth nearly $8 million had been awarded to a contractor with no construction experience — suggesting procurement failures that extended well beyond the water supply sector. According to whistleblowers and investigators, similar situations are widespread but rarely disclosed publicly, as the agencies involved are reluctant to undermine donor confidence." },
+      { type: "paragraph", text: "Underlying the funding shortfalls and fraud are deeper distortions in resource allocation. Jordan hosts roughly one-fifth of Syrian refugees yet receives nearly four-fifths of the humanitarian funding directed at that population. A significant portion of those funds is consumed by expensive short-term responses — water trucking, temporary storage tanks, emergency contracts — that would have been unnecessary had permanent infrastructure been built from the start." },
+      { type: "heading", text: "The Fragility of the Fixes Already Tried" },
+      { type: "paragraph", text: "New technologies have helped at the margins. In Turkana County, northern Kenya, a satellite-connected sensor network called DRIP — developed by the University of Colorado Boulder in partnership with the social enterprise Virridy — provides near real-time alerts when pumps fail. Previously, repair crews could take up to two weeks to reach a broken pump; now response times have fallen to hours. One repair team fixed 290 faulty pumps in the area within six months. The system was built to move away from the reactive emergency water truck model toward something more durable." },
+      { type: "paragraph", text: "But the sensors have solved only one part of the problem. Knowing a pump has failed within hours does not guarantee that the $27,000 needed to fix it will materialize. Aid projects supporting monitoring networks like DRIP — including the original funder USAID — have been severely cut over the past two years. The irony is blunt: every link in the relief chain, from underground pumps to the satellites that watch them, is now vulnerable to the same funding instability that let the pumps fail in the first place." },
+      { type: "heading", text: "Beyond the Emergency Model" },
+      { type: "paragraph", text: "The most significant structural response has so far come from policy, not engineering. In November 2025, Kenya formally redesignated Dadaab and Kakuma — 'temporary' camps that have existed for over thirty years — as permanent settlements under the Shirika Plan, aiming to integrate refugee populations into standard county administrative and infrastructure systems. This directly addresses the political logic that has kept water infrastructure perpetually provisional: when a camp is classified as temporary, permanent investment is framed as premature. Removing the label disrupts that logic, even if it cannot instantly repair a broken well." },
+      { type: "paragraph", text: "Combining this shift with sensor-based monitoring and basic financial transparency — a process that took researchers three years to approximate in Jordan — offers the outlines of a real solution: timely fault detection, regular maintenance budgets rather than emergency fundraising, and verification that resources reach their intended purpose. None of this requires new technology. It requires treating refugee water systems the way utilities in stable communities are treated: as infrastructure that will be here next year, and the year after that." }
+    ],
+    citations: [
+      { num: 1, text: "SOS Médias Burundi. 'Musasa: a refugee camp without water for six months, the humanitarian crisis worsens.' June 2026." },
+      { num: 2, text: "SOS Médias Burundi. 'Nakivale: the thirst grips the camp, refugees travel miles in search of water.' July 2026." },
+      { num: 3, text: "Radio Ergo. 'Dadaab water crisis brings misery to Somali refugees.' March 2026." },
+      { num: 4, text: "Earle, L., Crawford, K., Garfias Royo, M. 'The unknowable cost of camps: implications for a more sustainable refugee response.' Forced Migration Review 74. October 2024." },
+      { num: 5, text: "UNHCR. 'Critical funding gap may force deeper cuts to refugee aid.' October 2025.", url: "https://www.unhcr.org" },
+      { num: 6, text: "UNHCR. 'Early donor support tops $1 billion for 2026, but widening funding gaps leave millions at risk.' December 2025.", url: "https://www.unhcr.org" },
+      { num: 7, text: "UNHCR. Global Appeal 2026.", url: "https://www.unhcr.org/global-appeal" },
+      { num: 8, text: "ACAPS. Kenya Country Analysis. 2025.", url: "https://www.acaps.org" },
+      { num: 9, text: "RefugePoint. 'The 8 Largest Refugee Camps and Settlements in the World: 2026 Update.' 2026." },
+      { num: 10, text: "Njagi, D. 'Can remote sensing tech help East Africa's water-stressed communities?' Devex. November 2022.", url: "https://www.devex.com" },
+      { num: 11, text: "The New Humanitarian. 'Audit finds UN refugee agency critically mismanaged donor funds in Uganda.' 2018.", url: "https://www.thenewhumanitarian.org" }
+    ]
+  },
+  {
     id: "tehg-uv-water-access",
     title: "The Device That Could Change Refugee Water Access — If Anyone Builds the Bridge",
     subtitle: "Research conducted at Tsinghua University's State Key Laboratory of Regional Environment and Sustainability has produced a human-powered water disinfection system that exceeds WHO standards and costs $8.57 per person per year. The science is done. The translation work — from laboratory result to deployed tool — has not yet begun.",
@@ -1566,50 +1617,6 @@ const articles = [
       { num: 8, text: "Earth Journalism Network. Investigation leads to crackdown on illegal sand mining.", url: "https://earthjournalism.net/what-we-do/project-updates/ejn-supported-investigation-leads-to-crackdown-on-illegal-sand-mining-0" },
       { num: 9, text: "UC Berkeley Research (2024). Curbing illegal sand mining with data-driven mapping tools.", url: "https://vcresearch.berkeley.edu/news/new-research-aims-curb-illegal-sand-mining-data-driven-mapping-tools" },
       { num: 10, text: "Global Fishing Watch. Research project: disabled AIS signals.", url: "https://globalfishingwatch.org/research-project-disabled-signals/" }
-    ]
-  },
-  {
-    id: "refugee-water-crisis-27000-problem",
-    title: "The $27,000 Problem: Why the World's Refugee Camps Keep Running Dry",
-    subtitle: "From Burundi to Kenya to Jordan, refugee water systems keep failing in the same way. The pattern is not bad luck. It is how humanitarian water is designed, funded, and left to break.",
-    tag: "Water",
-    date: "August 5, 2026",
-    readTime: "9 min",
-    thumbnail: "/images/iStock-471519333.jpg",
-    excerpt: "Sifa spends 210,000 Burundian francs each month on water for her family of ten. The camp's pump has been broken for six months. Replacing it would cost $27,000. The money has not been raised.",
-    content: [
-      { type: "pullquote", text: "We don't even have the budget to buy flour and medicine.", attribution: "UNHCR frontline staff, Nakivale refugee settlement, Uganda" },
-      { type: "paragraph", text: "Sifa, a mother of ten, lives in the Musasa refugee camp in northern Burundi. She spends approximately 210,000 Burundian francs each month to purchase at least seven barrels of water for her family — money that comes from World Food Programme assistance. After paying for water, the remaining funds are barely enough to cover food or medical expenses. The camp's main water pump has been broken for over six months, and replacing the necessary parts would cost around $27,000. Because the funds have yet to be raised, the more than 9,000 Congolese refugees in Musasa still lack a reliable water supply." },
-      { type: "paragraph", text: "This is not merely the story of a single unfortunate refugee camp. Similar situations are playing out across multiple continents in camps that were established long ago, some having existed for decades. The pattern is always the same: infrastructure fails, yet there are no funds for repairs; while officials wait in vain for funding that may never materialize, thousands of refugees are forced to travel long distances for water, pay exorbitant prices, and suffer from water-related illnesses. This is the daily reality confronting a share of the roughly 122 million people forcibly displaced worldwide as of late 2025 — the largest displaced population UNHCR has ever recorded." },
-      { type: "heading", text: "A Pattern, Not an Accident" },
-      { type: "paragraph", text: "In Uganda's Nakivale, one of Africa's oldest refugee settlements housing over 150,000 people, public taps and wells have been dry for more than three months. Refugees are now forced to walk eight kilometers to Lake Nakivale to fetch water or buy water delivered by bicycle, often at prices many cannot afford. Health workers in the camp report a rise in cases of cholera and typhoid, particularly among children and pregnant women. Even the camp's hospital has run out of drinking water." },
-      { type: "paragraph", text: "In Kenya's Dadaab refugee complex — home to over 240,000 refugees — at least four deep-water wells in the Hagadera camp have broken down over the past year. Officials state that severe funding shortages have prevented proper repairs. Rising temperatures have driven up water demand, yet the supply system has ground to a halt. One refugee described how she rations her daily water supply, balancing cooking, drinking, and personal hygiene — her children often go to sleep hungry because there is no water to cook meals." },
-      { type: "image", src: "/images/iStock-471519333.jpg", alt: "Women and children collecting water at Dadaab refugee camp, Kenya, with yellow jerry cans covering the ground", caption: "Communal water distribution at Dadaab refugee complex, Kenya.", source: "iStock" },
-      { type: "stat", number: "25%", label: "Drop in UNHCR available funding by end of 2025, the lowest level since 2015" },
-      { type: "paragraph", text: "These are not isolated breakdowns, but the ripple effects of a funding collapse across the entire international humanitarian system. By the end of 2025, UNHCR's available funding stood at approximately $3.9 billion — a drop of about 25% from the previous year and the lowest level since 2015, a time when the global displaced population was only half of what it is today. In 2025, nearly 5,000 UNHCR staff members lost their jobs, and around 185 field offices were downsized or closed." },
-      { type: "heading", text: "Why the Taps Stay Dry" },
-      { type: "paragraph", text: "Recurring, long-term water supply failures often stem from structural issues. The Zaatari refugee camp in Jordan, which has hosted Syrian refugees since 2012, serves as a prime example. For years, the Jordanian government was reluctant to approve UNICEF's plans to build permanent water infrastructure in the camp, fearing that laying pipelines and constructing treatment plants would signal that Syrian refugees were there to stay. Consequently, the camp relied on water trucking for years — not only an expensive stopgap measure but one further complicated by widespread fraud among transport contractors." },
-      { type: "image", src: "/images/iStock-2225342668.jpg", alt: "Women and children gathering around a UNICEF water tank in a refugee camp near Mosul, Iraq, washing clothes and filling containers", caption: "Refugees gather around a UNICEF water distribution tank in a camp near Mosul, Iraq.", source: "iStock" },
-      { type: "paragraph", text: "Researchers from the International Institute for Environment and Development spent three years attempting to calculate the actual investment in Zaatari's water system. An independent evaluation stated bluntly: 'Neither the Jordan Country Office nor the WASH team tracked or recorded relevant expenditures for management purposes.' Between 2013 and 2017, approximately $355 million was invested in WASH projects for refugees in Jordan — yet no party could specify how much was actually spent on Zaatari." },
-      { type: "stat", number: "$355M", label: "Invested in WASH projects for Jordan refugees 2013–2017, with no precise accounting of how it was spent" },
-      { type: "paragraph", text: "Fraud further exacerbated this lack of transparency. In Uganda, an internal UN investigation launched in 2018 exposed irregularities in tendering contracts for water trucking, fuel misappropriation, and fraud during food distribution. An independent audit revealed further problematic contracts, including awarding a road repair contract worth nearly $8 million to a contractor with no relevant construction experience." },
-      { type: "heading", text: "The Fragility of the Fixes Already Tried" },
-      { type: "paragraph", text: "New technologies have alleviated the problem to some extent. In Turkana County, northern Kenya, a satellite-connected sensor network called DRIP — developed by the University of Colorado Boulder in partnership with the social enterprise Virridy — now provides near real-time alerts for malfunctions. Previously, it took up to two weeks for repair crews to reach a faulty pump; now it takes only a few hours. One repair team alone fixed 290 faulty pumps in the area within six months." },
-      { type: "paragraph", text: "However, while the sensors have solved the problem of fault detection, they haven't solved the problem of fundraising. Even knowing a pump has failed within hours doesn't guarantee that the required $27,000 for repairs will be raised. Aid projects supporting such monitoring networks, including the original funder USAID, have been severely impacted by budget cuts over the past two years." },
-      { type: "heading", text: "Beyond the Emergency Model" },
-      { type: "paragraph", text: "In November 2025, Kenya formally redesignated Dadaab and Kakuma — sites that had existed as 'temporary' camps for over three decades — as permanent settlements. As part of the 'Shirika Plan,' this move aims to integrate refugee populations into the standard administrative and infrastructural systems at the county level." },
-      { type: "paragraph", text: "Combining this structural shift with sensor-based monitoring technology and basic financial transparency offers a multifaceted solution. The core issue is not technological, but rather a decision repeatedly made across refugee camps for over a decade: managing displaced populations based on the premise that they are merely passing through and won't be here next year." }
-    ],
-    citations: [
-      { num: 1, text: "SOS Médias Burundi. 'Musasa: a refugee camp without water for six months.' June 2026." },
-      { num: 2, text: "SOS Médias Burundi. 'Nakivale: the thirst grips the camp.' July 2026." },
-      { num: 3, text: "Radio Ergo. 'Dadaab water crisis brings misery to Somali refugees.' March 2026." },
-      { num: 4, text: "Earle, L. et al. 'The unknowable cost of camps.' Forced Migration Review 74, October 2024." },
-      { num: 5, text: "UNHCR. 'Critical funding gap may force deeper cuts to refugee aid.' October 2025.", url: "https://www.unhcr.org" },
-      { num: 6, text: "UNHCR. Global Appeal 2026.", url: "https://www.unhcr.org/global-appeal" },
-      { num: 7, text: "ACAPS. Kenya Country Analysis. 2025.", url: "https://www.acaps.org" },
-      { num: 8, text: "Njagi, D. 'Can remote sensing tech help East Africa's water-stressed communities?' Devex, November 2022.", url: "https://www.devex.com" },
-      { num: 9, text: "The New Humanitarian. 'Audit finds UN refugee agency critically mismanaged donor funds in Uganda.' 2018.", url: "https://www.thenewhumanitarian.org" }
     ]
   }
 ];
@@ -1711,12 +1718,13 @@ function renderHomeArticles() {
 }
 
 // ── HERO CAROUSEL ──
-const heroCaptions = ['iStock / kertu_ee', 'iStock / Freezingtime', 'iStock / shironosov', 'iStock / Claudiad'];
+const heroCaptions = ['iStock / kertu_ee', 'iStock / Freezingtime', 'iStock / shironosov', 'iStock / Claudiad', 'iStock'];
 const heroOverlays = [
   { tag: 'Displacement', title: 'Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement', id: 'sand-cartels-southeast-asia' },
   { tag: 'Displacement', title: 'Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement', id: 'sand-cartels-southeast-asia' },
   { tag: 'Technology', title: 'The Device That Could Change Refugee Water Access — If Anyone Builds the Bridge', id: 'tehg-uv-water-access' },
-  { tag: 'Technology', title: 'The Device That Could Change Refugee Water Access — If Anyone Builds the Bridge', id: 'tehg-uv-water-access' }
+  { tag: 'Technology', title: 'The Device That Could Change Refugee Water Access — If Anyone Builds the Bridge', id: 'tehg-uv-water-access' },
+  { tag: 'Water', title: 'The $27,000 Problem: Why the World\'s Refugee Camps Keep Running Dry', id: 'refugee-water-crisis-27000-problem' }
 ];
 let currentSlide = 0;
 function goSlide(n) {
