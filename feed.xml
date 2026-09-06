@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>The Margins</title>
+    <link>https://themarginsjournals.com/</link>
+    <description>Reporting on displacement, housing and water.</description>
+    <language>en</language>
+    <atom:link href="https://themarginsjournals.com/feed.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Musasa’s Broken Pump and the Cost of Waiting</title>
+      <link>https://themarginsjournals.com/articles/refugee-water-crisis-27000-problem/</link>
+      <guid isPermaLink="false">urn:the-margins:article:refugee-water-crisis-27000-problem</guid>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 GMT</pubDate>
+      <description>In June, a Musasa resident described spending 210,000 Burundian francs a month on water after a pump failure. Emergency deliveries arrived in July. Residents were still asking for the pump to be repaired.</description>
+    </item>
+    <item>
+      <title>A Human-Powered UV Device: Questions for a Field Trial</title>
+      <link>https://themarginsjournals.com/articles/tehg-uv-water-access/</link>
+      <guid isPermaLink="false">urn:the-margins:article:tehg-uv-water-access</guid>
+      <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
+      <description>A crank or pedal powers a UV lamp. The next questions concern water quality, everyday use and repairs: what would it take to try the device outside the laboratory?</description>
+    </item>
+    <item>
+      <title>Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement</title>
+      <link>https://themarginsjournals.com/articles/sand-cartels-southeast-asia/</link>
+      <guid isPermaLink="false">urn:the-margins:article:sand-cartels-southeast-asia</guid>
+      <pubDate>Thu, 29 May 2025 00:00:00 GMT</pubDate>
+      <description>An estimated 20 to 50 million Bangladeshis are projected to be displaced from coastal areas due to river erosion by 2050. The relentless extraction of sand in Southeast Asia is leaving communities facing an uncertain future.</description>
+    </item>
+  </channel>
+</rss>

@@ -1,5 +1,39 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" }
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "functions": {
+    "api/newsletter.js": {
+      "maxDuration": 30
+    }
+  },
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/reporting/:slug",
+      "destination": "/articles/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/reporting",
+      "destination": "/articles/",
+      "permanent": true
+    },
+    {
+      "source": "/solutions",
+      "destination": "/projects/",
+      "permanent": true
+    },
+    {
+      "source": "/water",
+      "destination": "/projects/water/",
+      "permanent": true
+    },
+    {
+      "source": "/housing",
+      "destination": "/projects/housing/",
+      "permanent": true
+    }
   ]
 }
