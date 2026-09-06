@@ -50,6 +50,7 @@ function documentFor({ title, pathname, body, active, summary = description, art
 <meta name="color-scheme" content="only light">
 <meta name="theme-color" content="#ffffff">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" type="image/png" href="/images/favicon.png">
 <title>${escapeText(title)}</title>
 <meta name="description" content="${escapeText(summary)}">
 <link rel="canonical" href="${escapeText(canonical)}">

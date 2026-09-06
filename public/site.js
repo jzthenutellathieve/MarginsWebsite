@@ -25,7 +25,7 @@
     const schedule = () => {
       stop();
       if (!paused && !hovering && !focused && visible && !document.hidden) {
-        timer = setTimeout(() => { show(current + 1); schedule(); }, 6000);
+        timer = setTimeout(() => { show(current + 1); schedule(); }, 3000);
       }
     };
     function show(index, announce = false) {
