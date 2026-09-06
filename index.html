@@ -743,6 +743,7 @@ body { min-height: 100vh; }
   root.addEventListener('submit',event => {
     const form = event.target.closest('[data-mj-subscribe-form]');
     if (!form) return;
+    if (event.defaultPrevented) return;
     if (form.dataset.mjConfigured !== 'true') {
       event.preventDefault();
       root.querySelector('#mj-subscribe-status').textContent = 'Email subscriptions are not available yet. Your address has not been submitted or saved.';
@@ -769,5 +770,6 @@ body { min-height: 100vh; }
 </script>
 </div>
 
+<script src="/newsletter-client.js" defer></script>
 </body>
 </html>
