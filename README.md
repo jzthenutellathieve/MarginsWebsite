@@ -23,7 +23,7 @@ The build automatically places published article files into:
 - `/archive/`: twelve compact entries per page, grouped by year, with individual year pages.
 - Related reading at the end of each article, and the sitemap.
 
-The first two photos of a story alternate every six seconds on the homepage. Readers can pause or change photos; rotation stops offscreen, while the browser tab is hidden, and while hovering or using the keyboard. Reduced-motion preferences disable automatic rotation and page-transition effects. Search enhances the static directories; all topic, year and pagination links also work without JavaScript.
+The first two photos of a story alternate every three seconds on the homepage. Readers can pause or change photos; rotation stops offscreen, while the browser tab is hidden, and while hovering or using the keyboard. Reduced-motion preferences disable automatic rotation and page-transition effects. Search enhances the static directories; all topic, year and pagination links also work without JavaScript.
 
 Do not edit generated files in `dist/`. Edit the appropriate content file, update `feed.xml` with `python3 scripts/build_feed.py` when adding an article, then commit the changes. `sitemap.xml` is generated during every build. `npm test` checks page generation, old links, article content and the newsletter request behavior.
 
