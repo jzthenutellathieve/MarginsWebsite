@@ -1,0 +1,130 @@
+#margins-water-reviewed .md-project-page { max-width: 740px; margin: 0 auto; padding: 24px 12px 40px; overflow-wrap: break-word; }
+#margins-water-reviewed .md-project-nav { display: flex; flex-wrap: wrap; gap: 13px 25px; margin-bottom: 25px; font-size: 13px; color: var(--md-blue); }
+#margins-water-reviewed .md-project-nav :is(button, a.md-nav-link) { padding: 7px 0; text-decoration: underline; text-underline-offset: 4px; }
+#margins-water-reviewed .teng-hero-label { font: 12px/1.6 Arial, sans-serif; color: var(--md-blue); margin-bottom: 10px; }
+#margins-water-reviewed .teng-hero h1 { font: 39px/1.18 Georgia, serif; letter-spacing: -.6px; margin-bottom: 20px; }
+#margins-water-reviewed .teng-hero-deck { font: 19px/1.65 Georgia, serif; margin-bottom: 15px; }
+#margins-water-reviewed .teng-hero-doi { font: 12px/1.7 Arial, sans-serif; color: var(--md-muted); margin-bottom: 23px; }
+#margins-water-reviewed .teng-hero-stats { border-top: 1px solid var(--md-line); border-bottom: 1px solid var(--md-line); margin: 24px 0 30px; padding: 6px 0; }
+#margins-water-reviewed .teng-hero-stat { display: grid; grid-template-columns: 58px minmax(0,1fr); gap: 3px 18px; padding: 11px 0; }
+#margins-water-reviewed .teng-hero-stat-num { grid-row: span 2; font: 23px/1.3 Georgia, serif; }
+#margins-water-reviewed .teng-hero-stat-label { font: 13px/1.6 Arial, sans-serif; }
+#margins-water-reviewed .teng-hero-stat-source { font: 11px/1.5 Arial, sans-serif; color: var(--md-muted); }
+#margins-water-reviewed .teng-body, #margins-water-reviewed .housing-main { font: 17px/1.85 Georgia, serif; }
+#margins-water-reviewed .teng-section { padding: 25px 0 10px; }
+#margins-water-reviewed .teng-section-head { font: 27px/1.35 Georgia, serif; margin: 0 0 20px; }
+#margins-water-reviewed .teng-section-num { display: block; font: 12px/1.5 Arial, sans-serif; color: var(--md-muted); margin-bottom: 10px; }
+#margins-water-reviewed .teng-prose p, #margins-water-reviewed .teng-step p, #margins-water-reviewed .teng-context p, #margins-water-reviewed .housing-main p { margin: 0 0 22px; }
+#margins-water-reviewed .teng-failure-grid { padding: 4px 0 15px; }
+#margins-water-reviewed .teng-failure-card { margin: 15px 0; padding: 15px 0; border-top: 1px solid var(--md-faint); }
+#margins-water-reviewed .teng-failure-method, #margins-water-reviewed .teng-context-label { font: 12px/1.5 Arial, sans-serif; color: var(--md-blue); margin-bottom: 8px; }
+#margins-water-reviewed .teng-failure-card h4, #margins-water-reviewed .teng-step h4 { font: 20px/1.4 Georgia, serif; margin: 0 0 10px; }
+#margins-water-reviewed .teng-extreme { border-left: 2px solid var(--md-faint); padding: 0 0 0 20px; margin: 15px 0 25px; }
+#margins-water-reviewed .teng-extreme-num { font: 27px/1.2 Georgia, serif; margin-bottom: 10px; }
+#margins-water-reviewed .teng-extreme-text { font-size: 15px; }
+#margins-water-reviewed .md-project-page img { max-width: 100%; height: auto; display: block; }
+#margins-water-reviewed .md-project-figure { margin: 27px 0; }
+#margins-water-reviewed .teng-source-item { font: 12px/1.7 Arial, sans-serif; color: var(--md-muted); margin: 8px 0 12px; overflow-wrap: anywhere; }
+#margins-water-reviewed .md-lab-video { padding: 20px 0; margin: 24px 0; border-top: 1px solid var(--md-line); border-bottom: 1px solid var(--md-line); }
+#margins-water-reviewed .md-lab-video h3 { font: 23px/1.4 Georgia, serif; margin: 6px 0 12px; }
+#margins-water-reviewed .md-lab-video a { display: inline-block; padding: 8px 0; color: var(--md-blue); font: 14px/1.6 Arial, sans-serif; }
+#margins-water-reviewed .teng-step { padding: 20px 0 4px; }
+#margins-water-reviewed .teng-step-num { font: 12px/1.5 Arial, sans-serif; color: var(--md-muted); margin-bottom: 8px; }
+#margins-water-reviewed .teng-spec { display: inline-block; font: 12px/1.7 Arial, sans-serif; margin: 0 15px 10px 0; color: var(--md-muted); }
+#margins-water-reviewed .teng-perf-row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 20px; border-bottom: 1px solid var(--md-faint); padding: 10px 0; font: 13px/1.7 Arial, sans-serif; }
+#margins-water-reviewed .teng-perf-bar-wrap { display: none; }
+#margins-water-reviewed .teng-align-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 27px; margin: 20px 0; }
+#margins-water-reviewed .teng-align-label { font: 14px/1.6 Arial, sans-serif; padding: 13px 0; border-top: 1px solid var(--md-line); }
+#margins-water-reviewed .teng-align-item { font: 14px/1.75 Arial, sans-serif; margin-bottom: 20px; }
+#margins-water-reviewed .teng-align-item strong { display: block; margin-bottom: 5px; font-weight: 500; }
+#margins-water-reviewed .teng-compare-table { width: 100%; table-layout: fixed; border-collapse: collapse; font: 11px/1.6 Arial, sans-serif; }
+#margins-water-reviewed .teng-compare-table th, #margins-water-reviewed .teng-compare-table td { padding: 10px 7px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--md-faint); overflow-wrap: anywhere; font-weight: 400; }
+#margins-water-reviewed .teng-compare-table th { border-bottom-color: var(--md-ink); }
+#margins-water-reviewed .md-project-partners { display: flex; align-items: center; flex-wrap: wrap; gap: 18px 28px; padding: 20px 0; }
+#margins-water-reviewed .md-project-partners > span { flex-basis: 100%; font: 12px/1.6 Arial, sans-serif; color: var(--md-muted); }
+#margins-water-reviewed .md-project-partners .logo-first img { width: 285px; }
+#margins-water-reviewed .md-project-partners .logo-cityu img { width: 105px; }
+#margins-water-reviewed .md-project-partners img { background: transparent; }
+#margins-water-reviewed .teng-cta { border-top: 1px solid var(--md-line); margin-top: 22px; padding: 25px 0; }
+#margins-water-reviewed .teng-cta h3, #margins-water-reviewed .housing-main h3 { font: 25px/1.4 Georgia, serif; margin: 20px 0 14px; }
+#margins-water-reviewed .teng-cta p { font-size: 15px; }
+#margins-water-reviewed .teng-cta-actions { display: flex; flex-wrap: wrap; gap: 15px 23px; margin-top: 15px; font: 13px/1.7 Arial, sans-serif; color: var(--md-blue); }
+#margins-water-reviewed .teng-sources { border-top: 1px solid var(--md-line); margin-top: 20px; padding-top: 20px; }
+#margins-water-reviewed .teng-sources-label { font: 17px/1.6 Arial, sans-serif; margin-bottom: 10px; }
+#margins-water-reviewed .housing-stat-row { margin: 25px 0; border-top: 1px solid var(--md-line); border-bottom: 1px solid var(--md-line); }
+#margins-water-reviewed .housing-stat { display: grid; grid-template-columns: 90px minmax(0,1fr); gap: 20px; padding: 12px 0; font: 13px/1.7 Arial, sans-serif; }
+#margins-water-reviewed .housing-stat .num { font: 23px/1.3 Georgia, serif; }
+#margins-water-reviewed .housing-sidebar { border-top: 1px solid var(--md-line); padding-top: 20px; margin-top: 27px; font: 14px/1.75 Arial, sans-serif; }
+#margins-water-reviewed .housing-sidebar h4 { font: 20px/1.4 Georgia, serif; margin: 12px 0; }
+#margins-water-reviewed .housing-sidebar a { display: inline-block; margin: 10px 0; }
+#margins-water-reviewed .md-contact { margin-top: 25px; font-size: 14px; }
+
+#margins-water-reviewed .md-collaboration { margin-top: 21px; padding-top: 16px; border-top: 1px solid var(--md-faint); font-family: Arial, Helvetica, sans-serif; }
+#margins-water-reviewed .md-collaboration-label { font-size: 11px; line-height: 1.5; color: var(--md-muted); margin: 0 0 11px; }
+#margins-water-reviewed .md-partner-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
+#margins-water-reviewed .md-partner-logos a { display: block; max-width: 100%; line-height: 0; }
+#margins-water-reviewed .md-partner-logos img { display: block; max-width: 100%; height: auto; object-fit: contain; background: transparent; }
+#margins-water-reviewed .md-first-logo { width: 285px; }
+#margins-water-reviewed .md-cityu-logo { width: 96px; }
+#margins-water-reviewed .md-programme-note { margin-top: 10px; font-size: 11px; line-height: 1.65; color: var(--md-muted); }
+#margins-water-reviewed .md-collaboration details { margin-top: 12px; }
+#margins-water-reviewed .md-collaboration summary { display: list-item; list-style: disclosure-closed inside; cursor: pointer; color: var(--md-blue); font-size: 13px; line-height: 1.7; }
+#margins-water-reviewed .md-collaboration details[open] summary { list-style-type: disclosure-open; }
+#margins-water-reviewed .md-collaboration summary:focus-visible { outline: 2px solid var(--md-blue); outline-offset: 4px; }
+#margins-water-reviewed .md-role-notes { padding-top: 13px; }
+#margins-water-reviewed .md-role-notes p { font-size: 13px; line-height: 1.75; margin: 0 0 12px; }
+#margins-water-reviewed .md-role-notes strong { font-weight: 500; }
+#margins-water-reviewed .md-prose { max-width: 730px; margin: 0 auto; padding: 37px 30px 42px; }
+#margins-water-reviewed .md-prose h1 { font-family: Georgia, 'Times New Roman', serif; font-size: 38px; line-height: 1.2; letter-spacing: -.8px; margin-bottom: 23px; }
+#margins-water-reviewed .md-prose h2 { font-family: Georgia, 'Times New Roman', serif; font-size: 26px; line-height: 1.3; margin: 30px 0 15px; }
+#margins-water-reviewed .md-prose p { line-height: 1.8; margin-bottom: 21px; }
+#margins-water-reviewed .md-prose .md-about-opening { font-family: Georgia, 'Times New Roman', serif; font-size: 22px; line-height: 1.65; }
+#margins-water-reviewed .md-prose .md-source-note { font-size: 13px; color: var(--md-muted); }
+#margins-water-reviewed .md-prose { padding: 26px 0 30px; }
+#margins-water-reviewed .md-prose h1 { font-size: 33px; }
+#margins-water-reviewed .md-prose .md-about-opening { font-size: 20px; }
+#margins-water-reviewed .md-collaboration summary { min-height: 44px; padding-top: 10px; padding-bottom: 10px; }
+#margins-water-reviewed .md-home-housing { border-top: 1px solid var(--md-line); padding: 22px 0 27px; display: grid; grid-template-columns: 190px minmax(0,1fr); gap: 33px; }
+#margins-water-reviewed .md-home-housing h2 { font: 24px/1.35 Georgia, serif; margin-bottom: 9px; }
+#margins-water-reviewed .md-home-housing p { font-size: 14px; max-width: 600px; }
+#margins-water-reviewed .md-solutions-lead { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 30px; padding: 18px 0 30px; border-bottom: 1px solid var(--md-line); }
+#margins-water-reviewed .md-solutions-lead h2 { font: 33px/1.2 Georgia, serif; margin: 8px 0 15px; }
+#margins-water-reviewed .md-solutions-lead p { font-size: 15px; line-height: 1.75; }
+#margins-water-reviewed .md-mission-quote { margin: 18px 0 23px; padding: 0 0 0 17px; border-left: 2px solid var(--md-faint); font: 21px/1.55 Georgia, serif; }
+#margins-water-reviewed .md-original-overview { border-top: 1px solid var(--md-faint); padding-top: 15px; margin-top: 15px; }
+#margins-water-reviewed .md-original-overview summary { cursor: pointer; font: 13px/1.6 Arial, sans-serif; color: var(--md-blue); }
+#margins-water-reviewed .md-original-overview h3 { font: 24px/1.35 Georgia, serif; margin: 17px 0 12px; }
+#margins-water-reviewed .md-original-overview p { font: 14px/1.75 Arial, sans-serif; margin-bottom: 15px; }
+#margins-water-reviewed .md-original-overview dl { margin: 15px 0; }
+#margins-water-reviewed .md-original-overview dl > div { display: grid; grid-template-columns: 70px minmax(0,1fr); gap: 15px; padding: 8px 0; border-top: 1px solid var(--md-faint); }
+#margins-water-reviewed .md-original-overview dt { font: 19px/1.4 Georgia, serif; }
+#margins-water-reviewed .md-original-overview dd { margin: 0; font: 12px/1.7 Arial, sans-serif; }
+#margins-water-reviewed .md-original-pillars { border-top: 1px solid var(--md-line); margin-top: 26px; padding-top: 6px; }
+#margins-water-reviewed .md-original-pillars h3 { font: 21px/1.4 Georgia, serif; margin: 18px 0 10px; }
+#margins-water-reviewed .md-original-pillars p { font-size: 14px; margin-bottom: 12px; }
+#margins-water-reviewed .md-original-pillars :is(button, a.md-nav-link) { font: 13px/1.6 Arial, sans-serif; color: var(--md-blue); text-decoration: underline; text-underline-offset: 4px; }
+#margins-water-reviewed .md-original-overview summary, #margins-water-reviewed .md-subscribe-nav { min-height: 44px; }
+#margins-water-reviewed .md-project-data-source { margin: 24px 0; border-top: 1px solid var(--md-line); padding-top: 16px; }
+#margins-water-reviewed .md-embedded-video { margin: 24px 0; }
+#margins-water-reviewed .md-embedded-video iframe { width: 100%; height: auto; aspect-ratio: 16 / 9; min-height: 200px; display: block; border: 0; }
+#margins-water-reviewed .housing-inline-notes { margin: 20px 0; }
+#margins-water-reviewed .housing-inline-notes p { font: inherit; margin: 0 0 20px; }
+
+@media (max-width: 680px) {
+ #margins-water-reviewed .md-home-housing, #margins-water-reviewed .md-solutions-lead, #margins-water-reviewed .teng-align-grid { grid-template-columns: 1fr; gap: 22px; }
+ #margins-water-reviewed .md-project-page, #margins-water-reviewed .md-prose { padding-left:0; padding-right:0; }
+ #margins-water-reviewed .teng-hero h1 { font-size:36px; }
+ #margins-water-reviewed .teng-compare-table, #margins-water-reviewed .teng-compare-table tbody { display:block; }
+ #margins-water-reviewed .teng-compare-table thead { display:none; }
+ #margins-water-reviewed .teng-compare-table tr { display:block; padding:12px 0; border-top:1px solid var(--md-line); }
+ #margins-water-reviewed .teng-compare-table td { display:grid; grid-template-columns: 1fr 1fr; gap:14px; border:0; padding:5px 0; font-size:12px; }
+ #margins-water-reviewed .teng-compare-table td::before { content:attr(data-label); color:var(--md-muted); }
+}
+
+#margins-water-reviewed .md-project-links { display:flex; flex-wrap:wrap; gap:10px 23px; margin-top:17px; font-size:13px; color:var(--md-blue); }
+#margins-water-reviewed .md-project-links > a { display:inline-flex; align-items:center; min-height:38px; }
+#margins-water-reviewed .md-prose h1 { font-size:48px; line-height:1.12; letter-spacing:-1.5px; }
+@media(max-width:540px) {
+ #margins-water-reviewed .md-prose h1 { font-size:38px; }
+ #margins-water-reviewed .md-embedded-video iframe { min-height:0; }
+}

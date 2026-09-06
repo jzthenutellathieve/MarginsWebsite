@@ -1,6 +1,6 @@
 {
   "id": "tehg-uv-water-access",
-  "title": "A Human-Powered UV Device: Questions for a Field Trial",
+  "title": "Water by Hand: A Human-Powered UV Device and Questions for a Field Trial",
   "subtitle": "The TEHG-UV runs on a crank or pedal. Its laboratory results are promising; finding a use for it starts with the water people collect and the effort treatment would require.",
   "tag": "Technology",
   "date": "June 20, 2026",
@@ -252,5 +252,10 @@
     }
   ],
   "updated": "September 6, 2026",
-  "correctionNote": "Updated September 6, 2026: corrected the earlier claim about exceeding WHO standards, separated water supply from disinfection, and clarified laboratory conditions and estimated costs. Source attribution and photo captions have also been revised."
+  "correctionNote": "Updated September 6, 2026: corrected the earlier claim about exceeding WHO standards, separated water supply from disinfection, and clarified laboratory conditions and estimated costs. Source attribution and photo captions have also been revised.",
+  "displayTitle": "Water by Hand",
+  "deck": "A Human-Powered UV Device: Questions for a Field Trial",
+  "format": "Research notes",
+  "region": "Water access",
+  "cardSummary": "A crank or pedal powers a UV lamp. What would it take to use the device beyond the laboratory?"
 }

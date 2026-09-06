@@ -1,6 +1,6 @@
 {
   "id": "refugee-water-crisis-27000-problem",
-  "title": "Musasa’s Broken Pump and the Cost of Waiting",
+  "title": "The $27,000 Problem: Musasa’s Broken Pump and the Cost of Waiting",
   "subtitle": "Water trucks brought relief to Musasa in July. Residents still wanted the pump repaired. Reports from other settlements show why keeping water running takes more than an emergency delivery.",
   "tag": "Water",
   "date": "August 5, 2026",
@@ -203,5 +203,10 @@
     }
   ],
   "updated": "September 6, 2026",
-  "correctionNote": "Updated September 6, 2026: added the July water deliveries at Musasa; corrected the Jordan funding comparison and the distinction between budgets and spending; dated funding forecasts; and clarified interview attribution. Unverified repair metrics and programme-specific funding-cut claims have been removed."
+  "correctionNote": "Updated September 6, 2026: added the July water deliveries at Musasa; corrected the Jordan funding comparison and the distinction between budgets and spending; dated funding forecasts; and clarified interview attribution. Unverified repair metrics and programme-specific funding-cut claims have been removed.",
+  "displayTitle": "The $27,000 Problem",
+  "deck": "Musasa’s Broken Pump and the Cost of Waiting",
+  "format": "Reporting",
+  "region": "Burundi",
+  "cardSummary": "About $27,000 was the reported estimate to replace a failed motor. For Musasa’s residents, the cost was months without a reliable water supply."
 }

@@ -9,7 +9,7 @@ const root = path.resolve(__dirname, '..');
 execFileSync(process.execPath, ['scripts/build.cjs'], { cwd: root });
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
 const articles = fs.readdirSync(path.join(root, 'content/articles')).map(name => JSON.parse(read(`content/articles/${name}`)));
-const paths = [...Object.values(pages).map(page => page.path), ...articles.map(articlePath)];
+const paths = [...read('dist/sitemap.xml').matchAll(/<loc>https:\/\/themarginsjournals.com([^<]+)<\/loc>/g)].map(match => match[1]);
 const output = url => read(`dist${url}index.html`);
 
 test('each URL contains its own complete HTML and all local links resolve', () => {
@@ -30,7 +30,8 @@ test('each URL contains its own complete HTML and all local links resolve', () =
 test('article bodies and citations are present without JavaScript', () => {
   for (const article of articles) {
     const html = output(articlePath(article));
-    assert.ok(html.includes(`<h1>${escapeText(article.title)}</h1>`));
+    assert.ok(html.includes(`<h1>${escapeText(article.displayTitle || article.title)}</h1>`));
+    if (article.deck) assert.ok(html.includes(escapeText(article.deck)));
     for (const block of article.content) {
       for (const key of ['text', 'number', 'label', 'attribution', 'caption', 'source', 'alt']) {
         if (block[key]) assert.ok(html.includes(escapeText(block[key])), `${article.id}: missing ${key}`);
