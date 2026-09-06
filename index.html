@@ -1,21 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="color-scheme" content="only light">
+<meta name="theme-color" content="#ffffff">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="An independent journal on displacement, with essays by Jerry Zou and notes from housing work and water-treatment research."><meta name="referrer" content="strict-origin-when-cross-origin"><title>The Margins — A Journal on Displacement</title><style>
-:root { color-scheme: light dark; background: light-dark(#ffffff, #1c1f20); }
-html, body { margin: 0; padding: 0; }
+:root { color-scheme: only light; background: #ffffff; }
+html, body { margin: 0; padding: 0; background: #ffffff; color: #222729; }
 body { min-height: 100vh; }
 </style><style>
     #margins-water-reviewed {
-      --md-paper: light-dark(#ffffff, #1c1f20);
-      --md-ink: light-dark(#222729, #f0f0eb);
-      --md-muted: light-dark(#626869, #bfc6c5);
-      --md-line: light-dark(#c9cecc, #555e5d);
-      --md-faint: light-dark(#e0e3e1, #414948);
-      --md-blue: light-dark(#345264, #aecada);
+      --md-paper: #ffffff;
+      --md-ink: #222729;
+      --md-muted: #626869;
+      --md-line: #c9cecc;
+      --md-faint: #e0e3e1;
+      --md-blue: #345264;
       background: var(--md-paper);
       color: var(--md-ink);
-      color-scheme: inherit;
+      color-scheme: only light;
       font: 16px/1.6 Arial, Helvetica, sans-serif;
       padding: 18px 28px 18px;
     }
@@ -72,7 +74,7 @@ body { min-height: 100vh; }
     #margins-water-reviewed .md-collaboration-label { font-size: 11px; line-height: 1.5; color: var(--md-muted); margin: 0 0 11px; }
     #margins-water-reviewed .md-partner-logos { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
     #margins-water-reviewed .md-partner-logos a { display: block; max-width: 100%; line-height: 0; }
-    #margins-water-reviewed .md-partner-logos img { display: block; max-width: 100%; height: auto; object-fit: contain; background: light-dark(transparent, #ffffff); }
+    #margins-water-reviewed .md-partner-logos img { display: block; max-width: 100%; height: auto; object-fit: contain; background: transparent; }
     #margins-water-reviewed .md-first-logo { width: 285px; }
     #margins-water-reviewed .md-cityu-logo { width: 96px; }
     #margins-water-reviewed .md-programme-note { margin-top: 10px; font-size: 11px; line-height: 1.65; color: var(--md-muted); }
@@ -235,7 +237,7 @@ body { min-height: 100vh; }
 #margins-water-reviewed .md-project-partners > span { flex-basis: 100%; font: 12px/1.6 Arial, sans-serif; color: var(--md-muted); }
 #margins-water-reviewed .md-project-partners .logo-first img { width: 285px; }
 #margins-water-reviewed .md-project-partners .logo-cityu img { width: 105px; }
-#margins-water-reviewed .md-project-partners img { background: light-dark(transparent,#fff); }
+#margins-water-reviewed .md-project-partners img { background: transparent; }
 #margins-water-reviewed .teng-cta { border-top: 1px solid var(--md-line); margin-top: 22px; padding: 25px 0; }
 #margins-water-reviewed .teng-cta h3, #margins-water-reviewed .housing-main h3 { font: 25px/1.4 Georgia, serif; margin: 20px 0 14px; }
 #margins-water-reviewed .teng-cta p { font-size: 15px; }
@@ -249,9 +251,7 @@ body { min-height: 100vh; }
 #margins-water-reviewed .housing-sidebar h4 { font: 20px/1.4 Georgia, serif; margin: 12px 0; }
 #margins-water-reviewed .housing-sidebar a { display: inline-block; margin: 10px 0; }
 #margins-water-reviewed .md-contact { margin-top: 25px; font-size: 14px; }
-@media (prefers-color-scheme: dark) {
-  #margins-water-reviewed .md-wordmark img, #margins-water-reviewed .md-footer-name img { filter: invert(.91); }
-}
+
 @media (max-width: 600px) {
   #margins-water-reviewed .md-wordmark img { width: 249px; }
   #margins-water-reviewed .mj-nav { column-gap: 19px; row-gap: 3px; }
