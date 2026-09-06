@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { escapeText, pages, articlePath } = require('./site-utils.cjs');
 const { renderArticle } = require('./render-article.cjs');
+const { renderHome, collectionPages, searchIndex, readNext } = require('./editorial.cjs');
 const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
@@ -56,13 +57,14 @@ function documentFor({ title, pathname, body, active, summary = description, art
 <meta property="og:description" content="${escapeText(summary)}">
 <meta property="og:url" content="${escapeText(canonical)}">
 <meta property="og:type" content="${article ? 'article' : 'website'}">
+${article && article.content.find(b => b.type === 'image') ? `<meta property="og:image" content="${config.siteUrl}${assets[article.content.find(b => b.type === 'image').src].src}">` : ''}
 <link rel="alternate" type="application/rss+xml" title="The Margins — new articles" href="/feed.xml">
 <link rel="stylesheet" href="/site.css">
 ${metadata}
 <script id="legacy-routes" type="application/json">${JSON.stringify(legacyRoutes)}</script>
 <script src="/legacy-routes.js"></script>
 </head>
-<body>
+<body id="top">
 <div id="margins-water-reviewed">
 ${header}
 <main id="main-content">${hydrateImages(body)}</main>
@@ -82,23 +84,33 @@ fs.cpSync(path.join(root, 'public'), out, { recursive: true });
 fs.cpSync(path.join(root, 'images'), path.join(out, 'images'), { recursive: true });
 fs.copyFileSync(path.join(root, 'newsletter-client.js'), path.join(out, 'newsletter-client.js'));
 for (const [name, page] of Object.entries(pages)) {
+  if (name === 'reporting' || name === 'archive') continue;
   const directory = path.join(out, page.path);
   fs.mkdirSync(directory, { recursive: true });
   fs.writeFileSync(path.join(directory, 'index.html'), documentFor({
-    title: page.title, pathname: page.path, body: read(`content/pages/${name}.html`), active: page.parent || name
+    title: page.title, pathname: page.path,
+    body: name === 'home' ? renderHome(read('content/pages/home.html'), articles, config, assets, snippets) : read(`content/pages/${name}.html`),
+    active: page.parent || name
   }));
 }
+const collections = collectionPages(articles, {reporting:read('content/pages/reporting.html'), archive:read('content/pages/archive.html')}, assets, config.articlesPerPage || 6);
+for (const page of collections) {
+  const directory = path.join(out, page.pathname);
+  fs.mkdirSync(directory, {recursive:true});
+  fs.writeFileSync(path.join(directory,'index.html'), documentFor(page));
+}
+fs.writeFileSync(path.join(out, 'article-index.json'), JSON.stringify(searchIndex(articles, assets, config.articlesPerPage || 6)));
 for (const article of articles) {
   const pathname = articlePath(article);
   const directory = path.join(out, pathname);
   fs.mkdirSync(directory, { recursive: true });
   const back = '<a class="mj-back md-nav-link" href="/articles/">← Back to Articles</a>';
-  const body = `<section class="mj-reader" data-mj-page="reader" aria-label="Article">${back}<article data-mj-reader-content>${renderArticle(article, snippets, assets)}</article>${back}</section>`;
+  const body = `<section class="mj-reader" data-mj-page="reader" aria-label="Article"><div class="md-reading-progress" data-mj-reading-progress aria-hidden="true"></div>${back}<article data-mj-reader-content>${renderArticle(article, snippets, assets)}</article>${readNext(article, articles, assets)}</section>`;
   fs.writeFileSync(path.join(directory, 'index.html'), documentFor({
     title: `${article.title} | The Margins`, pathname, body, active: 'reporting', summary: article.excerpt || article.subtitle, article
   }));
 }
-const locations = [...Object.values(pages).map(page => page.path), ...articles.map(articlePath)];
+const locations = [...new Set([...Object.values(pages).map(page => page.path), ...articles.map(articlePath), ...collections.map(page => page.pathname)])];
 fs.writeFileSync(path.join(out, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${locations.map(url => `  <url><loc>${escapeText(config.siteUrl + url)}</loc></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(out, 'robots.txt'), `User-agent: *\nAllow: /\nSitemap: ${config.siteUrl}/sitemap.xml\n`);
 fs.copyFileSync(path.join(root, 'feed.xml'), path.join(out, 'feed.xml'));
