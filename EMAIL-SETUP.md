@@ -16,9 +16,9 @@
 
 ## 1. 在现有 Vercel 项目部署完整代码
 
-将这个包的内容放在现有 GitHub 仓库的网站根目录，包括 `api/`、`server/`、`newsletter-client.js`、`scripts/`、`package.json` 和 `vercel.json`，不能只替换 `index.html`。
+修改已整合到现有 GitHub 仓库。部署完整分支，包括 `content/`、`templates/`、`public/`、`api/`、`server/`、`newsletter-client.js`、`scripts/`、`package.json` 和 `vercel.json`。
 
-保留现有 Vercel 项目与域名。项目根目录应为这些文件所在目录；构建命令为 `npm run build`，静态输出目录为 `dist`。`api/newsletter.js` 由 Vercel 作为 Node.js Function 部署。原来的首页回退规则保留：Vercel 先匹配实际的静态文件或函数，其余路径再回退到首页。`/api/newsletter` 必须返回 JSON，`/feed.xml` 必须返回 XML；若返回 HTML，说明对应资源没有正确部署。图片目录 `images/` 与原有 `sitemap.xml` 一起复制到静态输出。现有 `#/reporting/...` 链接继续工作。
+保留现有 Vercel 项目与域名。项目根目录应为这些文件所在目录；构建命令为 `npm run build`，静态输出目录为 `dist`。`api/newsletter.js` 由 Vercel 作为 Node.js Function 部署。网站已改为独立静态页面，不存在的路径返回 404。`/api/newsletter` 必须返回 JSON，`/feed.xml` 必须返回 XML；若返回 HTML，说明对应资源没有正确部署。图片目录 `images/` 保留，`sitemap.xml` 在构建时生成。现有 `#/reporting/...` 链接会转到对应的 `/articles/.../` 页面。
 
 这个仓库继续使用现有 Vercel 项目；没有加入另外的 GitHub Pages 发布流程。在仅支持静态页面的主机上，表单会回到原来的 Mailchimp 提交方式，无法运行新增后台。
 
@@ -78,6 +78,6 @@ node scripts/build.cjs
 
 前端不将邮箱写进浏览器存储。服务器使用 `status_if_new` 只设置新联系人的状态，避免覆盖已有退订；API key 只用于服务器请求。每个服务实例在内存中合并重复点击，跨实例的发送间隔由 Mailchimp 的五分钟重新进入规则控制，所以必须保留该规则。
 
-静态输出 `dist` 包含网页、文章源、前端脚本、原有图片和站点地图。后台、测试和说明文件不复制到静态输出。原网页正文、图片、视频、白底样式与文章数据没有因本次订阅修改而变化。
+静态输出 `dist` 包含各篇完整 HTML 页面、前端脚本、原有图片和站点地图。后台、测试和说明文件不复制到静态输出。原网页正文、图片、视频、白底样式与文章数据没有因本次订阅修改而变化。
 
 实现依据：[Mailchimp Events API](https://mailchimp.com/developer/marketing/api/list-member-events/add-event/)、[重新订阅说明](https://mailchimp.com/help/resubscribe-a-contact/)、[Vercel Functions](https://vercel.com/docs/functions/runtimes/node-js)。

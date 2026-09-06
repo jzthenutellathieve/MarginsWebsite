@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build The Margins RSS feed from the article JSON embedded in index.html."""
+"""Build The Margins RSS feed from content/articles, or a legacy index.html."""
 
 import argparse
 from datetime import date, datetime, time, timezone
@@ -105,6 +105,18 @@ def require_text(value, label):
     return value.strip()
 
 
+def site_address(config):
+    if not isinstance(config, dict):
+        raise ValueError("Site configuration must contain a JSON object")
+    site_url = require_text(config.get("siteUrl", DEFAULT_SITE), "siteUrl").rstrip("/")
+    parsed = urlsplit(site_url)
+    if (parsed.scheme != "https" or not parsed.hostname or parsed.username or
+            parsed.password or parsed.query or parsed.fragment or
+            any(char.isspace() for char in site_url)):
+        raise ValueError("siteUrl must be an absolute HTTPS site address without a query or fragment")
+    return site_url
+
+
 def load_site(source):
     parser = SiteDataParser()
     parser.feed(source)
@@ -115,19 +127,30 @@ def load_site(source):
     if not isinstance(articles, list):
         raise ValueError("script#mj-article-data must contain a JSON array")
     config = json.loads("".join(parser.scripts.get("mj-site-config", ["{}"])))
-    if not isinstance(config, dict):
-        raise ValueError("script#mj-site-config must contain a JSON object")
-    site_url = require_text(config.get("siteUrl", DEFAULT_SITE), "siteUrl").rstrip("/")
-    parsed = urlsplit(site_url)
-    if (parsed.scheme != "https" or not parsed.hostname or parsed.username or
-            parsed.password or parsed.query or parsed.fragment or
-            any(char.isspace() for char in site_url)):
-        raise ValueError("siteUrl must be an absolute HTTPS site address without a query or fragment")
-    return articles, site_url
+    return articles, site_address(config)
+
+
+def load_content(directory):
+    directory = Path(directory)
+    config = json.loads((directory / "site.json").read_text(encoding="utf-8"))
+    files = sorted((directory / "articles").glob("*.json"))
+    if not files:
+        raise ValueError(f"{directory / 'articles'} contains no article JSON files")
+    articles = []
+    for file in files:
+        article = json.loads(file.read_text(encoding="utf-8"))
+        if not isinstance(article, dict):
+            raise ValueError(f"{file} must contain one article JSON object")
+        articles.append(article)
+    return articles, site_address(config)
 
 
 def build_feed(source, today=None):
     articles, site_url = load_site(source)
+    return build_feed_from_articles(articles, site_url, today)
+
+
+def build_feed_from_articles(articles, site_url, today=None):
     today = today or datetime.now(timezone.utc).date()
     prepared = []
     seen = set()
@@ -163,7 +186,7 @@ def build_feed(source, today=None):
     for published, article_id, title, excerpt in sorted(prepared, reverse=True):
         item = ET.SubElement(channel, "item")
         ET.SubElement(item, "title").text = title
-        ET.SubElement(item, "link").text = site_url + "/#/reporting/" + quote(article_id, safe="")
+        ET.SubElement(item, "link").text = site_url + "/articles/" + quote(article_id, safe="") + "/"
         # Identity never uses an edited title, body, update date or build timestamp.
         ET.SubElement(item, "guid", isPermaLink="false").text = "urn:the-margins:article:" + article_id
         ET.SubElement(item, "pubDate").text = format_datetime(
@@ -175,11 +198,16 @@ def build_feed(source, today=None):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--input", type=Path, default=Path("index.html"))
+    parser.add_argument("--input", type=Path, default=Path("content"),
+                        help="Content directory (default: content), or a legacy index.html")
     parser.add_argument("--output", type=Path, default=Path("feed.xml"))
     args = parser.parse_args()
     try:
-        xml, count = build_feed(args.input.read_text(encoding="utf-8"))
+        if args.input.is_dir():
+            articles, site_url = load_content(args.input)
+            xml, count = build_feed_from_articles(articles, site_url)
+        else:
+            xml, count = build_feed(args.input.read_text(encoding="utf-8"))
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_bytes(xml)
     except (OSError, ValueError, TypeError) as error:

@@ -84,14 +84,13 @@ test('provider errors are shown without a success message or a second native sub
   assert.equal(app.button.disabled, false);
 });
 
-test('all executable scripts in the existing HTML still parse', () => {
-  const html = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
-  let count = 0;
-  for (const match of html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
-    if (/application\/json|\bsrc=/.test(match[1])) continue;
-    new vm.Script(match[2]);
-    count++;
+test('shared client scripts parse and the native signup fallback is configured', () => {
+  for (const name of ['newsletter-client.js', 'public/site.js', 'public/legacy-routes.js']) {
+    new vm.Script(fs.readFileSync(path.join(__dirname, '..', name), 'utf8'));
   }
-  assert.ok(count > 0);
-  assert.match(html, /src="\/newsletter-client\.js" defer/);
+  const form = fs.readFileSync(path.join(__dirname, '../templates/newsletter.html'), 'utf8');
+  assert.match(form, /data-mj-configured="true"/);
+  assert.match(form, /action="https:\/\/themarginsjournals\.us13\.list-manage\.com\/subscribe\/post"/);
+  assert.match(form, /name="MERGE0"/);
+  assert.match(form, /name="id" value="1a86cc1618"/);
 });

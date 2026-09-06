@@ -1,0 +1,207 @@
+{
+  "id": "refugee-water-crisis-27000-problem",
+  "title": "Musasa’s Broken Pump and the Cost of Waiting",
+  "subtitle": "Water trucks brought relief to Musasa in July. Residents still wanted the pump repaired. Reports from other settlements show why keeping water running takes more than an emergency delivery.",
+  "tag": "Water",
+  "date": "August 5, 2026",
+  "readTime": "6 min",
+  "thumbnail": "/images/iStock-471519333.jpg",
+  "excerpt": "In June, a Musasa resident described spending 210,000 Burundian francs a month on water after a pump failure. Emergency deliveries arrived in July. Residents were still asking for the pump to be repaired.",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In June 2026, Sifa told SOS Médias Burundi that she was spending about 210,000 Burundian francs a month on water. She lived in Musasa refugee camp in northern Burundi and said there were ten people in her household. The money came from World Food Programme assistance; buying water left little for food or healthcare. Local sources told the outlet that replacing the failed pumping-system motor would cost about $27,000. For more than six months, a camp of over 9,000 Congolese refugees had lacked a regular drinking-water supply.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In July, SOS Médias Burundi reported that UNHCR had begun bringing water by truck from Gasorwe, filling tanks connected to the camp’s taps. Residents described some relief from the expense of buying water. They also worried that fuel shortages could interrupt the deliveries. They wanted the pump repaired, with reliable electricity to run it.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "What happens while repairs wait"
+    },
+    {
+      "type": "paragraph",
+      "text": "In Uganda’s Nakivale settlement, SOS Médias Burundi reported another prolonged disruption in July 2026. Some residents were travelling roughly eight kilometres to Lake Nakivale; others bought water carried in by bicycle. A medical source quoted in the report described patients with signs of cholera and typhoid and said the hospital itself lacked drinking water. The outlet also quoted UNHCR staff describing shortages of money for basic supplies.",
+      "sources": [
+        3
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Radio Ergo documented a similar repair problem in Hagadera, part of Kenya’s Dadaab complex, in March 2026. Camp officials said at least four boreholes had broken down during the preceding year without proper repairs. The deputy chairman, Abukar Sheikh Abdullahi, said the administration could not afford the work. Nimo, a resident interviewed by the outlet, described having food at home but no water with which to cook it. A water shortage can make food assistance harder to use, even before its effects on hygiene and illness are counted.",
+      "sources": [
+        4
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/iStock-471519333.jpg",
+      "alt": "People collecting water in containers at a communal water point",
+      "caption": "People collect water at a communal supply point. Editorial stock photograph.",
+      "source": "iStock / journalturk · Editorial use"
+    },
+    {
+      "type": "paragraph",
+      "text": "UNHCR was facing a wider funding shortage. In November 2025, it projected that it would finish the year with $3.9 billion available, about a quarter less than in 2024. Early pledges for 2026 subsequently reached about $1.5 billion, nearly 18% of projected needs, with more contributions expected. These were agency-wide figures at different points in the fundraising cycle. Tracing the money available for a particular repair would require local budget records.",
+      "sources": [
+        5,
+        6
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Food assistance was under pressure too. In May 2025, WFP warned that refugees it supported in Kenya would receive only 28% of a full in-kind ration from June, with cash assistance suspended unless more funding arrived. A family buying water from its food allowance has less to spend on meals. Residents who cannot buy it must instead spend time collecting it or cut back on washing and other daily needs.",
+      "sources": [
+        7
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Building for a settlement that stays"
+    },
+    {
+      "type": "paragraph",
+      "text": "Zaatari in Jordan shows a different obstacle. In Forced Migration Review, Lucy Earle, Kate Crawford and Margarita Garfias Royo describe government resistance to permanent infrastructure and costly reliance on trucking. Networks were operating by mid-2019, but a 2022 survey found 30% of households reporting insufficient water. Informants said summer trucking was still needed.",
+      "sources": [
+        8
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/iStock-2225342668.jpg",
+      "alt": "Families with containers beside a large water tank",
+      "caption": "Families collect water beside a storage tank. Editorial stock photograph.",
+      "source": "iStock / Mantvydas Krikstaponis · Editorial use"
+    },
+    {
+      "type": "paragraph",
+      "text": "The researchers could not obtain a reliable breakdown of Zaatari’s water-system costs. Evaluations put the wider Jordan WASH programme’s budgets at about $355 million for 2013–2017 and $139 million for 2018–2022, with limited expenditure detail. Without spending records for the camp itself, comparing the cost of trucking with that of a permanent network remains difficult.",
+      "sources": [
+        8
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In 2018, The New Humanitarian, then known as IRIN, reported on an internal UN audit of UNHCR’s Uganda operations. It identified water-trucking irregularities and a $7.9 million road contract awarded to a firm without road-construction experience. UNHCR accepted the recommendations and said it had begun corrective action. The audit concerns those earlier operations; it offers no explanation on its own for Nakivale’s shortage in 2026.",
+      "sources": [
+        9
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Publishing spending by location would help planners compare the costs of emergency deliveries and permanent provision.",
+      "sources": [
+        8
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "What monitoring can change"
+    },
+    {
+      "type": "paragraph",
+      "text": "The Drought Resilience Impact Platform, or DRIP, offers one way to identify trouble earlier. The University of Colorado Boulder describes a system combining satellite-connected sensors, groundwater and rainfall information, and drought forecasts. The work involves the Millennium Water Alliance and Virridy, alongside local institutions. Its purpose extends beyond sending an alert: monitoring is meant to inform maintenance, water-service contracts and decisions about where support is needed.",
+      "sources": [
+        10,
+        11
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "That is useful, but a detected fault still needs someone able to act on it. A sensor cannot supply a replacement motor, arrange its delivery or fund a technician. DRIP’s partners describe financing and service arrangements alongside the technology for that reason. For a refugee settlement considering a similar approach, the questions would be practical: who receives the alert, who is responsible for the repair, and what money can that person use without waiting for another emergency appeal?",
+      "sources": [
+        10,
+        11
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Planning for next year’s water"
+    },
+    {
+      "type": "paragraph",
+      "text": "Kenya’s Shirika Plan, launched in March 2025, aims to bring refugee services into national and local systems. At its launch, UNHCR’s Filippo Grandi stressed the resources local authorities would need to serve refugees and host communities. How that ambition translates into a repair budget and a functioning local water service still has to be established at each site.",
+      "sources": [
+        12
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Musasa brings the question back to something specific. July’s deliveries gave residents water while they continued to ask for the pump to be fixed. Keeping a system running means planning for the next fault as well: the part that wears out, the electricity bill, and the person who can authorize the work. Those expenses belong in the original plan, before families have to absorb them.",
+      "sources": [
+        2
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "SOS Médias Burundi. “Musasa: a refugee camp without water for six months, the humanitarian crisis worsens.” June 14, 2026; dateline June 11.",
+      "url": "https://www.sosmediasburundi.org/en/2026/06/14/musasa-a-refugee-camp-without-water-for-six-months-the-humanitarian-crisis-worsens/"
+    },
+    {
+      "num": 2,
+      "text": "SOS Médias Burundi. “Musasa: after months of thirst, water returns… but the crisis threatens to continue.” July 18, 2026; dateline July 16.",
+      "url": "https://www.sosmediasburundi.org/en/2026/07/18/musasa-after-months-of-thirst-water-returns-but-the-crisis-threatens-to-continue/"
+    },
+    {
+      "num": 3,
+      "text": "SOS Médias Burundi. “Nakivale: the thirst grips the camp, refugees travel miles in search of water.” July 27, 2026; dateline July 26.",
+      "url": "https://www.sosmediasburundi.org/en/2026/07/27/nakivale-the-thirst-grips-the-camp-refugees-travel-miles-in-search-of-water/"
+    },
+    {
+      "num": 4,
+      "text": "Radio Ergo. “Dadaab water crisis brings misery to Somali refugees.” March 2, 2026.",
+      "url": "https://radioergo.org/en/2026/03/dadaab-water-crisis-brings-misery-to-somali-refugees/"
+    },
+    {
+      "num": 5,
+      "text": "United Nations Office at Geneva. Press briefing, November 11, 2025; UNHCR’s global winter fundraising campaign.",
+      "url": "https://www.unognewsroom.org/story/en/2905/un-geneva-press-briefing-11-november-2025"
+    },
+    {
+      "num": 6,
+      "text": "United Nations Regional Information Centre. “Early donor support tops $1 billion for UNHCR 2026.” December 3, 2025; reporting the December 2 pledging conference.",
+      "url": "https://unric.org/en/early-donor-support-tops-1-billion-for-2026-but-widening-funding-gaps-leave-millions-at-risk/"
+    },
+    {
+      "num": 7,
+      "text": "World Food Programme. “Refugees in Kenya at risk of worsening hunger as WFP faces critical funding shortfall.” May 22, 2025.",
+      "url": "https://www.wfp.org/news/refugees-kenya-risk-worsening-hunger-wfp-faces-critical-funding-shortfall"
+    },
+    {
+      "num": 8,
+      "text": "Earle, Lucy; Crawford, Kate; and Garfias Royo, Margarita. “The unknowable cost of camps: implications for a more sustainable refugee response.” Forced Migration Review 74, October 2024.",
+      "url": "https://www.fmreview.org/financing-displacement-response/earle-crawford-garfiasroyo/"
+    },
+    {
+      "num": 9,
+      "text": "Parker, Ben. “Audit finds UN refugee agency critically mismanaged donor funds in Uganda.” The New Humanitarian (then IRIN), November 28, 2018.",
+      "url": "https://www.thenewhumanitarian.org/news/2018/11/28/audit-finds-un-refugee-agency-critically-mismanaged-donor-funds-uganda"
+    },
+    {
+      "num": 10,
+      "text": "University of Colorado Boulder, Mortenson Center. “Ending Drought Emergencies: The Drought Resilience Impact Platform.” Programme page; no publication date displayed. Accessed September 6, 2026.",
+      "url": "https://www.colorado.edu/center/mortenson/drip"
+    },
+    {
+      "num": 11,
+      "text": "Virridy. “Millennium Water Alliance, Virridy, and CU Boulder Partner to Drive Improved Water Security Through Climate Finance.” August 2022.",
+      "url": "https://www.virridy.com/news/millennium-water-alliance"
+    },
+    {
+      "num": 12,
+      "text": "Grandi, Filippo. “High Commissioner’s statement at the launch of Kenya’s Shirika Plan.” UNHCR, March 28, 2025.",
+      "url": "https://www.unhcr.org/us/news/speeches-and-statements/high-commissioner-s-statement-launch-kenya-s-shirika-plan"
+    }
+  ],
+  "updated": "September 6, 2026",
+  "correctionNote": "Updated September 6, 2026: added the July water deliveries at Musasa; corrected the Jordan funding comparison and the distinction between budgets and spending; dated funding forecasts; and clarified interview attribution. Unverified repair metrics and programme-specific funding-cut claims have been removed."
+}

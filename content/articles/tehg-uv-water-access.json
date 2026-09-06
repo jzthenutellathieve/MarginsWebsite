@@ -1,0 +1,256 @@
+{
+  "id": "tehg-uv-water-access",
+  "title": "A Human-Powered UV Device: Questions for a Field Trial",
+  "subtitle": "The TEHG-UV runs on a crank or pedal. Its laboratory results are promising; finding a use for it starts with the water people collect and the effort treatment would require.",
+  "tag": "Technology",
+  "date": "June 20, 2026",
+  "readTime": "6 min",
+  "thumbnail": null,
+  "excerpt": "A crank or pedal powers a UV lamp. The next questions concern water quality, everyday use and repairs: what would it take to try the device outside the laboratory?",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "In Dabat Bosin, Sudan, people received four liters of water per person per day in 2024, according to UNHCR. That is one-fifth of the agency's post-emergency minimum of 20 liters. A household has to divide that supply among drinking, cooking and hygiene.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "TEHG-UV addresses the treatment of water a household already has. Described in ACS Nano in February 2026, the human-powered prototype uses ultraviolet light to inactivate microorganisms. A site short of water would still need a reliable supply alongside any treatment device.",
+      "sources": [
+        1,
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The researchers combine a hand crank or pedal drive with two kinds of generator to power an ultraviolet mercury lamp. Their results suggest a way to disinfect small batches without grid electricity. Whether that would help a particular displaced community depends on its water source, the alternatives already available, and the work required to use the device every day.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "What a household device could address"
+    },
+    {
+      "type": "paragraph",
+      "text": "UNHCR's 2024 WASH report describes a response operating under severe pressure. In Chad, emergency systems provided nearly 13 liters per person per day after more than 239,000 Sudanese refugees arrived. Household treatment could be relevant where the water people collect is contaminated, but it would still depend on the wells, deliveries or other sources that provide the water in the first place.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A household may already boil its water, use a chemical disinfectant or own a portable UV device. Each option has requirements to check locally, from fuel or electricity to dosing and contact time. Chlorination can also leave a disinfectant residual that helps protect stored water against recontamination. UV treatment requires sufficiently clear water and careful storage afterward.",
+      "sources": [
+        5
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/iStock-499538949.jpg",
+      "alt": "A woman seated beside water containers and a tent",
+      "caption": "A woman sits beside water containers and a tent. Illustrative stock photograph.",
+      "source": "iStock / Claudiad · Editorial use"
+    },
+    {
+      "type": "heading",
+      "text": "One lamp, two electrical demands"
+    },
+    {
+      "type": "paragraph",
+      "text": "The engineering problem starts with the lamp. Igniting a UV mercury lamp requires a different electrical output from keeping it lit. The team used a triboelectric nanogenerator, or TENG, alongside an electromagnetic generator, or EMG, so their combined output could meet those changing demands.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The TENG uses contact between polyurethane and PTFE to generate charge. The EMG uses electromagnetic induction: mechanical rotation changes the magnetic flux through coils and generates an electrical output. The two generators serve complementary roles, with the TENG providing high voltage and the EMG supplying the greater current needed during operation. A transmission connects them to the user's motion.",
+      "sources": [
+        1,
+        4
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Portable UV treatment is already available in battery-operated devices. This design offers a different power source: human effort. That could be useful where access to electricity or replacement batteries is unreliable.",
+      "sources": [
+        1,
+        5
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "What the experiments show"
+    },
+    {
+      "type": "paragraph",
+      "text": "The paper reports an eight-log reduction in the test microorganisms when treating two liters for 25 minutes by hand cranking, or ten liters for 15 minutes with the pedal configuration. That means a 100-million-fold decrease, equivalent to 99.999999 percent, under the reported test conditions. Whether treated water is safe to drink also depends on what else is in the source water and what happens during use and storage.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A separate experiment in the supporting information tested 500-milliliter samples at 80 revolutions per minute, with five replicates. E. coli, B. subtilis and MS2 bacteriophage each reached an eight-log reduction within five minutes. The findings apply to those organisms under the reported conditions.",
+      "sources": [
+        4
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The river-water samples came from the Tsinghua River in Beijing. For the November samples, the supplementary table records turbidity of 2.6 to 2.8 NTU. Much cloudier water would need further assessment because particles can interfere with UV treatment.",
+      "sources": [
+        4,
+        5
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "WHO's highest household-treatment performance category requires reductions of at least four logs for bacteria, five for viruses and four for protozoa. Assessing a device against those criteria requires evidence for the relevant organism groups and test conditions. The reported eight-log results alone do not establish a WHO classification for TEHG-UV.",
+      "sources": [
+        3
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "What the cost estimate includes"
+    },
+    {
+      "type": "paragraph",
+      "text": "The authors’ estimate of about $8.57 per person per year comes from a levelized-cost model. The supporting tables include component and fabrication costs, with assumptions about replacement intervals. It is a useful starting point for a budget, though it is neither a purchase price nor a cost measured in a humanitarian programme.",
+      "sources": [
+        1,
+        4
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A pilot budget would need local costs for manufacture or purchase, transport, replacement parts, training and water-quality checks. It would also need to revisit the assumed component lifetimes as evidence from use became available.",
+      "sources": [
+        4
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/images/iStock-1347306145.jpg",
+      "alt": "A child holding a water bottle",
+      "caption": "A child holds a water bottle. Illustrative stock photograph.",
+      "source": "iStock / shironosov"
+    },
+    {
+      "type": "heading",
+      "text": "What would need testing outside the laboratory"
+    },
+    {
+      "type": "paragraph",
+      "text": "A proposed site would first need a water assessment. UV disinfection leaves dissolved chemical contaminants and heavy metals in the water. Pre-filtration may improve UV treatment by reducing particles; chemical contamination needs treatment suited to the substances present. An ordinary sand filter cannot be assumed to address that problem.",
+      "sources": [
+        6
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The next question concerns the person doing the work. A trial should establish whether users can sustain the required motion and finish a treatment cycle consistently, including people whose strength or mobility is limited. It should also check what happens when cranking stops early, how users recognize a fault, and whether they can obtain a replacement lamp or repair a worn component."
+    },
+    {
+      "type": "paragraph",
+      "text": "Handling matters after the lamp switches off, too. UV does not leave a protective disinfectant residual in the water, so storage and dispensing need to prevent recontamination. The mercury lamp would also require protection from breakage and a suitable collection and disposal arrangement; shielding users from harmful UV exposure belongs in the design assessment.",
+      "sources": [
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Related research is already exploring other ways to power disinfection. Jeon and colleagues reviewed triboelectric approaches across several applications in Micromachines in 2025. Kim and colleagues reported a walking-powered water-bottle system in Nature Water in 2024, while Huo and colleagues discussed contact electrification for personal sanitation in a 2025 commentary. These papers provide useful context, but they are not field validation of the TEHG-UV.",
+      "sources": [
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "The role of The Margins"
+    },
+    {
+      "type": "paragraph",
+      "text": "The researchers developed the device and conducted the experiments. Jerry is working with the group to consider its possible use after displacement and to explain the research to humanitarian organizations. That work begins with understanding local water needs."
+    },
+    {
+      "type": "paragraph",
+      "text": "The paper includes researchers from Tsinghua University and other institutions, with Zhiguo Yuan of City University of Hong Kong among its corresponding authors. Yuan's funding acknowledgement includes CityU support through FIRST, a UNESCO-endorsed initiative. The institutional support described here concerns the research and programme.",
+      "sources": [
+        11
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The next step would be to discuss a particular water problem with researchers, water-service staff and prospective users. A feasibility study could compare the device with the options already available and establish what a trial should measure. The published results give that conversation a starting point. Whether the device fits into daily water collection and treatment is still an open question."
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "Wang, X., Li, R., Wang, Y., et al. “A Simple Disinfection Device for Families in Underdeveloped Regions.” ACS Nano 20(8), 6609–6621. Published online February 20, 2026.",
+      "url": "https://doi.org/10.1021/acsnano.5c13095"
+    },
+    {
+      "num": 2,
+      "text": "UNHCR. 2024 WASH Annual Report. April 2025. Pages 2 and 4: Dabat Bosin and emergency water provision in Chad.",
+      "url": "https://www.unhcr.org/sites/default/files/2025-04/2024-wash-annual-report.pdf"
+    },
+    {
+      "num": 3,
+      "text": "World Health Organization. International Scheme to Evaluate Household Water Treatment Technologies: Products evaluated and performance criteria. Accessed September 6, 2026.",
+      "url": "https://www.who.int/tools/international-scheme-to-evaluate-household-water-treatment-technologies/products-evaluated"
+    },
+    {
+      "num": 4,
+      "text": "Wang, X., et al. Supporting Information for “A Simple Disinfection Device for Families in Underdeveloped Regions.” Figure S25; Tables S2–S4. ACS Publications, 2026.",
+      "url": "https://acs.figshare.com/articles/journal_contribution/A_Simple_Disinfection_Device_for_Families_in_Underdeveloped_Regions/31378634"
+    },
+    {
+      "num": 5,
+      "text": "Centers for Disease Control and Prevention. “Water Disinfection for Travelers.” CDC Yellow Book, April 23, 2025. Table 1.8.1.",
+      "url": "https://www.cdc.gov/yellow-book/hcp/preparing-international-travelers/water-disinfection-for-travelers.html"
+    },
+    {
+      "num": 6,
+      "text": "Centers for Disease Control and Prevention. “About Home Water Treatment Systems.” April 10, 2024.",
+      "url": "https://www.cdc.gov/drinking-water/about/about-home-water-treatment-systems.html"
+    },
+    {
+      "num": 7,
+      "text": "U.S. Food and Drug Administration. “Ultraviolet (UV) Radiation.” Risks of exposure to UVC radiation.",
+      "url": "https://www.fda.gov/radiation-emitting-products/tanning/ultraviolet-uv-radiation"
+    },
+    {
+      "num": 8,
+      "text": "Jeon, J., Kang, D., and Kim, S.-W. “Advances in Triboelectric Nanogenerators for Microbial Disinfection.” Micromachines 16(3), 281. February 27, 2025.",
+      "url": "https://doi.org/10.3390/mi16030281"
+    },
+    {
+      "num": 9,
+      "text": "Kim, Y.-J., et al. “Walking-induced electrostatic charges enable in situ electroporated disinfection in portable water bottles.” Nature Water 2, 360–369. 2024.",
+      "url": "https://doi.org/10.1038/s44221-024-00226-5"
+    },
+    {
+      "num": 10,
+      "text": "Huo, Z.-Y., Kim, Y.-J., and Kim, S.-W. “Contact electrification-induced personal sanitation.” Nature Reviews Clean Technology 1, 673–674. August 19, 2025.",
+      "url": "https://doi.org/10.1038/s44359-025-00100-x"
+    },
+    {
+      "num": 11,
+      "text": "CityUHK Scholars. Publication record for Wang et al. (2026): authors, affiliations and funding acknowledgements.",
+      "url": "https://scholars.cityu.edu.hk/en/publications/a-simple-disinfection-device-for-families-in-underdeveloped-regio/"
+    }
+  ],
+  "updated": "September 6, 2026",
+  "correctionNote": "Updated September 6, 2026: corrected the earlier claim about exceeding WHO standards, separated water supply from disinfection, and clarified laboratory conditions and estimated costs. Source attribution and photo captions have also been revised."
+}
