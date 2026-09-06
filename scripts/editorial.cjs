@@ -27,12 +27,11 @@ function story(article, assets, featured = false) {
   const heading = featured ? 'h1' : 'h3';
   return `<article class="${featured ? 'md-lead-story' : 'md-story'}" data-mj-story>
     ${gallery(article, assets, featured)}
-    <div class="md-story-copy"><p class="md-kicker">${e(article.format || article.tag)} <span>·</span> ${e(article.region || article.tag)}</p>
+    <div class="md-story-copy">
     <${heading}><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></${heading}>
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
     <p class="md-description">${e(article.cardSummary || article.excerpt || article.subtitle)}</p>
     <p class="md-meta">${e(byline(article))}<br><time datetime="${isoDate(article)}">${e(article.date)}</time><span> · ${e(article.readTime)} read</span></p>
-    <a class="md-read" href="${articlePath(article)}">${article.format === 'Essay' ? 'Read the essay' : 'Read the article'} <span aria-hidden="true">→</span></a>
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
 }
 function renderHome(template, articles, config, assets, snippets) {
