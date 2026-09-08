@@ -6,6 +6,10 @@
   "functions": {
     "api/newsletter.js": {
       "maxDuration": 30
+    },
+    "api/views.js": {
+      "maxDuration": 10,
+      "includeFiles": "content/articles/*.json"
     }
   },
   "trailingSlash": true,

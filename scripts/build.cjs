@@ -77,6 +77,7 @@ ${snippets.footer}
 </div>
 <script src="/site.js" defer></script>
 <script src="/newsletter-client.js" defer></script>
+${article ? '<script src="/article-views.js" defer></script>' : ''}
 </body>
 </html>
 `;

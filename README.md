@@ -14,7 +14,7 @@ Run `npm run build` to generate the deployable `dist/` directory. Every article 
 
 ## Adding an article
 
-Create a JSON file in `content/articles/` using an existing article as a guide. The `id` is the permanent URL slug. Use `title` for the full search/share title, `displayTitle` for the short main headline, `deck` for its subtitle, and `subtitle` for the article introduction. `cardSummary`, `format`, `region` and `tag` describe the article in listings. Keep image captions and credits with the image content blocks and register image files in `content/assets.json`.
+Create a JSON file in `content/articles/` using an existing article as a guide. The `id` is the permanent URL slug. Use `title` for the full search/share title, `displayTitle` for the short main headline, `deck` for its subtitle, and `subtitle` for the introduction shared by the homepage, listings and article. `format`, `region` and `tag` describe the article in listings. Keep image captions and credits with the image content blocks and register image files in `content/assets.json`.
 
 The build automatically places published article files into:
 
@@ -32,3 +32,11 @@ Do not edit generated files in `dist/`. Edit the appropriate content file, updat
 Vercel also deploys `api/newsletter.js`. Private credentials remain in Vercel environment variables. Keep `NEWSLETTER_ENABLED=false` until the Mailchimp Event API flow is configured and ready for a real delivery test. With the flag disabled, the existing hosted Mailchimp form remains available on every page.
 
 See `EMAIL-SETUP.md` for the welcome-email setup and `RSS-SETUP.md` for article notifications. The code tests use mock Mailchimp responses and do not send email.
+
+## Article page views
+
+`api/views.js` records article page loads in an external Redis database. Totals
+are independent of the generated site and are not reset by builds or deploys.
+The small byline counter appears after storage is connected; missing credentials
+or provider errors leave it hidden. See `VIEWS-SETUP.md` for connection,
+historical imports and the exact counting method.
