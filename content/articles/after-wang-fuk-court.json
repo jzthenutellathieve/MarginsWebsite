@@ -2,8 +2,8 @@
   "id": "after-wang-fuk-court",
   "title": "After Wang Fuk Court",
   "displayTitle": "After Wang Fuk Court",
-  "deck": "Finding a place to live after the fire",
-  "subtitle": "What it takes to settle again after Hong Kong’s Wang Fuk Court fire.",
+  "deck": "Finding a place to live after the Wang Fuk Court fire",
+  "subtitle": "What it takes to settle again after Hong Kong’s deadliest fire in over 70 years.",
   "tag": "Displacement",
   "region": "Hong Kong",
   "format": "Analysis",
@@ -21,10 +21,6 @@
       "caption": "People watch the fire at Wang Fuk Court in Tai Po, Hong Kong, on November 26, 2025.",
       "source": "Derek Yung / iStock · Editorial use",
       "eager": true
-    },
-    {
-      "type": "paragraph",
-      "text": "Months after the fire at Wang Fuk Court, I contacted the Hong Kong Red Cross. I wanted to understand what had happened to people who had lost relatives or been forced from their homes: whether they could access financial assistance, find suitable accommodation and begin to return to everyday life. I set out these questions in an interview outline and followed up by email. This article draws on published accounts from the Red Cross and other organisations, alongside government records."
     },
     {
       "type": "paragraph",
@@ -163,6 +159,13 @@
       "num": 5,
       "text": "Shi Dehua. Volunteer account of relief work after the Tai Po fire. Tzu Chi Jing Si website, December 12, 2025.",
       "url": "https://www.jsnews.org.tw/writing/item/13744.html"
+    },
+    {
+      "num": 6,
+      "text": "Reuters. Police arrest construction firm bosses over Hong Kong fire. Updated November 28, 2025. Historical comparison: Hong Kong’s deadliest fire since 1948.",
+      "url": "https://www.reuters.com/world/china/hong-kong-tower-fire-toll-rises-44-police-arrest-three-2025-11-26/"
     }
-  ]
+  ],
+  "reportingNote": "Months after the fire at Wang Fuk Court, I contacted the Hong Kong Red Cross to find out how people who had lost relatives or been forced from their homes were doing: whether they could access financial assistance, find suitable accommodation and begin to return to everyday life. This article draws on published personal accounts made available by the Red Cross and other organisations, alongside government records.",
+  "acknowledgements": "With thanks to the Hong Kong Red Cross for making these personal accounts publicly available."
 }

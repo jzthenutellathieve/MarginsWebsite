@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { escapeText, pages, articlePath } = require('./site-utils.cjs');
 const { renderArticle } = require('./render-article.cjs');
+const { estimateReadingTime } = require('./reading-time.cjs');
 const { renderHome, collectionPages, searchIndex, readNext } = require('./editorial.cjs');
 const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
@@ -19,6 +20,7 @@ const seen = new Set();
 for (const article of articles) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(article.id) || seen.has(article.id)) throw new Error('Invalid or duplicate article id');
   seen.add(article.id);
+  article.readTime = estimateReadingTime(renderArticle(article, snippets, assets), article.reportingNote).label;
   legacyRoutes[`reporting/${article.id}`] = articlePath(article);
 }
 function hydrateImages(html) {
