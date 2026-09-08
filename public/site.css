@@ -51,6 +51,7 @@ h1,h2,h3,h4 { font-family:var(--md-serif); font-weight:400; }
 .md-title-link:hover { text-decoration:none; }
 .md-deck { font:24px/1.3 var(--md-serif); text-wrap:pretty; }
 .md-description { font-size:14px; line-height:1.75; margin-top:18px; color:#525856; }
+.md-story-note { font-size:12px; line-height:1.75; margin-top:14px; color:var(--md-muted); }
 .md-meta { font-size:11px; line-height:1.8; color:var(--md-muted); margin-top:20px; }
 .md-text-link { display:inline-flex; align-items:center; gap:10px; padding:10px 0; margin-top:12px; font-size:12px; text-decoration:none; border-bottom:1px solid var(--md-line); }
 .md-text-link span { transition:transform .2s; }

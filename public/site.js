@@ -148,6 +148,7 @@
     copy.append(title);
     if (article.deck) copy.append(element('p', 'md-list-deck', article.deck));
     copy.append(element('p', 'md-list-summary', article.summary));
+    if (article.cardNote) copy.append(element('p', 'md-story-note', article.cardNote));
     const meta = element('p', 'md-meta', article.author + ' · ');
     const date = element('time', '', article.date);
     date.dateTime = article.isoDate;
@@ -180,7 +181,7 @@
       }
       const terms = query.toLocaleLowerCase().split(/\s+/);
       const matches = index.articles.filter(article => {
-        const text = [article.fullTitle, article.title, article.deck, article.summary, article.tag, article.region, article.author].join(' ').toLocaleLowerCase();
+        const text = [article.fullTitle, article.title, article.deck, article.summary, article.cardNote, article.tag, article.region, article.author].join(' ').toLocaleLowerCase();
         return (!topic || article.tag === topic) && terms.every(term => text.includes(term));
       });
       const total = Math.max(1, Math.ceil(matches.length / index.pageSize));

@@ -30,7 +30,8 @@ function story(article, assets, featured = false) {
     <div class="md-story-copy">
     <${heading}><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></${heading}>
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
-    <p class="md-description">${e(article.cardSummary || article.excerpt || article.subtitle)}</p>
+    <p class="md-description">${e(article.subtitle)}</p>
+    ${article.cardNote ? `<p class="md-story-note">${e(article.cardNote)}</p>` : ''}
     <p class="md-meta">${e(byline(article))}<br><time datetime="${isoDate(article)}">${e(article.date)}</time><span> · ${e(article.readTime)} read</span></p>
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
 }
@@ -48,7 +49,8 @@ function listRow(article, assets) {
     <div class="md-list-copy"><p class="md-kicker">${e(article.format || article.tag)} · ${e(article.region || article.tag)}</p>
     <h2><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h2>
     ${article.deck ? `<p class="md-list-deck">${e(article.deck)}</p>` : ''}
-    <p class="md-list-summary">${e(article.cardSummary || article.excerpt || article.subtitle)}</p>
+    <p class="md-list-summary">${e(article.subtitle)}</p>
+    ${article.cardNote ? `<p class="md-story-note">${e(article.cardNote)}</p>` : ''}
     <p class="md-meta">${e(byline(article))} · <time datetime="${isoDate(article)}">${e(article.date)}</time> · ${e(article.readTime)} read</p></div>
     <a class="md-list-arrow" href="${articlePath(article)}" aria-label="Read ${e(shortTitle(article))}">↗</a></article>`;
 }
@@ -102,7 +104,7 @@ function collectionPages(articles, templates, assets, pageSize = 6) {
   return results;
 }
 function searchIndex(articles, assets, pageSize) {
-  return {pageSize, articles:sortArticles(articles).map(a => ({id:a.id, url:articlePath(a), title:shortTitle(a), fullTitle:a.title, deck:a.deck || '', summary:a.cardSummary || a.excerpt || a.subtitle, tag:a.tag, format:a.format || a.tag, region:a.region || a.tag, author:byline(a), date:a.date, isoDate:isoDate(a), readTime:a.readTime, photo:photoBlocks(a)[0] ? {src:assets[photoBlocks(a)[0].src].src, alt:photoBlocks(a)[0].alt} : null}))};
+  return {pageSize, articles:sortArticles(articles).map(a => ({id:a.id, url:articlePath(a), title:shortTitle(a), fullTitle:a.title, deck:a.deck || '', summary:a.subtitle, cardNote:a.cardNote || '', tag:a.tag, format:a.format || a.tag, region:a.region || a.tag, author:byline(a), date:a.date, isoDate:isoDate(a), readTime:a.readTime, photo:photoBlocks(a)[0] ? {src:assets[photoBlocks(a)[0].src].src, alt:photoBlocks(a)[0].alt} : null}))};
 }
 function readNext(article, articles, assets) {
   const others = sortArticles(articles).filter(a => a.id !== article.id).slice(0,2);
