@@ -142,7 +142,6 @@
       item.append(photo);
     }
     const copy = element('div', 'md-list-copy');
-    copy.append(element('p', 'md-kicker', `${article.format} · ${article.region}`));
     const title = element('h2');
     title.append(link('md-title-link', article.title, article.url));
     copy.append(title);

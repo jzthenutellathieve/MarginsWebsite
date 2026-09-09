@@ -49,7 +49,7 @@ function listRow(article, assets) {
   const photo = photoBlocks(article)[0];
   return `<article class="md-list-story" data-mj-story>
     ${photo ? `<a class="md-list-photo" href="${articlePath(article)}" tabindex="-1" aria-hidden="true">${imageTag(photo, assets)}</a>` : ''}
-    <div class="md-list-copy"><p class="md-kicker">${e(article.format || article.tag)} · ${e(article.region || article.tag)}</p>
+    <div class="md-list-copy">
     <h2><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h2>
     ${article.deck ? `<p class="md-list-deck">${e(article.deck)}</p>` : ''}
     <p class="md-list-summary">${e(article.subtitle)}</p>
@@ -99,7 +99,7 @@ function collectionPages(articles, templates, assets, pageSize = 6) {
         const y = isoDate(article).slice(0, 4);
         const heading = y !== currentYear ? `<h2 class="md-archive-year">${y}</h2>` : '';
         currentYear = y;
-        return `${heading}<article class="md-archive-row"><time datetime="${isoDate(article)}">${e(article.date.replace(', ' + y, ''))}</time><div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3><p>${e(article.deck || article.subtitle)}</p></div><span class="md-kicker">${e(article.tag)}</span></article>`;
+        return `${heading}<article class="md-archive-row"><time datetime="${isoDate(article)}">${e(article.date.replace(', ' + y, ''))}</time><div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3><p>${e(article.deck || article.subtitle)}</p></div></article>`;
       }).join('');
       results.push({pathname: pagePath(base, page), title: `${year ? year + ' — ' : ''}Article archive${page > 1 ? ' — Page ' + page : ''} | The Margins`, active:'archive', body:fill(templates.archive, {years:navigation, summary:rangeText(page, archiveSize, matches.length), articles:rows, pagination:pagination(base,page,total,'Archive pages')})});
     }
