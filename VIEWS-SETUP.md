@@ -33,6 +33,9 @@ database or changing the permanent article ID changes which total is available.
 - A network retry uses the same page-load ID and does not add a second view.
 - Reading totals with GET, visiting the homepage or listings, and preview
   deployments do not increment production totals.
+- Homepage story cards show the same stored totals using GET requests. Returning
+  to the homepage through browser history refreshes those totals without adding
+  article views.
 - Known crawler, preview and headless user agents are filtered on a best-effort
   basis. A public counter cannot authenticate every visitor as a human.
 - This is **page views**, including repeat visitors, not unique readers, reading

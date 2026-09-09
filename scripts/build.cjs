@@ -78,6 +78,7 @@ ${snippets.footer}
 <script src="/site.js" defer></script>
 <script src="/newsletter-client.js" defer></script>
 ${article ? '<script src="/article-views.js" defer></script>' : ''}
+${body.includes('data-article-view-summary=') ? '<script src="/view-summaries.js" defer></script>' : ''}
 </body>
 </html>
 `;

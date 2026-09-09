@@ -34,7 +34,7 @@ function story(article, assets, featured = false) {
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
     <p class="md-description">${e(article.subtitle)}</p>
     ${article.homeNoteTitle ? `<aside class="md-initiative-note" aria-label="About this project"><p class="md-initiative-title">${e(article.homeNoteTitle)}</p><p>${e(article.homeNoteText)}</p></aside>` : article.cardNote ? `<p class="md-story-note">${e(article.cardNote)}</p>` : ''}
-    <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time><span> · ${e(article.readTime)} read</span></p>
+    <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time><span> · ${e(article.readTime)} read</span><span data-article-view-summary="${e(article.id)}" hidden></span></p>
     ${article.writtenDate && article.draftHistoryNote ? `<p class="md-meta">${e(article.draftHistoryNote)}</p>` : ''}
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
 }
