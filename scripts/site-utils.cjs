@@ -3,6 +3,7 @@ const escapeText = value => String(value == null ? '' : value).replace(/[&<>"']/
 const pages = {
   home: { path: '/', title: 'The Margins — A Journal on Displacement' },
   reporting: { path: '/articles/', title: 'Articles | The Margins' },
+  'field-notes': { path: '/field-notes/', title: 'Field Notes | The Margins' },
   solutions: { path: '/projects/', title: 'Projects | The Margins' },
   water: { path: '/projects/water/', title: 'Water treatment without grid electricity | The Margins', parent: 'solutions' },
   housing: { path: '/projects/housing/', title: 'Housing Navigation | The Margins', parent: 'solutions' },

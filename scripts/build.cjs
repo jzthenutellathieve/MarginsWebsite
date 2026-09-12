@@ -13,7 +13,7 @@ const articles = fs.readdirSync(path.join(root, 'content/articles')).filter(name
   .map(name => JSON.parse(read(`content/articles/${name}`)));
 const snippets = Object.fromEntries(['header', 'footer', 'newsletter', 'collaboration', 'device-figure', 'device-video']
   .map(name => [name, read(`templates/${name}.html`)]));
-const description = 'An independent journal on displacement, with essays by Jerry Zou and notes from housing work and water-treatment research.';
+const description = 'Jerry Zou’s ongoing journal on displacement and the places people call home, with articles, projects and a new space for field notes.';
 const legacyRoutes = Object.fromEntries(Object.entries(pages).map(([name, page]) => [name, page.path]));
 legacyRoutes[''] = '/';
 const seen = new Set();

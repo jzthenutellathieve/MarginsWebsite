@@ -5,12 +5,16 @@ A static journal with independent article and project pages, deployed to the exi
 ## Content and pages
 
 - `content/articles/`: one JSON file per article, including its text, references, dates and image descriptions.
-- `content/pages/`: homepage, article index, archive, about page and project pages.
+- `content/pages/`: homepage, article index, archive, Field Notes, about page and project pages.
 - `templates/`: shared navigation, footer, newsletter form and water-project media.
 - `public/`: shared CSS, small interaction scripts and the exact images extracted from the original site.
 - `images/`: original source images, retained unchanged.
 
 Run `npm run build` to generate the deployable `dist/` directory. Every article is a separate HTML document at `/articles/{id}/`. Links use normal browser navigation, and the full text is readable without JavaScript. Old `#/reporting/{id}` bookmarks redirect to the matching article.
+
+## Journal sections
+
+The homepage opens with a short introduction to Jerry's ongoing journal. Articles, Field Notes and Projects share the existing navigation and visual design. `/field-notes/` introduces the planned section, with no published notes yet; the homepage's Field Notes row makes that status explicit. When the first real note is ready, replace the introductory state with the dated note and its credited photographs, and update the homepage row. Do not turn example topics or planned visits into published entries.
 
 ## Adding an article
 
