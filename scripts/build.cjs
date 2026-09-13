@@ -9,6 +9,7 @@ const out = path.join(root, 'dist');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
 const config = JSON.parse(read('content/site.json'));
 const assets = JSON.parse(read('content/assets.json'));
+const imageLayouts = JSON.parse(read('content/image-layouts.json'));
 const articles = fs.readdirSync(path.join(root, 'content/articles')).filter(name => name.endsWith('.json'))
   .map(name => JSON.parse(read(`content/articles/${name}`)));
 const snippets = Object.fromEntries(['header', 'footer', 'newsletter', 'collaboration', 'device-figure', 'device-video']
@@ -20,6 +21,25 @@ const seen = new Set();
 for (const article of articles) {
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(article.id) || seen.has(article.id)) throw new Error('Invalid or duplicate article id');
   seen.add(article.id);
+  const layout = imageLayouts[article.id];
+  if (layout) {
+    const photos = new Map(article.content.filter(block => block.type === 'image').map(photo => [photo.src, photo]));
+    const paragraphTotal = article.content.filter(block => block.type === 'paragraph').length;
+    if (layout.length !== photos.size || new Set(layout.map(item => item.src)).size !== photos.size ||
+        layout.some((item, i) => !photos.has(item.src) || !Number.isInteger(item.afterParagraphs) ||
+          item.afterParagraphs < 0 || item.afterParagraphs > paragraphTotal ||
+          (i > 0 && item.afterParagraphs < layout[i - 1].afterParagraphs))) throw new Error('Invalid image layout for '+article.id);
+    const imagesAt = count => layout.filter(item => item.afterParagraphs === count)
+      .map(item => ({...photos.get(item.src), eager: item === layout[0]}));
+    let paragraphs = 0;
+    const content = imagesAt(0);
+    for (const block of article.content.filter(block => block.type !== 'image')) {
+      content.push(block);
+      if (block.type === 'paragraph') content.push(...imagesAt(++paragraphs));
+    }
+    article.content = content;
+    article.thumbnail = layout[0]?.src || article.thumbnail;
+  }
   article.readTime = estimateReadingTime(renderArticle(article, snippets, assets), article.reportingNote).label;
   legacyRoutes[`reporting/${article.id}`] = articlePath(article);
 }
