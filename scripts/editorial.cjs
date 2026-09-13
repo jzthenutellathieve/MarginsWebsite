@@ -30,7 +30,7 @@ function story(article, assets, featured = false) {
   return `<article class="${featured ? 'md-lead-story' : 'md-story'}" data-mj-story>
     ${gallery(article, assets, featured)}
     <div class="md-story-copy">
-    <${heading}><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></${heading}>
+    <${heading}${featured && shortTitle(article).length > 40 ? ' class="md-long-title"' : ''}><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></${heading}>
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
     <p class="md-description">${e(article.subtitle)}</p>
     ${article.homeNoteTitle ? `<aside class="md-initiative-note" aria-label="About this project"><p class="md-initiative-title">${e(article.homeNoteTitle)}</p><p>${e(article.homeNoteText)}</p></aside>` : article.cardNote ? `<p class="md-story-note">${e(article.cardNote)}</p>` : ''}

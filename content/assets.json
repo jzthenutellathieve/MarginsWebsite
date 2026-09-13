@@ -73,5 +73,10 @@
     "src": "/assets/cws-welcoming-discussion.jpg",
     "width": 854,
     "height": 732
+  },
+  "/images/trump-executive-orders-2025-01-20.jpg": {
+    "src": "/assets/trump-executive-orders-2025-01-20.jpg",
+    "width": 4096,
+    "height": 2731
   }
 }

@@ -31,7 +31,9 @@ function renderArticle(article, snippets, assets) {
       if (block.type === 'stat') return '<p class="mj-number-note"><strong>'+escapeText(block.number)+'</strong> · '+escapeText(block.label)+sourceRefs(block)+'</p>';
       if (block.type === 'image') {
         if (!assets[block.src]) throw new Error('Unmigrated article photo: '+block.src);
-        return '<figure><img class="mj-image" loading="'+(block.eager ? 'eager' : 'lazy')+'"'+(block.eager ? ' fetchpriority="high"' : '')+' decoding="async" data-mj-asset="'+escapeText(block.src)+'" alt="'+escapeText(block.alt)+'"><figcaption>'+escapeText(block.caption)+'<br>'+escapeText(block.source)+'</figcaption></figure>'+(isDevice && block.src === '/images/iStock-499538949.jpg' ? embeddedVideo : '');
+        if (block.sourceUrl && !/^https:\/\//.test(block.sourceUrl)) throw new Error('Invalid photo source URL in '+id);
+        const photoCredit = block.sourceUrl ? '<a href="'+escapeText(block.sourceUrl)+'" target="_blank" rel="noopener noreferrer">'+escapeText(block.source)+'</a>' : escapeText(block.source);
+        return '<figure><img class="mj-image" loading="'+(block.eager ? 'eager' : 'lazy')+'"'+(block.eager ? ' fetchpriority="high"' : '')+' decoding="async" data-mj-asset="'+escapeText(block.src)+'" alt="'+escapeText(block.alt)+'"><figcaption>'+escapeText(block.caption)+'<br>'+photoCredit+'</figcaption></figure>'+(isDevice && block.src === '/images/iStock-499538949.jpg' ? embeddedVideo : '');
       }
       throw new Error('Unmigrated article block: '+block.type);
     }).join('');

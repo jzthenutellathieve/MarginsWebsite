@@ -55,6 +55,7 @@ h1,h2,h3,h4 { font-family:var(--md-serif); font-weight:400; }
 .md-lead-story { display:grid; grid-template-columns:1.47fr 1fr; gap:44px; padding-bottom:44px; }
 .md-story-copy { padding-top:9px; min-width:0; }
 .md-lead-story h1 { font-size:clamp(46px,5.2vw,72px); line-height:1.02; letter-spacing:-2.8px; text-wrap:balance; margin:0 0 20px; }
+.md-lead-story h1.md-long-title { font-size:clamp(40px,4vw,58px); line-height:1.06; letter-spacing:-1.7px; }
 .md-title-link { text-decoration:none; }
 .md-title-link:hover { text-decoration:none; }
 .md-deck { font:24px/1.3 var(--md-serif); text-wrap:pretty; }

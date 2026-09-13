@@ -1,9 +1,9 @@
 {
   "id": "after-cws-orange-county",
-  "title": "After the CWS Orange County Office Closes",
-  "displayTitle": "After the Office Closes",
-  "deck": "CWS Orange County and the families still looking for housing",
-  "subtitle": "How changes to refugee policy and funding reached a local office helping families already living in the United States.",
+  "title": "Trump’s Refugee Policies Didn’t Stop at the Border",
+  "displayTitle": "Trump’s Refugee Policies Didn’t Stop at the Border",
+  "deck": "",
+  "subtitle": "How federal policy and funding changes reached a housing search in Long Beach.",
   "tag": "Displacement",
   "region": "Southern California",
   "format": "Analysis",
@@ -77,6 +77,14 @@
       "sources": [
         7
       ]
+    },
+    {
+      "type": "image",
+      "src": "/images/trump-executive-orders-2025-01-20.jpg",
+      "alt": "President Donald Trump signing a document at the Resolute Desk in the Oval Office",
+      "caption": "President Donald Trump signs executive orders in the Oval Office on January 20, 2025.",
+      "source": "The White House, via Wikimedia Commons · Public domain",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:President_Donald_J._Trump_signs_executive_orders.jpg"
     },
     {
       "type": "paragraph",
