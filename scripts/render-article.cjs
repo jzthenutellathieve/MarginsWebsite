@@ -7,13 +7,16 @@ function renderArticle(article, snippets, assets) {
   const collaboration = isDevice ? snippets.collaboration : '';
   const diagram = isDevice ? snippets['device-figure'] : '';
   const embeddedVideo = isDevice ? snippets['device-video'] : '';
-  const projectLinks = isDevice ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/water/">Read the full water project →</a><a href="/projects/water/#laboratory-video">Watch the laboratory video ↓</a></div>' : '';
+  const projectLinks = isDevice ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/water/">Read the full water project →</a><a href="/projects/water/#laboratory-video">Watch the laboratory video ↓</a></div>' : id === 'after-cws-orange-county' ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/housing/">Read my housing navigation notes →</a></div>' : '';
     const sourceRefs = block => {
       if (!block.sources || !block.sources.length) return '';
       return ' <span class="md-source-refs">'+block.sources.map(num => {
         const citation = article.citations.find(item => item.num === num);
-        if (!citation || !/^https:\/\//.test(citation.url || '')) throw new Error('Missing source '+num+' in '+id);
-        return '<a href="'+escapeText(citation.url)+'" target="_blank" rel="noopener noreferrer" aria-label="Source '+num+'">['+num+']</a>';
+        if (!citation) throw new Error('Missing source '+num+' in '+id);
+        const external = /^https:\/\//.test(citation.url || '');
+        if (citation.url && !external) throw new Error('Invalid source URL '+num+' in '+id);
+        const href = external ? citation.url : '#source-'+num;
+        return '<a href="'+escapeText(href)+'"'+(external ? ' target="_blank" rel="noopener noreferrer"' : '')+' aria-label="Source '+num+'">['+num+']</a>';
       }).join(' ')+'</span>';
     };
     const updated = article.updated ? '<p class="md-update-date">Updated '+escapeText(article.updated)+'</p>' : '';
@@ -34,7 +37,7 @@ function renderArticle(article, snippets, assets) {
     }).join('');
     const sources = article.citations.map(citation => {
       const label = escapeText(citation.text);
-      return '<li>'+(/^https:\/\//.test(citation.url || '') ? '<a href="'+escapeText(citation.url)+'" target="_blank" rel="noopener noreferrer">'+label+'</a>' : label)+'</li>';
+      return '<li id="source-'+citation.num+'" value="'+citation.num+'">'+(/^https:\/\//.test(citation.url || '') ? '<a href="'+escapeText(citation.url)+'" target="_blank" rel="noopener noreferrer">'+label+'</a>' : label)+'</li>';
     }).join('');
     const contents = article.content.map((block, index) => block.type === 'heading' ? '<li><a href="#section-'+index+'">'+escapeText(block.text)+'</a></li>' : '').join('');
     const toolbar = '<div class="md-reader-tools">'+(contents ? '<details class="md-contents"><summary>In this article</summary><ol>'+contents+'<li><a href="#article-sources">Sources</a></li></ol></details>' : '<a href="#article-sources">Sources ↓</a>')+'<button type="button" data-mj-copy-link hidden>Copy article link ↗</button></div>';
