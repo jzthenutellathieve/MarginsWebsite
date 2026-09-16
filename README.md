@@ -14,7 +14,22 @@ Run `npm run build` to generate the deployable `dist/` directory. Every article 
 
 ## Journal sections
 
-The homepage opens with a short introduction to Jerry's ongoing journal. Articles, Field Notes and Projects share the existing navigation and visual design. `/field-notes/` introduces the planned section, with no published notes yet; the homepage's Field Notes row makes that status explicit. When the first real note is ready, replace the introductory state with the dated note and its credited photographs, and update the homepage row. Do not turn example topics or planned visits into published entries.
+The homepage opens with a short introduction to Jerry's ongoing journal. Articles,
+Field Notes and Projects share the existing navigation and visual design.
+
+Field Notes are stored as one JSON file per entry in `content/field-notes/` and
+rendered in date order at `/field-notes/`. The newest note appears on the homepage.
+Upload note photos into `public/field-notes/<entry-id>/`. A date such as `2025-08`
+records the month of the visit/photos; it is not a backdated publication claim.
+
+Members live in `content/members.json`. Add supplied portraits to `public/members/`
+and set each member's `avatar` path, or leave it null. An entry's `author` must
+match a member ID. Their byline links to the Members section of `/about/`.
+
+The public contribution button opens an email draft addressed to Jerry. Visitors
+attach photos and provide a place, month, caption and credit. This is an editorial
+submission flow, not account-based self-publishing. Submissions are reviewed and
+added to the repository before appearing on the site.
 
 ## Adding an article
 

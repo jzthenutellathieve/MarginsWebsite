@@ -2,6 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { escapeText, pages, articlePath } = require('./site-utils.cjs');
 const { renderArticle } = require('./render-article.cjs');
+const { contributeUrl, renderNotes, renderMembers, renderNotePreview } = require('./field-notes.cjs');
 const { estimateReadingTime } = require('./reading-time.cjs');
 const { renderHome, collectionPages, searchIndex, readNext } = require('./editorial.cjs');
 const root = path.resolve(__dirname, '..');
@@ -12,9 +13,12 @@ const assets = JSON.parse(read('content/assets.json'));
 const imageLayouts = JSON.parse(read('content/image-layouts.json'));
 const articles = fs.readdirSync(path.join(root, 'content/articles')).filter(name => name.endsWith('.json'))
   .map(name => JSON.parse(read(`content/articles/${name}`)));
+const members = JSON.parse(read('content/members.json'));
+const fieldNotes = fs.readdirSync(path.join(root, 'content/field-notes')).filter(name => name.endsWith('.json'))
+  .map(name => JSON.parse(read(`content/field-notes/${name}`))).sort((a, b) => b.date.localeCompare(a.date));
 const snippets = Object.fromEntries(['header', 'footer', 'newsletter', 'collaboration', 'device-figure', 'device-video']
   .map(name => [name, read(`templates/${name}.html`)]));
-const description = 'Jerry Zou’s ongoing journal on displacement and the places people call home, with articles, projects and a new space for field notes.';
+const description = 'Jerry Zou’s ongoing journal on displacement and the places people call home, with articles, projects and field notes from an open community of contributors.';
 const legacyRoutes = Object.fromEntries(Object.entries(pages).map(([name, page]) => [name, page.path]));
 legacyRoutes[''] = '/';
 const seen = new Set();
@@ -42,6 +46,12 @@ for (const article of articles) {
   }
   article.readTime = estimateReadingTime(renderArticle(article, snippets, assets), article.reportingNote).label;
   legacyRoutes[`reporting/${article.id}`] = articlePath(article);
+}
+function hydrateCommunity(html) {
+  return html.replace('{{fieldNotes}}', () => renderNotes(fieldNotes, members))
+    .replace('{{members}}', () => renderMembers(members))
+    .replace('{{fieldNotePreview}}', () => renderNotePreview(fieldNotes, members))
+    .replaceAll('{{contributeUrl}}', escapeText(contributeUrl));
 }
 function hydrateImages(html) {
   return html.replace(/<img\b[^>]*data-mj-asset="([^"]+)"[^>]*>/g, (tag, key) => {
@@ -90,7 +100,7 @@ ${metadata}
 <body id="top">
 <div id="margins-water-reviewed">
 ${header}
-<main id="main-content">${hydrateImages(body)}</main>
+<main id="main-content">${hydrateImages(hydrateCommunity(body))}</main>
 ${snippets.newsletter}
 ${snippets.footer}
 <div class="mj-announcement" aria-live="polite" data-mj-announcement></div>
@@ -114,7 +124,7 @@ for (const [name, page] of Object.entries(pages)) {
   fs.mkdirSync(directory, { recursive: true });
   fs.writeFileSync(path.join(directory, 'index.html'), documentFor({
     title: page.title, pathname: page.path,
-    body: name === 'home' ? renderHome(read('content/pages/home.html'), articles, config, assets, snippets) : read(`content/pages/${name}.html`),
+    body: name === 'home' ? renderHome(hydrateCommunity(read('content/pages/home.html')), articles, config, assets, snippets) : read(`content/pages/${name}.html`),
     active: page.parent || name
   }));
 }
