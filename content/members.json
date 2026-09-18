@@ -1,3 +1,82 @@
 [
-  {"id": "jerry-zou", "name": "Jerry Zou", "role": "Founder & editor", "bio": "Writing about displacement and the places people call home.", "avatar": null}
+  {
+    "id": "jason",
+    "name": "Jason",
+    "username": "jason",
+    "avatar": "/members/jason.webp",
+    "avatarColor": "#35584f",
+    "initial": "J",
+    "followers": null,
+    "following": null
+  },
+  {
+    "id": "jerry-zou",
+    "name": "Xingtong Jerry Zou",
+    "username": "jerryzou",
+    "avatar": "/members/jerry-zou.png",
+    "avatarColor": "#35584f",
+    "initial": "J",
+    "followers": null,
+    "following": null
+  },
+  {
+    "id": "emily-lin",
+    "name": "Emily Lin",
+    "username": "emilylin",
+    "avatar": null,
+    "avatarColor": "#80524f",
+    "initial": "E",
+    "followers": null,
+    "following": null
+  },
+  {
+    "id": "rhombus-xing",
+    "name": "Rhombus Xing",
+    "username": "rhombusxing",
+    "avatar": null,
+    "avatarColor": "#4d6682",
+    "initial": "R",
+    "followers": null,
+    "following": null
+  },
+  {
+    "id": "john-x",
+    "name": "John X",
+    "username": "johnx",
+    "avatar": null,
+    "avatarColor": "#66558a",
+    "initial": "J",
+    "followers": null,
+    "following": null
+  },
+  {
+    "id": "barry",
+    "name": "Barry",
+    "username": "barry",
+    "avatar": null,
+    "avatarColor": "#8a662f",
+    "initial": "B",
+    "followers": null,
+    "following": null
+  },
+  {
+    "id": "steven-h",
+    "name": "Steven H",
+    "username": "stevenh",
+    "avatar": null,
+    "avatarColor": "#39756c",
+    "initial": "S",
+    "followers": null,
+    "following": null
+  },
+  {
+    "id": "billie-zhu",
+    "name": "Billie Zhu",
+    "username": "billiezhu",
+    "avatar": "/members/billie-zhu.jpg",
+    "avatarColor": "#35584f",
+    "initial": "B",
+    "followers": null,
+    "following": null
+  }
 ]

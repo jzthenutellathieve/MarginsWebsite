@@ -1,12 +1,48 @@
 {
   "id": "2025-08-tuas",
   "title": "Tuas, Singapore",
-  "date": "2025-08",
+  "date": "2025-08-07",
   "author": "jerry-zou",
   "text": "A few photos from Tuas. The station sign, the long route across Singapore, and a barge out on the water. Sand piled up behind the fence.",
   "photos": [
-    {"src": "/field-notes/2025-08-tuas/waterfront.jpg", "alt": "A barge with excavators on the water, beside pale sand piles behind a wire fence in Tuas.", "caption": "Across the fence.", "width": 1702, "height": 1276},
-    {"src": "/field-notes/2025-08-tuas/station.jpg", "alt": "The green EW31 Tuas Crescent station sign beneath a yellow and steel roof.", "caption": "Tuas Crescent, EW31.", "width": 1707, "height": 1280},
-    {"src": "/field-notes/2025-08-tuas/route-map.jpg", "alt": "An East–West Line route map at Tuas Crescent, with destinations toward Pasir Ris and Changi Airport.", "caption": "A long way across the map.", "width": 1280, "height": 1707}
+    {
+      "src": "/field-notes/2025-08-tuas/waterfront.jpg",
+      "alt": "A barge with excavators on the water, beside pale sand piles behind a wire fence in Tuas.",
+      "caption": "Across the fence.",
+      "width": 1702,
+      "height": 1276
+    },
+    {
+      "src": "/field-notes/2025-08-tuas/station.jpg",
+      "alt": "The green EW31 Tuas Crescent station sign beneath a yellow and steel roof.",
+      "caption": "Tuas Crescent, EW31.",
+      "width": 1707,
+      "height": 1280
+    },
+    {
+      "src": "/field-notes/2025-08-tuas/route-map.jpg",
+      "alt": "An East\u2013West Line route map at Tuas Crescent, with destinations toward Pasir Ris and Changi Airport.",
+      "caption": "A long way across the map.",
+      "width": 1280,
+      "height": 1707
+    }
+  ],
+  "videos": [
+    {
+      "title": "Video 1",
+      "status": "pending"
+    },
+    {
+      "title": "Video 2",
+      "status": "pending"
+    },
+    {
+      "title": "Video 3",
+      "status": "pending"
+    },
+    {
+      "title": "Video 4",
+      "status": "pending"
+    }
   ]
 }
