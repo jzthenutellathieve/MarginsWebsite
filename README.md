@@ -20,7 +20,13 @@ list of other articles. The original journal typography and navigation remain.
 
 Field Notes are stored as one JSON file per entry in `content/field-notes/` and
 rendered in date order at `/field-notes/`. The newest note appears beside the featured article on the homepage.
-Upload note photos into `public/field-notes/<entry-id>/`. A date such as `2025-08`
+Entries can use an ordered `media` array of images and videos. The first item
+also appears in the homepage preview. Videos have native playback controls;
+`caption` is optional, and `title` provides an accessible label. Use H.264/AAC
+MP4s for browser compatibility. The Tuas V1 source is HDR/HEVC; `originalSrc`
+points to that original and the build generates its SDR H.264 version. Video
+posters are extracted from the clips during the build. Upload note assets into `public/field-notes/<entry-id>/`,
+or reference existing files in `/images/`. A date such as `2025-08`
 records the month of the visit/photos; it is not a backdated publication claim.
 
 Members live in `content/members.json`. Add supplied portraits to `public/members/`

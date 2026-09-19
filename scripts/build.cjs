@@ -3,6 +3,7 @@ const path = require('node:path');
 const { escapeText, pages, articlePath } = require('./site-utils.cjs');
 const { renderArticle } = require('./render-article.cjs');
 const { contributeUrl, renderNotes, renderMembers, renderNotePreview } = require('./field-notes.cjs');
+const { prepareNoteMedia } = require('./prepare-note-media.cjs');
 const { estimateReadingTime } = require('./reading-time.cjs');
 const { renderHome, collectionPages, searchIndex, readNext } = require('./editorial.cjs');
 const root = path.resolve(__dirname, '..');
@@ -117,6 +118,7 @@ fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 fs.cpSync(path.join(root, 'public'), out, { recursive: true });
 fs.cpSync(path.join(root, 'images'), path.join(out, 'images'), { recursive: true });
+prepareNoteMedia(fieldNotes, out);
 fs.copyFileSync(path.join(root, 'newsletter-client.js'), path.join(out, 'newsletter-client.js'));
 for (const [name, page] of Object.entries(pages)) {
   if (name === 'reporting' || name === 'archive') continue;
