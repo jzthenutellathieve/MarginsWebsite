@@ -1,31 +1,36 @@
 <section data-mj-page="home" aria-label="The journal">
   <div class="md-journal-intro">
-    <p>I’m Jerry Zou. I write about displacement and the places people call home, drawing on research, housing volunteer work and a water-treatment collaboration. This journal grows as I follow those questions through articles, projects and shorter field notes.</p>
-    <a href="/about/">About me and the journal <span aria-hidden="true">→</span></a>
+    <p>The Margins documents displacement and the places people call home. It began with questions about land reclamation and brings together articles, shared field notes and projects on housing and water access.</p>
+    <a href="/about/">About us <span aria-hidden="true">→</span></a>
   </div>
-  {{featured}}
-  <section class="md-recent" aria-labelledby="recent-title">
-    <div class="md-section-rule"><h2 id="recent-title">Articles</h2><a href="/articles/">All articles <span aria-hidden="true">→</span></a></div>
-    <div class="md-story-grid">{{recent}}</div>
-  </section>
-  <section class="md-field-notes" aria-labelledby="field-notes-title">
-    <div class="md-section-rule"><h2 id="field-notes-title">Field Notes</h2><a href="/field-notes/">All field notes <span aria-hidden="true">→</span></a></div>
-    {{fieldNotePreview}}
-    <p class="md-home-note-invite"><a href="/field-notes/#share-a-note">What have you noticed? Share a field note →</a></p>
-  </section>
-  <section class="md-work" aria-labelledby="work-title">
-    <div class="md-section-rule"><h2 id="work-title">Projects</h2></div>
+  <div class="md-home-top">
+    <section class="md-home-feature" aria-labelledby="featured-title">
+      <div class="md-section-rule"><h2 id="featured-title">Featured article</h2><a href="/articles/">All articles <span aria-hidden="true">→</span></a></div>
+      {{featured}}
+    </section>
+    <section class="md-field-notes" aria-labelledby="field-notes-title">
+      <div class="md-section-rule"><h2 id="field-notes-title">Field Notes</h2><a href="/field-notes/">All field notes <span aria-hidden="true">→</span></a></div>
+      {{fieldNotePreview}}
+      <p class="md-home-note-invite"><a href="/field-notes/#share-a-note">Share what you saw →</a></p>
+    </section>
+  </div>
+  <section class="md-work md-home-projects" aria-labelledby="work-title">
+    <div class="md-section-rule"><h2 id="work-title">Projects</h2><a href="/projects/">All projects <span aria-hidden="true">→</span></a></div>
     <div class="md-work-grid">
       <div class="md-lab-feature">
         <h3><a href="/projects/water/" class="md-title-link">Water treatment without grid electricity</a></h3>
         <p>A water-treatment prototype powered by a hand crank or pedal, and the questions that come before a field trial.</p>
-        {{video}}
-        {{collaboration}}
+        <a class="md-text-link" href="/projects/water/">Explore the water project <span aria-hidden="true">→</span></a>
       </div>
       <div class="md-housing-feature">
         <h3><a href="/projects/housing/" class="md-title-link">Finding a place to live</a></h3>
         <p>Rental listings are a starting point. These notes follow the calls, income requirements and practical questions involved in housing navigation.</p>
+        <a class="md-text-link" href="/projects/housing/">Explore the housing project <span aria-hidden="true">→</span></a>
       </div>
     </div>
+  </section>
+  <section class="md-recent" aria-labelledby="recent-title">
+    <div class="md-section-rule"><h2 id="recent-title">More articles</h2><a href="/articles/">All articles <span aria-hidden="true">→</span></a></div>
+    <div class="md-home-article-list">{{recent}}</div>
   </section>
 </section>

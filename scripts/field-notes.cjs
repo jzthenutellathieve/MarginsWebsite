@@ -23,7 +23,7 @@ function renderMembers(members) {
   return members.map(member => `<article class="md-member" id="member-${esc(member.id)}">
     ${member.avatar ? `<img class="md-member-avatar" src="${esc(member.avatar)}" alt="${esc(member.name)}" width="64" height="64" loading="lazy">` : `<span class="md-member-avatar md-member-initial" style="background-color:${esc(member.avatarColor || '#35584f')}" aria-hidden="true">${esc(member.initial || member.name[0].toUpperCase())}</span>`}
     <div class="md-member-info"><h3>${esc(member.name)}</h3><p class="md-member-username">@${esc(member.username || member.id)}</p>
-    <dl class="md-member-stats"><div><dt>Followers</dt><dd>${member.followers == null ? '<span aria-label="Not available">—</span>' : esc(String(member.followers))}</dd></div><div><dt>Following</dt><dd>${member.following == null ? '<span aria-label="Not available">—</span>' : esc(String(member.following))}</dd></div></dl></div>
+    <p class="md-member-role">${esc(member.role)}</p></div>
   </article>`).join('\n');
 }
 

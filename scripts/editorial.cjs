@@ -33,17 +33,25 @@ function story(article, assets, featured = false) {
     <${heading}${featured && shortTitle(article).length > 40 ? ' class="md-long-title"' : ''}><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></${heading}>
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
     <p class="md-description">${e(article.subtitle)}</p>
-    ${article.homeNoteTitle ? `<aside class="md-initiative-note" aria-label="About this project"><p class="md-initiative-title">${e(article.homeNoteTitle)}</p><p>${e(article.homeNoteText)}</p></aside>` : article.cardNote ? `<p class="md-story-note">${e(article.cardNote)}</p>` : ''}
     <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time><span> · ${e(article.readTime)} read</span><span data-article-view-summary="${e(article.id)}" hidden></span></p>
     ${article.writtenDate && article.draftHistoryNote ? `<p class="md-meta">${e(article.draftHistoryNote)}</p>` : ''}
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
+}
+function compactStory(article, assets) {
+  const photo = photoBlocks(article)[0];
+  return `<article class="md-compact-story" data-mj-story>
+    ${photo ? `<a class="md-compact-photo" href="${articlePath(article)}" tabindex="-1" aria-hidden="true">${imageTag(photo, assets)}</a>` : ''}
+    <div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3>
+    <p class="md-compact-deck">${e(article.deck || article.subtitle)}</p>
+    <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time> · ${e(article.readTime)} read</p></div>
+  </article>`;
 }
 function renderHome(template, articles, config, assets, snippets) {
   const ordered = sortArticles(articles);
   const featured = ordered.find(article => article.id === config.featuredArticle) || ordered[0];
   if (!featured) throw new Error('The journal needs a published article');
   const recent = ordered.filter(article => article.id !== featured.id).slice(0, config.recentArticleLimit || 4);
-  return fill(template, {featured: story(featured, assets, true), recent: recent.map(a => story(a, assets)).join(''), video: snippets['device-video'], collaboration: snippets.collaboration});
+  return fill(template, {featured: story(featured, assets, true), recent: recent.map(a => compactStory(a, assets)).join(''), video: snippets['device-video'], collaboration: snippets.collaboration});
 }
 function listRow(article, assets) {
   const photo = photoBlocks(article)[0];

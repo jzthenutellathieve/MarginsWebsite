@@ -6,8 +6,7 @@
     "avatar": "/members/jason.webp",
     "avatarColor": "#35584f",
     "initial": "J",
-    "followers": null,
-    "following": null
+    "role": "Field notes contributor"
   },
   {
     "id": "jerry-zou",
@@ -16,8 +15,7 @@
     "avatar": "/members/jerry-zou.png",
     "avatarColor": "#35584f",
     "initial": "J",
-    "followers": null,
-    "following": null
+    "role": "Founder & editor"
   },
   {
     "id": "emily-lin",
@@ -26,8 +24,7 @@
     "avatar": null,
     "avatarColor": "#80524f",
     "initial": "E",
-    "followers": null,
-    "following": null
+    "role": "Field notes contributor"
   },
   {
     "id": "rhombus-xing",
@@ -36,8 +33,7 @@
     "avatar": null,
     "avatarColor": "#4d6682",
     "initial": "R",
-    "followers": null,
-    "following": null
+    "role": "Field notes contributor"
   },
   {
     "id": "john-x",
@@ -46,8 +42,7 @@
     "avatar": null,
     "avatarColor": "#66558a",
     "initial": "J",
-    "followers": null,
-    "following": null
+    "role": "Field notes contributor"
   },
   {
     "id": "barry",
@@ -56,8 +51,7 @@
     "avatar": null,
     "avatarColor": "#8a662f",
     "initial": "B",
-    "followers": null,
-    "following": null
+    "role": "Field notes contributor"
   },
   {
     "id": "steven-h",
@@ -66,8 +60,7 @@
     "avatar": null,
     "avatarColor": "#39756c",
     "initial": "S",
-    "followers": null,
-    "following": null
+    "role": "Field notes contributor"
   },
   {
     "id": "billie-zhu",
@@ -76,7 +69,6 @@
     "avatar": "/members/billie-zhu.jpg",
     "avatarColor": "#35584f",
     "initial": "B",
-    "followers": null,
-    "following": null
+    "role": "Field notes contributor"
   }
 ]

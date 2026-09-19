@@ -32,7 +32,7 @@ test('a growing journal has bounded pages and every article remains reachable', 
 });
 
 test('homepage stays limited to one feature and four recent stories', () => {
-  const html = renderHome(read('content/pages/home.html'), fixtures,
+  const html = renderHome(read('content/pages/home.html').replace('{{fieldNotePreview}}', ''), fixtures,
     {featuredArticle:'fixture-1',recentArticleLimit:4}, assets,
     {'device-video':'<p>Video</p>',collaboration:'<p>Collaboration</p>'});
   assert.equal((html.match(/data-mj-story>/g) || []).length,5);

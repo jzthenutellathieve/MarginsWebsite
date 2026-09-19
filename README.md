@@ -14,17 +14,20 @@ Run `npm run build` to generate the deployable `dist/` directory. Every article 
 
 ## Journal sections
 
-The homepage opens with a short introduction to Jerry's ongoing journal. Articles,
-Field Notes and Projects share the existing navigation and visual design.
+The homepage introduces The Margins as a shared project. A featured article and
+Field Notes sit side by side, followed by concise project links and a compact
+list of other articles. The original journal typography and navigation remain.
 
 Field Notes are stored as one JSON file per entry in `content/field-notes/` and
-rendered in date order at `/field-notes/`. The newest note appears on the homepage.
+rendered in date order at `/field-notes/`. The newest note appears beside the featured article on the homepage.
 Upload note photos into `public/field-notes/<entry-id>/`. A date such as `2025-08`
 records the month of the visit/photos; it is not a backdated publication claim.
 
 Members live in `content/members.json`. Add supplied portraits to `public/members/`
 and set each member's `avatar` path, or leave it null. An entry's `author` must
-match a member ID. Their byline links to the Members section of `/about/`.
+match a member ID. Their byline links to the Contributors section of `/about/`. Each profile
+includes a role, without follower or following counts. Research mentorship
+is acknowledged separately under Special thanks.
 
 The public contribution button opens an email draft addressed to Jerry. Visitors
 attach photos and provide a place, month, caption and credit. This is an editorial
