@@ -398,6 +398,13 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
 .md-home-collaboration h4 { font:14px/1.5 Arial,sans-serif; margin-bottom:8px; }
 .md-home-collaboration p { font-size:14px; line-height:1.65; color:var(--md-muted); }
 .md-home-collaboration > a { display:inline-block; font-size:14px; margin-top:10px; }
+.md-research-heading { display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px 16px; margin-bottom:8px; }
+#margins-water-reviewed .md-research-heading > h4,
+#margins-water-reviewed .md-research-heading > .teng-hero-label { margin:0; }
+#margins-water-reviewed .md-research-marks { display:flex; align-items:center; justify-content:flex-end; gap:12px; flex:0 0 auto; margin-left:auto; line-height:0; text-decoration:none; border:0; }
+#margins-water-reviewed .md-research-marks img { display:block; height:auto; object-fit:contain; background:transparent; }
+#margins-water-reviewed .md-research-marks .md-mark-cityu { width:50px; }
+#margins-water-reviewed .md-research-marks .md-mark-first { width:134px; }
 .md-home-article-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 36px; padding-bottom:26px; }
 .md-compact-story { display:grid; grid-template-columns:112px minmax(0,1fr); gap:18px; align-items:start; padding:22px 0; border-top:1px solid var(--md-faint); }
 .md-compact-story:nth-child(-n+2) { border-top:0; padding-top:0; }
