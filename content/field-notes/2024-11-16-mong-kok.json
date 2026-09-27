@@ -1,0 +1,37 @@
+{
+  "id": "2024-11-16-mong-kok",
+  "title": "Sunday in Mong Kok",
+  "date": "2024-11-16",
+  "author": "mikkl-yiu",
+  "text": "Filipino domestic workers sharing food, talking and resting along the footbridges in Mong Kok, Hong Kong.",
+  "credit": "",
+  "media": [
+    {
+      "type": "image",
+      "src": "/field-notes/2024-11-16-mong-kok/01.jpg",
+      "alt": "People sitting on mats and sharing food along a covered footbridge in Mong Kok, Hong Kong.",
+      "fit": "contain",
+      "width": 1179,
+      "height": 1549,
+      "caption": "Photographed on Sunday, May 26, 2024."
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2024-11-16-mong-kok/02.jpg",
+      "alt": "People walking through the middle of a covered footbridge, with groups seated along both sides in Mong Kok.",
+      "fit": "contain",
+      "width": 1179,
+      "height": 879
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2024-11-16-mong-kok/03.jpg",
+      "alt": "People resting on cardboard and sitting beside bags along a covered walkway in Mong Kok.",
+      "fit": "contain",
+      "width": 1179,
+      "height": 1544
+    }
+  ],
+  "dateLabel": "Uploaded",
+  "photographedAt": "2024-05-26"
+}

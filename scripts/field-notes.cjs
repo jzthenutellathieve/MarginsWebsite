@@ -22,7 +22,7 @@ function renderNotes(notes, members) {
     const author = members.find(member => member.id === note.author);
     if (!author) throw new Error('Unknown field note author: ' + note.author);
     return `<article class="md-note-entry" id="${esc(note.id)}" data-note-id="${esc(note.id)}" data-note-date="${esc(note.date)}" aria-labelledby="${esc(note.id)}-title">
-      <header><p class="md-note-meta"><time datetime="${esc(note.date)}">${esc(noteDate(note.date))}</time> · <a href="/about/#member-${esc(author.id)}">${esc(author.name)}</a></p>
+      <header><p class="md-note-meta">${note.dateLabel ? esc(note.dateLabel) + ' ' : ''}<time datetime="${esc(note.date)}">${esc(noteDate(note.date))}</time> · <a href="/about/#member-${esc(author.id)}">${esc(author.name)}</a></p>
       <h2 id="${esc(note.id)}-title"><a href="#${esc(note.id)}">${esc(note.title)}</a></h2></header>
       ${note.text ? `<p class="md-note-text">${esc(note.text)}</p>` : ''}
       <div class="md-note-photos" role="region" aria-label="Photos and videos from this field note">${noteMedia(note).map((item, index) => `<figure style="--note-ratio:${mediaRatio(item)}">${item.type === 'video' ? videoPlayer(item) : `<a href="${esc(item.src)}" aria-label="View full image: ${esc(item.alt)}"><img${item.fit === 'contain' ? ' class="md-note-image-contain"' : ''} src="${esc(item.src)}" alt="${esc(item.alt)}" width="${item.width}" height="${item.height}" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}></a>`}${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}</div>
@@ -48,7 +48,7 @@ function renderNotePreview(notes, members) {
   const href = `/field-notes/#${esc(note.id)}`;
   return `<div class="md-note-preview">
     ${first.type === 'video' ? videoPlayer(first) : `<a href="${href}" aria-label="View ${esc(note.title)}"><img${first.fit === 'contain' ? ' class="md-note-image-contain"' : ''} src="${esc(first.src)}" alt="${esc(first.alt)}" width="${first.width}" height="${first.height}" loading="lazy"></a>`}
-    <div><p class="md-note-meta">${esc(noteDate(note.date))} · ${esc(author.name)}</p><h3><a href="${href}">${esc(note.title)}</a></h3><p>${esc(note.text)}</p><a class="md-note-preview-link" href="${href}">View the note →</a></div>
+    <div><p class="md-note-meta">${note.dateLabel ? esc(note.dateLabel) + ' ' : ''}${esc(noteDate(note.date))} · ${esc(author.name)}</p><h3><a href="${href}">${esc(note.title)}</a></h3><p>${esc(note.text)}</p><a class="md-note-preview-link" href="${href}">View the note →</a></div>
   </div>`;
 }
 

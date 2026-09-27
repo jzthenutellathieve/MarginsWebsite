@@ -1,0 +1,21 @@
+{
+  "id": "la-wildfire-steven-h",
+  "title": "Los Angeles wildfires",
+  "date": "2025-01-11",
+  "author": "steven-h",
+  "text": "",
+  "credit": "",
+  "media": [
+    {
+      "type": "image",
+      "src": "/field-notes/la-wildfire-steven-h/01.jpg",
+      "alt": "Flames and orange smoke rising behind rooftops and palm trees in Los Angeles at night.",
+      "fit": "contain",
+      "width": 1179,
+      "height": 1482,
+      "caption": "Flames and smoke above the rooftops at night."
+    }
+  ],
+  "photographedAt": "2025-01-11",
+  "dateLabel": "Photographed"
+}

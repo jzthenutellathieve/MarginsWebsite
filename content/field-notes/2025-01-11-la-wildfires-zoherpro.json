@@ -1,0 +1,30 @@
+{
+  "id": "la-wildfires-zoherpro",
+  "title": "Fire beyond the city lights",
+  "date": "2025-01-11",
+  "author": "zoherpro",
+  "text": "",
+  "credit": "",
+  "media": [
+    {
+      "type": "image",
+      "src": "/field-notes/la-wildfires-zoherpro/01.jpg",
+      "alt": "An orange wildfire glow on a distant ridge beyond the illuminated buildings of Los Angeles.",
+      "fit": "contain",
+      "width": 1179,
+      "height": 1497,
+      "caption": "Looking across Los Angeles toward the fire."
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/la-wildfires-zoherpro/02.jpg",
+      "alt": "A second view of flames along the distant ridge above the city lights in Los Angeles.",
+      "fit": "contain",
+      "width": 1179,
+      "height": 1349,
+      "caption": "The glow along the ridge."
+    }
+  ],
+  "photographedAt": "2025-01-11",
+  "dateLabel": "Photographed"
+}

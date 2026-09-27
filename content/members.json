@@ -97,5 +97,32 @@
     "avatarColor": "#967158",
     "initial": "W",
     "role": "Member"
+  },
+  {
+    "id": "mikkl-yiu",
+    "name": "mikkl_yiu",
+    "username": "mikkl_yiu",
+    "avatar": null,
+    "avatarColor": "#4d6682",
+    "initial": "M",
+    "role": "Member"
+  },
+  {
+    "id": "benjid-816",
+    "name": "benjid_816",
+    "username": "benjid_816",
+    "avatar": null,
+    "avatarColor": "#8a662f",
+    "initial": "B",
+    "role": "Member"
+  },
+  {
+    "id": "zoherpro",
+    "name": "zoherpro",
+    "username": "zoherpro",
+    "avatar": null,
+    "avatarColor": "#66558a",
+    "initial": "Z",
+    "role": "Member"
   }
 ]
