@@ -1,6 +1,7 @@
 const { escapeText: esc } = require('./site-utils.cjs');
 
-const contributeUrl = 'mailto:jerryzou2021@gmail.com?subject=' + encodeURIComponent('A field note for The Margins') + '&body=' + encodeURIComponent('Name to credit:\nPlace:\nMonth / year:\n\nWhat I noticed:\n\nPhoto credit / permission:\n\nPlease attach your photos before sending.');
+const contributeUrl = 'mailto:xingtong.themargins@gmail.com?subject=' + encodeURIComponent('A field note for The Margins') + '&body=' + encodeURIComponent('Name to credit:\nPlace:\nMonth / year:\n\nWhat I noticed:\n\nPhoto credit / permission:\n\nPlease attach your photos before sending.');
+const joinUrl = 'mailto:xingtong.themargins@gmail.com?subject=' + encodeURIComponent('Joining The Margins') + '&body=' + encodeURIComponent('Name:\n\nA little about me:\n\nWhat I would like to share:\n');
 const noteDate = date => new Date((date.length === 7 ? date + '-01' : date) + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'long', ...(date.length > 7 ? { day: 'numeric' } : {}), year: 'numeric', timeZone: 'UTC' });
 
 function noteMedia(note) {
@@ -45,4 +46,4 @@ function renderNotePreview(notes, members) {
   </div>`;
 }
 
-module.exports = { contributeUrl, renderNotes, renderMembers, renderNotePreview };
+module.exports = { contributeUrl, joinUrl, renderNotes, renderMembers, renderNotePreview };

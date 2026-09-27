@@ -20,6 +20,7 @@ These are the owner's standing preferences for new articles and edits across The
 
 ## Existing publication decisions
 
+- Use xingtong.themargins@gmail.com for every public contact, membership and Field Notes submission link. Join links open an email draft; the separate Field Notes link opens the section directly.
 - Sand Cartels is protected from edits unless the owner explicitly authorizes a change to it. Do not use it as a sample of the owner's unedited voice without confirmation.
 - Preserve each article's original publication date. Sort article lists by that date, newest first; never use writing dates or the latest edit date to reorder them. Show Published and Updated as separate concepts.
 - The owner corrected the publication date of After Wang Fuk Court to April 17, 2026, replacing September 8, 2026. Do not display a duplicate Written date. Later updates and the actual dates of cited sources remain separate.

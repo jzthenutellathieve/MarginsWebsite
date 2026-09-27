@@ -2,7 +2,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { escapeText, pages, articlePath } = require('./site-utils.cjs');
 const { renderArticle } = require('./render-article.cjs');
-const { contributeUrl, renderNotes, renderMembers, renderNotePreview } = require('./field-notes.cjs');
+const { contributeUrl, joinUrl, renderNotes, renderMembers, renderNotePreview } = require('./field-notes.cjs');
 const { prepareNoteMedia } = require('./prepare-note-media.cjs');
 const { estimateReadingTime } = require('./reading-time.cjs');
 const { renderHome, collectionPages, searchIndex, readNext } = require('./editorial.cjs');
@@ -52,7 +52,8 @@ function hydrateCommunity(html) {
   return html.replace('{{fieldNotes}}', () => renderNotes(fieldNotes, members))
     .replace('{{members}}', () => renderMembers(members))
     .replace('{{fieldNotePreview}}', () => renderNotePreview(fieldNotes, members))
-    .replaceAll('{{contributeUrl}}', escapeText(contributeUrl));
+    .replaceAll('{{contributeUrl}}', escapeText(contributeUrl))
+    .replaceAll('{{joinUrl}}', escapeText(joinUrl));
 }
 function hydrateImages(html) {
   return html.replace(/<img\b[^>]*data-mj-asset="([^"]+)"[^>]*>/g, (tag, key) => {
@@ -64,7 +65,8 @@ function hydrateImages(html) {
 }
 function documentFor({ title, pathname, body, active, summary = description, article }) {
   const canonical = config.siteUrl + pathname;
-  const header = snippets.header.replace(new RegExp(`data-mj-view="${active}"`, 'g'), '$& aria-current="page"');
+  const header = snippets.header.replace(new RegExp(`data-mj-view="${active}"`, 'g'), '$& aria-current="page"')
+    .replaceAll('{{joinUrl}}', escapeText(joinUrl));
   const metadata = article ? `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'Article', headline: article.title,
     description: summary, mainEntityOfPage: canonical,
