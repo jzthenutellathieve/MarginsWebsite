@@ -70,5 +70,32 @@
     "avatarColor": "#35584f",
     "initial": "B",
     "role": "Member"
+  },
+  {
+    "id": "zachary-lai",
+    "name": "Zachary Lai",
+    "username": "zacharylai",
+    "avatar": "/members/zachary-lai.png",
+    "avatarColor": "#42566d",
+    "initial": "Z",
+    "role": "Member"
+  },
+  {
+    "id": "pang-huaiyu",
+    "name": "pang.huaiyu",
+    "username": "pang.huaiyu",
+    "avatar": "/members/pang-huaiyu.png",
+    "avatarColor": "#9b6b78",
+    "initial": "P",
+    "role": "Member"
+  },
+  {
+    "id": "weilingluo0925",
+    "name": "weilingluo0925",
+    "username": "weilingluo0925",
+    "avatar": null,
+    "avatarColor": "#967158",
+    "initial": "W",
+    "role": "Member"
   }
 ]
