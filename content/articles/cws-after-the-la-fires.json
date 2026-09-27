@@ -1,0 +1,111 @@
+{
+  "id": "cws-after-the-la-fires",
+  "title": "CWS After the LA Fires",
+  "displayTitle": "CWS After the LA Fires",
+  "deck": "",
+  "subtitle": "How emergency supplies, temporary housing and coordinated support helped families begin their recovery.",
+  "tag": "Displacement",
+  "region": "Los Angeles",
+  "format": "Report",
+  "date": "September 26, 2026",
+  "readTime": "3 min",
+  "thumbnail": "/assets/cws-wildfire-relief-table.jpg",
+  "excerpt": "How emergency supplies, temporary housing and coordinated support helped families begin their recovery.",
+  "projectNote": "Looking back at the January 2025 fires and the recovery efforts documented in 2025.",
+  "content": [
+    {
+      "type": "image",
+      "src": "/assets/cws-wildfire-relief-table.jpg",
+      "alt": "A CWS relief table with folded blankets and branded supply bags",
+      "caption": "CWS blankets and bags at a wildfire relief station.",
+      "source": "Image source: Church World Service (CWS)",
+      "sourceUrl": "https://cwsglobal.org/blog/hope-amid-destruction-how-the-wildfire-resource-hub-supports-displaced-families/",
+      "eager": true
+    },
+    {
+      "type": "paragraph",
+      "text": "After the January 2025 Los Angeles wildfires, Church World Service helped displaced families access emergency supplies, temporary accommodation and information about available assistance. Its response connected immediate relief with services families could turn to as they worked out their next steps.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "I joined CWS and took part in the relief effort. For me, an important question is what happens after a family reaches safety: who helps them work out what to do next?"
+    },
+    {
+      "type": "paragraph",
+      "text": "CWS's emergency team worked with local offices to assemble and distribute more than 200 fire- and waterproof evacuation bags for newcomer families. The organization also directed additional staff time and resources toward temporary housing needs. For immigrants navigating the response, it provided information in their preferred languages and connections to community resources.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Those different forms of support addressed problems that could occur together. A family might need somewhere to sleep while also trying to understand which services were available. An offer of help had to be understandable and accessible before it could become useful."
+    },
+    {
+      "type": "paragraph",
+      "text": "CWS helped establish the Wildfire Resource Hub, a six-day effort involving multiple relief organizations. It brought food, supplies, financial assistance, counseling and housing support into one place. CWS contributed bags containing resources and information, translated preparedness materials, and helped coordinate the response.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The Hub also addressed the process of asking for help. In its February 4 account, CWS described a single registration system being introduced with a unique identifier for each family. The intention was to reduce repeated requests for the same information and the distress of having to recount losses to different providers.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "image",
+      "src": "/assets/cws-wildfire-resource-hub.jpg",
+      "alt": "People and service tables in a courtyard beneath a Wildfire Resource Hub banner",
+      "caption": "Assistance providers and families gather at the Wildfire Resource Hub.",
+      "source": "Image source: Church World Service (CWS)",
+      "sourceUrl": "https://cwsglobal.org/blog/hope-amid-destruction-how-the-wildfire-resource-hub-supports-displaced-families/"
+    },
+    {
+      "type": "paragraph",
+      "text": "Children's Disaster Services provided another part of the support. At the invitation of CWS and California VOAD, a local team served at the Pasadena Hub for a week. Childcare could give parents time to speak with service providers and consider their options while their children were being cared for nearby.",
+      "sources": [
+        3
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These details matter because seeking assistance takes time and attention. Parents may be answering questions, gathering information and making decisions while also caring for children. Bringing services together can reduce some of the work involved in reaching them."
+    },
+    {
+      "type": "paragraph",
+      "text": "The Hub's services included referrals for longer-term recovery and connections with local providers. CWS also coordinated with disaster-response networks, including the Los Angeles County Long Term Recovery Group. These connections offered routes to further assistance beyond the Hub itself.",
+      "sources": [
+        1,
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The next steps could differ from one household to another: arranging a temporary stay, understanding an application, or reaching a provider who could address an unresolved need. The response described by CWS made room for those differences. Families needed help they could use immediately, and a way to continue seeking support as their circumstances changed."
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "Church World Service, “Emergency Appeal: California Wildfires”, January 8, 2025; updated February 6, 2025.",
+      "url": "https://cwsglobal.org/appeals/emergency-appeal-california-wildfires/"
+    },
+    {
+      "num": 2,
+      "text": "Church World Service, “Hope Amid Destruction: How the Wildfire Resource Hub Supports Displaced Families”, February 4, 2025.",
+      "url": "https://cwsglobal.org/blog/hope-amid-destruction-how-the-wildfire-resource-hub-supports-displaced-families/"
+    },
+    {
+      "num": 3,
+      "text": "Carolyn Neher and Michael Scalzi, Church of the Brethren Newsline, “Children's Disaster Services fields large response to Los Angeles fires”, February 6, 2025.",
+      "url": "https://www.brethren.org/news/2025/cds-fields-large-fire-response/"
+    }
+  ],
+  "reportingNote": "The first-person statement of participation is based on the author's account. Details of the organizational response come from the dated reports above. The article attributes specific programs and distributions to CWS and its partners."
+}

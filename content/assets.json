@@ -78,5 +78,25 @@
     "src": "/assets/trump-executive-orders-2025-01-20.jpg",
     "width": 4096,
     "height": 2731
+  },
+  "/assets/altadena-fire-damage-marcus-jones-istock.jpg": {
+    "src": "/assets/altadena-fire-damage-marcus-jones-istock.jpg",
+    "width": 2048,
+    "height": 1150
+  },
+  "/assets/ushs-eaton-fire-assistance.webp": {
+    "src": "/assets/ushs-eaton-fire-assistance.webp",
+    "width": 1536,
+    "height": 2048
+  },
+  "/assets/cws-wildfire-relief-table.jpg": {
+    "src": "/assets/cws-wildfire-relief-table.jpg",
+    "width": 1430,
+    "height": 1073
+  },
+  "/assets/cws-wildfire-resource-hub.jpg": {
+    "src": "/assets/cws-wildfire-resource-hub.jpg",
+    "width": 1430,
+    "height": 1073
   }
 }
