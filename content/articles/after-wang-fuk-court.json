@@ -54,11 +54,11 @@
     },
     {
       "type": "paragraph",
-      "text": "Understanding the recovery process requires taking into account not only the signing of the buyout agreement but also the availability of suitable accommodation, the journeys it requires and whether daily tasks are manageable there. All these should be considered alongside progress on the buyout."
+      "text": "Suitable accommodation also depends on the journeys it requires and whether daily tasks are manageable there."
     },
     {
       "type": "paragraph",
-      "text": "According to Habitat for Humanity Hong Kong, its response has included providing household items — beds, wardrobes, tables, chairs, kettles, and rice cookers — to the affected families. The organization also describes work towards a three-year housing assistance program, with input from social workers, housing operators and residents. Although these items are basic household goods, acquiring them requires money, delivery arrangements and space in the new accommodation. The listed items show what tasks are associated with the creation of a new home.",
+      "text": "According to Habitat for Humanity Hong Kong, its response has included providing household items — beds, wardrobes, tables, chairs, kettles, and rice cookers — to the affected families. The organization also describes work towards a three-year housing assistance program, with input from social workers, housing operators and residents. Although these items are basic household goods, acquiring them requires money, delivery arrangements and space in the new accommodation.",
       "sources": [
         2
       ]
@@ -79,28 +79,14 @@
     },
     {
       "type": "paragraph",
-      "text": "Moreover, the Hong Kong Social Workers General Union raised the possibility that identity cards and tenancy agreements had been destroyed and suggested using social worker referrals or sworn declarations as alternative documentation. Though this letter describes issues encountered during aid delivery, it does not give the number of affected families or establish how particular cases were resolved.",
+      "text": "The union also raised the possibility that identity cards and tenancy agreements had been destroyed and suggested using social worker referrals or sworn declarations as alternative documentation. Though this letter describes issues encountered during aid delivery, it does not give the number of affected families or establish how particular cases were resolved.",
       "sources": [
         4
       ]
     },
     {
       "type": "paragraph",
-      "text": "It is important to verify applications in order to protect limited funds, but the requested documentation may be among the things lost in the fire. The union proposed alternative ways to verify applications so that missing documentation would not prevent people from receiving aid.",
-      "sources": [
-        4
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "In addition, a volunteer's account, published on Tzu Chi's Jing Si website on December 12, 2025, reveals another obstacle in providing aid. On the first Saturday after the fire, a distraught resident directed an outburst at volunteers. Then a team leader sat with the resident on a bench by a park, giving her time to regain her composure before helping her register.",
-      "sources": [
-        5
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "Giving people time is an important, but often underrated, element of relief work. In this story, the volunteer stayed with the distraught resident until she was calmer before continuing the registration process.",
+      "text": "A volunteer's account, published on Tzu Chi's Jing Si website on December 12, 2025, reveals another obstacle in providing aid. On the first Saturday after the fire, a distraught resident directed an outburst at volunteers. Then a team leader sat with the resident on a bench by a park, giving her time to regain her composure before helping her register.",
       "sources": [
         5
       ]
@@ -118,11 +104,11 @@
     },
     {
       "type": "paragraph",
-      "text": "Nevertheless, the limitations of these records should be considered. Charities select stories to show their work, and the limited number of published accounts cannot represent every family's experience. These stories describe particular problems that arose after the fire and cannot establish whether the same problems remain unresolved today."
+      "text": "Charities select stories to show their work, and the limited number of published accounts cannot represent every family's experience. These stories describe particular problems that arose after the fire and cannot establish whether the same problems remain unresolved today."
     },
     {
       "type": "paragraph",
-      "text": "However, despite these limitations, the stories raise questions relevant to the current recovery: can residents manage in the accommodation offered? Is it possible to verify applications when the usual documents are missing? Is there someone who can listen without placing additional demands on the person seeking help? Answers to these questions can provide more insight into how aid is provided."
+      "text": "The stories still raise questions about the current recovery: can residents manage in the accommodation offered? Is it possible to verify applications when the usual documents are missing? Is there someone who can listen without placing additional demands on the person seeking help?"
     },
     {
       "type": "paragraph",
@@ -170,5 +156,6 @@
   "cardNote": "For this independent follow-up, I contacted the Hong Kong Red Cross about the recovery and examined published personal accounts alongside government records.",
   "homeNoteTitle": "An independent initiative following my outreach to the Hong Kong Red Cross",
   "homeNoteText": "Drawing on personal accounts made available by the Hong Kong Red Cross.",
-  "writtenDate": "April 17, 2026"
+  "writtenDate": "April 17, 2026",
+  "updated": "September 27, 2026"
 }

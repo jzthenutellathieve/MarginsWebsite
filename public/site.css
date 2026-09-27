@@ -40,7 +40,7 @@ h1,h2,h3,h4 { font-family:var(--md-serif); font-weight:400; }
 .mj-nav a:hover::after,.mj-nav a[aria-current]::after { transform:scaleX(1); }
 .md-search-link { display:flex; align-items:center; gap:9px; text-decoration:none; font-size:12px; padding:12px 0 12px 16px; }
 [data-mj-page="home"] { padding-top:30px; }
-.md-journal-intro { display:flex; align-items:flex-start; justify-content:space-between; gap:32px; padding:0 0 26px; margin-bottom:30px; border-bottom:1px solid var(--md-faint); }
+.md-journal-intro { display:flex; align-items:flex-start; justify-content:space-between; gap:32px; padding:26px 0; margin-top:36px; border-top:1px solid var(--md-faint); }
 .md-journal-intro p { max-width:790px; font:17px/1.65 var(--md-serif); }
 .md-journal-intro > a { flex-shrink:0; margin-top:4px; font-size:11px; text-decoration:none; padding:4px 0; }
 .md-field-notes { margin-top:48px; }

@@ -49,7 +49,7 @@
     },
     {
       "type": "paragraph",
-      "text": "UNHCR was facing a wider funding shortage. In November 2025, it projected that it would finish the year with $3.9 billion available, about a quarter less than in 2024. Early pledges for 2026 subsequently reached about $1.5 billion, nearly 18% of projected needs, with more contributions expected. These were agency-wide figures at different points in the fundraising cycle. Tracing the money available for a particular repair would require local budget records.",
+      "text": "UNHCR was facing a wider funding shortage. In November 2025, it projected that it would finish the year with $3.9 billion available, about a quarter less than in 2024. Early pledges for 2026 subsequently reached about $1.5 billion, nearly 18% of projected needs, with more contributions expected. These agency-wide fundraising figures do not establish what was available for Musasa’s repair.",
       "sources": [
         5,
         6
@@ -89,13 +89,6 @@
     },
     {
       "type": "paragraph",
-      "text": "In 2018, The New Humanitarian, then known as IRIN, reported on an internal UN audit of UNHCR’s Uganda operations. It identified water-trucking irregularities and a $7.9 million road contract awarded to a firm without road-construction experience. UNHCR accepted the recommendations and said it had begun corrective action. The audit concerns those earlier operations; it offers no explanation on its own for Nakivale’s shortage in 2026.",
-      "sources": [
-        9
-      ]
-    },
-    {
-      "type": "paragraph",
       "text": "Publishing spending by location would help planners compare the costs of emergency deliveries and permanent provision.",
       "sources": [
         8
@@ -109,16 +102,16 @@
       "type": "paragraph",
       "text": "The Drought Resilience Impact Platform, or DRIP, offers one way to identify trouble earlier. The University of Colorado Boulder describes a system combining satellite-connected sensors, groundwater and rainfall information, and drought forecasts. The work involves the Millennium Water Alliance and Virridy, alongside local institutions. Its purpose extends beyond sending an alert: monitoring is meant to inform maintenance, water-service contracts and decisions about where support is needed.",
       "sources": [
-        10,
-        11
+        9,
+        10
       ]
     },
     {
       "type": "paragraph",
       "text": "That is useful, but a detected fault still needs someone able to act on it. A sensor cannot supply a replacement motor, arrange its delivery or fund a technician. DRIP’s partners describe financing and service arrangements alongside the technology for that reason. For a refugee settlement considering a similar approach, the questions would be practical: who receives the alert, who is responsible for the repair, and what money can that person use without waiting for another emergency appeal?",
       "sources": [
-        10,
-        11
+        9,
+        10
       ]
     },
     {
@@ -129,7 +122,7 @@
       "type": "paragraph",
       "text": "Kenya’s Shirika Plan, launched in March 2025, aims to bring refugee services into national and local systems. At its launch, UNHCR’s Filippo Grandi stressed the resources local authorities would need to serve refugees and host communities. How that ambition translates into a repair budget and a functioning local water service still has to be established at each site.",
       "sources": [
-        12
+        11
       ]
     },
     {
@@ -183,26 +176,21 @@
     },
     {
       "num": 9,
-      "text": "Parker, Ben. “Audit finds UN refugee agency critically mismanaged donor funds in Uganda.” The New Humanitarian (then IRIN), November 28, 2018.",
-      "url": "https://www.thenewhumanitarian.org/news/2018/11/28/audit-finds-un-refugee-agency-critically-mismanaged-donor-funds-uganda"
-    },
-    {
-      "num": 10,
       "text": "University of Colorado Boulder, Mortenson Center. “Ending Drought Emergencies: The Drought Resilience Impact Platform.” Programme page; no publication date displayed. Accessed September 6, 2026.",
       "url": "https://www.colorado.edu/center/mortenson/drip"
     },
     {
-      "num": 11,
+      "num": 10,
       "text": "Virridy. “Millennium Water Alliance, Virridy, and CU Boulder Partner to Drive Improved Water Security Through Climate Finance.” August 2022.",
       "url": "https://www.virridy.com/news/millennium-water-alliance"
     },
     {
-      "num": 12,
+      "num": 11,
       "text": "Grandi, Filippo. “High Commissioner’s statement at the launch of Kenya’s Shirika Plan.” UNHCR, March 28, 2025.",
       "url": "https://www.unhcr.org/us/news/speeches-and-statements/high-commissioner-s-statement-launch-kenya-s-shirika-plan"
     }
   ],
-  "updated": "September 6, 2026",
+  "updated": "September 27, 2026",
   "correctionNote": "Updated September 6, 2026: added the July water deliveries at Musasa; corrected the Jordan funding comparison and the distinction between budgets and spending; dated funding forecasts; and clarified interview attribution. Unverified repair metrics and programme-specific funding-cut claims have been removed.",
   "displayTitle": "The $27,000 Problem",
   "deck": "Musasa’s Broken Pump and the Cost of Waiting",

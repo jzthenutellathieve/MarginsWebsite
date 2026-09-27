@@ -58,6 +58,14 @@ test('publication order is newest first regardless of editing or writing dates',
   const built = collectionPages(articles, templates, assets);
   const list = built.find(p => p.pathname === '/articles/').body;
   assert.ok(list.indexOf('/articles/newer/') < list.indexOf('/articles/older/'));
+  assert.match(list, /<time datetime="2026-09-08">Published September 8, 2026<\/time>/);
+  assert.ok(!list.includes('April 17, 2025'));
+  assert.ok(!list.includes('September 26, 2026'));
+  const index = searchIndex(articles, assets);
+  assert.deepEqual(index.articles.map(a => [a.id, a.date, a.isoDate]), [
+    ['newer', 'Published September 8, 2026', '2026-09-08'],
+    ['older', 'Published October 7, 2025', '2025-10-07']
+  ]);
   assert.ok(!built.some(p => p.pathname.startsWith('/articles/page/')));
   const archive = built.find(p => p.pathname === '/archive/').body;
   assert.ok(archive.indexOf('/articles/newer/') < archive.indexOf('/articles/older/'));

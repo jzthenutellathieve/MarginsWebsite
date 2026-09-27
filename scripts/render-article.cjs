@@ -19,9 +19,10 @@ function renderArticle(article, snippets, assets) {
         return '<a href="'+escapeText(href)+'"'+(external ? ' target="_blank" rel="noopener noreferrer"' : '')+' aria-label="Source '+num+'">['+num+']</a>';
       }).join(' ')+'</span>';
     };
-    const updated = article.updated ? '<p class="md-update-date">'+escapeText(article.updateLabel || 'Updated')+' '+escapeText(article.updated)+'</p>' : '';
+    const updated = article.updated ? '<p class="md-update-date">Updated '+escapeText(article.updated)+'</p>' : '';
     const projectNote = article.projectNote ? '<p class="md-update-date">'+escapeText(article.projectNote)+'</p>' : '';
-    const draftHistoryNote = article.draftHistoryNote ? '<p class="md-update-date">'+escapeText(article.draftHistoryNote)+'</p>' : '';
+    const history = [article.writtenDate ? 'Written '+article.writtenDate : '', article.draftHistoryNote || ''].filter(Boolean).join(' · ');
+    const draftHistoryNote = history ? '<p class="md-update-date">'+escapeText(history)+'</p>' : '';
     const reportingNote = article.reportingNote ? '<div class="md-reporting-note"><p>'+escapeText(article.reportingNote)+'</p>'+(article.acknowledgements ? '<p class="md-acknowledgements">'+escapeText(article.acknowledgements)+'</p>' : '')+'</div>' : '';
     const correction = article.correctionNote ? '<p class="md-update-note">'+escapeText(article.correctionNote)+'</p>' : '';
     const blocks = article.content.map((block, index) => {

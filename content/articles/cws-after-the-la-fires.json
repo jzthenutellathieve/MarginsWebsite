@@ -23,7 +23,7 @@
     },
     {
       "type": "paragraph",
-      "text": "After the January 2025 Los Angeles wildfires, Church World Service helped displaced families access emergency supplies, temporary accommodation and information about available assistance. Its response connected immediate relief with services families could turn to as they worked out their next steps.",
+      "text": "After the January 2025 Los Angeles wildfires, Church World Service helped displaced families access emergency supplies, temporary accommodation and information about available assistance.",
       "sources": [
         1
       ]
@@ -41,10 +41,6 @@
     },
     {
       "type": "paragraph",
-      "text": "Those different forms of support addressed problems that could occur together. A family might need somewhere to sleep while also trying to understand which services were available. An offer of help had to be understandable and accessible before it could become useful."
-    },
-    {
-      "type": "paragraph",
       "text": "CWS helped establish the Wildfire Resource Hub, a six-day effort involving multiple relief organizations. It brought food, supplies, financial assistance, counseling and housing support into one place. CWS contributed bags containing resources and information, translated preparedness materials, and helped coordinate the response.",
       "sources": [
         2
@@ -52,7 +48,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The Hub also addressed the process of asking for help. In its February 4 account, CWS described a single registration system being introduced with a unique identifier for each family. The intention was to reduce repeated requests for the same information and the distress of having to recount losses to different providers.",
+      "text": "In its February 4 account, CWS described a single registration system being introduced at the Hub with a unique identifier for each family. The intention was to reduce repeated requests for the same information and the distress of having to recount losses to different providers.",
       "sources": [
         2
       ]
@@ -67,26 +63,18 @@
     },
     {
       "type": "paragraph",
-      "text": "Children's Disaster Services provided another part of the support. At the invitation of CWS and California VOAD, a local team served at the Pasadena Hub for a week. Childcare could give parents time to speak with service providers and consider their options while their children were being cared for nearby.",
+      "text": "At the invitation of CWS and California VOAD, a local Children's Disaster Services team served at the Pasadena Hub for a week. Childcare could give parents time to speak with service providers and consider their options while their children were being cared for nearby.",
       "sources": [
         3
       ]
     },
     {
       "type": "paragraph",
-      "text": "These details matter because seeking assistance takes time and attention. Parents may be answering questions, gathering information and making decisions while also caring for children. Bringing services together can reduce some of the work involved in reaching them."
-    },
-    {
-      "type": "paragraph",
-      "text": "The Hub's services included referrals for longer-term recovery and connections with local providers. CWS also coordinated with disaster-response networks, including the Los Angeles County Long Term Recovery Group. These connections offered routes to further assistance beyond the Hub itself.",
+      "text": "The Hub's services included referrals for longer-term recovery and connections with local providers. CWS also coordinated with disaster-response networks, including the Los Angeles County Long Term Recovery Group.",
       "sources": [
         1,
         2
       ]
-    },
-    {
-      "type": "paragraph",
-      "text": "The next steps could differ from one household to another: arranging a temporary stay, understanding an application, or reaching a provider who could address an unresolved need. The response described by CWS made room for those differences. Families needed help they could use immediately, and a way to continue seeking support as their circumstances changed."
     }
   ],
   "citations": [
@@ -106,6 +94,8 @@
       "url": "https://www.brethren.org/news/2025/cds-fields-large-fire-response/"
     }
   ],
-  "reportingNote": "The first-person statement of participation is based on the author's account. Details of the organizational response come from the dated reports above. The article attributes specific programs and distributions to CWS and its partners.",
-  "dateLabel": "Published"
+  "reportingNote": "Details of the wider relief response are drawn from reports published by CWS and Children's Disaster Services.",
+  "dateLabel": "Published",
+  "updated": "September 27, 2026",
+  "updateLabel": "Edited"
 }

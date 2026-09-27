@@ -6,7 +6,7 @@
     "avatar": "/members/jason.webp",
     "avatarColor": "#35584f",
     "initial": "J",
-    "role": "Field notes contributor"
+    "role": "Member"
   },
   {
     "id": "jerry-zou",
@@ -24,7 +24,7 @@
     "avatar": null,
     "avatarColor": "#80524f",
     "initial": "E",
-    "role": "Field notes contributor"
+    "role": "Member"
   },
   {
     "id": "rhombus-xing",
@@ -33,7 +33,7 @@
     "avatar": null,
     "avatarColor": "#4d6682",
     "initial": "R",
-    "role": "Field notes contributor"
+    "role": "Member"
   },
   {
     "id": "john-x",
@@ -42,7 +42,7 @@
     "avatar": null,
     "avatarColor": "#66558a",
     "initial": "J",
-    "role": "Field notes contributor"
+    "role": "Member"
   },
   {
     "id": "barry",
@@ -51,7 +51,7 @@
     "avatar": null,
     "avatarColor": "#8a662f",
     "initial": "B",
-    "role": "Field notes contributor"
+    "role": "Member"
   },
   {
     "id": "steven-h",
@@ -60,7 +60,7 @@
     "avatar": null,
     "avatarColor": "#39756c",
     "initial": "S",
-    "role": "Field notes contributor"
+    "role": "Member"
   },
   {
     "id": "billie-zhu",
@@ -69,6 +69,6 @@
     "avatar": "/members/billie-zhu.jpg",
     "avatarColor": "#35584f",
     "initial": "B",
-    "role": "Field notes contributor"
+    "role": "Member"
   }
 ]

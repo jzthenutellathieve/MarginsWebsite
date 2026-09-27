@@ -17,7 +17,7 @@
     },
     {
       "type": "paragraph",
-      "text": "TEHG-UV addresses the treatment of water a household already has. Described in ACS Nano in February 2026, the human-powered prototype uses ultraviolet light to inactivate microorganisms. A site short of water would still need a reliable supply alongside any treatment device.",
+      "text": "TEHG-UV addresses the treatment of water a household already has. Described in ACS Nano in February 2026, the human-powered prototype uses ultraviolet light to inactivate microorganisms.",
       "sources": [
         1,
         2
@@ -36,7 +36,7 @@
     },
     {
       "type": "paragraph",
-      "text": "UNHCR's 2024 WASH report describes a response operating under severe pressure. In Chad, emergency systems provided nearly 13 liters per person per day after more than 239,000 Sudanese refugees arrived. Household treatment could be relevant where the water people collect is contaminated, but it would still depend on the wells, deliveries or other sources that provide the water in the first place.",
+      "text": "In Chad, emergency systems provided nearly 13 liters per person per day after more than 239,000 Sudanese refugees arrived, according to UNHCR's 2024 WASH report. Treatment could help where that water is contaminated; shortages would still require work on wells, deliveries or other sources.",
       "sources": [
         2
       ]
@@ -95,7 +95,7 @@
     },
     {
       "type": "paragraph",
-      "text": "A separate experiment in the supporting information tested 500-milliliter samples at 80 revolutions per minute, with five replicates. E. coli, B. subtilis and MS2 bacteriophage each reached an eight-log reduction within five minutes. The findings apply to those organisms under the reported conditions.",
+      "text": "A separate experiment in the supporting information tested 500-milliliter samples at 80 revolutions per minute, with five replicates. E. coli, B. subtilis and MS2 bacteriophage each reached an eight-log reduction within five minutes.",
       "sources": [
         4
       ]
@@ -176,11 +176,11 @@
     },
     {
       "type": "heading",
-      "text": "The role of The Margins"
+      "text": "My role — Jerry Zou"
     },
     {
       "type": "paragraph",
-      "text": "The researchers developed the device and conducted the experiments. Jerry is working with the group to consider its possible use after displacement and to explain the research to humanitarian organizations. That work begins with understanding local water needs."
+      "text": "The researchers developed the device and conducted the experiments. I am working with the group to consider its possible use after displacement and to explain the research to humanitarian organizations. This work is at the stage of assessing possible uses; a field trial remains to be designed."
     },
     {
       "type": "paragraph",
@@ -191,7 +191,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The next step would be to discuss a particular water problem with researchers, water-service staff and prospective users. A feasibility study could compare the device with the options already available and establish what a trial should measure. The published results give that conversation a starting point. Whether the device fits into daily water collection and treatment is still an open question."
+      "text": "My next step is to discuss a particular water problem with researchers, water-service staff and prospective users. That discussion would help compare the device with the options already available and decide whether a trial is worth pursuing."
     }
   ],
   "citations": [
@@ -251,7 +251,7 @@
       "url": "https://scholars.cityu.edu.hk/en/publications/a-simple-disinfection-device-for-families-in-underdeveloped-regio/"
     }
   ],
-  "updated": "September 6, 2026",
+  "updated": "September 27, 2026",
   "correctionNote": "Updated September 6, 2026: corrected the earlier claim about exceeding WHO standards, separated water supply from disinfection, and clarified laboratory conditions and estimated costs. Source attribution and photo captions have also been revised.",
   "displayTitle": "Water by Hand",
   "deck": "A Human-Powered UV Device: Questions for a Field Trial",

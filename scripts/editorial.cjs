@@ -6,8 +6,8 @@ const fill = (template, values) => template.replace(/\{\{(\w+)\}\}/g, (_, key) =
 const shortTitle = article => article.displayTitle || article.title;
 const byline = article => article.id === 'tehg-uv-water-access' ? 'Xingtong Zou & Xingwei Wang' : 'Xingtong Jerry Zou';
 const isoDate = article => new Date(article.date + ' 00:00:00 UTC').toISOString().slice(0, 10);
-const displayDate = article => article.writtenDate ? 'Written ' + article.writtenDate : (article.dateLabel ? article.dateLabel + ' ' : '') + article.date;
-const displayIsoDate = article => isoDate({date:article.writtenDate || article.date});
+const displayDate = article => 'Published ' + article.date;
+const displayIsoDate = article => isoDate(article);
 const sortArticles = articles => [...articles].sort((a, b) => isoDate(b).localeCompare(isoDate(a)) || a.id.localeCompare(b.id));
 const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const photoBlocks = article => article.content.filter(block => block.type === 'image');
@@ -34,8 +34,6 @@ function story(article, assets, featured = false) {
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
     <p class="md-description">${e(article.subtitle)}</p>
     <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time><span> · ${e(article.readTime)} read</span><span data-article-view-summary="${e(article.id)}" hidden></span></p>
-    ${article.writtenDate && article.draftHistoryNote ? `<p class="md-meta">${e(article.draftHistoryNote)}</p>` : ''}
-    ${article.updated && article.updateLabel ? `<p class="md-meta">${e(article.updateLabel)} ${e(article.updated)}</p>` : ''}
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
 }
 function compactStory(article, assets) {

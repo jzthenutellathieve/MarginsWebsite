@@ -65,7 +65,7 @@
     },
     {
       "type": "paragraph",
-      "text": "A separate order that day, Executive Order 14169, directed a review and pause of foreign development assistance. The State Department then issued stop-work notices on January 24 affecting resettlement agreements, including services delivered inside the United States. On February 26, it notified resettlement organizations that their cooperative agreements would terminate the next day. The distinction matters: the admissions order restricted entry; subsequent agency funding actions reached organizations assisting people already here.",
+      "text": "A separate order that day, Executive Order 14169, directed a review and pause of foreign development assistance. The State Department then issued stop-work notices on January 24 affecting resettlement agreements, including services delivered inside the United States. On February 26, it notified resettlement organizations that their cooperative agreements would terminate the next day. The admissions order restricted entry; subsequent agency funding actions reached organizations assisting people already here.",
       "sources": [
         5,
         6
@@ -73,7 +73,7 @@
     },
     {
       "type": "paragraph",
-      "text": "This funding supported both assistance and the people delivering it. In their June 2026 amended complaint, CWS and fellow plaintiffs described reimbursement per refugee as partly covering direct aid and partly covering service costs and overhead. That structure helps explain how restricting arrivals can also reduce income supporting an agency's operations. A payment freeze creates an additional problem: an organization may have already incurred expenses that it expected the government to reimburse.",
+      "text": "This funding supported both assistance and the people delivering it. In their June 2026 amended complaint, CWS and fellow plaintiffs described reimbursement per refugee as partly covering direct aid and partly covering service costs and overhead. With reimbursement tied to arrivals, fewer arrivals can reduce income supporting an agency's operations. A payment freeze creates an additional problem: an organization may have already incurred expenses that it expected the government to reimburse.",
       "sources": [
         7
       ]
@@ -88,7 +88,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The disruption was substantial nationally. In May 2025, CWS announced plans to close 11 local offices, attributing the decision to federal policy changes and lost support. Orange County was not on that list. CWS subsequently reported that some services resumed on May 23 and that most outstanding federal funding and reimbursements had been released. The Orange County announcement in August 2026 therefore belongs to a longer sequence of cuts, partial restorations and local decisions.",
+      "text": "In May 2025, CWS announced plans to close 11 local offices, attributing the decision to federal policy changes and lost support. Orange County was not on that list. CWS subsequently reported that some services resumed on May 23 and that most outstanding federal funding and reimbursements had been released. The Orange County announcement in August 2026 therefore belongs to a longer sequence of cuts, partial restorations and local decisions.",
       "sources": [
         8,
         9
@@ -103,14 +103,14 @@
     },
     {
       "type": "paragraph",
-      "text": "The government emphasized restored funding in an August 11, 2026, filing, arguing that the domestic funding claim should be dismissed because the suspension was not expected to recur. That is the government's litigation position. It does not establish the financial condition of each office operating within the resettlement network.",
+      "text": "The government emphasized restored funding in an August 11, 2026, filing, arguing that the domestic funding claim should be dismissed because the suspension was not expected to recur. That litigation position does not establish the financial condition of each office operating within the resettlement network.",
       "sources": [
         10
       ]
     },
     {
       "type": "paragraph",
-      "text": "One plaintiff's experience shows the consequences at household level. According to the amended complaint, an Iraqi refugee living in Dallas, identified in the case by the pseudonym Ali, arrived in January 2025 with $120. A local agency helped arrange an apartment. On February 5, he received notice that Refugee Cash Assistance payments faced an indefinite delay; his case manager attributed it to the federal funding suspension. The complaint describes his fear of losing housing. It also records that he later received resettlement benefits following the court's injunction.",
+      "text": "According to the amended complaint, an Iraqi refugee living in Dallas, identified in the case by the pseudonym Ali, arrived in January 2025 with $120. A local agency helped arrange an apartment. On February 5, he received notice that Refugee Cash Assistance payments faced an indefinite delay; his case manager attributed it to the federal funding suspension. The complaint describes his fear of losing housing. It also records that he later received resettlement benefits following the court's injunction.",
       "sources": [
         7
       ]
@@ -125,7 +125,7 @@
     },
     {
       "type": "paragraph",
-      "text": "That identifies a route by which federal money supported local work, and a funding endpoint close to the office's announced closure. Neither the state listing nor the closure email identifies how much this grant contributed to the shortfall. The published end date also does not establish that the administration prematurely canceled the grant. CWS attributes the closure to the combined policy and funding environment; the available records do not reconstruct the office's budget.",
+      "text": "The program's end date was close to the office's announced closure. Neither the state listing nor the closure email identifies how much this grant contributed to the shortfall. The published end date also does not establish that the administration prematurely canceled the grant. CWS attributes the closure to the combined policy and funding environment; the available records do not reconstruct the office's budget.",
       "sources": [
         3,
         11,
@@ -134,14 +134,14 @@
     },
     {
       "type": "paragraph",
-      "text": "For clients, the effects also need to be described service by service. My understanding of the wind-down was that previously promised help, including housing searches, security deposits and assistance with benefit applications, would be completed as the existing service arrangements ended. That was an expectation about remaining commitments, not confirmation that every payment and handoff had been completed.",
+      "text": "My understanding of the wind-down was that previously promised help, including housing searches, security deposits and assistance with benefit applications, would be completed as the existing service arrangements ended. That was an expectation about remaining commitments, not confirmation that every payment and handoff had been completed.",
       "sources": [
         13
       ]
     },
     {
       "type": "paragraph",
-      "text": "CalFresh illustrates another distinction. CWS could help someone navigate an application, while Orange County's Social Services Agency administered the benefit. Closing a CWS office did not itself terminate a person's eligibility. The availability of application help and the rules governing benefits are separate parts of a client's access to assistance.",
+      "text": "CWS could help someone navigate a CalFresh application, while Orange County's Social Services Agency administered the benefit. Closing a CWS office did not itself terminate a person's eligibility.",
       "sources": [
         14,
         15
@@ -250,5 +250,7 @@
   ],
   "reportingNote": "I volunteered in housing navigation with CWS Orange County. This article follows the policy and funding changes cited in its closure announcement, drawing on my correspondence with staff and public records from government agencies, the courts and CWS.",
   "homeNoteTitle": "From my volunteer work with CWS Orange County",
-  "homeNoteText": "Drawing on correspondence with staff and public records from government agencies, the courts and CWS."
+  "homeNoteText": "Drawing on correspondence with staff and public records from government agencies, the courts and CWS.",
+  "updated": "September 27, 2026",
+  "updateLabel": "Edited"
 }
