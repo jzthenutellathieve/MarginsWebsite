@@ -16,12 +16,13 @@ function renderNotes(notes, members) {
   return notes.map(note => {
     const author = members.find(member => member.id === note.author);
     if (!author) throw new Error('Unknown field note author: ' + note.author);
-    return `<article class="md-note-entry" id="${esc(note.id)}" aria-labelledby="${esc(note.id)}-title">
+    return `<article class="md-note-entry" id="${esc(note.id)}" data-note-id="${esc(note.id)}" data-note-date="${esc(note.date)}" aria-labelledby="${esc(note.id)}-title">
       <header><p class="md-note-meta"><time datetime="${esc(note.date)}">${esc(noteDate(note.date))}</time> · <a href="/about/#member-${esc(author.id)}">${esc(author.name)}</a></p>
       <h2 id="${esc(note.id)}-title"><a href="#${esc(note.id)}">${esc(note.title)}</a></h2></header>
       ${note.text ? `<p class="md-note-text">${esc(note.text)}</p>` : ''}
       <div class="md-note-photos" tabindex="0" role="region" aria-label="Photos and videos from this field note">${noteMedia(note).map((item, index) => `<figure>${item.type === 'video' ? videoPlayer(item) : `<a href="${esc(item.src)}" aria-label="View full image: ${esc(item.alt)}"><img${item.fit === 'contain' ? ' class="md-note-image-contain"' : ''} src="${esc(item.src)}" alt="${esc(item.alt)}" width="${item.width}" height="${item.height}" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}></a>`}${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}</div>
       <p class="md-note-credit">${note.credit ? esc(note.credit) : `${noteMedia(note).some(item => item.type === 'video') ? 'Photos and videos' : 'Photographs'} by ${esc(author.name)}`}</p>
+      <div data-note-interactions hidden></div>
     </article>`;
   }).join('\n');
 }

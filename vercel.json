@@ -4,6 +4,10 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
   "functions": {
+    "api/community.js": {
+      "maxDuration": 30,
+      "includeFiles": "content/field-notes/*.json"
+    },
     "api/newsletter.js": {
       "maxDuration": 30
     },

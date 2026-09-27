@@ -97,6 +97,8 @@ function documentFor({ title, pathname, body, active, summary = description, art
 ${article && article.content.find(b => b.type === 'image') ? `<meta property="og:image" content="${config.siteUrl}${assets[article.content.find(b => b.type === 'image').src].src}">` : ''}
 <link rel="alternate" type="application/rss+xml" title="The Margins — new articles" href="/feed.xml">
 <link rel="stylesheet" href="/site.css">
+<link rel="stylesheet" href="/community.css">
+${pathname === '/account/' ? '<meta name="robots" content="noindex">' : ''}
 ${metadata}
 <script id="legacy-routes" type="application/json">${JSON.stringify(legacyRoutes)}</script>
 <script src="/legacy-routes.js"></script>
@@ -111,6 +113,7 @@ ${snippets.footer}
 </div>
 <script src="/site.js" defer></script>
 <script src="/newsletter-client.js" defer></script>
+<script src="/community.js" defer></script>
 ${article ? '<script src="/article-views.js" defer></script>' : ''}
 ${body.includes('data-article-view-summary=') ? '<script src="/view-summaries.js" defer></script>' : ''}
 </body>

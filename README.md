@@ -35,10 +35,13 @@ match a member ID. Their byline links to the Contributors section of `/about/`. 
 includes a role, without follower or following counts. Research mentorship
 is acknowledged separately under Special thanks.
 
-The public contribution button opens an email draft addressed to Jerry. Visitors
-attach photos and provide a place, month, caption and credit. This is an editorial
-submission flow, not account-based self-publishing. Submissions are reviewed and
-added to the repository before appearing on the site.
+Field Notes also supports verified email sign-in, photo submissions, comments,
+likes and recorded views. Submitted notes and comments await editorial review.
+Approved submissions are served dynamically; publishing a member's note does not
+require rebuilding the journal. Existing notes remain readable without JavaScript.
+The account service uses Supabase Auth, Postgres and private image storage; see
+`COMMUNITY-SETUP.md` before enabling it. Until that service is connected, public
+contribution links continue to open an email draft addressed to Jerry.
 
 ## Adding an article
 
@@ -47,7 +50,7 @@ Create a JSON file in `content/articles/` using an existing article as a guide. 
 The build automatically places published article files into:
 
 - The homepage: one feature selected by `featuredArticle` in `content/site.json`, plus the four most recent other stories.
-- `/articles/`: six articles per page, newest first, with automatically generated topic pages and a small metadata search index.
+- `/articles/`: all articles on one page, newest first by original publication date, with topic pages and a small metadata search index.
 - `/archive/`: twelve compact entries per page, grouped by year, with individual year pages.
 - Related reading at the end of each article, and the sitemap.
 
