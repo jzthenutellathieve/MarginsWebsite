@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
-const { collectionPages, renderHome, searchIndex } = require('../scripts/editorial.cjs');
+const { collectionPages, renderHome, searchIndex, sortArticles } = require('../scripts/editorial.cjs');
 const read = path => fs.readFileSync(path, 'utf8');
 const original = JSON.parse(read('content/articles/sand-cartels-southeast-asia.json'));
 const assets = JSON.parse(read('content/assets.json'));
@@ -31,17 +31,32 @@ test('a growing journal has bounded pages and every article remains reachable', 
   assert.ok(!water.some(p => p.body.includes('Article 0</a>')));
 });
 
-test('homepage stays limited to one feature and four recent stories', () => {
+test('homepage features both selected stories and lists every article chronologically', () => {
   const html = renderHome(read('content/pages/home.html').replace('{{fieldNotePreview}}', ''), fixtures,
-    {featuredArticle:'fixture-1',recentArticleLimit:4}, assets,
+    {featuredArticles:['fixture-24','fixture-1']}, assets,
     {'device-video':'<p>Video</p>',collaboration:'<p>Collaboration</p>'});
-  assert.equal((html.match(/data-mj-story>/g) || []).length,5);
-  assert.equal((html.match(/<h1>/g) || []).length,1);
-  assert.match(html, /Article 1<\/a><\/h1>/);
+  assert.equal((html.match(/data-mj-story>/g) || []).length,27);
+  assert.equal((html.match(/class="md-lead-story"/g) || []).length,2);
+  const titles = [...html.matchAll(/<h3><a[^>]+href="\/articles\/(fixture-\d+)\/"/g)].map(match => match[1]);
+  assert.deepEqual(titles.slice(0,2), ['fixture-1','fixture-24']);
+  assert.deepEqual(titles.slice(2), fixtures.map(article => article.id));
   assert.match(html, /data-mj-pause/);
   const index = searchIndex(fixtures,assets,6);
   assert.equal(index.articles.length,25);
   assert.equal(index.pageSize,6);
-  assert.equal(index.articles[0].id,'fixture-24');
+  assert.equal(index.articles[0].id,'fixture-0');
   assert.ok(index.articles.every(a => a.url && a.title && a.photo));
+});
+
+test('publication order is oldest first regardless of editing or writing dates', () => {
+  const articles = [
+    {...original, id:'newer', date:'September 8, 2026', writtenDate:'April 17, 2025'},
+    {...original, id:'older', date:'October 7, 2025', updated:'September 26, 2026'}
+  ];
+  assert.deepEqual(sortArticles(articles).map(a => a.id), ['older','newer']);
+  const built = collectionPages(articles, templates, assets, 1);
+  assert.match(built.find(p => p.pathname === '/articles/').body, /href="\/articles\/older\/"/);
+  assert.match(built.find(p => p.pathname === '/articles/page/2/').body, /href="\/articles\/newer\/"/);
+  const archive = built.find(p => p.pathname === '/archive/').body;
+  assert.ok(archive.indexOf('/articles/older/') < archive.indexOf('/articles/newer/'));
 });

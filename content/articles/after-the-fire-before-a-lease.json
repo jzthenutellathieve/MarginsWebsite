@@ -63,6 +63,14 @@
       ]
     },
     {
+      "type": "image",
+      "src": "/assets/altadena-palm-street-eric-thayer-2026-04-30.webp",
+      "alt": "Workers at the timber frame of a home under construction on Palm Street in Altadena",
+      "caption": "A home under construction on Palm Street in Altadena, April 30, 2026.",
+      "source": "Eric Thayer / Los Angeles Times",
+      "sourceUrl": "https://www.latimes.com/california/story/2026-05-07/nearly-40-of-la-fire-survivors-face-crisis-as-temporary-housing-funds-dry-up-survey-finds"
+    },
+    {
       "type": "paragraph",
       "text": "Those vacancies represented potential options. The number alone could not show how many households qualified, how many applied or how many moved in. Following a housing search requires keeping track of each of those steps. Otherwise, an available unit can appear to answer a need that remains unresolved for the family looking for it."
     },
@@ -117,14 +125,6 @@
     {
       "type": "paragraph",
       "text": "For renters, rebuilding also leaves an unanswered question about return. A replacement building has an address, but its construction does not by itself establish when a former tenant can move back or what that tenant will pay. Until those details are known, families have to make decisions about their lives elsewhere."
-    },
-    {
-      "type": "image",
-      "src": "/assets/altadena-palm-street-eric-thayer-2026-04-30.webp",
-      "alt": "Workers at the timber frame of a home under construction on Palm Street in Altadena",
-      "caption": "A home under construction on Palm Street in Altadena, April 30, 2026.",
-      "source": "Eric Thayer / Los Angeles Times",
-      "sourceUrl": "https://www.latimes.com/california/story/2026-05-07/nearly-40-of-la-fire-survivors-face-crisis-as-temporary-housing-funds-dry-up-survey-finds"
     },
     {
       "type": "paragraph",

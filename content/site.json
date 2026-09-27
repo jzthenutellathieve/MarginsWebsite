@@ -6,7 +6,9 @@
     "u": "8cfb5b7fc7b6c199973c6a926",
     "id": "1a86cc1618"
   },
-  "featuredArticle": "after-the-fire-before-a-lease",
-  "recentArticleLimit": 4,
-  "articlesPerPage": 6
+  "articlesPerPage": 6,
+  "featuredArticles": [
+    "after-wang-fuk-court",
+    "after-cws-orange-county"
+  ]
 }

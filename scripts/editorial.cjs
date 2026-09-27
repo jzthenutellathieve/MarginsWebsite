@@ -8,7 +8,7 @@ const byline = article => article.id === 'tehg-uv-water-access' ? 'Xingtong Zou 
 const isoDate = article => new Date(article.date + ' 00:00:00 UTC').toISOString().slice(0, 10);
 const displayDate = article => article.writtenDate ? 'Written ' + article.writtenDate : (article.dateLabel ? article.dateLabel + ' ' : '') + article.date;
 const displayIsoDate = article => isoDate({date:article.writtenDate || article.date});
-const sortArticles = articles => [...articles].sort((a, b) => isoDate(b).localeCompare(isoDate(a)) || a.id.localeCompare(b.id));
+const sortArticles = articles => [...articles].sort((a, b) => isoDate(a).localeCompare(isoDate(b)) || a.id.localeCompare(b.id));
 const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const photoBlocks = article => article.content.filter(block => block.type === 'image');
 function imageTag(photo, assets, eager = false) {
@@ -26,7 +26,7 @@ function gallery(article, assets, eager = false) {
   </div>`;
 }
 function story(article, assets, featured = false) {
-  const heading = featured ? 'h1' : 'h3';
+  const heading = 'h3';
   return `<article class="${featured ? 'md-lead-story' : 'md-story'}" data-mj-story>
     ${gallery(article, assets, featured)}
     <div class="md-story-copy">
@@ -49,10 +49,11 @@ function compactStory(article, assets) {
 }
 function renderHome(template, articles, config, assets, snippets) {
   const ordered = sortArticles(articles);
-  const featured = ordered.find(article => article.id === config.featuredArticle) || ordered[0];
-  if (!featured) throw new Error('The journal needs a published article');
-  const recent = ordered.filter(article => article.id !== featured.id).slice(0, config.recentArticleLimit || 4);
-  return fill(template, {featured: story(featured, assets, true), recent: recent.map(a => compactStory(a, assets)).join(''), video: snippets['device-video'], collaboration: snippets.collaboration});
+  const featuredIds = config.featuredArticles || [config.featuredArticle];
+  const featured = ordered.filter(article => featuredIds.includes(article.id));
+  if (!featured.length && ordered.length) featured.push(ordered[0]);
+  if (!featured.length) throw new Error('The journal needs a published article');
+  return fill(template, {featured: featured.map(a => story(a, assets, true)).join(''), recent: ordered.map(a => compactStory(a, assets)).join(''), video: snippets['device-video'], collaboration: snippets.collaboration});
 }
 function listRow(article, assets) {
   const photo = photoBlocks(article)[0];

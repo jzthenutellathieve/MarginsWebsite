@@ -3,17 +3,16 @@
     <p>The Margins documents displacement and the places people call home. It began with questions about land reclamation and brings together articles, shared field notes and projects on housing and water access.</p>
     <a href="/about/">About us <span aria-hidden="true">→</span></a>
   </div>
+  <section class="md-home-feature" aria-labelledby="featured-title">
+      <div class="md-section-rule"><h2 id="featured-title">Featured articles</h2><a href="/articles/">All articles <span aria-hidden="true">→</span></a></div>
+      <div class="md-featured-grid">{{featured}}</div>
+  </section>
   <div class="md-home-top">
-    <section class="md-home-feature" aria-labelledby="featured-title">
-      <div class="md-section-rule"><h2 id="featured-title">Featured article</h2><a href="/articles/">All articles <span aria-hidden="true">→</span></a></div>
-      {{featured}}
-    </section>
     <section class="md-field-notes" aria-labelledby="field-notes-title">
       <div class="md-section-rule"><h2 id="field-notes-title">Field Notes</h2><a href="/field-notes/">All field notes <span aria-hidden="true">→</span></a></div>
       {{fieldNotePreview}}
       <p class="md-home-note-invite"><a href="/field-notes/#share-a-note">Share what you saw →</a></p>
     </section>
-  </div>
   <section class="md-work md-home-projects" aria-labelledby="work-title">
     <div class="md-section-rule"><h2 id="work-title">Projects</h2><a href="/projects/">All projects <span aria-hidden="true">→</span></a></div>
     <div class="md-work-grid">
@@ -41,8 +40,9 @@
       </div>
     </div>
   </section>
+  </div>
   <section class="md-recent" aria-labelledby="recent-title">
-    <div class="md-section-rule"><h2 id="recent-title">More articles</h2><a href="/articles/">All articles <span aria-hidden="true">→</span></a></div>
+    <div class="md-section-rule"><h2 id="recent-title">All articles</h2><a href="/articles/">All articles <span aria-hidden="true">→</span></a></div>
     <div class="md-home-article-list">{{recent}}</div>
   </section>
 </section>
