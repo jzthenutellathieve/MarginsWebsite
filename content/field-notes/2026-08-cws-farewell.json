@@ -4,7 +4,7 @@
   "date": "2026-08-24",
   "author": "jerry-zou",
   "text": "On August 14, Justin emailed to say that CWS's Orange County office would close on September 4. After a year and a half with CWS, I am grateful to Justin, the staff, and the families who let me be part of their lives. These are a few records from that time: the closure email, a conversation at the office, and a call with Justin to go through a client interest form. Thank you for the patience, guidance, and friendships. I hope we stay in touch.",
-  "credit": "Photograph and screenshots provided by Jerry Zou. Closure email from Justin Castillo, CWS.",
+  "credit": "Photographs and screenshots provided by Jerry Zou. Closure email from Justin Castillo, CWS.",
   "media": [
     {
       "type": "image",
@@ -32,6 +32,15 @@
       "fit": "contain",
       "width": 2048,
       "height": 1111
+    },
+    {
+      "type": "image",
+      "src": "/assets/cws-family-photo.jpg",
+      "alt": "Jerry Zou standing beside a refugee father at CWS; the father's face and name tag are covered.",
+      "caption": "With a refugee father at CWS.",
+      "fit": "contain",
+      "width": 908,
+      "height": 1582
     }
   ]
 }
