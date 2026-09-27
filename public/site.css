@@ -34,7 +34,8 @@ h1,h2,h3,h4 { font-family:var(--md-serif); font-weight:400; }
 .md-wordmark { display:block; }
 .md-wordmark img { width:386px; }
 .md-original-tagline { margin-top:13px; font-family:var(--md-serif); font-style:italic; font-size:13px; color:var(--md-muted); }
-.md-subscribe-nav { justify-self:end; text-decoration:none; font-size:12px; padding:10px 0; border-bottom:1px solid var(--md-ink); }
+.md-subscribe-invite { grid-column:3; grid-row:1; justify-self:end; max-width:250px; font-size:12px; line-height:1.55; color:var(--md-muted); }
+.md-subscribe-nav { display:inline-flex; align-items:center; margin-top:5px; color:var(--md-ink); text-decoration:none; font-size:12px; padding:10px 0; border-bottom:1px solid var(--md-ink); }
 .md-subscribe-nav span { display:inline-block; margin-left:14px; transition:transform .2s; }
 .md-subscribe-nav:hover span { transform:translate(2px,-2px); }
 .md-nav-row { border-top:1px solid var(--md-ink); border-bottom:1px solid var(--md-line); display:flex; align-items:center; justify-content:space-between; }
@@ -219,7 +220,7 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
 @media(max-width:900px) {
  .md-masthead-row { grid-template-columns:minmax(0,1fr) auto; row-gap:16px; }
  .md-masthead { grid-column:1; grid-row:1; text-align:left; }
- .md-subscribe-nav { grid-column:2; grid-row:1; }
+ .md-subscribe-invite { grid-column:2; grid-row:1; max-width:230px; }
  .md-join-invite { grid-column:1 / -1; grid-row:2; max-width:none; border-top:1px solid var(--md-faint); padding-top:12px; }
  .md-join-links a { min-height:44px; }
 }
@@ -264,7 +265,7 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
  .md-join-links { justify-content:center; }
  .md-wordmark img { width:275px; margin:auto; }
  .md-original-tagline { font-size:11px; margin-top:12px; }
- .md-subscribe-nav { display:none; }
+ .md-subscribe-invite { grid-column:1; grid-row:3; justify-self:center; max-width:320px; text-align:center; }
  .mj-nav { gap:17px; }
  .mj-nav a { font-size:11px; padding:13px 0; white-space:nowrap; }
  .md-search-link { padding-left:8px; }
