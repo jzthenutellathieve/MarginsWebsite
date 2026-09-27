@@ -48,6 +48,7 @@ h1,h2,h3,h4 { font-family:var(--md-serif); font-weight:400; }
 .md-journal-intro { display:flex; align-items:flex-start; justify-content:space-between; gap:32px; padding:26px 0; margin-top:36px; border-top:1px solid var(--md-faint); }
 .md-journal-intro p { max-width:790px; font:17px/1.65 var(--md-serif); }
 .md-journal-intro-copy { max-width:790px; }
+.md-journal-intro h2 { margin-bottom:16px; font-size:28px; line-height:1.25; }
 .md-journal-intro-copy p + p { margin-top:14px; }
 .md-journal-intro > a { flex-shrink:0; margin-top:4px; font-size:11px; text-decoration:none; padding:4px 0; }
 .md-field-notes { margin-top:48px; }
