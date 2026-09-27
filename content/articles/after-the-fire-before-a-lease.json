@@ -11,7 +11,7 @@
   "readTime": "6 min",
   "thumbnail": "/assets/altadena-fire-damage-marcus-jones-istock.jpg",
   "excerpt": "For renters displaced by Los Angeles's January 2025 fires, finding somewhere to stay left another question: how long could they afford to remain?",
-  "projectNote": "Looking back at the January 2025 fires and the recovery efforts documented in 2025.",
+  "projectNote": "First published online September 26, 2026.",
   "content": [
     {
       "type": "image",
@@ -120,6 +120,14 @@
       "text": "For renters, rebuilding also leaves an unanswered question about return. A replacement building has an address, but its construction does not by itself establish when a former tenant can move back or what that tenant will pay. Until those details are known, families have to make decisions about their lives elsewhere."
     },
     {
+      "type": "image",
+      "src": "/assets/altadena-palm-street-eric-thayer-2026-04-30.webp",
+      "alt": "Workers at the timber frame of a home under construction on Palm Street in Altadena",
+      "caption": "A home under construction on Palm Street in Altadena, April 30, 2026.",
+      "source": "Eric Thayer / Los Angeles Times",
+      "sourceUrl": "https://www.latimes.com/california/story/2026-05-07/nearly-40-of-la-fire-survivors-face-crisis-as-temporary-housing-funds-dry-up-survey-finds"
+    },
+    {
       "type": "paragraph",
       "text": "Chevondolyn's account brings the question back to the arrangement behind an address. Living with family had helped her manage an unaffordable rental market before the fire. Understanding her recovery means considering that earlier housing difficulty alongside the losses described after the fire. The same attention should follow other displaced households beyond a temporary booking or an approved payment. Once the assistance runs out, can they still afford to stay?"
     }
@@ -161,5 +169,7 @@
       "url": "https://pasadenacf.org/news/door-of-hope-expands-housing-program-with-pcf-eaton-fire-funding/"
     }
   ],
-  "reportingNote": "The sources were first published between January and August 2025. The two USHS pages show later updates dated October 21, 2025; their current wording has not been checked against a summer 2025 archived version. Chevondolyn's experience comes from USHS's published account, not an interview conducted for The Margins. The first-person housing-search material is based on the author's previously described work. Source dates are not this article's publication date."
+  "reportingNote": "The sources were first published between January and August 2025. The two USHS pages show later updates dated October 21, 2025; their current wording has not been checked against a summer 2025 archived version. Chevondolyn's experience comes from USHS's published account, not an interview conducted for The Margins. The first-person housing-search material is based on the author's previously described work. Source dates are not this article's publication date.",
+  "writtenDate": "October 7, 2025",
+  "draftHistoryNote": "Revised July 17, 2026"
 }
