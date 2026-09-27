@@ -130,13 +130,13 @@ for (const [name, page] of Object.entries(pages)) {
     active: page.parent || name
   }));
 }
-const collections = collectionPages(articles, {reporting:read('content/pages/reporting.html'), archive:read('content/pages/archive.html')}, assets, config.articlesPerPage || 6);
+const collections = collectionPages(articles, {reporting:read('content/pages/reporting.html'), archive:read('content/pages/archive.html')}, assets);
 for (const page of collections) {
   const directory = path.join(out, page.pathname);
   fs.mkdirSync(directory, {recursive:true});
   fs.writeFileSync(path.join(directory,'index.html'), documentFor(page));
 }
-fs.writeFileSync(path.join(out, 'article-index.json'), JSON.stringify(searchIndex(articles, assets, config.articlesPerPage || 6)));
+fs.writeFileSync(path.join(out, 'article-index.json'), JSON.stringify(searchIndex(articles, assets)));
 for (const article of articles) {
   const pathname = articlePath(article);
   const directory = path.join(out, pathname);

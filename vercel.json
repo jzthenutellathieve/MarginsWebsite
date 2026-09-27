@@ -15,6 +15,16 @@
   "trailingSlash": true,
   "redirects": [
     {
+      "source": "/articles/page/:page",
+      "destination": "/articles/",
+      "permanent": true
+    },
+    {
+      "source": "/articles/topic/:topic/page/:page",
+      "destination": "/articles/topic/:topic/",
+      "permanent": true
+    },
+    {
       "source": "/reporting/:slug",
       "destination": "/articles/:slug/",
       "permanent": true

@@ -8,7 +8,7 @@ const byline = article => article.id === 'tehg-uv-water-access' ? 'Xingtong Zou 
 const isoDate = article => new Date(article.date + ' 00:00:00 UTC').toISOString().slice(0, 10);
 const displayDate = article => article.writtenDate ? 'Written ' + article.writtenDate : (article.dateLabel ? article.dateLabel + ' ' : '') + article.date;
 const displayIsoDate = article => isoDate({date:article.writtenDate || article.date});
-const sortArticles = articles => [...articles].sort((a, b) => isoDate(a).localeCompare(isoDate(b)) || a.id.localeCompare(b.id));
+const sortArticles = articles => [...articles].sort((a, b) => isoDate(b).localeCompare(isoDate(a)) || a.id.localeCompare(b.id));
 const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const photoBlocks = article => article.content.filter(block => block.type === 'image');
 function imageTag(photo, assets, eager = false) {
@@ -77,8 +77,8 @@ function pagination(base, page, total, label = 'Article pages') {
 }
 const countText = n => `${n} article${n === 1 ? '' : 's'}`;
 const rangeText = (page, size, total) => total ? `${(page - 1) * size + 1}–${Math.min(page * size, total)} of ${countText(total)}` : 'No articles yet';
-function collectionPages(articles, templates, assets, pageSize = 6) {
-  if (!Number.isInteger(pageSize) || pageSize < 1) throw new Error('Invalid page size');
+function collectionPages(articles, templates, assets) {
+  const pageSize = Math.max(1, articles.length);
   const ordered = sortArticles(articles);
   const topics = [...new Set(ordered.map(article => article.tag))].sort();
   const results = [];
@@ -116,7 +116,8 @@ function collectionPages(articles, templates, assets, pageSize = 6) {
   }
   return results;
 }
-function searchIndex(articles, assets, pageSize) {
+function searchIndex(articles, assets) {
+  const pageSize = Math.max(1, articles.length);
   return {pageSize, articles:sortArticles(articles).map(a => ({id:a.id, url:articlePath(a), title:shortTitle(a), fullTitle:a.title, deck:a.deck || '', summary:a.subtitle, cardNote:a.cardNote || '', tag:a.tag, format:a.format || a.tag, region:a.region || a.tag, author:byline(a), date:displayDate(a), isoDate:displayIsoDate(a), readTime:a.readTime, photo:photoBlocks(a)[0] ? {src:assets[photoBlocks(a)[0].src].src, alt:photoBlocks(a)[0].alt} : null}))};
 }
 function readNext(article, articles, assets) {

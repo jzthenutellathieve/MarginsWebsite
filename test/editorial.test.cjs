@@ -11,14 +11,15 @@ const fixtures = Array.from({length:25}, (_, i) => ({ ...original,
   date:`May ${i + 1}, ${i < 13 ? 2025 : 2026}`
 }));
 
-test('a growing journal has bounded pages and every article remains reachable', () => {
-  const built = collectionPages(fixtures, templates, assets, 6);
+test('all articles and topic results remain on a single page as the journal grows', () => {
+  const built = collectionPages(fixtures, templates, assets);
   const main = built.filter(p => /^\/articles\/(?:page\/\d+\/)?$/.test(p.pathname));
-  assert.equal(main.length, 5);
+  assert.equal(main.length, 1);
   const displayed = main.flatMap(p => [...p.body.matchAll(/<h2><a[^>]+href="\/articles\/(fixture-\d+)\/"/g)].map(match => match[1]));
   assert.equal(displayed.length,25);
   assert.equal(new Set(displayed).size,25);
-  main.forEach(p => assert.ok((p.body.match(/data-mj-story/g) || []).length <= 6));
+  assert.deepEqual(displayed, [...fixtures].reverse().map(article => article.id));
+  assert.ok(built.filter(p => p.pathname.startsWith('/articles/')).every(p => !p.body.includes('md-pagination')));
   const urls = new Set(built.map(p => p.pathname));
   for (const page of built) {
     for (const match of page.body.matchAll(/href="(\/(?:articles\/(?:topic\/[^/]+\/)?(?:page\/\d+\/)?|archive\/(?:\d{4}\/)?(?:page\/\d+\/)?))"/g)) {
@@ -27,36 +28,37 @@ test('a growing journal has bounded pages and every article remains reachable', 
   }
   assert.equal(built.filter(p => /^\/archive\/(?:page\/\d+\/)?$/.test(p.pathname)).length,3);
   const water = built.filter(p => p.pathname.startsWith('/articles/topic/water/'));
-  assert.equal(water.length,2);
+  assert.equal(water.length,1);
   assert.ok(!water.some(p => p.body.includes('Article 0</a>')));
 });
 
-test('homepage features both selected stories and lists every article chronologically', () => {
+test('homepage features both selected stories and lists every article newest first', () => {
   const html = renderHome(read('content/pages/home.html').replace('{{fieldNotePreview}}', ''), fixtures,
     {featuredArticles:['fixture-24','fixture-1']}, assets,
     {'device-video':'<p>Video</p>',collaboration:'<p>Collaboration</p>'});
   assert.equal((html.match(/data-mj-story>/g) || []).length,27);
   assert.equal((html.match(/class="md-lead-story"/g) || []).length,2);
   const titles = [...html.matchAll(/<h3><a[^>]+href="\/articles\/(fixture-\d+)\/"/g)].map(match => match[1]);
-  assert.deepEqual(titles.slice(0,2), ['fixture-1','fixture-24']);
-  assert.deepEqual(titles.slice(2), fixtures.map(article => article.id));
+  assert.deepEqual(titles.slice(0,2), ['fixture-24','fixture-1']);
+  assert.deepEqual(titles.slice(2), [...fixtures].reverse().map(article => article.id));
   assert.match(html, /data-mj-pause/);
-  const index = searchIndex(fixtures,assets,6);
+  const index = searchIndex(fixtures,assets);
   assert.equal(index.articles.length,25);
-  assert.equal(index.pageSize,6);
-  assert.equal(index.articles[0].id,'fixture-0');
+  assert.equal(index.pageSize,25);
+  assert.equal(index.articles[0].id,'fixture-24');
   assert.ok(index.articles.every(a => a.url && a.title && a.photo));
 });
 
-test('publication order is oldest first regardless of editing or writing dates', () => {
+test('publication order is newest first regardless of editing or writing dates', () => {
   const articles = [
     {...original, id:'newer', date:'September 8, 2026', writtenDate:'April 17, 2025'},
     {...original, id:'older', date:'October 7, 2025', updated:'September 26, 2026'}
   ];
-  assert.deepEqual(sortArticles(articles).map(a => a.id), ['older','newer']);
-  const built = collectionPages(articles, templates, assets, 1);
-  assert.match(built.find(p => p.pathname === '/articles/').body, /href="\/articles\/older\/"/);
-  assert.match(built.find(p => p.pathname === '/articles/page/2/').body, /href="\/articles\/newer\/"/);
+  assert.deepEqual(sortArticles(articles).map(a => a.id), ['newer','older']);
+  const built = collectionPages(articles, templates, assets);
+  const list = built.find(p => p.pathname === '/articles/').body;
+  assert.ok(list.indexOf('/articles/newer/') < list.indexOf('/articles/older/'));
+  assert.ok(!built.some(p => p.pathname.startsWith('/articles/page/')));
   const archive = built.find(p => p.pathname === '/archive/').body;
-  assert.ok(archive.indexOf('/articles/older/') < archive.indexOf('/articles/newer/'));
+  assert.ok(archive.indexOf('/articles/newer/') < archive.indexOf('/articles/older/'));
 });
