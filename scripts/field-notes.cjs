@@ -19,8 +19,8 @@ function renderNotes(notes, members) {
       <header><p class="md-note-meta"><time datetime="${esc(note.date)}">${esc(noteDate(note.date))}</time> · <a href="/about/#member-${esc(author.id)}">${esc(author.name)}</a></p>
       <h2 id="${esc(note.id)}-title"><a href="#${esc(note.id)}">${esc(note.title)}</a></h2></header>
       <p class="md-note-text">${esc(note.text)}</p>
-      <div class="md-note-photos" tabindex="0" role="region" aria-label="Photos and videos from this field note">${noteMedia(note).map((item, index) => `<figure>${item.type === 'video' ? videoPlayer(item) : `<a href="${esc(item.src)}" aria-label="View full photograph: ${esc(item.alt)}"><img src="${esc(item.src)}" alt="${esc(item.alt)}" width="${item.width}" height="${item.height}" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}></a>`}${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}</div>
-      <p class="md-note-credit">${noteMedia(note).some(item => item.type === 'video') ? 'Photos and videos' : 'Photographs'} by ${esc(author.name)}</p>
+      <div class="md-note-photos" tabindex="0" role="region" aria-label="Photos and videos from this field note">${noteMedia(note).map((item, index) => `<figure>${item.type === 'video' ? videoPlayer(item) : `<a href="${esc(item.src)}" aria-label="View full image: ${esc(item.alt)}"><img${item.fit === 'contain' ? ' class="md-note-image-contain"' : ''} src="${esc(item.src)}" alt="${esc(item.alt)}" width="${item.width}" height="${item.height}" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}></a>`}${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}</div>
+      <p class="md-note-credit">${note.credit ? esc(note.credit) : `${noteMedia(note).some(item => item.type === 'video') ? 'Photos and videos' : 'Photographs'} by ${esc(author.name)}`}</p>
     </article>`;
   }).join('\n');
 }
@@ -40,7 +40,7 @@ function renderNotePreview(notes, members) {
   const first = noteMedia(note)[0];
   const href = `/field-notes/#${esc(note.id)}`;
   return `<div class="md-note-preview">
-    ${first.type === 'video' ? videoPlayer(first) : `<a href="${href}" aria-label="View ${esc(note.title)}"><img src="${esc(first.src)}" alt="${esc(first.alt)}" width="${first.width}" height="${first.height}" loading="lazy"></a>`}
+    ${first.type === 'video' ? videoPlayer(first) : `<a href="${href}" aria-label="View ${esc(note.title)}"><img${first.fit === 'contain' ? ' class="md-note-image-contain"' : ''} src="${esc(first.src)}" alt="${esc(first.alt)}" width="${first.width}" height="${first.height}" loading="lazy"></a>`}
     <div><p class="md-note-meta">${esc(noteDate(note.date))} · ${esc(author.name)}</p><h3><a href="${href}">${esc(note.title)}</a></h3><p>${esc(note.text)}</p><a class="md-note-preview-link" href="${href}">View the note →</a></div>
   </div>`;
 }

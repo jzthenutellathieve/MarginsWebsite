@@ -103,5 +103,10 @@
     "src": "/assets/altadena-palm-street-eric-thayer-2026-04-30.webp",
     "width": 1200,
     "height": 800
+  },
+  "/assets/us-capitol-toni-smith-usgs.jpg": {
+    "src": "/assets/us-capitol-toni-smith-usgs.jpg",
+    "width": 2592,
+    "height": 1944
   }
 }

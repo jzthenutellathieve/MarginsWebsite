@@ -449,3 +449,6 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
  .md-home-top .md-note-preview { grid-template-columns:1fr; }
  .md-home-top .md-note-preview img { aspect-ratio:3/2; }
 }
+
+/* Preserve complete document screenshots and author-supplied photographs. */
+.md-note-photos img.md-note-image-contain, .md-home-top .md-note-preview img.md-note-image-contain { object-fit: contain; background: #fff; }
