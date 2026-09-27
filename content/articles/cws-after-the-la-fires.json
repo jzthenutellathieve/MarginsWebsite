@@ -7,11 +7,10 @@
   "tag": "Displacement",
   "region": "Los Angeles",
   "format": "Report",
-  "date": "September 26, 2026",
+  "date": "October 17, 2025",
   "readTime": "3 min",
   "thumbnail": "/assets/cws-wildfire-relief-table.jpg",
   "excerpt": "How emergency supplies, temporary housing and coordinated support helped families begin their recovery.",
-  "projectNote": "First published online September 26, 2026.",
   "content": [
     {
       "type": "image",
@@ -108,5 +107,5 @@
     }
   ],
   "reportingNote": "The first-person statement of participation is based on the author's account. Details of the organizational response come from the dated reports above. The article attributes specific programs and distributions to CWS and its partners.",
-  "writtenDate": "October 17, 2025"
+  "dateLabel": "Published"
 }

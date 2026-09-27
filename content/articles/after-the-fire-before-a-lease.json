@@ -7,11 +7,10 @@
   "tag": "Displacement",
   "region": "Los Angeles",
   "format": "Analysis",
-  "date": "September 26, 2026",
+  "date": "October 7, 2025",
   "readTime": "6 min",
   "thumbnail": "/assets/altadena-fire-damage-marcus-jones-istock.jpg",
   "excerpt": "For renters displaced by Los Angeles's January 2025 fires, finding somewhere to stay left another question: how long could they afford to remain?",
-  "projectNote": "First published online September 26, 2026.",
   "content": [
     {
       "type": "image",
@@ -170,6 +169,7 @@
     }
   ],
   "reportingNote": "The sources were first published between January and August 2025. The two USHS pages show later updates dated October 21, 2025; their current wording has not been checked against a summer 2025 archived version. Chevondolyn's experience comes from USHS's published account, not an interview conducted for The Margins. The first-person housing-search material is based on the author's previously described work. Source dates are not this article's publication date.",
-  "writtenDate": "October 7, 2025",
-  "draftHistoryNote": "Revised July 17, 2026"
+  "dateLabel": "Published",
+  "updated": "July 17, 2026",
+  "updateLabel": "Edited"
 }

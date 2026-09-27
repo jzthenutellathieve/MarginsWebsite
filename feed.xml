@@ -7,20 +7,6 @@
     <language>en</language>
     <atom:link href="https://themarginsjournals.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>CWS After the LA Fires</title>
-      <link>https://themarginsjournals.com/articles/cws-after-the-la-fires/</link>
-      <guid isPermaLink="false">urn:the-margins:article:cws-after-the-la-fires</guid>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 GMT</pubDate>
-      <description>How emergency supplies, temporary housing and coordinated support helped families begin their recovery.</description>
-    </item>
-    <item>
-      <title>After the Fire, Before a Lease</title>
-      <link>https://themarginsjournals.com/articles/after-the-fire-before-a-lease/</link>
-      <guid isPermaLink="false">urn:the-margins:article:after-the-fire-before-a-lease</guid>
-      <pubDate>Sat, 26 Sep 2026 00:00:00 GMT</pubDate>
-      <description>For renters displaced by Los Angeles's January 2025 fires, finding somewhere to stay left another question: how long could they afford to remain?</description>
-    </item>
-    <item>
       <title>Trump’s Refugee Policies Didn’t Stop at the Border</title>
       <link>https://themarginsjournals.com/articles/after-cws-orange-county/</link>
       <guid isPermaLink="false">urn:the-margins:article:after-cws-orange-county</guid>
@@ -47,6 +33,20 @@
       <guid isPermaLink="false">urn:the-margins:article:tehg-uv-water-access</guid>
       <pubDate>Sat, 20 Jun 2026 00:00:00 GMT</pubDate>
       <description>A crank or pedal powers a UV lamp. The next questions concern water quality, everyday use and repairs: what would it take to try the device outside the laboratory?</description>
+    </item>
+    <item>
+      <title>CWS After the LA Fires</title>
+      <link>https://themarginsjournals.com/articles/cws-after-the-la-fires/</link>
+      <guid isPermaLink="false">urn:the-margins:article:cws-after-the-la-fires</guid>
+      <pubDate>Fri, 17 Oct 2025 00:00:00 GMT</pubDate>
+      <description>How emergency supplies, temporary housing and coordinated support helped families begin their recovery.</description>
+    </item>
+    <item>
+      <title>After the Fire, Before a Lease</title>
+      <link>https://themarginsjournals.com/articles/after-the-fire-before-a-lease/</link>
+      <guid isPermaLink="false">urn:the-margins:article:after-the-fire-before-a-lease</guid>
+      <pubDate>Tue, 07 Oct 2025 00:00:00 GMT</pubDate>
+      <description>For renters displaced by Los Angeles's January 2025 fires, finding somewhere to stay left another question: how long could they afford to remain?</description>
     </item>
     <item>
       <title>Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement</title>
