@@ -1,0 +1,83 @@
+{
+  "id": "2026-07-25-tuas",
+  "title": "Tuas, Singapore",
+  "date": "2026-07-25",
+  "dateLabel": "Photographed",
+  "photographedAt": "2026-07-25",
+  "author": "jerry-zou",
+  "coauthors": [
+    "barry"
+  ],
+  "text": "Barry and I visited Tuas to speak with workers about land reclamation.",
+  "credit": "",
+  "media": [
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/01.webp",
+      "alt": "A worker holding a phone showing a map of Tuas, Singapore, while giving directions.",
+      "width": 1276,
+      "height": 1708,
+      "fit": "contain",
+      "caption": "A Bangladeshi worker showing us the way on his phone."
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/02.webp",
+      "alt": "A barge with yellow excavators behind a fence along the waterfront in Tuas.",
+      "width": 2048,
+      "height": 1429,
+      "fit": "contain",
+      "caption": "Barges and excavators along the waterfront."
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/03.webp",
+      "alt": "A barge with excavators beside pale sand piles in the water at Tuas.",
+      "width": 2048,
+      "height": 1322,
+      "fit": "contain"
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/04.webp",
+      "alt": "A closer view of the excavators on a barge and sand piles near the shore.",
+      "width": 2048,
+      "height": 1275,
+      "fit": "contain"
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/05.webp",
+      "alt": "Dump trucks and excavators across an open construction site, seen through a wire fence in Tuas.",
+      "width": 2048,
+      "height": 1442,
+      "fit": "contain",
+      "caption": "Beyond the fence."
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/06.webp",
+      "alt": "Two barges beside sand deposits and an exposed stretch of shoreline in Tuas.",
+      "width": 2048,
+      "height": 1258,
+      "fit": "contain",
+      "caption": "The newest part of the map."
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/07.webp",
+      "alt": "A wide view of earthworks, machinery and barges along the waterfront in Tuas.",
+      "width": 2048,
+      "height": 1411,
+      "fit": "contain"
+    },
+    {
+      "type": "image",
+      "src": "/field-notes/2026-07-25-tuas/08.webp",
+      "alt": "Excavators and a crane behind a wire fence at a waterfront construction site in Tuas.",
+      "width": 2048,
+      "height": 1281,
+      "fit": "contain"
+    }
+  ]
+}
