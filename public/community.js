@@ -4,8 +4,9 @@
   const account = document.querySelector('#community-account');
   const feed = document.querySelector('#community-feed');
   const accountLinks = [...document.querySelectorAll('[data-community-account]')];
+  const membershipLinks = [...document.querySelectorAll('[data-community-membership]')];
   const contributeLinks = [...document.querySelectorAll('[data-community-contribute]')];
-  const originalLinks = new Map([...accountLinks, ...contributeLinks].map(link => [link, {href:link.getAttribute('href'), text:link.textContent}]));
+  const originalLinks = new Map([...accountLinks, ...membershipLinks, ...contributeLinks].map(link => [link, {href:link.getAttribute('href'), text:link.textContent}]));
   const availability = document.querySelector('[data-community-status]');
   const state = {ready:false, user:null, notes:new Map()};
   const visibleNotes = new Set();
@@ -122,6 +123,7 @@
       image.loading = 'lazy';
       if (Number.isSafeInteger(photo.width) && photo.width > 0) image.width = photo.width;
       if (Number.isSafeInteger(photo.height) && photo.height > 0) image.height = photo.height;
+      if (image.width > 0 && image.height > 0) figure.style.setProperty('--note-ratio', String(image.width / image.height));
       link.setAttribute('aria-label', image.alt ? 'View full image: ' + image.alt : 'View full image');
       link.append(image);
       figure.append(link);
@@ -157,15 +159,22 @@
     accountLinks.forEach(link => {
       if (state.ready) {
         link.href = '/account/';
-        link.textContent = state.user ? 'My account →' : 'Sign in →';
+        link.textContent = state.user ? 'My account' : 'Log in / Sign up';
       } else {
         link.setAttribute('href', originalLinks.get(link).href);
         link.textContent = originalLinks.get(link).text;
       }
     });
-    contributeLinks.forEach(link => {
-      link.setAttribute('href', state.ready ? '/account/#share-a-note' : originalLinks.get(link).href);
+    membershipLinks.forEach(link => {
+      link.setAttribute('href', state.ready ? '/account/#membership' : originalLinks.get(link).href);
     });
+    contributeLinks.forEach(link => {
+      link.setAttribute('href', state.ready ? (canContribute() ? '/account/#share-a-note' : '/account/#membership') : originalLinks.get(link).href);
+    });
+  }
+
+  function canContribute() {
+    return !!(state.user?.isMember || state.user?.isAdmin);
   }
 
   function showUnavailable(text) {
@@ -210,7 +219,7 @@
     comments.forEach(comment => {
       const item = element('li');
       const meta = element('p', null, 'community-comment-meta');
-      meta.append(element('strong', comment.name || 'Member'));
+      meta.append(element('strong', comment.name || 'Reader'));
       if (dateLabel(comment.createdAt)) meta.append(document.createTextNode(' · ' + dateLabel(comment.createdAt)));
       item.append(meta, element('p', comment.text || '', 'community-comment-text'));
       list.append(item);
@@ -387,7 +396,8 @@
 
   function renderLogin() {
     const heading = element('h2', 'Sign in to The Margins');
-    const intro = element('p', 'Receive a code by email to share field notes, like a note, or leave a comment.', 'community-help');
+    heading.id = 'membership';
+    const intro = element('p', 'Receive a code by email to like a field note, leave a comment, or ask to become a member.', 'community-help');
     const requestForm = element('form', null, 'community-form');
     const emailField = field('Email address', 'email', {required:true, autoComplete:'email', maxLength:254});
     const requestButton = button('Email me a code', 'submit');
@@ -447,6 +457,70 @@
       finally { verifyButton.disabled = false; changeEmail.disabled = false; }
     });
     accountUI.append(heading, intro, requestForm, verifyForm);
+  }
+
+  function renderMembership() {
+    const section = element('section', null, 'community-membership');
+    section.id = 'membership';
+    if (canContribute()) {
+      section.append(element('h2', 'Ready to share a story?'),
+        element('p', 'As a member, you can share a field note below or send an article to Jerry.', 'community-help'));
+      const article = element('a', 'Send an article');
+      article.href = 'mailto:xingtong.themargins@gmail.com?subject=' + encodeURIComponent('Article submission — The Margins');
+      section.append(article);
+      return section;
+    }
+    section.append(element('h2', 'Want to share your own stories?'));
+    if (state.user.membership === 'pending') {
+      section.append(element('p', 'Your request is with Jerry. You can still join the conversation in Field Notes.', 'community-help'));
+      const check = button('Check request status');
+      const feedback = status();
+      check.addEventListener('click', async () => {
+        check.disabled = true;
+        try {
+          state.user = (await api('session')).user || null;
+          updateAccountLinks();
+          renderAccount();
+        } catch (error) { message(feedback, errorMessage(error), true); }
+        finally { check.disabled = false; }
+      });
+      section.append(check, feedback);
+      return section;
+    }
+    section.append(element('p', 'Become a member to contribute field notes and articles.', 'community-help'));
+    if (state.user.membership === 'rejected') {
+      section.append(element('p', "Your last request wasn't approved. You're welcome to introduce yourself again.", 'community-help'));
+    }
+    const open = button('Become a member');
+    const form = element('form', null, 'community-form');
+    form.id = 'membership-request';
+    form.hidden = true;
+    open.setAttribute('aria-expanded', 'false');
+    open.setAttribute('aria-controls', form.id);
+    const introduction = field('A little about you (optional)', 'textarea', {maxLength:1000, rows:3});
+    const send = button('Send request', 'submit');
+    const feedback = status();
+    form.append(introduction.wrap, send, feedback);
+    open.addEventListener('click', () => {
+      form.hidden = !form.hidden;
+      open.setAttribute('aria-expanded', String(!form.hidden));
+      if (!form.hidden) introduction.input.focus();
+    });
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (send.disabled || !form.reportValidity()) return;
+      send.disabled = true;
+      message(feedback, 'Sending your request…');
+      try {
+        const result = await api('request-membership', {message:introduction.input.value.trim()});
+        state.user = {...state.user, membership:result.membership || 'pending', isMember:result.isMember === true};
+        updateAccountLinks();
+        renderAccount();
+      } catch (error) { message(feedback, errorMessage(error), true); }
+      finally { send.disabled = false; }
+    });
+    section.append(open, form);
+    return section;
   }
 
   function fileBase64(file) {
@@ -609,6 +683,7 @@
         list.replaceChildren();
         const notes = Array.isArray(result.notes) ? result.notes : [];
         const comments = Array.isArray(result.comments) ? result.comments : [];
+        const requests = Array.isArray(result.requests) ? result.requests : [];
         const addActions = (card, item, kind) => {
           const actions = element('div', null, 'community-form-actions');
           const approve = button('Approve');
@@ -622,7 +697,8 @@
             try {
               await api('moderate', {kind, id:item.id, approve:control === approve});
               card.remove();
-              message(feedback, (kind === 'note' ? 'Field note' : 'Comment') + (control === approve ? ' approved.' : ' rejected.'));
+              const label = {note:'Field note', comment:'Comment', membership:'Membership request'}[kind];
+              message(feedback, label + (control === approve ? ' approved.' : ' rejected.'));
               if (kind === 'note') refreshMine();
             } catch (error) {
               message(itemFeedback, errorMessage(error), true);
@@ -631,10 +707,17 @@
           }));
           list.append(card);
         };
+        requests.forEach(request => {
+          const card = element('article', null, 'community-submission');
+          card.append(element('h3', (request.name || 'Reader') + ' wants to join'));
+          if (dateLabel(request.createdAt)) card.append(element('p', dateLabel(request.createdAt), 'community-help'));
+          card.append(element('p', request.message || 'No introduction included.'));
+          addActions(card, request, 'membership');
+        });
         notes.forEach(note => addActions(noteCard(note, true), note, 'note'));
         comments.forEach(comment => {
           const card = element('article', null, 'community-submission');
-          card.append(element('h3', 'Comment by ' + (comment.name || 'Member')));
+          card.append(element('h3', 'Comment by ' + (comment.name || 'Reader')));
           if (comment.noteId) {
             const context = element('p', null, 'community-help');
             const link = element('a', comment.noteTitle || 'View the field note');
@@ -645,7 +728,7 @@
           card.append(element('p', comment.text || '', 'community-comment-text'));
           addActions(card, comment, 'comment');
         });
-        message(feedback, notes.length || comments.length ? '' : 'There are no submissions awaiting review.');
+        message(feedback, requests.length || notes.length || comments.length ? '' : 'There are no submissions awaiting review.');
       } catch (error) { message(feedback, errorMessage(error), true); }
       finally { refreshButton.disabled = false; }
     }
@@ -676,9 +759,12 @@
         renderAccount();
       } catch (error) { message(feedback, errorMessage(error), true); signOut.disabled = false; }
     });
-    const mine = renderMine();
-    accountUI.append(renderEditor(mine.refresh), mine.section);
-    if (state.user.isAdmin) accountUI.append(renderReview(mine.refresh));
+    accountUI.append(renderMembership());
+    if (canContribute()) {
+      const mine = renderMine();
+      accountUI.append(renderEditor(mine.refresh), mine.section);
+      if (state.user.isAdmin) accountUI.append(renderReview(mine.refresh));
+    }
   }
 
   async function start() {

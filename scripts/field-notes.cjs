@@ -9,7 +9,12 @@ function noteMedia(note) {
 }
 
 function videoPlayer(video) {
-  return `<video controls playsinline preload="metadata"${video.poster ? ` poster="${esc(video.poster)}"` : ''} aria-label="${esc(video.title)}"><source src="${esc(video.src)}" type="video/mp4"><a href="${esc(video.src)}">Watch ${esc(video.title)}</a></video>`;
+  return `<video controls playsinline preload="metadata"${video.width && video.height ? ` width="${esc(video.width)}" height="${esc(video.height)}"` : ''}${video.poster ? ` poster="${esc(video.poster)}"` : ''} aria-label="${esc(video.title)}"><source src="${esc(video.src)}" type="video/mp4"><a href="${esc(video.src)}">Watch ${esc(video.title)}</a></video>`;
+}
+
+function mediaRatio(item) {
+  const ratio = Number(item.width) / Number(item.height);
+  return Number.isFinite(ratio) && ratio > 0 ? ratio.toFixed(5) : item.type === 'video' ? '1.77778' : '1.33333';
 }
 
 function renderNotes(notes, members) {
@@ -20,8 +25,8 @@ function renderNotes(notes, members) {
       <header><p class="md-note-meta"><time datetime="${esc(note.date)}">${esc(noteDate(note.date))}</time> · <a href="/about/#member-${esc(author.id)}">${esc(author.name)}</a></p>
       <h2 id="${esc(note.id)}-title"><a href="#${esc(note.id)}">${esc(note.title)}</a></h2></header>
       ${note.text ? `<p class="md-note-text">${esc(note.text)}</p>` : ''}
-      <div class="md-note-photos" tabindex="0" role="region" aria-label="Photos and videos from this field note">${noteMedia(note).map((item, index) => `<figure>${item.type === 'video' ? videoPlayer(item) : `<a href="${esc(item.src)}" aria-label="View full image: ${esc(item.alt)}"><img${item.fit === 'contain' ? ' class="md-note-image-contain"' : ''} src="${esc(item.src)}" alt="${esc(item.alt)}" width="${item.width}" height="${item.height}" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}></a>`}${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}</div>
-      <p class="md-note-credit">${note.credit ? esc(note.credit) : `${noteMedia(note).some(item => item.type === 'video') ? 'Photos and videos' : 'Photographs'} by ${esc(author.name)}`}</p>
+      <div class="md-note-photos" role="region" aria-label="Photos and videos from this field note">${noteMedia(note).map((item, index) => `<figure style="--note-ratio:${mediaRatio(item)}">${item.type === 'video' ? videoPlayer(item) : `<a href="${esc(item.src)}" aria-label="View full image: ${esc(item.alt)}"><img${item.fit === 'contain' ? ' class="md-note-image-contain"' : ''} src="${esc(item.src)}" alt="${esc(item.alt)}" width="${item.width}" height="${item.height}" ${index === 0 ? 'fetchpriority="high"' : 'loading="lazy"'}></a>`}${item.caption ? `<figcaption>${esc(item.caption)}</figcaption>` : ''}</figure>`).join('')}</div>
+      ${note.credit === '' ? '' : `<p class="md-note-credit">${note.credit ? esc(note.credit) : `${noteMedia(note).some(item => item.type === 'video') ? 'Photos and videos' : 'Photographs'} by ${esc(author.name)}`}</p>`}
       <div data-note-interactions hidden></div>
     </article>`;
   }).join('\n');

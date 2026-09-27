@@ -20,7 +20,9 @@ These are the owner's standing preferences for new articles and edits across The
 
 ## Existing publication decisions
 
-- Use xingtong.themargins@gmail.com for every public contact and email submission link. When the community service is ready, the masthead offers Sign in / My account and members can submit Field Notes for review. Keep email submission available as a fallback; the separate Field Notes link opens the section directly.
+- Use xingtong.themargins@gmail.com for every public contact and email submission link. Keep Log in / Sign up (or My account) separate from Become a member. Ordinary verified users can like and comment; formal membership requires the editor's approval before uploading or submitting Field Notes. Keep email submission available as a fallback; full articles can be sent to the editor by email.
+- Membership is distinct from having a user account. Never automatically turn a signup into a formal member or claim an existing member profile by matching a display name. Use friendly wording such as Become a member, without calling someone an "actual" or "real" member in public copy.
+- Field Notes photos retain their original aspect ratios in a compact responsive layout; avoid empty fixed-shape frames around portrait photos. The Wang Fuk Court notes have no image captions or duplicate Shared by lines beneath the photos; their bylines above remain.
 - Each Field Note supports comments, likes and recorded views once persistent community storage is configured. Require verified sign-in for posting, comments and likes; new notes and comments enter editorial review. Never display invented activity counts or treat the static contributor directory as a set of authenticated accounts.
 - Member portraits: pang.huaiyu uses the blue avatar, Zachary Lai uses the red and gold avatar, and weilingluo0925 uses a colored initial.
 - Sand Cartels is protected from edits unless the owner explicitly authorizes a change to it. Do not use it as a sample of the owner's unedited voice without confirmation.

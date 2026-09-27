@@ -17,6 +17,9 @@ class Element {
     this.hidden = false;
     this.parentNode = null;
     this._text = '';
+    this.value = '';
+    const styles = new Map();
+    this.style = {setProperty:(name, value) => styles.set(name, String(value)), getPropertyValue:name => styles.get(name) || ''};
     this.classList = {
       add: (...names) => { this.className = [...new Set([...this.className.split(/\s+/).filter(Boolean), ...names])].join(' '); },
       remove: (...names) => { this.className = this.className.split(/\s+/).filter(name => !names.includes(name)).join(' '); },
@@ -130,9 +133,10 @@ class Element {
   querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
   closest(selector) { return this.matches(selector) ? this : this.parentNode?.closest(selector) || null; }
   focus() {}
+  reportValidity() { return true; }
 }
 
-function page({ ready = true, unavailable = false, notes = [], noteDetails = {} } = {}) {
+function page({ ready = true, unavailable = false, notes = [], noteDetails = {}, user = null, responses = {} } = {}) {
   const document = new Element('document');
   document.ownerDocument = document;
   document.readyState = 'complete';
@@ -156,7 +160,9 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {} 
   const header = create('header');
   const join = create('a', { href: 'mailto:xingtong.themargins@gmail.com?subject=Joining%20The%20Margins', 'data-community-account': '' }, 'Join us');
   const accountLink = join;
-  header.append(join);
+  const membershipLink = create('a', {href:'mailto:xingtong.themargins@gmail.com?subject=Membership', 'data-community-membership':''}, 'Become a member');
+  const contributeLink = create('a', {href:'mailto:xingtong.themargins@gmail.com?subject=Field%20Note', 'data-community-contribute':''}, 'Share a field note');
+  header.append(join, membershipLink, contributeLink);
   const account = create('section', { id: 'community-account' });
   const fallback = create('p', { 'data-community-fallback': '' }, 'Send a Field Note by email.');
   const status = create('p', { 'data-community-status': '' });
@@ -184,17 +190,23 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {} 
     if (unavailable) throw new Error('Network unavailable');
     const action = parsed.searchParams.get('action');
     let payload;
-    if (action === 'status') payload = { ready };
-    else if (action === 'session') payload = { user: null };
+    if (Object.hasOwn(responses, action)) payload = responses[action];
+    else if (action === 'status') payload = { ready };
+    else if (action === 'session') payload = { user };
     else if (action === 'feed') payload = { notes };
     else if (action === 'note') payload = { likes: 0, liked: false, views: 0, comments: [], canModerate: false, ...noteDetails };
+    else if (action === 'mine') payload = {notes:[]};
+    else if (action === 'review') payload = {requests:[], notes:[], comments:[]};
+    else if (action === 'request-membership') payload = {membership:'pending', isMember:false};
+    else if (action === 'like') payload = {likes:1, liked:true};
+    else if (['comment', 'moderate', 'request-code'].includes(action)) payload = {};
     else throw new Error('Unexpected community request: ' + action);
     return new Response(JSON.stringify(payload), { status: 200, headers: { 'content-type': 'application/json' } });
   };
   const source = fs.readFileSync(path.join(__dirname, '../public/community.js'), 'utf8');
   vm.runInNewContext(source, { document, window, location: window.location, fetch, URL, URLSearchParams,
     AbortController, AbortSignal, setTimeout, clearTimeout, console, crypto: window.crypto });
-  return { document, feed, account, accountLink, fallback, status, join, staticNotes, requests,
+  return { document, feed, account, accountLink, membershipLink, contributeLink, fallback, status, join, staticNotes, requests,
     async settle() { for (let index = 0; index < 6; index++) await new Promise(resolve => setImmediate(resolve)); } };
 }
 
@@ -206,6 +218,8 @@ for (const scenario of [{ name: 'unconfigured storage', ready: false }, { name: 
     assert.match(app.feed.textContent, /The original published note remains readable/);
     assert.equal(new URL(app.join.href).pathname, 'xingtong.themargins@gmail.com');
     assert.equal(new URL(app.join.href).protocol, 'mailto:');
+    assert.equal(new URL(app.membershipLink.href).protocol, 'mailto:');
+    assert.equal(new URL(app.contributeLink.href).protocol, 'mailto:');
     assert.equal(app.join.hidden, false);
     assert.equal(app.account.hidden, false);
     assert.equal(app.account.querySelectorAll('form').length, 0);
@@ -230,6 +244,8 @@ test('published member notes merge with existing notes by publication date, newe
   assert.ok(app.staticNotes.every(note => app.feed.contains(note)), 'Original published DOM nodes are retained');
   assert.equal(app.account.hidden, false);
   assert.ok(app.account.querySelector('form'), 'Online sign-in is available when the backend is ready');
+  assert.equal(app.accountLink.textContent, 'Log in / Sign up');
+  assert.equal(app.membershipLink.href, '/account/#membership');
 });
 
 test('member notes and comments render literal text and skip unsafe media URLs', async () => {
@@ -258,4 +274,100 @@ test('member notes and comments render literal text and skip unsafe media URLs',
   assert.equal(note.querySelectorAll('script, svg').length, 0);
   assert.deepEqual(note.querySelectorAll('img').map(image => image.src), [safeSrc]);
   assert.equal(note.querySelector('img').alt, 'A real photograph');
+  assert.equal(note.querySelector('figure').style.getPropertyValue('--note-ratio'), '1.5');
+});
+
+test('an ordinary account can join the conversation and request membership without gaining contributor access', async () => {
+  const app = page({user:{id:'reader-id', name:'Jerry', isAdmin:false, isMember:false, membership:'none'}});
+  await app.settle();
+  assert.equal(app.accountLink.textContent, 'My account');
+  assert.equal(app.contributeLink.href, '/account/#membership');
+  assert.equal(app.account.querySelector('.community-editor'), null);
+  assert.equal(app.account.querySelector('.community-mine'), null);
+  assert.ok(!app.requests.some(request => request.url.includes('action=mine')));
+  const note = app.staticNotes[0];
+  await note.querySelectorAll('button').find(button => button.getAttribute('aria-pressed') !== null).emit('click');
+  await note.querySelectorAll('button').find(button => /comment/i.test(button.textContent)).emit('click');
+  const comment = note.querySelector('.community-comment-form');
+  comment.querySelector('textarea').value = 'Thank you for sharing this.';
+  await comment.emit('submit');
+  assert.ok(app.requests.some(request => request.url.includes('action=like')));
+  assert.ok(app.requests.some(request => request.url.includes('action=comment')));
+  const membership = app.account.querySelector('#membership');
+  const form = membership.querySelector('form');
+  assert.equal(form.hidden, true);
+  await membership.querySelector('button').emit('click');
+  assert.equal(form.hidden, false);
+  assert.equal(form.querySelector('textarea').maxLength, 1000);
+  form.querySelector('textarea').value = 'I would like to share observations from my neighborhood.';
+  await form.emit('submit');
+  const sent = app.requests.find(request => request.url.includes('action=request-membership'));
+  assert.deepEqual(JSON.parse(sent.options.body), {message:'I would like to share observations from my neighborhood.'});
+  assert.match(app.account.textContent, /Your request is with Jerry/);
+  assert.equal(app.account.querySelector('.community-editor'), null);
+  assert.equal(app.account.querySelector('.community-mine'), null);
+});
+
+test('pending membership stays separate from publishing and rejected applicants can request again', async () => {
+  const pending = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'pending'}});
+  await pending.settle();
+  assert.match(pending.account.textContent, /You can still join the conversation in Field Notes/);
+  assert.equal(pending.account.querySelector('#membership').querySelector('form'), null);
+  assert.equal(pending.account.querySelector('.community-editor'), null);
+  const rejected = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'rejected'}});
+  await rejected.settle();
+  const section = rejected.account.querySelector('#membership');
+  assert.match(section.textContent, /welcome to introduce yourself again/);
+  await section.querySelector('button').emit('click');
+  await section.querySelector('form').emit('submit');
+  const sent = rejected.requests.find(request => request.url.includes('action=request-membership'));
+  assert.deepEqual(JSON.parse(sent.options.body), {message:''}, 'The introduction is optional');
+  assert.match(rejected.account.textContent, /Your request is with Jerry/);
+});
+
+test('verification uses the approved membership returned by the server and offers article submission by email', async () => {
+  const approved = {id:'member-id', name:'Contributor', isAdmin:false, isMember:true, membership:'approved'};
+  const app = page({responses:{verify:{user:approved}}});
+  await app.settle();
+  const [request, verify] = app.account.querySelectorAll('form');
+  request.querySelector('input').value = 'reader@example.com';
+  await request.emit('submit');
+  const [code, name] = verify.querySelectorAll('input');
+  code.value = '123456';
+  name.value = 'Contributor';
+  await verify.emit('submit');
+  await app.settle();
+  assert.ok(app.account.querySelector('.community-editor'));
+  assert.ok(app.account.querySelector('.community-mine'));
+  assert.equal(app.account.querySelector('.community-review'), null);
+  assert.equal(app.contributeLink.href, '/account/#share-a-note');
+  const article = app.account.querySelector('#membership').querySelector('a');
+  assert.equal(article.textContent, 'Send an article');
+  const destination = new URL(article.href);
+  assert.equal(destination.protocol, 'mailto:');
+  assert.equal(destination.pathname, 'xingtong.themargins@gmail.com');
+  assert.equal(destination.searchParams.get('subject'), 'Article submission — The Margins');
+});
+
+test('editors approve and reject membership requests through the membership moderation action', async () => {
+  const requests = [
+    {id:'candidate-1', name:'<script>One</script>', message:'I would like to write.', createdAt:'2026-09-27T12:00:00Z'},
+    {id:'candidate-2', name:'Two', message:'', createdAt:'2026-09-27T12:01:00Z'}
+  ];
+  const app = page({user:{id:'editor-id', name:'Jerry', isAdmin:true, isMember:true, membership:'approved'},
+    responses:{review:{requests, notes:[], comments:[]}}});
+  await app.settle();
+  const review = app.account.querySelector('.community-review');
+  assert.ok(review);
+  const cards = review.querySelectorAll('article');
+  assert.equal(cards.length, 2);
+  assert.match(cards[0].textContent, /<script>One<\/script>/);
+  assert.equal(cards[0].querySelector('script'), null);
+  await cards[0].querySelectorAll('button').find(button => button.textContent === 'Approve').emit('click');
+  await cards[1].querySelectorAll('button').find(button => button.textContent === 'Reject').emit('click');
+  assert.deepEqual(app.requests.filter(request => request.url.includes('action=moderate')).map(request => JSON.parse(request.options.body)), [
+    {kind:'membership', id:'candidate-1', approve:true},
+    {kind:'membership', id:'candidate-2', approve:false}
+  ]);
+  assert.equal(review.querySelectorAll('article').length, 0);
 });

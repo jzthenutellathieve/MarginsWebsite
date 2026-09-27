@@ -15,6 +15,16 @@ create table if not exists public.community_admins (
   created_at timestamptz not null default now()
 );
 
+-- A verified account can interact without membership. Only approved members
+-- and the verified owner can upload photographs and submit Field Notes.
+create table if not exists public.community_memberships (
+  user_id uuid primary key references auth.users(id) on delete cascade,
+  message text not null default '' check (char_length(message) <= 1000),
+  status text not null default 'pending' check (status in ('pending', 'approved', 'rejected')),
+  created_at timestamptz not null default now(),
+  updated_at timestamptz not null default now()
+);
+
 -- The server registers existing, vetted static Field Note IDs here. Submitted
 -- notes start unpublished and become public only through community_moderate.
 create table if not exists public.community_targets (
@@ -81,6 +91,8 @@ create table if not exists public.community_rate_limits (
 
 create index if not exists community_notes_status_date_idx
   on public.community_notes (status, date desc, created_at desc);
+create index if not exists community_memberships_status_idx
+  on public.community_memberships (status, created_at);
 create index if not exists community_notes_author_idx
   on public.community_notes (author_id, created_at desc);
 create index if not exists community_comments_note_status_idx
@@ -96,6 +108,7 @@ create index if not exists community_rate_limits_expiry_idx
 
 alter table public.community_profiles enable row level security;
 alter table public.community_admins enable row level security;
+alter table public.community_memberships enable row level security;
 alter table public.community_targets enable row level security;
 alter table public.community_notes enable row level security;
 alter table public.community_comments enable row level security;
@@ -104,12 +117,12 @@ alter table public.community_views enable row level security;
 alter table public.community_uploads enable row level security;
 alter table public.community_rate_limits enable row level security;
 
-revoke all on table public.community_profiles, public.community_admins,
+revoke all on table public.community_profiles, public.community_admins, public.community_memberships,
   public.community_targets, public.community_notes, public.community_comments,
   public.community_likes, public.community_views, public.community_uploads,
   public.community_rate_limits from public, anon, authenticated;
 grant select, insert, update, delete on table public.community_profiles,
-  public.community_admins, public.community_targets, public.community_notes,
+  public.community_admins, public.community_memberships, public.community_targets, public.community_notes,
   public.community_comments, public.community_likes, public.community_views,
   public.community_uploads, public.community_rate_limits to service_role;
 
@@ -123,6 +136,9 @@ $$;
 
 drop trigger if exists community_profiles_touch on public.community_profiles;
 create trigger community_profiles_touch before update on public.community_profiles
+  for each row execute function public.community_touch_updated_at();
+drop trigger if exists community_memberships_touch on public.community_memberships;
+create trigger community_memberships_touch before update on public.community_memberships
   for each row execute function public.community_touch_updated_at();
 drop trigger if exists community_notes_touch on public.community_notes;
 create trigger community_notes_touch before update on public.community_notes
@@ -234,6 +250,27 @@ begin
 end;
 $$;
 
+create or replace function public.community_request_membership(
+  p_user_id uuid, p_message text
+) returns jsonb language plpgsql security definer set search_path = '' as $$
+declare v_status text;
+begin
+  if p_user_id is null or not exists (
+    select 1 from auth.users u where u.id = p_user_id and u.email_confirmed_at is not null
+  ) then raise exception 'Verified account required' using errcode = '42501'; end if;
+  if p_message is null or char_length(p_message) > 1000 then
+    raise exception 'Invalid membership message' using errcode = '22023';
+  end if;
+  insert into public.community_memberships as m(user_id, message, status)
+    values(p_user_id, btrim(p_message), 'pending')
+    on conflict (user_id) do update set
+      message = case when m.status = 'approved' then m.message else excluded.message end,
+      status = case when m.status = 'approved' then 'approved' else 'pending' end
+    returning status into v_status;
+  return jsonb_build_object('user_id', p_user_id, 'status', v_status);
+end;
+$$;
+
 create or replace function public.community_submit_note(
   p_id text, p_user_id uuid, p_title text, p_text text, p_date date, p_media jsonb
 ) returns jsonb language plpgsql security definer set search_path = '' as $$
@@ -242,6 +279,15 @@ begin
   if p_user_id is null or not exists (
     select 1 from auth.users u where u.id = p_user_id and u.email_confirmed_at is not null
   ) then raise exception 'Verified account required' using errcode = '42501'; end if;
+  -- Hold the approved membership until submission commits, so revocation and
+  -- submission have a definite order instead of racing after a permission check.
+  perform 1 from public.community_memberships m
+    where m.user_id = p_user_id and m.status = 'approved' for share;
+  if not found and not exists (
+    select 1 from public.community_admins a join auth.users u on u.id = a.user_id
+    where a.user_id = p_user_id and u.email = 'xingtong.themargins@gmail.com'
+      and u.email_confirmed_at is not null
+  ) then raise exception 'Approved membership required' using errcode = '42501'; end if;
   if p_id is null or char_length(p_id) not between 1 and 128
     or p_date is null or p_title is null or char_length(p_title) > 120
     or p_text is null or char_length(p_text) > 4000
@@ -293,11 +339,15 @@ begin
       and u.email_confirmed_at is not null) then
     raise exception 'Administrator required' using errcode = '42501';
   end if;
-  if p_approve is null or p_kind is null or p_kind not in ('note', 'comment') then
+  if p_approve is null or p_kind is null or p_kind not in ('note', 'comment', 'membership') then
     raise exception 'Invalid moderation request' using errcode = '22023';
   end if;
   v_status := case when p_approve then 'published' else 'rejected' end;
-  if p_kind = 'note' then
+  if p_kind = 'membership' then
+    v_status := case when p_approve then 'approved' else 'rejected' end;
+    update public.community_memberships set status = v_status where user_id = p_id::uuid;
+    if not found then raise exception 'Membership request not found' using errcode = 'P0002'; end if;
+  elsif p_kind = 'note' then
     perform 1 from public.community_targets where note_id = p_id for update;
     if not found then raise exception 'Note not found' using errcode = 'P0002'; end if;
     update public.community_notes set status = v_status where id = p_id;
@@ -325,6 +375,7 @@ revoke all on function public.community_note_state(text, uuid) from public, anon
 revoke all on function public.community_set_like(text, uuid, boolean) from public, anon, authenticated;
 revoke all on function public.community_record_view(text, uuid) from public, anon, authenticated;
 revoke all on function public.community_rate_limit(text, integer, integer) from public, anon, authenticated;
+revoke all on function public.community_request_membership(uuid, text) from public, anon, authenticated;
 revoke all on function public.community_submit_note(text, uuid, text, text, date, jsonb) from public, anon, authenticated;
 revoke all on function public.community_moderate(text, text, boolean, uuid) from public, anon, authenticated;
 grant execute on function public.community_sync_owner() to service_role;
@@ -332,6 +383,7 @@ grant execute on function public.community_note_state(text, uuid) to service_rol
 grant execute on function public.community_set_like(text, uuid, boolean) to service_role;
 grant execute on function public.community_record_view(text, uuid) to service_role;
 grant execute on function public.community_rate_limit(text, integer, integer) to service_role;
+grant execute on function public.community_request_membership(uuid, text) to service_role;
 grant execute on function public.community_submit_note(text, uuid, text, text, date, jsonb) to service_role;
 grant execute on function public.community_moderate(text, text, boolean, uuid) to service_role;
 

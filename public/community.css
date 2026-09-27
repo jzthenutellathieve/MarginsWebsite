@@ -48,7 +48,7 @@
 .community-submission-status { display:inline-block; margin:14px 0 0!important; padding:4px 10px; background:#eef1ea; color:var(--md-blue,#35584f); font:12px/1.5 Arial,Helvetica,sans-serif!important; }
 .community-submission .community-form-actions { margin-top:20px; }
 .community-photos:empty { display:none; }
-.community-photos img { object-fit:contain; background:#f5f5f0; }
+.community-photos img { height:auto; object-fit:contain; background:transparent; }
 @media(max-width:600px) {
   .community-ui { margin-top:22px; }
   .community-ui h2 { font-size:27px; }

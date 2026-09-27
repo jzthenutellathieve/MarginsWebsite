@@ -36,7 +36,9 @@ includes a role, without follower or following counts. Research mentorship
 is acknowledged separately under Special thanks.
 
 Field Notes also supports verified email sign-in, photo submissions, comments,
-likes and recorded views. Submitted notes and comments await editorial review.
+likes and recorded views. Ordinary accounts can interact and apply to become
+members; approved members can upload and submit Field Notes. Full articles are
+sent to the editor by email. Submitted notes and comments await editorial review.
 Approved submissions are served dynamically; publishing a member's note does not
 require rebuilding the journal. Existing notes remain readable without JavaScript.
 The account service uses Supabase Auth, Postgres and private image storage; see
