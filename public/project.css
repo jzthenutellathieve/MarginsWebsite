@@ -84,9 +84,9 @@
 #margins-water-reviewed .md-prose h1 { font-size: 33px; }
 #margins-water-reviewed .md-prose .md-about-opening { font-size: 20px; }
 #margins-water-reviewed .md-collaboration summary { min-height: 44px; padding-top: 10px; padding-bottom: 10px; }
-#margins-water-reviewed .md-home-housing { border-top: 1px solid var(--md-line); padding: 22px 0 27px; display: grid; grid-template-columns: 190px minmax(0,1fr); gap: 33px; }
+#margins-water-reviewed .md-home-housing { border-top: 1px solid var(--md-line); padding: 28px 0 32px; display: block; }
 #margins-water-reviewed .md-home-housing h2 { font: 24px/1.35 Georgia, serif; margin-bottom: 9px; }
-#margins-water-reviewed .md-home-housing p { font-size: 14px; max-width: 600px; }
+#margins-water-reviewed .md-home-housing p { font-size: 16px; line-height: 1.75; max-width: 76ch; }
 #margins-water-reviewed .md-solutions-lead { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,1fr); gap: 30px; padding: 18px 0 30px; border-bottom: 1px solid var(--md-line); }
 #margins-water-reviewed .md-solutions-lead h2 { font: 33px/1.2 Georgia, serif; margin: 8px 0 15px; }
 #margins-water-reviewed .md-solutions-lead p { font-size: 15px; line-height: 1.75; }
@@ -128,3 +128,10 @@
  #margins-water-reviewed .md-prose h1 { font-size:38px; }
  #margins-water-reviewed .md-embedded-video iframe { min-height:0; }
 }
+
+#margins-water-reviewed .md-research-logos { display:flex; align-items:center; flex-wrap:wrap; gap:16px 28px; padding:16px 0; }
+#margins-water-reviewed .md-research-logos a { display:flex; align-items:center; max-width:100%; min-height:48px; }
+#margins-water-reviewed .md-research-logos img { display:block; height:auto; max-width:100%; object-fit:contain; background:transparent; }
+#margins-water-reviewed .md-research-first { width:240px; }
+#margins-water-reviewed .md-research-cityu { width:90px; }
+#margins-water-reviewed .md-home-collaboration .md-research-logos { padding:0 0 14px; }
