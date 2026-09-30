@@ -1,16 +1,16 @@
 {
   "id": "after-cws-orange-county",
-  "title": "Trump’s Refugee Policies Didn’t Stop at the Border",
-  "displayTitle": "Trump’s Refugee Policies Didn’t Stop at the Border",
+  "title": "When Federal Funding Cuts Reach Everyday Life",
+  "displayTitle": "When Federal Funding Cuts Reach Everyday Life",
   "deck": "",
-  "subtitle": "How federal policy and funding changes reached a housing search in Long Beach.",
+  "subtitle": "What federal policy and funding changes mean for refugee families rebuilding their lives in Southern California.",
   "tag": "Displacement",
   "region": "Southern California",
   "format": "Analysis",
   "date": "September 13, 2026",
   "readTime": "7 min",
-  "thumbnail": "/images/iStock-2292476860 (1).jpg",
-  "excerpt": "After CWS announced its Orange County office would close, I followed the policy and funding changes behind the decision and what they meant for families still needing housing assistance.",
+  "thumbnail": "/assets/us-capitol-toni-smith-usgs.jpg",
+  "excerpt": "After CWS announced its Orange County office would close, I followed the policy and funding changes behind the decision and what they meant for refugee families relying on help with housing, benefit applications and the work of settling in.",
   "content": [
     {
       "type": "image",
@@ -65,14 +65,6 @@
       "sources": [
         4
       ]
-    },
-    {
-      "type": "image",
-      "src": "/images/trump-executive-orders-2025-01-20.jpg",
-      "alt": "President Donald Trump signing a document at the Resolute Desk in the Oval Office",
-      "caption": "President Donald Trump signs executive orders in the Oval Office on January 20, 2025.",
-      "source": "The White House, via Wikimedia Commons · Public domain",
-      "sourceUrl": "https://commons.wikimedia.org/wiki/File:President_Donald_J._Trump_signs_executive_orders.jpg"
     },
     {
       "type": "paragraph",
@@ -212,6 +204,6 @@
   "reportingNote": "I volunteered in housing navigation with CWS Orange County. This article follows the policy and funding changes cited in its closure announcement, drawing on my correspondence with staff and public records from government agencies, the courts and CWS.",
   "homeNoteTitle": "From my volunteer work with CWS Orange County",
   "homeNoteText": "Drawing on correspondence with staff and public records from government agencies, the courts and CWS.",
-  "updated": "September 27, 2026",
+  "updated": "September 30, 2026",
   "updateLabel": "Edited"
 }

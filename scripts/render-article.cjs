@@ -27,14 +27,14 @@ function renderArticle(article, snippets, assets) {
     const correction = article.correctionNote ? '<p class="md-update-note">'+escapeText(article.correctionNote)+'</p>' : '';
     const blocks = article.content.map((block, index) => {
       if (block.type === 'paragraph') return '<p>'+escapeText(block.text)+sourceRefs(block)+'</p>';
-      if (block.type === 'heading') return '<h2 id="section-'+index+'">'+escapeText(block.text)+'</h2>';
+      if (block.type === 'heading') return (isDevice && block.text === 'One lamp, two electrical demands' ? embeddedVideo : '')+'<h2 id="section-'+index+'">'+escapeText(block.text)+'</h2>';
       if (block.type === 'pullquote') return '<blockquote><p>“'+escapeText(block.text)+'”</p><cite>'+escapeText(block.attribution)+'</cite></blockquote>';
       if (block.type === 'stat') return '<p class="mj-number-note"><strong>'+escapeText(block.number)+'</strong> · '+escapeText(block.label)+sourceRefs(block)+'</p>';
       if (block.type === 'image') {
         if (!assets[block.src]) throw new Error('Unmigrated article photo: '+block.src);
         if (block.sourceUrl && !/^https:\/\//.test(block.sourceUrl)) throw new Error('Invalid photo source URL in '+id);
         const photoCredit = block.sourceUrl ? '<a href="'+escapeText(block.sourceUrl)+'" target="_blank" rel="noopener noreferrer">'+escapeText(block.source)+'</a>' : escapeText(block.source);
-        return '<figure><img class="mj-image" loading="'+(block.eager ? 'eager' : 'lazy')+'"'+(block.eager ? ' fetchpriority="high"' : '')+' decoding="async" data-mj-asset="'+escapeText(block.src)+'" alt="'+escapeText(block.alt)+'"><figcaption>'+escapeText(block.caption)+'<br>'+photoCredit+'</figcaption></figure>'+(isDevice && block.src === '/images/iStock-499538949.jpg' ? embeddedVideo : '');
+        return '<figure><img class="mj-image" loading="'+(block.eager ? 'eager' : 'lazy')+'"'+(block.eager ? ' fetchpriority="high"' : '')+' decoding="async" data-mj-asset="'+escapeText(block.src)+'" alt="'+escapeText(block.alt)+'"><figcaption>'+escapeText(block.caption)+'<br>'+photoCredit+'</figcaption></figure>';
       }
       throw new Error('Unmigrated article block: '+block.type);
     }).join('');
