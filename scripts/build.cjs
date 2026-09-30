@@ -5,7 +5,7 @@ const { renderArticle } = require('./render-article.cjs');
 const { contributeUrl, joinUrl, renderNotes, renderMembers, renderNotePreview } = require('./field-notes.cjs');
 const { prepareNoteMedia } = require('./prepare-note-media.cjs');
 const { estimateReadingTime } = require('./reading-time.cjs');
-const { renderHome, collectionPages, searchIndex, readNext } = require('./editorial.cjs');
+const { renderHome, collectionPages, readNext } = require('./editorial.cjs');
 const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
@@ -142,7 +142,6 @@ for (const page of collections) {
   fs.mkdirSync(directory, {recursive:true});
   fs.writeFileSync(path.join(directory,'index.html'), documentFor(page));
 }
-fs.writeFileSync(path.join(out, 'article-index.json'), JSON.stringify(searchIndex(articles, assets)));
 for (const article of articles) {
   const pathname = articlePath(article);
   const directory = path.join(out, pathname);
