@@ -34,7 +34,7 @@ function story(article, assets, featured = false) {
     <${heading}${featured && shortTitle(article).length > 40 ? ' class="md-long-title"' : ''}><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></${heading}>
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
     <p class="md-description">${e(article.subtitle)}</p>
-    ${featured && article.homeNoteText ? `<p class="md-story-note">${article.homeNoteTitle ? `<strong>${e(article.homeNoteTitle)}</strong> ` : ''}${e(article.homeNoteText)}</p>` : ''}
+    ${featured && article.homeNoteText ? `<p class="md-story-note md-home-source-note"><strong>${article.homeNoteTitle ? `${e(article.homeNoteTitle)} ` : ''}${e(article.homeNoteText)}</strong></p>` : ''}
     <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time><span> · ${e(article.readTime)} read</span><span data-article-view-summary="${e(article.id)}" hidden></span></p>
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
 }

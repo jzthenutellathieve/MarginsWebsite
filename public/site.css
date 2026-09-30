@@ -392,6 +392,7 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
 .md-home-feature .md-lead-story h3.md-long-title { font-size:clamp(30px,3.3vw,42px); line-height:1.12; letter-spacing:-1px; margin-bottom:12px; text-wrap:pretty; }
 .md-home-feature .md-deck { font-size:21px; }
 .md-home-feature .md-description { font-size:16px; line-height:1.6; margin-top:12px; }
+.md-home-feature .md-home-source-note { font-family:inherit; font-size:1.0625rem; line-height:1.6; color:#525856; }
 .md-home-feature .md-meta { font-size:13px; margin-top:14px; }
 .md-home-top .md-note-preview { display:block; }
 .md-home-top .md-note-preview img { width:100%; aspect-ratio:3/2; object-fit:cover; }
