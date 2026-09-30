@@ -476,3 +476,5 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
 /* Text-only articles use the space otherwise reserved for a thumbnail. */
 .md-compact-story > div:only-child { grid-column:1 / -1; }
 .md-list-story > .md-list-copy:first-child { grid-column:1 / span 2; }
+
+.md-compact-photo img.md-photo-contain, .md-list-photo img.md-photo-contain { object-fit:contain; background:#fff; }

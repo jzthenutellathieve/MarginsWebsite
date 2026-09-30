@@ -5,7 +5,7 @@
   "tag": "Technology",
   "date": "June 20, 2026",
   "readTime": "7 min",
-  "thumbnail": null,
+  "thumbnail": "/images/abstract.jpg",
   "excerpt": "A crank or pedal powers a UV lamp. The next questions concern water quality, everyday use and repairs: what would it take to try the device outside the laboratory?",
   "content": [
     {
@@ -242,5 +242,7 @@
   "displayTitle": "Water by Hand",
   "deck": "A Human-Powered UV Device: Questions for a Field Trial",
   "format": "Research notes",
-  "region": "Water access"
+  "region": "Water access",
+  "thumbnailAlt": "TEHG-UV schematic showing hand-crank and pedal inputs powering UV water treatment",
+  "thumbnailFit": "contain"
 }

@@ -11,10 +11,11 @@ const displayIsoDate = article => isoDate(article);
 const sortArticles = articles => [...articles].sort((a, b) => isoDate(b).localeCompare(isoDate(a)) || a.id.localeCompare(b.id));
 const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const photoBlocks = article => article.content.filter(block => block.type === 'image');
+const cardPhoto = article => article.thumbnail ? {src:article.thumbnail, alt:article.thumbnailAlt || photoBlocks(article).find(p => p.src === article.thumbnail)?.alt || shortTitle(article), fit:article.thumbnailFit} : photoBlocks(article)[0];
 function imageTag(photo, assets, eager = false) {
   const asset = assets[photo.src];
   if (!asset) throw new Error(`Missing photo: ${photo.src}`);
-  return `<img src="${e(asset.src)}" width="${asset.width}" height="${asset.height}" alt="${e(photo.alt)}" loading="${eager ? 'eager' : 'lazy'}"${eager ? ' fetchpriority="high"' : ''} decoding="async">`;
+  return `<img${photo.fit === 'contain' ? ' class="md-photo-contain"' : ''} src="${e(asset.src)}" width="${asset.width}" height="${asset.height}" alt="${e(photo.alt)}" loading="${eager ? 'eager' : 'lazy'}"${eager ? ' fetchpriority="high"' : ''} decoding="async">`;
 }
 function gallery(article, assets, eager = false) {
   const photos = photoBlocks(article).slice(0, 2);
@@ -37,7 +38,7 @@ function story(article, assets, featured = false) {
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
 }
 function compactStory(article, assets) {
-  const photo = photoBlocks(article)[0];
+  const photo = cardPhoto(article);
   return `<article class="md-compact-story" data-mj-story>
     ${photo ? `<a class="md-compact-photo" href="${articlePath(article)}" tabindex="-1" aria-hidden="true">${imageTag(photo, assets)}</a>` : ''}
     <div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3>
@@ -54,7 +55,7 @@ function renderHome(template, articles, config, assets, snippets) {
   return fill(template, {featured: featured.map(a => story(a, assets, true)).join(''), recent: ordered.map(a => compactStory(a, assets)).join(''), video: snippets['device-video'], collaboration: snippets.collaboration});
 }
 function listRow(article, assets) {
-  const photo = photoBlocks(article)[0];
+  const photo = cardPhoto(article);
   return `<article class="md-list-story" data-mj-story>
     ${photo ? `<a class="md-list-photo" href="${articlePath(article)}" tabindex="-1" aria-hidden="true">${imageTag(photo, assets)}</a>` : ''}
     <div class="md-list-copy">
@@ -78,22 +79,10 @@ const rangeText = (page, size, total) => total ? `${(page - 1) * size + 1}–${M
 function collectionPages(articles, templates, assets) {
   const pageSize = Math.max(1, articles.length);
   const ordered = sortArticles(articles);
-  const topics = [...new Set(ordered.map(article => article.tag))].sort();
-  const results = [];
-  for (const topic of ['', ...topics]) {
-    const matches = topic ? ordered.filter(article => article.tag === topic) : ordered;
-    const base = topic ? `/articles/topic/${slug(topic)}/` : '/articles/';
-    const total = Math.max(1, Math.ceil(matches.length / pageSize));
-    const navigation = ['', ...topics].map(tag => `<a href="${tag ? `/articles/topic/${slug(tag)}/` : '/articles/'}"${tag === topic ? ' aria-current="page"' : ''}>${e(tag || 'All writing')}</a>`).join('');
-    for (let page = 1; page <= total; page++) {
-      results.push({pathname: pagePath(base, page), title: `${topic ? topic + ' articles' : 'Articles'}${page > 1 ? ' — Page ' + page : ''} | The Margins`, active: 'reporting', body: fill(templates.reporting, {
-        topic: e(topic), heading: e(topic || 'All writing'), basePath: base, topics: navigation,
-        summary: rangeText(page, pageSize, matches.length),
-        articles: matches.slice((page - 1) * pageSize, page * pageSize).map(a => listRow(a, assets)).join(''),
-        pagination: pagination(base, page, total)
-      })});
-    }
-  }
+  const results = [{pathname:'/articles/', title:'Articles | The Margins', active:'reporting', body:fill(templates.reporting, {
+    heading:'Articles', basePath:'/articles/', summary:countText(ordered.length),
+    articles:ordered.map(a => listRow(a, assets)).join(''), pagination:''
+  })}];
   const years = [...new Set(ordered.map(a => isoDate(a).slice(0, 4)))];
   const archiveSize = 12;
   for (const year of ['', ...years]) {
@@ -116,7 +105,7 @@ function collectionPages(articles, templates, assets) {
 }
 function searchIndex(articles, assets) {
   const pageSize = Math.max(1, articles.length);
-  return {pageSize, articles:sortArticles(articles).map(a => ({id:a.id, url:articlePath(a), title:shortTitle(a), fullTitle:a.title, deck:a.deck || '', summary:a.subtitle, cardNote:a.cardNote || '', tag:a.tag, format:a.format || a.tag, region:a.region || a.tag, author:byline(a), date:displayDate(a), isoDate:displayIsoDate(a), readTime:a.readTime, photo:photoBlocks(a)[0] ? {src:assets[photoBlocks(a)[0].src].src, alt:photoBlocks(a)[0].alt} : null}))};
+  return {pageSize, articles:sortArticles(articles).map(a => ({id:a.id, url:articlePath(a), title:shortTitle(a), fullTitle:a.title, deck:a.deck || '', summary:a.subtitle, cardNote:a.cardNote || '', tag:a.tag, format:a.format || a.tag, region:a.region || a.tag, author:byline(a), date:displayDate(a), isoDate:displayIsoDate(a), readTime:a.readTime, photo:cardPhoto(a) ? {src:assets[cardPhoto(a).src].src, alt:cardPhoto(a).alt, fit:cardPhoto(a).fit} : null}))};
 }
 function readNext(article, articles, assets) {
   const others = sortArticles(articles).filter(a => a.id !== article.id).slice(0,2);

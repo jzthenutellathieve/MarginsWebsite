@@ -52,6 +52,11 @@
       "source": "/housing",
       "destination": "/projects/housing/",
       "permanent": true
+    },
+    {
+      "source": "/articles/topic/:topic",
+      "destination": "/articles/",
+      "permanent": true
     }
   ]
 }

@@ -11,7 +11,7 @@ const fixtures = Array.from({length:25}, (_, i) => ({ ...original,
   date:`May ${i + 1}, ${i < 13 ? 2025 : 2026}`
 }));
 
-test('all articles and topic results remain on a single page as the journal grows', () => {
+test('all articles remain on one page without topic divisions as the journal grows', () => {
   const built = collectionPages(fixtures, templates, assets);
   const main = built.filter(p => /^\/articles\/(?:page\/\d+\/)?$/.test(p.pathname));
   assert.equal(main.length, 1);
@@ -27,9 +27,8 @@ test('all articles and topic results remain on a single page as the journal grow
     }
   }
   assert.equal(built.filter(p => /^\/archive\/(?:page\/\d+\/)?$/.test(p.pathname)).length,3);
-  const water = built.filter(p => p.pathname.startsWith('/articles/topic/water/'));
-  assert.equal(water.length,1);
-  assert.ok(!water.some(p => p.body.includes('Article 0</a>')));
+  assert.ok(!built.some(p => p.pathname.startsWith('/articles/topic/')));
+  assert.ok(!main[0].body.includes('md-topics'));
 });
 
 test('homepage features both selected stories and lists every article newest first', () => {

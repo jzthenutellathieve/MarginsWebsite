@@ -112,7 +112,6 @@
   const results = collection.querySelector('[data-mj-results]');
   const summary = collection.querySelector('[data-mj-results-summary]');
   const pagination = collection.querySelector('[data-mj-pagination]');
-  const topic = collection.dataset.topic;
   const base = new URL(form.action).pathname;
   const initial = { results: results.innerHTML, summary: summary.textContent, pagination: pagination.innerHTML };
   const element = (tag, className, text) => {
@@ -135,6 +134,7 @@
       photo.setAttribute('aria-hidden', 'true');
       const img = element('img');
       img.src = article.photo.src;
+      if (article.photo.fit === 'contain') img.className = 'md-photo-contain';
       img.alt = article.photo.alt;
       img.loading = 'lazy';
       img.decoding = 'async';
@@ -166,12 +166,6 @@
       const params = new URLSearchParams(location.search);
       const query = (params.get('q') || '').trim();
       input.value = query;
-      collection.querySelectorAll('.md-topics a').forEach(anchor => {
-        const url = new URL(anchor.href);
-        if (query) url.searchParams.set('q', query);
-        else url.searchParams.delete('q');
-        anchor.href = url;
-      });
       if (!query) {
         results.innerHTML = initial.results;
         summary.textContent = initial.summary;
@@ -181,7 +175,7 @@
       const terms = query.toLocaleLowerCase().split(/\s+/);
       const matches = index.articles.filter(article => {
         const text = [article.fullTitle, article.title, article.deck, article.summary, article.cardNote, article.tag, article.region, article.author].join(' ').toLocaleLowerCase();
-        return (!topic || article.tag === topic) && terms.every(term => text.includes(term));
+        return terms.every(term => text.includes(term));
       });
       const total = Math.max(1, Math.ceil(matches.length / index.pageSize));
       const page = Math.min(total, Math.max(1, Number.parseInt(params.get('page'), 10) || 1));
