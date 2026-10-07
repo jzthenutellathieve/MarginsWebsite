@@ -1,6 +1,15 @@
 # Member accounts and Field Notes
 
-The static journal remains usable without any community service. Member features are **disabled by default**. They are not live merely because this code has been deployed. No Supabase project, email delivery service or production credentials were provisioned as part of this change.
+The static journal remains usable without any community service. Member features are **disabled by default**. They are not live merely because this code has been deployed.
+
+## Provisioning status — October 7, 2026 (UTC)
+
+- Supabase project: `the-margins`, reference `tmnblxehnfonitechaay`, region `us-west-1`, in the owner's Free-plan organization `fxauxryzxkwhdpwtedgd`.
+- Dashboard: https://supabase.com/dashboard/project/tmnblxehnfonitechaay
+- Applied database migrations: `20261007060924_community_baseline` and `20261007061000_profiles_and_reader_notes`. The SQL sources are listed below; do not apply them again to this project.
+- Verified against the live database: all 10 community tables have RLS enabled, browser roles have no direct table access, the server role has access, profile mutation is server-only, and both media buckets are private with a 2 MiB image limit. Ordinary verified accounts can submit notes for review without membership approval.
+- The security advisor reported only the informational [RLS Enabled No Policy notice](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy) for these service-only tables. Their default-deny policy is intentional; do not grant browser roles direct access to silence it.
+- Still required: production Vercel environment configuration, custom SMTP and the OTP email template, followed by live signup/sign-in/profile/submission checks. The current Vercel connector cannot see the website's team. No real reader account or public test note has been created.
 
 ## Activate after configuring the service
 
@@ -36,7 +45,7 @@ Rate limits are shared in Postgres across server instances. Likes use a unique a
 
 ## Verification completed locally
 
-`node --test test/community.test.cjs test/community-client.test.cjs` tests the handler with injected providers and client behavior: disabled and preview behavior, provider/schema failure, Origin and JSON checks, verified-user requirements, metadata role rejection, reader/member separation, membership requests and owner-only approval, ordinary-reader submissions, secure cookies, unpublished content isolation, account-owned media, moderation boundaries, profile ownership, avatar upload/removal, returning-user profile persistence, draft preservation, text-as-data, limits, retry semantics and atomic-RPC routing. No real OTP emails are sent by these tests. The new migration has not been executed against a configured Supabase project. Production auth, database transactions, storage and email delivery must still be verified during setup.
+`node --test test/community.test.cjs test/community-client.test.cjs` tests the handler with injected providers and client behavior: disabled and preview behavior, provider/schema failure, Origin and JSON checks, verified-user requirements, metadata role rejection, reader/member separation, membership requests and owner-only approval, ordinary-reader submissions, secure cookies, unpublished content isolation, account-owned media, moderation boundaries, profile ownership, avatar upload/removal, returning-user profile persistence, draft preservation, text-as-data, limits, retry semantics and atomic-RPC routing. No real OTP emails are sent by these tests. Both migrations have now executed successfully in the project above, and database access and storage privacy were checked directly. Full production auth, account operations, uploads and email delivery still require live verification after environment setup.
 
 Official setup references:
 
