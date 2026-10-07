@@ -159,7 +159,7 @@
     accountLinks.forEach(link => {
       if (state.ready) {
         link.href = '/account/';
-        link.textContent = state.user ? 'My account' : 'Log in / Sign up';
+        link.textContent = state.user ? 'My profile' : 'Log in / Sign up';
       } else {
         link.setAttribute('href', originalLinks.get(link).href);
         link.textContent = originalLinks.get(link).text;
@@ -169,12 +169,12 @@
       link.setAttribute('href', state.ready ? '/account/#membership' : originalLinks.get(link).href);
     });
     contributeLinks.forEach(link => {
-      link.setAttribute('href', state.ready ? (canContribute() ? '/account/#share-a-note' : '/account/#membership') : originalLinks.get(link).href);
+      link.setAttribute('href', state.ready ? '/account/#share-a-note' : originalLinks.get(link).href);
     });
   }
 
   function canContribute() {
-    return !!(state.user?.isMember || state.user?.isAdmin);
+    return !!state.user;
   }
 
   function showUnavailable(text) {
@@ -397,7 +397,7 @@
   function renderLogin() {
     const heading = element('h2', 'Sign in to The Margins');
     heading.id = 'membership';
-    const intro = element('p', 'Receive a code by email to like a field note, leave a comment, or ask to become a member.', 'community-help');
+    const intro = element('p', 'Use an email code to sign in or create an account. You can then submit a note, add a photo to your profile, or leave a comment.', 'community-help');
     const requestForm = element('form', null, 'community-form');
     const emailField = field('Email address', 'email', {required:true, autoComplete:'email', maxLength:254});
     const requestButton = button('Email me a code', 'submit');
@@ -406,8 +406,8 @@
     const verifyForm = element('form', null, 'community-form');
     verifyForm.hidden = true;
     const code = field('Code from your email', 'text', {required:true, minLength:6, maxLength:10, inputMode:'numeric', autoComplete:'one-time-code', pattern:'[0-9]{6,10}'});
-    const name = field('Display name', 'text', {required:true, maxLength:80, autoComplete:'nickname'});
-    const nameHelp = element('p', 'This name will appear with your notes and comments.', 'community-help');
+    const name = field('Display name (optional)', 'text', {maxLength:80, autocomplete:'nickname'});
+    const nameHelp = element('p', 'New here? Choose the name to show with your notes and comments. Leave this blank to keep your existing name.', 'community-help');
     const verifyButton = button('Sign in', 'submit');
     const changeEmail = button('Use another email');
     changeEmail.classList.add('community-button-quiet');
@@ -442,12 +442,11 @@
       event.preventDefault();
       if (!verifyForm.reportValidity()) return;
       const displayName = name.input.value.trim();
-      if (!displayName) { message(verifyFeedback, 'Please enter a display name.', true); return; }
       verifyButton.disabled = true;
       changeEmail.disabled = true;
       message(verifyFeedback, 'Signing in…');
       try {
-        const result = await api('verify', {email:requestedEmail, token:code.input.value.trim(), name:displayName});
+        const result = await api('verify', {email:requestedEmail, token:code.input.value.trim(), ...(displayName ? {name:displayName} : {})});
         state.user = result.user || (result.id ? result : null);
         if (!state.user) state.user = (await api('session')).user;
         if (!state.user) throw new Error('Sign-in could not be confirmed. Please request a new code.');
@@ -462,17 +461,17 @@
   function renderMembership() {
     const section = element('section', null, 'community-membership');
     section.id = 'membership';
-    if (canContribute()) {
-      section.append(element('h2', 'Ready to share a story?'),
-        element('p', 'As a member, you can share a field note below or send an article to the editor.', 'community-help'));
+    if (state.user.isMember || state.user.isAdmin) {
+      section.append(element('h2', 'Membership'),
+        element('p', 'You are a member of The Margins. For full-length articles, contact the editor by email.', 'community-help'));
       const article = element('a', 'Send an article');
       article.href = 'mailto:xingtong.themargins@gmail.com?subject=' + encodeURIComponent('Article submission — The Margins');
       section.append(article);
       return section;
     }
-    section.append(element('h2', 'Want to share your own stories?'));
+    section.append(element('h2', 'Become a member'));
     if (state.user.membership === 'pending') {
-      section.append(element('p', 'The editor is reviewing your request. You can still join the conversation in Notes on Displacement.', 'community-help'));
+      section.append(element('p', 'The editor is reviewing your membership request. You can submit notes while you wait.', 'community-help'));
       const check = button('Check request status');
       const feedback = status();
       check.addEventListener('click', async () => {
@@ -487,7 +486,7 @@
       section.append(check, feedback);
       return section;
     }
-    section.append(element('p', 'Become a member to contribute field notes and articles.', 'community-help'));
+    section.append(element('p', 'Interested in contributing regularly? Introduce yourself to the editor. You can already submit notes with this account.', 'community-help'));
     if (state.user.membership === 'rejected') {
       section.append(element('p', "Your last request wasn't approved. You're welcome to introduce yourself again.", 'community-help'));
     }
@@ -531,6 +530,88 @@
       reader.onabort = () => reject(new Error('Reading this photo was cancelled.'));
       reader.readAsDataURL(file);
     });
+  }
+
+  function portrait(user) {
+    const wrap = element('span', null, 'community-avatar');
+    const src = safeImageURL(user.avatar);
+    if (src) {
+      const photo = element('img');
+      photo.src = src;
+      photo.alt = 'Your profile photo';
+      photo.width = photo.height = 80;
+      wrap.append(photo);
+    } else {
+      wrap.textContent = Array.from(user.name || 'Reader').slice(0,1).join('').toUpperCase();
+      wrap.setAttribute('aria-hidden', 'true');
+    }
+    return wrap;
+  }
+
+  function renderProfile() {
+    const userId = state.user.id;
+    const section = element('section', null, 'community-profile');
+    section.id = 'my-profile';
+    section.append(element('h2', 'Profile details'));
+    const form = element('form', null, 'community-form');
+    const name = field('Display name', 'text', {required:true,maxLength:80,autocomplete:'nickname',value:state.user.name});
+    const photo = field('Profile photo', 'file', {accept:'image/jpeg,image/png,image/webp'});
+    const help = element('p', 'JPG, PNG or WebP, up to 2 MB. Your display name appears with your notes and comments.', 'community-help');
+    const remove = button('Remove photo');
+    remove.classList.add('community-button-quiet');
+    remove.hidden = !state.user.avatar;
+    let removePhoto = false;
+    const save = button('Save changes', 'submit');
+    const feedback = status();
+    const actions = element('div', null, 'community-form-actions');
+    actions.append(save,remove);
+    photo.input.addEventListener('change', () => {
+      removePhoto = false;
+      message(feedback, '');
+      const file = photo.input.files?.[0];
+      if (file && (!acceptedImages.has(file.type) || file.size > 2 * 1024 * 1024)) {
+        photo.input.value = '';
+        message(feedback, 'Choose a JPG, PNG or WebP photo up to 2 MB.', true);
+      }
+    });
+    remove.addEventListener('click', () => {
+      removePhoto = true;
+      photo.input.value = '';
+      message(feedback, 'Save changes to remove your photo.');
+    });
+    form.append(name.wrap,photo.wrap,help,actions,feedback);
+    form.addEventListener('submit', async event => {
+      event.preventDefault();
+      if (save.disabled || !form.reportValidity()) return;
+      const displayName = name.input.value.trim();
+      if (!displayName) { message(feedback, 'Please enter a display name.', true); return; }
+      const file = photo.input.files?.[0];
+      if (file && (!acceptedImages.has(file.type) || file.size > 2 * 1024 * 1024)) {
+        message(feedback, 'Choose a JPG, PNG or WebP photo up to 2 MB.', true);
+        return;
+      }
+      save.disabled = remove.disabled = photo.input.disabled = name.input.disabled = true;
+      message(feedback, 'Saving your profile…');
+      try {
+        const body = {name:displayName};
+        if (file) body.avatar = {mime:file.type,base64:await fileBase64(file)};
+        else if (removePhoto) body.avatar = null;
+        const result = await api('profile',body);
+        if (!result.user || result.user.id !== userId) throw new Error('The profile update could not be confirmed. Please reload and try again.');
+        if (state.user?.id !== userId) return;
+        state.user = result.user;
+        const summary = accountUI.querySelector('.community-profile-summary');
+        if (summary) summary.replaceChildren(portrait(state.user),element('h2',state.user.name));
+        name.input.value = state.user.name;
+        photo.input.value = '';
+        remove.hidden = !state.user.avatar;
+        removePhoto = false;
+        message(feedback, 'Profile saved.');
+      } catch (error) { message(feedback,errorMessage(error),true); }
+      finally { save.disabled = remove.disabled = photo.input.disabled = name.input.disabled = false; }
+    });
+    section.append(form);
+    return section;
   }
 
   function renderEditor(refreshMine) {
@@ -744,7 +825,9 @@
     account.append(accountUI);
     if (!state.user) { renderLogin(); return; }
     const top = element('div', null, 'community-account-heading');
-    top.append(element('h2', 'Hello, ' + state.user.name));
+    const summary = element('div',null,'community-profile-summary');
+    summary.append(portrait(state.user),element('h2',state.user.name));
+    top.append(summary);
     const signOut = button('Sign out');
     signOut.classList.add('community-button-quiet');
     const feedback = status();
@@ -759,12 +842,13 @@
         renderAccount();
       } catch (error) { message(feedback, errorMessage(error), true); signOut.disabled = false; }
     });
-    accountUI.append(renderMembership());
+    accountUI.append(renderProfile());
     if (canContribute()) {
       const mine = renderMine();
       accountUI.append(renderEditor(mine.refresh), mine.section);
       if (state.user.isAdmin) accountUI.append(renderReview(mine.refresh));
     }
+    accountUI.append(renderMembership());
   }
 
   async function start() {

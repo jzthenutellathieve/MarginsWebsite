@@ -9,12 +9,20 @@ const origin = 'https://themarginsjournals.com';
 const env = {COMMUNITY_ENABLED:'true',VERCEL_ENV:'production',SUPABASE_SERVICE_ROLE_KEY:'test-only'};
 const png = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+jS1kAAAAASUVORK5CYII=';
 function backend(overrides = {}) {
-  const likes = new Set(), views = new Set(), uploads = new Map(), notes = [], comments = [];
+  const likes = new Set(), views = new Set(), uploads = new Map(), notes = [], comments = [], profiles = new Map(), avatars = new Map();
   return {
     ready:true,ping:async () => [], rate:async () => ({allowed:true}),
     getUser:async token => {if(token !== 'valid') throw new ProviderError(401); return {id:userId,email:'member@example.com',email_confirmed_at:'2026-01-01',user_metadata:{isAdmin:true,role:'admin'}};},
-    profile:async id => ({user_id:id,name:'Member <img src=x onerror=alert(1)>'}),
-    isAdmin:async () => false,saveProfile:async () => {},syncOwner:async () => {},
+    profile:async id => profiles.get(id) || {user_id:id,name:'Member <img src=x onerror=alert(1)>'},
+    isAdmin:async () => false,saveProfile:async (id,name) => {profiles.set(id,{...profiles.get(id),user_id:id,name});},syncOwner:async () => {},
+    updateProfile:async (id,name,avatar,changeAvatar) => {
+      const previous = profiles.get(id)?.avatar_path || null;
+      const current = changeAvatar ? avatar : previous;
+      profiles.set(id,{user_id:id,name,avatar_path:current});
+      return {previous_avatar_path:previous,avatar_path:current};
+    },
+    uploadAvatar:async (p,info) => {avatars.set(p,info);},
+    deleteAvatar:async p => {avatars.delete(p);},
     membership:async () => ({status:'approved'}),requestMembership:async () => ({status:'pending'}),membershipRequests:async () => [],
     requestCode:async () => {}, verify:async () => ({access_token:'valid',refresh_token:'refresh',expires_in:3600}),logout:async () => {},
     ensureStatic:async () => {}, target:async id => id === noteId ? {note_id:id,published:true} : null,
@@ -23,13 +31,13 @@ function backend(overrides = {}) {
     listComments:async () => comments,
     uploadRow:async p => uploads.get(p),
     upload:async (p,id,info) => {uploads.set(p,{path:p,user_id:id,width:info.width,height:info.height,attached_note_id:null});},
-    sign:async p => 'https://project.supabase.co/storage/v1/object/sign/community-media/' + p + '?token=short-lived',
+    sign:async (p,bucket = 'community-media') => 'https://project.supabase.co/storage/v1/object/sign/' + bucket + '/' + p + '?token=short-lived',
     submit:async payload => {notes.push({...payload,id:payload.p_id,title:payload.p_title,text:payload.p_text,date:payload.p_date,media:payload.p_media,author_id:payload.p_user_id,status:'pending'}); return {id:payload.p_id,status:'pending'};},
     like:async (id,uid,liked) => {liked ? likes.add(uid) : likes.delete(uid); return {likes:likes.size,liked};},
     comment:async (id,uid,text) => {comments.push({id:eventId,note_id:id,author_id:uid,text,status:'pending'});},
     view:async (id,event) => {views.add(id + event); return {views:views.size};},
     moderate:async () => {throw Error('Must not be called');},
-    ...overrides, _notes:notes,_comments:comments,_uploads:uploads
+    ...overrides, _notes:notes,_comments:comments,_uploads:uploads,_profiles:profiles,_avatars:avatars
   };
 }
 function handler(db = backend(), options = {}) {return createHandler({env,backend:db,ids:new Set([noteId]),uuid:() => eventId,now:() => Date.parse('2026-09-28'),...options});}
@@ -69,7 +77,7 @@ test('verify sets only secure HttpOnly cookies, validates provider identity, and
   const db=backend();const fn=handler(db);
   const result=await call(fn,'verify',{method:'POST',body:{email:'member@example.com',token:'123456',name:'Reader'}});
   assert.equal(result.statusCode,200);
-  assert.deepEqual(result.body,{user:{id:userId,name:'Reader',isAdmin:false,membership:'approved',isMember:true}});
+  assert.deepEqual(result.body,{user:{id:userId,name:'Reader',avatar:null,isAdmin:false,membership:'approved',isMember:true}});
   assert.equal(result.headers['Set-Cookie'].length,2);
   for(const cookie of result.headers['Set-Cookie']) assert.match(cookie,/^__Host-.*; Path=\/; Max-Age=\d+; HttpOnly; Secure; SameSite=Lax$/);
   const bad=handler(backend({getUser:async () => ({id:userId,email:'member@example.com',email_confirmed_at:null})}));
@@ -153,17 +161,80 @@ test('REST adapter uses service-only atomic RPCs and never trusts client URLs', 
   assert.equal(calls[0][1].redirect,'error');
 });
 
-test('ordinary verified accounts can interact but cannot upload or post before membership approval', async () => {
+test('profile updates require a verified identity and cannot choose another account, role, or photo URL', async () => {
+  const db = backend({membership:async () => null}); const fn = handler(db);
+  assert.equal((await call(fn,'profile',{method:'POST',body:{name:'Reader'}})).statusCode,401);
+  const unverified = handler(backend({getUser:async () => ({id:userId,email_confirmed_at:null})}));
+  assert.equal((await call(unverified,'profile',{method:'POST',auth:true,body:{name:'Reader'}})).statusCode,401);
+  for (const extra of [{user_id:otherId},{isAdmin:true},{membership:'approved'},{avatar_path:otherId+'/'+eventId+'.png'},{avatar:'https://example.com/photo.jpg'}]) {
+    assert.equal((await call(fn,'profile',{method:'POST',auth:true,body:{name:'Reader',...extra}})).statusCode,400);
+  }
+  assert.equal(db._profiles.size,0);
+  assert.equal(db._avatars.size,0);
+  assert.equal((await call(fn,'profile',{method:'POST',auth:true,body:{name:' '}})).statusCode,400);
+  assert.equal((await call(fn,'profile',{method:'POST',auth:true,body:{name:'Reader',avatar:{base64:png,mime:'image/jpeg'}}})).statusCode,400);
+  const saved = await call(fn,'profile',{method:'POST',auth:true,body:{name:'<svg>Reader</svg>',avatar:{base64:png,mime:'image/png'}}});
+  assert.equal(saved.statusCode,200);
+  assert.equal(saved.body.user.name,'<svg>Reader</svg>');
+  assert.equal(saved.body.user.isMember,false);
+  assert.match(saved.body.user.avatar,/object\/sign\/community-avatars\//);
+  assert.equal(db._uploads.size,0,'An avatar is not a reusable note-upload receipt');
+  assert.equal(db._avatars.size,1);
+  assert.equal(db._profiles.get(userId).avatar_path,userId+'/'+eventId+'.png');
+  assert.equal(JSON.stringify(saved.body).includes('avatar_path'),false);
+  assert.equal((await call(fn,'session',{auth:true})).body.user.avatar,saved.body.user.avatar);
+  const renamed = await call(fn,'profile',{method:'POST',auth:true,body:{name:'New name'}});
+  assert.equal(renamed.body.user.avatar,saved.body.user.avatar,'Editing a name preserves its photo');
+  const signin = await call(fn,'verify',{method:'POST',body:{email:'member@example.com',token:'123456'}});
+  assert.equal(signin.body.user.name,'New name');
+  assert.equal(signin.body.user.avatar,saved.body.user.avatar,'Signing in again preserves the profile');
+  const removed = await call(fn,'profile',{method:'POST',auth:true,body:{name:'New name',avatar:null}});
+  assert.equal(removed.body.user.avatar,null);
+  assert.equal(db._avatars.size,0);
+});
+
+test('profile replacement cleans up only its own previous photo and tolerates cleanup failure', async () => {
+  const previous = userId+'/'+otherId+'.png';
+  const db = backend({deleteAvatar:async p => {assert.equal(p,previous);throw Error('temporary storage failure');}});
+  db._profiles.set(userId,{user_id:userId,name:'Reader',avatar_path:previous});
+  const result = await call(handler(db),'profile',{method:'POST',auth:true,body:{name:'Reader',avatar:{base64:png,mime:'image/png'}}});
+  assert.equal(result.statusCode,200);
+  assert.match(result.body.user.avatar,new RegExp(eventId));
+  const bad = backend({updateProfile:async () => ({previous_avatar_path:otherId+'/'+eventId+'.png',avatar_path:null}),deleteAvatar:async () => {assert.fail('Cannot delete another account photo');}});
+  assert.equal((await call(handler(bad),'profile',{method:'POST',auth:true,body:{name:'Reader',avatar:null}})).statusCode,200);
+});
+
+test('modern Supabase keys use apikey while authenticated calls keep the user JWT', async () => {
+  const calls = [];
+  const db = createBackend({env:{...env,SUPABASE_URL:'https://project.supabase.co',SUPABASE_ANON_KEY:'sb_publishable_test',SUPABASE_SERVICE_ROLE_KEY:'sb_secret_test'},fetchImpl:async (url,opts) => {
+    calls.push([url,opts]); return {ok:true,status:200,headers:{get:() => null},text:async () => '{}'};
+  }});
+  await db.requestCode('reader@example.com');
+  await db.updateProfile(userId,'Reader',null,false);
+  await db.getUser('user-session-jwt');
+  assert.equal(calls[0][1].headers.apikey,'sb_publishable_test');
+  assert.equal(calls[0][1].headers.Authorization,undefined);
+  assert.equal(calls[1][1].headers.apikey,'sb_secret_test');
+  assert.equal(calls[1][1].headers.Authorization,undefined);
+  assert.equal(calls[2][1].headers.Authorization,'Bearer user-session-jwt');
+});
+
+test('ordinary verified accounts can submit pending notes without becoming members', async () => {
   const db=backend({membership:async () => null,profile:async id => ({user_id:id,name:'JSON'})});
   const fn=handler(db);
   const session=(await call(fn,'session',{auth:true})).body.user;
   assert.equal(session.membership,'none'); assert.equal(session.isMember,false);
   const verified=await call(fn,'verify',{method:'POST',body:{email:'member@example.com',token:'123456',name:'JSON'}});
   assert.equal(verified.body.user.membership,'none');assert.equal(verified.body.user.isMember,false);
-  assert.equal((await call(fn,'upload',{method:'POST',auth:true,body:{base64:png,mime:'image/png'}})).statusCode,403);
-  assert.equal(db._uploads.size,0);
-  assert.equal((await call(fn,'submit',{method:'POST',auth:true,body:{title:'A note',text:'Observation',date:'2026-09-27',media:[],permission:true}})).statusCode,403);
-  assert.equal(db._notes.length,0);
+  assert.equal((await call(fn,'upload',{method:'POST',auth:true,body:{base64:png,mime:'image/png'}})).statusCode,201);
+  assert.equal(db._uploads.size,1);
+  const submitted = await call(fn,'submit',{method:'POST',auth:true,body:{title:'A note',text:'Observation',date:'2026-09-27',media:[],permission:true}});
+  assert.equal(submitted.statusCode,201);
+  assert.equal(submitted.body.status,'pending');
+  assert.equal(db._notes.length,1);
+  assert.deepEqual((await call(fn,'feed')).body.notes,[]);
+  assert.equal((await call(fn,'session',{auth:true})).body.user.isMember,false);
+  assert.equal((await call(fn,'moderate',{method:'POST',auth:true,body:{kind:'note',id:submitted.body.id,approve:true}})).statusCode,403);
   assert.equal((await call(fn,'like',{method:'POST',auth:true,body:{id:noteId,liked:true}})).statusCode,200);
   assert.equal((await call(fn,'comment',{method:'POST',auth:true,body:{id:noteId,text:'A reader comment'}})).statusCode,201);
 });

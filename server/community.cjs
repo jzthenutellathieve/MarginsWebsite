@@ -3,6 +3,7 @@ const path = require('node:path');
 const {randomUUID, createHmac} = require('node:crypto');
 
 const BUCKET = 'community-media';
+const AVATARS = 'community-avatars';
 const MAX_IMAGE = 2 * 1024 * 1024;
 const MAX_BODY = 3 * 1024 * 1024;
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -119,7 +120,8 @@ function createBackend({env = process.env, fetchImpl = fetch} = {}) {
   const config = configFrom(env);
   async function request(endpoint, {method = 'GET', body, token, auth = false, headers = {}, binary = false} = {}) {
     const key = auth ? config.anon : config.service;
-    const response = await fetchImpl(config.url + endpoint, {method, redirect:'error', signal:AbortSignal.timeout(10000), headers:{apikey:key, Authorization:`Bearer ${token || key}`, ...(body !== undefined ? {'Content-Type':binary ? body.mime : 'application/json'} : {}), ...headers}, ...(body !== undefined ? {body:binary ? body.bytes : JSON.stringify(body)} : {})});
+    const bearer = token || (!key.startsWith('sb_') ? key : null);
+    const response = await fetchImpl(config.url + endpoint, {method, redirect:'error', signal:AbortSignal.timeout(10000), headers:{apikey:key, ...(bearer ? {Authorization:`Bearer ${bearer}`} : {}), ...(body !== undefined ? {'Content-Type':binary ? body.mime : 'application/json'} : {}), ...headers}, ...(body !== undefined ? {body:binary ? body.bytes : JSON.stringify(body)} : {})});
     if (!response.ok) throw new ProviderError(response.status);
     if (response.status === 204 || response.headers?.get('content-length') === '0') return null;
     const raw = await response.text();
@@ -129,15 +131,18 @@ function createBackend({env = process.env, fetchImpl = fetch} = {}) {
   const rpc = (name, body) => request('/rest/v1/rpc/' + name, {method:'POST', body});
   return {
     ready:config.ready,
-    ping:() => Promise.all([table('community_targets', 'select=note_id&limit=0'), table('community_memberships', 'select=user_id&limit=0')]),
+    ping:() => Promise.all([table('community_targets', 'select=note_id&limit=0'), table('community_memberships', 'select=user_id&limit=0'), table('community_profiles', 'select=avatar_path&limit=0')]),
     rate:(key, limit, seconds) => rpc('community_rate_limit', {p_bucket_key:key,p_limit:limit,p_window_seconds:seconds}),
     requestCode:address => request('/auth/v1/otp', {method:'POST',auth:true,body:{email:address,create_user:true}}),
     verify:(address, token) => request('/auth/v1/verify', {method:'POST',auth:true,body:{email:address,token,type:'email'}}),
     getUser:token => request('/auth/v1/user', {auth:true,token}),
     refresh:token => request('/auth/v1/token?grant_type=refresh_token', {method:'POST',auth:true,body:{refresh_token:token}}),
     logout:token => request('/auth/v1/logout?scope=local', {method:'POST',auth:true,token}),
-    profile:async id => (await table('community_profiles', 'select=user_id,name&user_id=eq.' + id + '&limit=1'))[0] || null,
+    profile:async id => (await table('community_profiles', 'select=user_id,name,avatar_path&user_id=eq.' + id + '&limit=1'))[0] || null,
     saveProfile:(id,name) => table('community_profiles', 'on_conflict=user_id', {method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:{user_id:id,name}}),
+    updateProfile:(id,name,avatarPath,changeAvatar) => rpc('community_update_profile', {p_user_id:id,p_name:name,p_avatar_path:avatarPath,p_change_avatar:changeAvatar}),
+    uploadAvatar:(objectPath,info) => request('/storage/v1/object/' + AVATARS + '/' + objectPath, {method:'POST',body:info,binary:true,headers:{'x-upsert':'false'}}),
+    deleteAvatar:objectPath => request('/storage/v1/object/' + AVATARS, {method:'DELETE',body:{prefixes:[objectPath]}}),
     syncOwner:() => rpc('community_sync_owner', {}),
     membership:async id => (await table('community_memberships', 'select=status&user_id=eq.' + id + '&limit=1'))[0] || null,
     requestMembership:(id,message) => rpc('community_request_membership', {p_user_id:id,p_message:message}),
@@ -154,12 +159,13 @@ function createBackend({env = process.env, fetchImpl = fetch} = {}) {
       try { await table('community_uploads','',{method:'POST',body:{path:objectPath,user_id:userId,mime:info.mime,width:info.width,height:info.height}}); }
       catch (error) { try { await request('/storage/v1/object/' + BUCKET, {method:'DELETE',body:{prefixes:[objectPath]}}); } catch {} throw error; }
     },
-    sign:async objectPath => {
-      const result = await request('/storage/v1/object/sign/' + BUCKET + '/' + objectPath,{method:'POST',body:{expiresIn:3600}});
+    sign:async (objectPath,bucket = BUCKET) => {
+      if (![BUCKET,AVATARS].includes(bucket)) throw new Error('Invalid media bucket');
+      const result = await request('/storage/v1/object/sign/' + bucket + '/' + objectPath,{method:'POST',body:{expiresIn:3600}});
       const signed = result.signedURL || result.signedUrl;
       if (typeof signed !== 'string') throw new Error('Invalid media response');
       const url = new URL(signed.startsWith('/object/') ? '/storage/v1' + signed : signed, config.url);
-      if (url.origin !== config.url || !url.pathname.startsWith('/storage/v1/object/sign/' + BUCKET + '/')) throw new Error('Invalid media response');
+      if (url.origin !== config.url || !url.pathname.startsWith('/storage/v1/object/sign/' + bucket + '/')) throw new Error('Invalid media response');
       return url.href;
     },
     submit:payload => rpc('community_submit_note',payload),
@@ -177,11 +183,11 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
     const result = await backend.rate(hash(key),max,seconds);
     if (!result?.allowed) fail(429,'Please wait before trying again');
   }
-  async function account(user,name) {
+  async function account(user,profile) {
     const isAdmin = user.email?.toLowerCase() === OWNER_EMAIL && await backend.isAdmin(user.id);
     const membership = isAdmin ? 'approved' : (await backend.membership(user.id))?.status || 'none';
     if (!['none','pending','approved','rejected'].includes(membership)) throw new Error('Invalid membership state');
-    return {id:user.id,name,isAdmin,membership,isMember:membership === 'approved'};
+    return {id:user.id,name:profile.name,avatarPath:profile.avatar_path || null,isAdmin,membership,isMember:membership === 'approved'};
   }
   async function identity(req,res) {
     const jar = cookies(req); let token = jar[ACCESS]; let user;
@@ -197,9 +203,20 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
     if (!UUID.test(user.id || '') || !user.email_confirmed_at) return null;
     const profile = await backend.profile(user.id);
     if (!profile) return null;
-    return {...await account(user,profile.name),token};
+    return {...await account(user,profile),token};
   }
-  function publicUser(user) { return user ? {id:user.id,name:user.name,isAdmin:user.isAdmin,membership:user.membership,isMember:user.isMember} : null; }
+  function ownImagePath(id,value) {
+    return typeof value === 'string' && value.startsWith(id + '/') && /^[a-f0-9-]+\/[a-f0-9-]+\.(jpg|png|webp)$/.test(value);
+  }
+  async function publicUser(user) {
+    if (!user) return null;
+    let avatar = null;
+    if (user.avatarPath) {
+      if (!ownImagePath(user.id,user.avatarPath)) throw new Error('Invalid stored avatar');
+      avatar = await backend.sign(user.avatarPath,AVATARS);
+    }
+    return {id:user.id,name:user.name,avatar,isAdmin:user.isAdmin,membership:user.membership,isMember:user.isMember};
+  }
   async function target(value) {
     if (typeof value !== 'string' || !NOTE_ID.test(value)) fail(400,'Invalid field note');
     if (ids.has(value)) await backend.ensureStatic(value);
@@ -245,7 +262,7 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
       if (req.method === 'GET') {
         if (!['session','feed','note','mine','review'].includes(action)) fail(404,'Unknown action');
         const user = action === 'feed' ? null : await identity(req,res);
-        if (action === 'session') return reply(res,200,{user:publicUser(user)});
+        if (action === 'session') return reply(res,200,{user:await publicUser(user)});
         if (action === 'feed') return reply(res,200,{notes:await notesFor('feed',null)});
         if (action === 'note') {
           const id = await target(url.searchParams.get('id'));
@@ -261,8 +278,8 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
         const requests = await Promise.all((await backend.membershipRequests()).map(async r => ({id:r.user_id,name:await authorName(r.user_id,names),message:r.message,createdAt:r.created_at})));
         return reply(res,200,{notes:await notesFor('review',user),comments,requests});
       }
-      if (!['request-code','verify','logout','like','comment','view','upload','submit','moderate','request-membership'].includes(action)) fail(404,'Unknown action');
-      const body = await readBody(req,action === 'upload' ? MAX_BODY : 32000);
+      if (!['request-code','verify','logout','like','comment','view','upload','submit','moderate','request-membership','profile'].includes(action)) fail(404,'Unknown action');
+      const body = await readBody(req,['upload','profile'].includes(action) ? MAX_BODY : 32000);
       if (action === 'request-code') {
         const address = email(body.email); await limit('email:' + address,3,600);
         try { await backend.requestCode(address); } catch (error) { if (![400,422,429].includes(error.status)) throw error; }
@@ -280,7 +297,7 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
         const name = body.name === undefined ? profile?.name || 'Reader' : text(body.name,80);
         await backend.saveProfile(verified.id,name);
         if (address === OWNER_EMAIL) await backend.syncOwner();
-        const user = await account(verified,name);
+        const user = await publicUser(await account(verified,{...profile,name}));
         setSession(res,session);
         return reply(res,200,{user});
       }
@@ -298,7 +315,27 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
       }
       const user = await identity(req,res);
       if (!user) fail(401,'Sign in to continue');
-      await limit('user:' + user.id + ':' + action, action === 'request-membership' ? 3 : action === 'submit' ? 10 : action === 'upload' || action === 'comment' ? 20 : 120, ['submit','upload','comment','request-membership'].includes(action) ? 3600 : 60);
+      await limit('user:' + user.id + ':' + action, action === 'request-membership' ? 3 : action === 'submit' ? 10 : ['upload','comment','profile'].includes(action) ? 20 : 120, ['submit','upload','comment','profile','request-membership'].includes(action) ? 3600 : 60);
+      if (action === 'profile') {
+        if (Object.keys(body).some(key => !['name','avatar'].includes(key))) fail(400,'Only your name and photo can be changed here');
+        const name = text(body.name,80);
+        const changeAvatar = Object.hasOwn(body,'avatar');
+        let avatarPath = null;
+        if (changeAvatar && body.avatar !== null) {
+          if (!body.avatar || typeof body.avatar !== 'object' || Array.isArray(body.avatar)) fail(400,'Choose a photo to upload');
+          const info = imageInfo(body.avatar.base64,body.avatar.mime);
+          avatarPath = user.id + '/' + uuid() + '.' + info.ext;
+          await backend.uploadAvatar(avatarPath,info);
+        }
+        const result = await backend.updateProfile(user.id,name,avatarPath,changeAvatar);
+        // The RPC serializes replacements and returns the actual previous path.
+        // If its response is lost, leave the new object for retention cleanup:
+        // deleting it here could remove an avatar that was successfully saved.
+        if (changeAvatar && ownImagePath(user.id,result.previous_avatar_path) && result.previous_avatar_path !== avatarPath) {
+          try { await backend.deleteAvatar(result.previous_avatar_path); } catch { /* Retention cleanup can retry. */ }
+        }
+        return reply(res,200,{user:await publicUser({...user,name,avatarPath:result.avatar_path}),message:'Profile saved.'});
+      }
       if (action === 'request-membership') {
         if (['id','userId','user_id','status','isMember','isAdmin'].some(key => key in body)) fail(400,'Membership is reviewed by the editor');
         const message = text(body.message ?? '',1000,false);
@@ -306,7 +343,6 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
         const approved = result.status === 'approved';
         return reply(res,200,{status:result.status,membership:result.status,isMember:approved,message:approved ? 'You are already a member.' : 'Your membership request is awaiting review.'});
       }
-      if (['upload','submit'].includes(action) && !user.isMember) fail(403,'Become a member before posting Field Notes');
       if (action === 'like') {
         if (typeof body.liked !== 'boolean') fail(400,'Choose a like state');
         return reply(res,200,await backend.like(await target(body.id),user.id,body.liked));

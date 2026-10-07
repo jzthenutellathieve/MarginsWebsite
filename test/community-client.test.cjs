@@ -190,7 +190,7 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
     if (unavailable) throw new Error('Network unavailable');
     const action = parsed.searchParams.get('action');
     let payload;
-    if (Object.hasOwn(responses, action)) payload = responses[action];
+    if (Object.hasOwn(responses, action)) payload = typeof responses[action] === 'function' ? responses[action]() : responses[action];
     else if (action === 'status') payload = { ready };
     else if (action === 'session') payload = { user };
     else if (action === 'feed') payload = { notes };
@@ -204,7 +204,10 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
     return new Response(JSON.stringify(payload), { status: 200, headers: { 'content-type': 'application/json' } });
   };
   const source = fs.readFileSync(path.join(__dirname, '../public/community.js'), 'utf8');
-  vm.runInNewContext(source, { document, window, location: window.location, fetch, URL, URLSearchParams,
+  class FileReader {
+    readAsDataURL(file) { this.result = 'data:' + file.type + ';base64,' + file.base64; this.onload(); }
+  }
+  vm.runInNewContext(source, { document, window, location: window.location, fetch, URL, URLSearchParams, FileReader,
     AbortController, AbortSignal, setTimeout, clearTimeout, console, crypto: window.crypto });
   return { document, feed, account, accountLink, membershipLink, contributeLink, fallback, status, join, staticNotes, requests,
     async settle() { for (let index = 0; index < 6; index++) await new Promise(resolve => setImmediate(resolve)); } };
@@ -277,14 +280,14 @@ test('member notes and comments render literal text and skip unsafe media URLs',
   assert.equal(note.querySelector('figure').style.getPropertyValue('--note-ratio'), '1.5');
 });
 
-test('an ordinary account can join the conversation and request membership without gaining contributor access', async () => {
+test('an ordinary account can submit notes and request membership as separate actions', async () => {
   const app = page({user:{id:'reader-id', name:'Jerry', isAdmin:false, isMember:false, membership:'none'}});
   await app.settle();
-  assert.equal(app.accountLink.textContent, 'My account');
-  assert.equal(app.contributeLink.href, '/account/#membership');
-  assert.equal(app.account.querySelector('.community-editor'), null);
-  assert.equal(app.account.querySelector('.community-mine'), null);
-  assert.ok(!app.requests.some(request => request.url.includes('action=mine')));
+  assert.equal(app.accountLink.textContent, 'My profile');
+  assert.equal(app.contributeLink.href, '/account/#share-a-note');
+  assert.ok(app.account.querySelector('.community-editor'));
+  assert.ok(app.account.querySelector('.community-mine'));
+  assert.ok(app.requests.some(request => request.url.includes('action=mine')));
   const note = app.staticNotes[0];
   await note.querySelectorAll('button').find(button => button.getAttribute('aria-pressed') !== null).emit('click');
   await note.querySelectorAll('button').find(button => /comment/i.test(button.textContent)).emit('click');
@@ -303,17 +306,17 @@ test('an ordinary account can join the conversation and request membership witho
   await form.emit('submit');
   const sent = app.requests.find(request => request.url.includes('action=request-membership'));
   assert.deepEqual(JSON.parse(sent.options.body), {message:'I would like to share observations from my neighborhood.'});
-  assert.match(app.account.textContent, /The editor is reviewing your request/);
-  assert.equal(app.account.querySelector('.community-editor'), null);
-  assert.equal(app.account.querySelector('.community-mine'), null);
+  assert.match(app.account.textContent, /The editor is reviewing your membership request/);
+  assert.ok(app.account.querySelector('.community-editor'));
+  assert.ok(app.account.querySelector('.community-mine'));
 });
 
 test('pending membership stays separate from publishing and rejected applicants can request again', async () => {
   const pending = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'pending'}});
   await pending.settle();
-  assert.match(pending.account.textContent, /You can still join the conversation in Notes on Displacement/);
+  assert.match(pending.account.textContent, /You can submit notes while you wait/);
   assert.equal(pending.account.querySelector('#membership').querySelector('form'), null);
-  assert.equal(pending.account.querySelector('.community-editor'), null);
+  assert.ok(pending.account.querySelector('.community-editor'));
   const rejected = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'rejected'}});
   await rejected.settle();
   const section = rejected.account.querySelector('#membership');
@@ -322,7 +325,7 @@ test('pending membership stays separate from publishing and rejected applicants 
   await section.querySelector('form').emit('submit');
   const sent = rejected.requests.find(request => request.url.includes('action=request-membership'));
   assert.deepEqual(JSON.parse(sent.options.body), {message:''}, 'The introduction is optional');
-  assert.match(rejected.account.textContent, /The editor is reviewing your request/);
+  assert.match(rejected.account.textContent, /The editor is reviewing your membership request/);
 });
 
 test('verification uses the approved membership returned by the server and offers article submission by email', async () => {
@@ -347,6 +350,69 @@ test('verification uses the approved membership returned by the server and offer
   assert.equal(destination.protocol, 'mailto:');
   assert.equal(destination.pathname, 'xingtong.themargins@gmail.com');
   assert.equal(destination.searchParams.get('subject'), 'Article submission — The Margins');
+});
+
+test('profile saves upload the selected photo, update the displayed name, and preserve an unfinished note', async () => {
+  const user = {id:'reader-id',name:'Reader',avatar:null,isMember:false,isAdmin:false,membership:'none'};
+  const saved = {...user,name:'<svg>New name</svg>',avatar:'https://project.supabase.co/storage/v1/object/sign/community-avatars/own/photo.png?token=signed'};
+  const app = page({user,responses:{profile:{user:saved}}});
+  await app.settle();
+  const noteDraft = app.account.querySelector('.community-editor textarea');
+  noteDraft.value = 'An unfinished note';
+  const form = app.account.querySelector('.community-profile form');
+  form.querySelector('input[type="text"]').value = saved.name;
+  const photo = form.querySelector('input[type="file"]');
+  photo.files = [{type:'image/png',size:100,base64:'cGhvdG8='}];
+  await form.emit('submit');
+  const request = app.requests.find(request => request.url.includes('action=profile'));
+  assert.deepEqual(JSON.parse(request.options.body),{name:saved.name,avatar:{mime:'image/png',base64:'cGhvdG8='}});
+  assert.equal(app.account.querySelector('.community-profile-summary img').src,saved.avatar);
+  assert.equal(app.account.querySelector('.community-profile-summary h2').textContent,saved.name);
+  assert.equal(app.account.querySelector('svg'),null);
+  assert.match(form.textContent,/Profile saved/);
+  assert.equal(noteDraft.value,'An unfinished note');
+  assert.equal(app.account.querySelector('.community-editor textarea'),noteDraft);
+  assert.equal(app.account.querySelector('.community-review'),null);
+});
+
+test('profile removal is explicit; failed saves retain the name draft and allow retry', async () => {
+  const user = {id:'reader-id',name:'Reader',avatar:'https://project.supabase.co/storage/v1/object/sign/community-avatars/photo.png',isMember:false,isAdmin:false,membership:'none'};
+  let fail = true;
+  const app = page({user,responses:{profile:() => {if (fail) throw new Error('Temporary failure');return {user:{...user,name:'New name',avatar:null}};}}});
+  await app.settle();
+  const form = app.account.querySelector('.community-profile form');
+  const name = form.querySelector('input[type="text"]');
+  name.value = 'New name';
+  const remove = form.querySelectorAll('button').find(b => b.textContent==='Remove photo');
+  const save = form.querySelectorAll('button').find(b => b.textContent==='Save changes');
+  await remove.emit('click');
+  assert.equal(app.requests.filter(r => r.url.includes('action=profile')).length,0);
+  await form.emit('submit');
+  assert.match(form.textContent,/Temporary failure/);
+  assert.equal(name.value,'New name');
+  assert.equal(save.disabled,false);
+  fail = false;
+  await form.emit('submit');
+  const request = app.requests.filter(r => r.url.includes('action=profile')).at(-1);
+  assert.deepEqual(JSON.parse(request.options.body),{name:'New name',avatar:null});
+  assert.equal(app.account.querySelector('.community-profile-summary img'),null);
+  assert.equal(remove.hidden,true);
+});
+
+test('a returning reader can verify without resetting their existing display name', async () => {
+  const user = {id:'reader-id',name:'Existing name',avatar:null,isMember:false,isAdmin:false,membership:'none'};
+  const app = page({responses:{verify:{user}}});
+  await app.settle();
+  const [request,verify] = app.account.querySelectorAll('form');
+  request.querySelector('input').value = 'reader@example.com';
+  await request.emit('submit');
+  verify.querySelectorAll('input')[0].value = '123456';
+  verify.querySelectorAll('input')[1].value = '';
+  await verify.emit('submit');
+  const sent = app.requests.find(r => r.url.includes('action=verify'));
+  assert.deepEqual(JSON.parse(sent.options.body),{email:'reader@example.com',token:'123456'});
+  assert.equal(app.account.querySelector('.community-profile-summary h2').textContent,'Existing name');
+  assert.ok(app.account.querySelector('.community-editor'));
 });
 
 test('editors approve and reject membership requests through the membership moderation action', async () => {
