@@ -1,6 +1,6 @@
 # Member accounts and Field Notes
 
-The static journal remains usable without any community service. Member features are **disabled by default**. They are not live merely because this code has been deployed.
+The static journal remains usable without any community service. Account features are **disabled by default in code** and require the production configuration below. They were enabled on the production website on October 7, 2026; previews remain disabled.
 
 ## Provisioning status — October 7, 2026 (UTC)
 
@@ -9,7 +9,13 @@ The static journal remains usable without any community service. Member features
 - Applied database migrations: `20261007060924_community_baseline` and `20261007061000_profiles_and_reader_notes`. The SQL sources are listed below; do not apply them again to this project.
 - Verified against the live database: all 10 community tables have RLS enabled, browser roles have no direct table access, the server role has access, profile mutation is server-only, and both media buckets are private with a 2 MiB image limit. Ordinary verified accounts can submit notes for review without membership approval.
 - The security advisor reported only the informational [RLS Enabled No Policy notice](https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy) for these service-only tables. Their default-deny policy is intentional; do not grant browser roles direct access to silence it.
-- Still required: production Vercel environment configuration, custom SMTP and the OTP email template, followed by live signup/sign-in/profile/submission checks. The current Vercel connector cannot see the website's team. No real reader account or public test note has been created.
+- Production Vercel configuration is saved: `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, and `COMMUNITY_ENABLED=true`. The two API keys are Secret variables, available only in Production. Preview environments have no community credentials. The Vercel connector could not access this team, so configuration was completed through the owner's authorized dashboard session.
+- Production deployment `dpl_5fWEdfdM8YDieHq6QvgXjH33EnDx` reached Ready with source commit `a366982b7477c5261e601d2aaa91e70db46e3d9e` and was assigned to `themarginsjournals.com`.
+- Resend resource `margins-auth-email` uses the Free plan (3,000 messages per month, 100 per day). The domain `themarginsjournals.com` and its DKIM/SPF records are verified. Sending is enabled; receiving is disabled. Only the required `resend._domainkey` TXT and `send` MX/TXT records were added to Vercel DNS; existing website records were preserved.
+- Supabase custom SMTP is enabled with `smtp.resend.com:465`, username `resend`, sender `The Margins <accounts@themarginsjournals.com>`, and the Resend key stored in the encrypted SMTP password field. Keys are not in the repository. The per-user email interval is 60 seconds; the initial SMTP limit is 30 emails per hour.
+- Email confirmation remains required. The Site URL is `https://themarginsjournals.com`. Both the Magic link or OTP and Confirm sign up templates contain `{{ .Token }}` and tell readers to enter the code on the website. Codes are 8 digits and expire after 600 seconds.
+- Verified against production after deployment: `status` returns `{"ready":true}`, the signed-out `session` returns `{"user":null}`, and `feed` returns an empty list. Responses have `Cache-Control: private, no-store`. The account page renders the email-code form and its Email me a code button.
+- Still required: the owner must complete first-time signup and email verification in the live browser, followed by real profile/avatar, returning sign-in, reader submission, and moderation checks. No real reader account or public test note has been created. A visible signup form and a healthy database connection do not establish email delivery or successful sign-in.
 
 ## Activate after configuring the service
 
