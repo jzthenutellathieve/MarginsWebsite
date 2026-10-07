@@ -162,7 +162,7 @@
     },
     {
       "type": "heading",
-      "text": "My role — Jerry Zou"
+      "text": "Author’s note — Jerry Zou"
     },
     {
       "type": "paragraph",
@@ -170,7 +170,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The paper includes researchers from Tsinghua University and other institutions, with Zhiguo Yuan of City University of Hong Kong among its corresponding authors. Yuan's funding acknowledgement includes CityU support through FIRST, a UNESCO-endorsed initiative. The institutional support described here concerns the research and programme.",
+      "text": "The study’s authors and funding acknowledgements are listed in the CityUHK publication record.",
       "sources": [
         11
       ]
@@ -237,7 +237,7 @@
       "url": "https://scholars.cityu.edu.hk/en/publications/a-simple-disinfection-device-for-families-in-underdeveloped-regio/"
     }
   ],
-  "updated": "September 30, 2026",
+  "updated": "October 6, 2026",
   "correctionNote": "Updated September 6, 2026: corrected the earlier claim about exceeding WHO standards, separated water supply from disinfection, and clarified laboratory conditions and estimated costs. Source attribution and photo captions have also been revised.",
   "displayTitle": "Water by Hand",
   "deck": "A Human-Powered UV Device: Questions for a Field Trial",

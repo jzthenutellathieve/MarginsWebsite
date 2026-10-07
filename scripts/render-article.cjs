@@ -7,7 +7,7 @@ function renderArticle(article, snippets, assets) {
   const collaboration = isDevice ? snippets.collaboration : '';
   const diagram = isDevice ? snippets['device-figure'] : '';
   const embeddedVideo = isDevice ? snippets['device-video'] : '';
-  const projectLinks = isDevice ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/water/">Read the full water project →</a><a href="/projects/water/#laboratory-video">Watch the laboratory video ↓</a></div>' : id === 'after-cws-orange-county' ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/housing/">Read my housing navigation notes →</a></div>' : '';
+  const projectLinks = isDevice ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/water/">Read the full water project →</a><a href="/projects/water/#laboratory-video">Watch the laboratory video ↓</a></div>' : id === 'after-cws-orange-county' ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/housing/">Read the housing navigation notes →</a></div>' : '';
     const sourceRefs = block => {
       if (!block.sources || !block.sources.length) return '';
       return ' <span class="md-source-refs">'+block.sources.map(num => {
@@ -25,6 +25,7 @@ function renderArticle(article, snippets, assets) {
     const draftHistoryNote = history ? '<p class="md-update-date">'+escapeText(history)+'</p>' : '';
     const reportingNote = article.reportingNote ? '<div class="md-reporting-note"><p>'+escapeText(article.reportingNote)+'</p>'+(article.acknowledgements ? '<p class="md-acknowledgements">'+escapeText(article.acknowledgements)+'</p>' : '')+'</div>' : '';
     const correction = article.correctionNote ? '<p class="md-update-note">'+escapeText(article.correctionNote)+'</p>' : '';
+    const publicationNote = article.publicationNote ? '<aside class="md-publication-note" aria-label="Publication note"><h2>Publication note</h2><p>'+escapeText(article.publicationNote)+'</p></aside>' : '';
     const blocks = article.content.map((block, index) => {
       if (block.type === 'paragraph') return '<p>'+escapeText(block.text)+sourceRefs(block)+'</p>';
       if (block.type === 'heading') return (isDevice && block.text === 'One lamp, two electrical demands' ? embeddedVideo : '')+'<h2 id="section-'+index+'">'+escapeText(block.text)+'</h2>';
@@ -44,6 +45,6 @@ function renderArticle(article, snippets, assets) {
     }).join('');
     const contents = article.content.map((block, index) => block.type === 'heading' ? '<li><a href="#section-'+index+'">'+escapeText(block.text)+'</a></li>' : '').join('');
     const toolbar = '<div class="md-reader-tools">'+(contents ? '<details class="md-contents"><summary>In this article</summary><ol>'+contents+'<li><a href="#article-sources">Sources</a></li></ol></details>' : '<a href="#article-sources">Sources ↓</a>')+'<button type="button" data-mj-copy-link hidden>Copy article link ↗</button></div>';
-    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+escapeText(displayDate(article))+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+updated+projectNote+draftHistoryNote+reportingNote+toolbar+projectLinks+collaboration+'</header><div class="mj-reader-body">'+diagram+blocks+correction+'<section class="mj-sources" id="article-sources"><h2>Sources</h2><ol>'+sources+'</ol></section></div>';
+    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+escapeText(displayDate(article))+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+updated+projectNote+draftHistoryNote+reportingNote+toolbar+projectLinks+'</header><div class="mj-reader-body">'+diagram+blocks+collaboration+correction+publicationNote+'<section class="mj-sources" id="article-sources"><h2>Sources</h2><ol>'+sources+'</ol></section></div>';
 }
 module.exports = { renderArticle };

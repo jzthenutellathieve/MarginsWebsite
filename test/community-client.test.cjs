@@ -303,7 +303,7 @@ test('an ordinary account can join the conversation and request membership witho
   await form.emit('submit');
   const sent = app.requests.find(request => request.url.includes('action=request-membership'));
   assert.deepEqual(JSON.parse(sent.options.body), {message:'I would like to share observations from my neighborhood.'});
-  assert.match(app.account.textContent, /Your request is with Jerry/);
+  assert.match(app.account.textContent, /The editor is reviewing your request/);
   assert.equal(app.account.querySelector('.community-editor'), null);
   assert.equal(app.account.querySelector('.community-mine'), null);
 });
@@ -311,7 +311,7 @@ test('an ordinary account can join the conversation and request membership witho
 test('pending membership stays separate from publishing and rejected applicants can request again', async () => {
   const pending = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'pending'}});
   await pending.settle();
-  assert.match(pending.account.textContent, /You can still join the conversation in Field Notes/);
+  assert.match(pending.account.textContent, /You can still join the conversation in Notes on Displacement/);
   assert.equal(pending.account.querySelector('#membership').querySelector('form'), null);
   assert.equal(pending.account.querySelector('.community-editor'), null);
   const rejected = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'rejected'}});
@@ -322,7 +322,7 @@ test('pending membership stays separate from publishing and rejected applicants 
   await section.querySelector('form').emit('submit');
   const sent = rejected.requests.find(request => request.url.includes('action=request-membership'));
   assert.deepEqual(JSON.parse(sent.options.body), {message:''}, 'The introduction is optional');
-  assert.match(rejected.account.textContent, /Your request is with Jerry/);
+  assert.match(rejected.account.textContent, /The editor is reviewing your request/);
 });
 
 test('verification uses the approved membership returned by the server and offers article submission by email', async () => {

@@ -19,7 +19,7 @@ const fieldNotes = fs.readdirSync(path.join(root, 'content/field-notes')).filter
   .map(name => JSON.parse(read(`content/field-notes/${name}`))).sort((a, b) => b.date.localeCompare(a.date));
 const snippets = Object.fromEntries(['header', 'footer', 'newsletter', 'collaboration', 'device-figure', 'device-video']
   .map(name => [name, read(`templates/${name}.html`)]));
-const description = 'The Margins documents displacement and the places people call home through articles, shared field notes and projects on housing and water access.';
+const description = 'The Margins publishes reporting, photographs and personal accounts of displacement, alongside projects on housing and water access.';
 const legacyRoutes = Object.fromEntries(Object.entries(pages).map(([name, page]) => [name, page.path]));
 legacyRoutes[''] = '/';
 const seen = new Set();

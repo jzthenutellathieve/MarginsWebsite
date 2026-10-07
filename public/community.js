@@ -407,7 +407,7 @@
     verifyForm.hidden = true;
     const code = field('Code from your email', 'text', {required:true, minLength:6, maxLength:10, inputMode:'numeric', autoComplete:'one-time-code', pattern:'[0-9]{6,10}'});
     const name = field('Display name', 'text', {required:true, maxLength:80, autoComplete:'nickname'});
-    const nameHelp = element('p', 'This name will appear with your field notes and comments.', 'community-help');
+    const nameHelp = element('p', 'This name will appear with your notes and comments.', 'community-help');
     const verifyButton = button('Sign in', 'submit');
     const changeEmail = button('Use another email');
     changeEmail.classList.add('community-button-quiet');
@@ -464,7 +464,7 @@
     section.id = 'membership';
     if (canContribute()) {
       section.append(element('h2', 'Ready to share a story?'),
-        element('p', 'As a member, you can share a field note below or send an article to Jerry.', 'community-help'));
+        element('p', 'As a member, you can share a field note below or send an article to the editor.', 'community-help'));
       const article = element('a', 'Send an article');
       article.href = 'mailto:xingtong.themargins@gmail.com?subject=' + encodeURIComponent('Article submission — The Margins');
       section.append(article);
@@ -472,7 +472,7 @@
     }
     section.append(element('h2', 'Want to share your own stories?'));
     if (state.user.membership === 'pending') {
-      section.append(element('p', 'Your request is with Jerry. You can still join the conversation in Field Notes.', 'community-help'));
+      section.append(element('p', 'The editor is reviewing your request. You can still join the conversation in Notes on Displacement.', 'community-help'));
       const check = button('Check request status');
       const feedback = status();
       check.addEventListener('click', async () => {

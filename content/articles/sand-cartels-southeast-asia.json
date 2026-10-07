@@ -1,13 +1,12 @@
 {
   "id": "sand-cartels-southeast-asia",
   "title": "Sand Cartels: Illegal Dredging in Southeast Asia and Coastal Displacement",
-  "subtitle": "I wrote my first essay for The Margins after learning about land reclamation during my time in Singapore. It received a gold medal in the Spring 2025 Harvard International Review Academic Writing Contest and is published here in its original form.",
+  "subtitle": "How sand extraction and the trade supplying land reclamation affect riverbanks, coastlines and the people living there.",
   "tag": "Displacement",
   "date": "May 28, 2025",
   "readTime": "7 min",
-  "award": "Award-winning essay · Harvard International Review, Spring 2025",
   "thumbnail": "/images/iStock-157603815.jpg",
-  "excerpt": "An estimated 20 to 50 million Bangladeshis are projected to be displaced from coastal areas due to river erosion by 2050. The relentless extraction of sand in Southeast Asia is leaving communities facing an uncertain future.",
+  "excerpt": "How sand extraction and the trade supplying land reclamation affect riverbanks, coastlines and the people living there.",
   "content": [
     {
       "type": "paragraph",
@@ -18,7 +17,7 @@
     },
     {
       "type": "paragraph",
-      "text": "This is just one example among countless cases of displacement caused by sand mining worldwide. An estimated 20 to 50 million Bangladeshis are projected to be displaced from coastal areas due to river erosion by 2050. The relentless extraction of sand in Southeast Asia is leaving communities like Rojoniline facing an uncertain future, only to fulfill Singapore’s land reclamation ambitions. As a key source for its artificial land expansion, Singapore’s high demand for imported sand from countries like Cambodia and Indonesia has led to excessive sand mining, causing land loss and forced displacement. Despite efforts to outlaw sand mining and transnational trade, attempts to curb sand smuggling have largely failed due to various factors. With increasing coastal displacement, these illegal sand mining and smuggling activities demand effective solutions and urgent global attention.",
+      "text": "An estimated 20 to 50 million Bangladeshis are projected to be displaced from coastal areas due to river erosion by 2050. The relentless extraction of sand in Southeast Asia is leaving communities like Rojoniline facing an uncertain future, only to fulfill Singapore’s land reclamation ambitions. As a key source for its artificial land expansion, Singapore’s high demand for imported sand from countries like Cambodia and Indonesia has led to excessive sand mining, causing land loss and forced displacement. Despite efforts to outlaw sand mining and transnational trade, attempts to curb sand smuggling have largely failed due to various factors.",
       "sources": [
         2,
         3,
@@ -115,7 +114,7 @@
     },
     {
       "type": "paragraph",
-      "text": "To prevent this future, governments must act now. Technological innovations like blockchain-based tracking and geo-engineered buffer zones offer promising paths forward, but they require political will and transnational cooperation. Policymakers, especially in import-reliant nations like Singapore, must take responsibility not just for their supply chains but for the lives displaced in the process. Global stewardship of sand as a shared resource is no longer optional—it is urgent."
+      "text": "Tracking shipments would still leave practical questions: who checks whether the recorded extraction matches the permit, who investigates a discrepancy, and what happens when a vessel stops transmitting? Any proposed system needs to explain how a warning leads to an inspection or enforcement action."
     }
   ],
   "citations": [
@@ -189,5 +188,6 @@
   "deck": "Illegal Dredging in Southeast Asia and Coastal Displacement",
   "format": "Essay",
   "region": "Southeast Asia",
-  "projectNote": "Theme A: Global Commons and Stewardship of Shared Resources"
+  "publicationNote": "I began this essay after learning about land reclamation during my time in Singapore. It received a gold medal in the Spring 2025 Harvard International Review Academic Writing Contest, under the theme “Global Commons and Stewardship of Shared Resources.” The text has since been edited.",
+  "updated": "October 6, 2026"
 }
