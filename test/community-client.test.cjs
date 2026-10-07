@@ -160,9 +160,8 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
   const header = create('header');
   const join = create('a', { href: 'mailto:xingtong.themargins@gmail.com?subject=Joining%20The%20Margins', 'data-community-account': '' }, 'Join us');
   const accountLink = join;
-  const membershipLink = create('a', {href:'mailto:xingtong.themargins@gmail.com?subject=Membership', 'data-community-membership':''}, 'Become a member');
   const contributeLink = create('a', {href:'mailto:xingtong.themargins@gmail.com?subject=Field%20Note', 'data-community-contribute':''}, 'Share a field note');
-  header.append(join, membershipLink, contributeLink);
+  header.append(join, contributeLink);
   const account = create('section', { id: 'community-account' });
   const fallback = create('p', { 'data-community-fallback': '' }, 'Send a Field Note by email.');
   const status = create('p', { 'data-community-status': '' });
@@ -180,12 +179,18 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
   account.append(fallback, status);
   body.append(header, account, feed);
   const requests = [];
+  const resendTimers = new Map();
   const window = { document, location: new URL('https://themargins.example/field-notes/'),
-    addEventListener() {}, setTimeout, clearTimeout, crypto: { randomUUID: () => 'test-page-load' } };
+    addEventListener() {},
+    setTimeout(callback, delay) {
+      if (delay === 60000) { const id = {}; resendTimers.set(id, callback); return id; }
+      return setTimeout(callback, delay);
+    },
+    clearTimeout(id) { if (resendTimers.has(id)) resendTimers.delete(id); else clearTimeout(id); }, crypto: { randomUUID: () => 'test-page-load' } };
   const fetch = async (url, options = {}) => {
     requests.push({ url: String(url), options });
     const parsed = new URL(url, window.location);
-    assert.equal(parsed.pathname, '/api/community');
+    assert.equal(parsed.pathname, '/api/community/');
     assert.equal(options.credentials, 'same-origin');
     if (unavailable) throw new Error('Network unavailable');
     const action = parsed.searchParams.get('action');
@@ -197,7 +202,6 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
     else if (action === 'note') payload = { likes: 0, liked: false, views: 0, comments: [], canModerate: false, ...noteDetails };
     else if (action === 'mine') payload = {notes:[]};
     else if (action === 'review') payload = {requests:[], notes:[], comments:[]};
-    else if (action === 'request-membership') payload = {membership:'pending', isMember:false};
     else if (action === 'like') payload = {likes:1, liked:true};
     else if (['comment', 'moderate', 'request-code'].includes(action)) payload = {};
     else throw new Error('Unexpected community request: ' + action);
@@ -209,7 +213,8 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
   }
   vm.runInNewContext(source, { document, window, location: window.location, fetch, URL, URLSearchParams, FileReader,
     AbortController, AbortSignal, setTimeout, clearTimeout, console, crypto: window.crypto });
-  return { document, feed, account, accountLink, membershipLink, contributeLink, fallback, status, join, staticNotes, requests,
+  return { document, feed, account, accountLink, contributeLink, fallback, status, join, staticNotes, requests,
+    expireResendTimer() { for (const [id, callback] of resendTimers) { resendTimers.delete(id); callback(); } },
     async settle() { for (let index = 0; index < 6; index++) await new Promise(resolve => setImmediate(resolve)); } };
 }
 
@@ -221,7 +226,6 @@ for (const scenario of [{ name: 'unconfigured storage', ready: false }, { name: 
     assert.match(app.feed.textContent, /The original published note remains readable/);
     assert.equal(new URL(app.join.href).pathname, 'xingtong.themargins@gmail.com');
     assert.equal(new URL(app.join.href).protocol, 'mailto:');
-    assert.equal(new URL(app.membershipLink.href).protocol, 'mailto:');
     assert.equal(new URL(app.contributeLink.href).protocol, 'mailto:');
     assert.equal(app.join.hidden, false);
     assert.equal(app.account.hidden, false);
@@ -248,7 +252,6 @@ test('published member notes merge with existing notes by publication date, newe
   assert.equal(app.account.hidden, false);
   assert.ok(app.account.querySelector('form'), 'Online sign-in is available when the backend is ready');
   assert.equal(app.accountLink.textContent, 'Log in / Sign up');
-  assert.equal(app.membershipLink.href, '/account/#membership');
 });
 
 test('member notes and comments render literal text and skip unsafe media URLs', async () => {
@@ -280,7 +283,7 @@ test('member notes and comments render literal text and skip unsafe media URLs',
   assert.equal(note.querySelector('figure').style.getPropertyValue('--note-ratio'), '1.5');
 });
 
-test('an ordinary account can submit notes and request membership as separate actions', async () => {
+test('a verified account opens the note composer without a membership application', async () => {
   const app = page({user:{id:'reader-id', name:'Jerry', isAdmin:false, isMember:false, membership:'none'}});
   await app.settle();
   assert.equal(app.accountLink.textContent, 'My profile');
@@ -296,39 +299,23 @@ test('an ordinary account can submit notes and request membership as separate ac
   await comment.emit('submit');
   assert.ok(app.requests.some(request => request.url.includes('action=like')));
   assert.ok(app.requests.some(request => request.url.includes('action=comment')));
-  const membership = app.account.querySelector('#membership');
-  const form = membership.querySelector('form');
-  assert.equal(form.hidden, true);
-  await membership.querySelector('button').emit('click');
-  assert.equal(form.hidden, false);
-  assert.equal(form.querySelector('textarea').maxLength, 1000);
-  form.querySelector('textarea').value = 'I would like to share observations from my neighborhood.';
-  await form.emit('submit');
-  const sent = app.requests.find(request => request.url.includes('action=request-membership'));
-  assert.deepEqual(JSON.parse(sent.options.body), {message:'I would like to share observations from my neighborhood.'});
-  assert.match(app.account.textContent, /The editor is reviewing your membership request/);
-  assert.ok(app.account.querySelector('.community-editor'));
-  assert.ok(app.account.querySelector('.community-mine'));
+  assert.equal(app.account.querySelector('.community-membership'), null);
+  assert.equal(app.account.querySelectorAll('section')[0].id, 'share-a-note');
+  assert.deepEqual(app.account.querySelectorAll('.community-account-nav a').map(a => a.href), ['#share-a-note','#my-notes','#my-profile']);
+  assert.equal(app.requests.some(request => request.url.includes('action=request-membership')), false);
 });
 
-test('pending membership stays separate from publishing and rejected applicants can request again', async () => {
-  const pending = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'pending'}});
-  await pending.settle();
-  assert.match(pending.account.textContent, /You can submit notes while you wait/);
-  assert.equal(pending.account.querySelector('#membership').querySelector('form'), null);
-  assert.ok(pending.account.querySelector('.community-editor'));
-  const rejected = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership:'rejected'}});
-  await rejected.settle();
-  const section = rejected.account.querySelector('#membership');
-  assert.match(section.textContent, /welcome to introduce yourself again/);
-  await section.querySelector('button').emit('click');
-  await section.querySelector('form').emit('submit');
-  const sent = rejected.requests.find(request => request.url.includes('action=request-membership'));
-  assert.deepEqual(JSON.parse(sent.options.body), {message:''}, 'The introduction is optional');
-  assert.match(rejected.account.textContent, /The editor is reviewing your membership request/);
+test('legacy membership states do not add another application step', async () => {
+  for (const membership of ['pending','rejected']) {
+    const app = page({user:{id:'reader-id', name:'Reader', isAdmin:false, isMember:false, membership}});
+    await app.settle();
+    assert.ok(app.account.querySelector('.community-editor'));
+    assert.equal(app.account.querySelector('.community-membership'), null);
+    assert.doesNotMatch(app.account.textContent, /membership request|Become a member/);
+  }
 });
 
-test('verification uses the approved membership returned by the server and offers article submission by email', async () => {
+test('email verification opens posting and offers full article submission by email', async () => {
   const approved = {id:'member-id', name:'Contributor', isAdmin:false, isMember:true, membership:'approved'};
   const app = page({responses:{verify:{user:approved}}});
   await app.settle();
@@ -344,8 +331,8 @@ test('verification uses the approved membership returned by the server and offer
   assert.ok(app.account.querySelector('.community-mine'));
   assert.equal(app.account.querySelector('.community-review'), null);
   assert.equal(app.contributeLink.href, '/account/#share-a-note');
-  const article = app.account.querySelector('#membership').querySelector('a');
-  assert.equal(article.textContent, 'Send an article');
+  const article = app.account.querySelectorAll('a').find(a => a.href?.startsWith('mailto:'));
+  assert.equal(article.textContent, 'Send a full-length article to the editor');
   const destination = new URL(article.href);
   assert.equal(destination.protocol, 'mailto:');
   assert.equal(destination.pathname, 'xingtong.themargins@gmail.com');
@@ -415,25 +402,47 @@ test('a returning reader can verify without resetting their existing display nam
   assert.ok(app.account.querySelector('.community-editor'));
 });
 
-test('editors approve and reject membership requests through the membership moderation action', async () => {
-  const requests = [
-    {id:'candidate-1', name:'<script>One</script>', message:'I would like to write.', createdAt:'2026-09-27T12:00:00Z'},
-    {id:'candidate-2', name:'Two', message:'', createdAt:'2026-09-27T12:01:00Z'}
-  ];
+test('editors review notes and comments without a membership queue', async () => {
+  const notes = [{id:'community-one',title:'<script>A note</script>',text:'An observation.',date:'2026-09-27',media:[]}];
+  const comments = [{id:'comment-two',name:'Two',text:'A comment.'}];
   const app = page({user:{id:'editor-id', name:'Jerry', isAdmin:true, isMember:true, membership:'approved'},
-    responses:{review:{requests, notes:[], comments:[]}}});
+    responses:{review:{requests:[{id:'old-request',name:'Old applicant'}], notes, comments}}});
   await app.settle();
   const review = app.account.querySelector('.community-review');
-  assert.ok(review);
   const cards = review.querySelectorAll('article');
   assert.equal(cards.length, 2);
-  assert.match(cards[0].textContent, /<script>One<\/script>/);
+  assert.match(cards[0].textContent, /<script>A note<\/script>/);
   assert.equal(cards[0].querySelector('script'), null);
   await cards[0].querySelectorAll('button').find(button => button.textContent === 'Approve').emit('click');
   await cards[1].querySelectorAll('button').find(button => button.textContent === 'Reject').emit('click');
   assert.deepEqual(app.requests.filter(request => request.url.includes('action=moderate')).map(request => JSON.parse(request.options.body)), [
-    {kind:'membership', id:'candidate-1', approve:true},
-    {kind:'membership', id:'candidate-2', approve:false}
+    {kind:'note', id:'community-one', approve:true},
+    {kind:'comment', id:'comment-two', approve:false}
   ]);
   assert.equal(review.querySelectorAll('article').length, 0);
+});
+
+test('the code step identifies the destination and resends only after the cooldown', async () => {
+  const app = page();
+  await app.settle();
+  const [request,verify] = app.account.querySelectorAll('form');
+  request.querySelector('input').value = 'reader@example.com';
+  await request.emit('submit');
+  assert.equal(verify.hidden, false);
+  assert.equal(verify.querySelector('.community-code-destination').textContent, 'Check reader@example.com for your code.');
+  assert.match(verify.textContent, /accounts@themarginsjournals.com/);
+  const resend = verify.querySelectorAll('button').find(b => b.textContent.startsWith('Resend'));
+  assert.equal(resend.disabled,true);
+  await resend.emit('click');
+  assert.equal(app.requests.filter(r => r.url.includes('action=request-code')).length,1);
+  app.expireResendTimer();
+  assert.equal(resend.disabled,false);
+  await resend.emit('click');
+  const requests = app.requests.filter(r => r.url.includes('action=request-code'));
+  assert.equal(requests.length,2);
+  assert.deepEqual(JSON.parse(requests[1].options.body),{email:'reader@example.com'});
+  assert.equal(resend.disabled,true);
+  await verify.querySelectorAll('button').find(b => b.textContent === 'Use another email').emit('click');
+  assert.equal(request.hidden,false);
+  assert.equal(verify.hidden,true);
 });

@@ -131,7 +131,7 @@ function createBackend({env = process.env, fetchImpl = fetch} = {}) {
   const rpc = (name, body) => request('/rest/v1/rpc/' + name, {method:'POST', body});
   return {
     ready:config.ready,
-    ping:() => Promise.all([table('community_targets', 'select=note_id&limit=0'), table('community_memberships', 'select=user_id&limit=0'), table('community_profiles', 'select=avatar_path&limit=0')]),
+    ping:() => Promise.all([table('community_targets', 'select=note_id&limit=0'), table('community_profiles', 'select=avatar_path&limit=0')]),
     rate:(key, limit, seconds) => rpc('community_rate_limit', {p_bucket_key:key,p_limit:limit,p_window_seconds:seconds}),
     requestCode:address => request('/auth/v1/otp', {method:'POST',auth:true,body:{email:address,create_user:true}}),
     verify:(address, token) => request('/auth/v1/verify', {method:'POST',auth:true,body:{email:address,token,type:'email'}}),
@@ -144,9 +144,6 @@ function createBackend({env = process.env, fetchImpl = fetch} = {}) {
     uploadAvatar:(objectPath,info) => request('/storage/v1/object/' + AVATARS + '/' + objectPath, {method:'POST',body:info,binary:true,headers:{'x-upsert':'false'}}),
     deleteAvatar:objectPath => request('/storage/v1/object/' + AVATARS, {method:'DELETE',body:{prefixes:[objectPath]}}),
     syncOwner:() => rpc('community_sync_owner', {}),
-    membership:async id => (await table('community_memberships', 'select=status&user_id=eq.' + id + '&limit=1'))[0] || null,
-    requestMembership:(id,message) => rpc('community_request_membership', {p_user_id:id,p_message:message}),
-    membershipRequests:() => table('community_memberships', 'select=user_id,message,created_at&status=eq.pending&order=created_at.asc&limit=100'),
     isAdmin:async id => (await table('community_admins', 'select=user_id&user_id=eq.' + id + '&limit=1')).length === 1,
     ensureStatic:id => table('community_targets', 'on_conflict=note_id', {method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:{note_id:id,published:true}}),
     target:async id => (await table('community_targets','select=note_id,published&note_id=eq.' + id + '&limit=1'))[0] || null,
@@ -185,9 +182,9 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
   }
   async function account(user,profile) {
     const isAdmin = user.email?.toLowerCase() === OWNER_EMAIL && await backend.isAdmin(user.id);
-    const membership = isAdmin ? 'approved' : (await backend.membership(user.id))?.status || 'none';
-    if (!['none','pending','approved','rejected'].includes(membership)) throw new Error('Invalid membership state');
-    return {id:user.id,name:profile.name,avatarPath:profile.avatar_path || null,isAdmin,membership,isMember:membership === 'approved'};
+    // Every verified account is a member. Editorial access still requires the
+    // verified owner email and an administrator record; a display name cannot grant it.
+    return {id:user.id,name:profile.name,avatarPath:profile.avatar_path || null,isAdmin,membership:'approved',isMember:true};
   }
   async function identity(req,res) {
     const jar = cookies(req); let token = jar[ACCESS]; let user;
@@ -275,14 +272,17 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
         if (!user.isAdmin) fail(403,'Editor access required');
         const names = new Map();
         const comments = await Promise.all((await backend.listComments(null,true)).map(async c => ({id:c.id,noteId:c.note_id,name:await authorName(c.author_id,names),text:c.text,createdAt:c.created_at,status:c.status})));
-        const requests = await Promise.all((await backend.membershipRequests()).map(async r => ({id:r.user_id,name:await authorName(r.user_id,names),message:r.message,createdAt:r.created_at})));
-        return reply(res,200,{notes:await notesFor('review',user),comments,requests});
+        return reply(res,200,{notes:await notesFor('review',user),comments});
       }
-      if (!['request-code','verify','logout','like','comment','view','upload','submit','moderate','request-membership','profile'].includes(action)) fail(404,'Unknown action');
+      if (!['request-code','verify','logout','like','comment','view','upload','submit','moderate','profile'].includes(action)) fail(404,'Unknown action');
       const body = await readBody(req,['upload','profile'].includes(action) ? MAX_BODY : 32000);
       if (action === 'request-code') {
         const address = email(body.email); await limit('email:' + address,3,600);
-        try { await backend.requestCode(address); } catch (error) { if (![400,422,429].includes(error.status)) throw error; }
+        try { await backend.requestCode(address); }
+        catch (error) {
+          if (error.status === 429) fail(429,'Please wait before requesting another code.');
+          if (![400,422].includes(error.status)) throw error;
+        }
         return reply(res,200,{message:'If this address can receive a sign-in code, check your inbox.'});
       }
       if (action === 'verify') {
@@ -315,7 +315,7 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
       }
       const user = await identity(req,res);
       if (!user) fail(401,'Sign in to continue');
-      await limit('user:' + user.id + ':' + action, action === 'request-membership' ? 3 : action === 'submit' ? 10 : ['upload','comment','profile'].includes(action) ? 20 : 120, ['submit','upload','comment','profile','request-membership'].includes(action) ? 3600 : 60);
+      await limit('user:' + user.id + ':' + action, action === 'submit' ? 10 : ['upload','comment','profile'].includes(action) ? 20 : 120, ['submit','upload','comment','profile'].includes(action) ? 3600 : 60);
       if (action === 'profile') {
         if (Object.keys(body).some(key => !['name','avatar'].includes(key))) fail(400,'Only your name and photo can be changed here');
         const name = text(body.name,80);
@@ -335,13 +335,6 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
           try { await backend.deleteAvatar(result.previous_avatar_path); } catch { /* Retention cleanup can retry. */ }
         }
         return reply(res,200,{user:await publicUser({...user,name,avatarPath:result.avatar_path}),message:'Profile saved.'});
-      }
-      if (action === 'request-membership') {
-        if (['id','userId','user_id','status','isMember','isAdmin'].some(key => key in body)) fail(400,'Membership is reviewed by the editor');
-        const message = text(body.message ?? '',1000,false);
-        const result = user.isAdmin ? {status:'approved'} : await backend.requestMembership(user.id,message);
-        const approved = result.status === 'approved';
-        return reply(res,200,{status:result.status,membership:result.status,isMember:approved,message:approved ? 'You are already a member.' : 'Your membership request is awaiting review.'});
       }
       if (action === 'like') {
         if (typeof body.liked !== 'boolean') fail(400,'Choose a like state');
@@ -375,7 +368,7 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
         return reply(res,201,{...result,message:'Your field note is awaiting review.'});
       }
       if (!user.isAdmin) fail(403,'Editor access required');
-      if (!['note','comment','membership'].includes(body.kind) || typeof body.approve !== 'boolean' || typeof body.id !== 'string' || !(body.kind === 'note' ? /^community-[a-f0-9-]{36}$/.test(body.id) : UUID.test(body.id))) fail(400,'Invalid moderation action');
+      if (!['note','comment'].includes(body.kind) || typeof body.approve !== 'boolean' || typeof body.id !== 'string' || !(body.kind === 'note' ? /^community-[a-f0-9-]{36}$/.test(body.id) : UUID.test(body.id))) fail(400,'Invalid moderation action');
       return reply(res,200,await backend.moderate(body.kind,body.id,body.approve,user.id));
     } catch (error) {
       return reply(res,error instanceof PublicError ? error.status : 503,{error:error instanceof PublicError ? error.message : 'Member features are temporarily unavailable. Please try again later.'});

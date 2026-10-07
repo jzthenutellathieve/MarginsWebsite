@@ -176,7 +176,7 @@ test('profile updates require a verified identity and cannot choose another acco
   const saved = await call(fn,'profile',{method:'POST',auth:true,body:{name:'<svg>Reader</svg>',avatar:{base64:png,mime:'image/png'}}});
   assert.equal(saved.statusCode,200);
   assert.equal(saved.body.user.name,'<svg>Reader</svg>');
-  assert.equal(saved.body.user.isMember,false);
+  assert.equal(saved.body.user.isMember,true);
   assert.match(saved.body.user.avatar,/object\/sign\/community-avatars\//);
   assert.equal(db._uploads.size,0,'An avatar is not a reusable note-upload receipt');
   assert.equal(db._avatars.size,1);
@@ -219,13 +219,13 @@ test('modern Supabase keys use apikey while authenticated calls keep the user JW
   assert.equal(calls[2][1].headers.Authorization,'Bearer user-session-jwt');
 });
 
-test('ordinary verified accounts can submit pending notes without becoming members', async () => {
+test('every verified account is a member who can submit pending notes without an application', async () => {
   const db=backend({membership:async () => null,profile:async id => ({user_id:id,name:'JSON'})});
   const fn=handler(db);
   const session=(await call(fn,'session',{auth:true})).body.user;
-  assert.equal(session.membership,'none'); assert.equal(session.isMember,false);
+  assert.equal(session.membership,'approved'); assert.equal(session.isMember,true);
   const verified=await call(fn,'verify',{method:'POST',body:{email:'member@example.com',token:'123456',name:'JSON'}});
-  assert.equal(verified.body.user.membership,'none');assert.equal(verified.body.user.isMember,false);
+  assert.equal(verified.body.user.membership,'approved');assert.equal(verified.body.user.isMember,true);
   assert.equal((await call(fn,'upload',{method:'POST',auth:true,body:{base64:png,mime:'image/png'}})).statusCode,201);
   assert.equal(db._uploads.size,1);
   const submitted = await call(fn,'submit',{method:'POST',auth:true,body:{title:'A note',text:'Observation',date:'2026-09-27',media:[],permission:true}});
@@ -233,44 +233,43 @@ test('ordinary verified accounts can submit pending notes without becoming membe
   assert.equal(submitted.body.status,'pending');
   assert.equal(db._notes.length,1);
   assert.deepEqual((await call(fn,'feed')).body.notes,[]);
-  assert.equal((await call(fn,'session',{auth:true})).body.user.isMember,false);
+  assert.equal((await call(fn,'session',{auth:true})).body.user.isMember,true);
   assert.equal((await call(fn,'moderate',{method:'POST',auth:true,body:{kind:'note',id:submitted.body.id,approve:true}})).statusCode,403);
   assert.equal((await call(fn,'like',{method:'POST',auth:true,body:{id:noteId,liked:true}})).statusCode,200);
   assert.equal((await call(fn,'comment',{method:'POST',auth:true,body:{id:noteId,text:'A reader comment'}})).statusCode,201);
 });
 
-test('membership requests stay pending until owner approval and rejected applicants can reapply', async () => {
-  let state=null;let message='';let moderateCalls=0;
+test('member signup does not grant editor access and the old application endpoints are retired', async () => {
+  let moderated = false;
   const db=backend({
     getUser:async token => ({id:token==='owner' ? otherId : userId,email:token==='owner' ? 'xingtong.themargins@gmail.com' : 'member@example.com',email_confirmed_at:'2026-01-01'}),
-    membership:async id => id===userId && state ? {status:state} : null,
     isAdmin:async id => id===otherId,
-    requestMembership:async (id,text) => {assert.equal(id,userId);message=text;if(state!=='approved')state='pending';return {status:state};},
-    membershipRequests:async () => state==='pending' ? [{user_id:userId,message,created_at:'2026-09-28T00:00:00Z'}] : [],
-    moderate:async (kind,id,approve,adminId) => {moderateCalls++;assert.equal(kind,'membership');assert.equal(id,userId);assert.equal(adminId,otherId);state=approve ? 'approved' : 'rejected';return {id,kind,status:state};}
+    membership:async () => {throw Error('Legacy membership status must not gate accounts');},
+    membershipRequests:async () => {throw Error('No separate membership queue');},
+    moderate:async () => {moderated=true;return {};}
   });
   const fn=handler(db);const owner={cookie:'__Host-margins-access=owner'};
-  assert.equal((await call(fn,'request-membership',{method:'POST',body:{message:'hello'}})).statusCode,401);
-  assert.equal((await call(fn,'request-membership',{method:'POST',auth:true,body:{message:'hello',status:'approved'}})).statusCode,400);
-  assert.equal((await call(fn,'request-membership',{method:'POST',auth:true,body:{message:'x'.repeat(1001)}})).statusCode,400);
-  const requested=await call(fn,'request-membership',{method:'POST',auth:true,body:{message:'I would like to share photos.'}});
-  assert.equal(requested.body.membership,'pending');assert.equal(requested.body.isMember,false);
-  assert.equal((await call(fn,'session',{auth:true})).body.user.membership,'pending');
+  const member=(await call(fn,'session',{auth:true})).body.user;
+  assert.equal(member.isMember,true);assert.equal(member.isAdmin,false);
   assert.equal((await call(fn,'review',{auth:true})).statusCode,403);
-  const queue=await call(fn,'review',{headers:owner});
-  assert.deepEqual(queue.body.requests,[{id:userId,name:'Member <img src=x onerror=alert(1)>',message:'I would like to share photos.',createdAt:'2026-09-28T00:00:00Z'}]);
-  assert.equal((await call(fn,'moderate',{method:'POST',auth:true,body:{kind:'membership',id:userId,approve:true}})).statusCode,403);
-  assert.equal(moderateCalls,0);
-  await call(fn,'moderate',{method:'POST',headers:owner,body:{kind:'membership',id:userId,approve:false}});
-  assert.equal((await call(fn,'session',{auth:true})).body.user.membership,'rejected');
-  await call(fn,'request-membership',{method:'POST',auth:true,body:{message:'A new request.'}});
-  assert.equal(state,'pending');
-  await call(fn,'moderate',{method:'POST',headers:owner,body:{kind:'membership',id:userId,approve:true}});
-  assert.equal((await call(fn,'session',{auth:true})).body.user.isMember,true);
-  assert.equal((await call(fn,'upload',{method:'POST',auth:true,body:{base64:png,mime:'image/png'}})).statusCode,201);
-  assert.equal((await call(fn,'submit',{method:'POST',auth:true,body:{title:'A note',text:'Observation',date:'2026-09-27',media:[],permission:true}})).statusCode,201);
-  const repeated=await call(fn,'request-membership',{method:'POST',auth:true,body:{message:'Still a member'}});
-  assert.equal(repeated.body.membership,'approved');
-  const ownerSession=(await call(fn,'session',{headers:owner})).body.user;
-  assert.equal(ownerSession.isAdmin,true);assert.equal(ownerSession.isMember,true);assert.equal(ownerSession.membership,'approved');
+  assert.equal((await call(fn,'request-membership',{method:'POST',auth:true,body:{}})).statusCode,404);
+  assert.equal((await call(fn,'moderate',{method:'POST',auth:true,body:{kind:'note',id:'community-'+eventId,approve:true}})).statusCode,403);
+  assert.equal((await call(fn,'moderate',{method:'POST',headers:owner,body:{kind:'membership',id:userId,approve:true}})).statusCode,400);
+  assert.equal(moderated,false);
+  assert.deepEqual((await call(fn,'review',{headers:owner})).body,{notes:[],comments:[]});
+  const editor=(await call(fn,'session',{headers:owner})).body.user;
+  assert.equal(editor.isAdmin,true);assert.equal(editor.isMember,true);
+});
+
+test('email throttling is reported as a retry error instead of implying a code was sent', async () => {
+  const throttled=handler(backend({requestCode:async () => {throw new ProviderError(429);}}));
+  const result=await call(throttled,'request-code',{method:'POST',body:{email:'reader@example.com'}});
+  assert.equal(result.statusCode,429);
+  assert.match(result.body.error,/wait before requesting another code/);
+  for (const status of [400,422]) {
+    const fn=handler(backend({requestCode:async () => {throw new ProviderError(status);}}));
+    const response=await call(fn,'request-code',{method:'POST',body:{email:'reader@example.com'}});
+    assert.equal(response.statusCode,200);
+    assert.doesNotMatch(JSON.stringify(response.body),/already exists|not found/);
+  }
 });
