@@ -79,7 +79,6 @@ function documentFor({ title, pathname, body, active, summary = description, art
       { '@type': 'Person', name: 'Xingtong Zou' }, { '@type': 'Person', name: 'Xingwei Wang' }
     ] : { '@type': 'Person', name: 'Xingtong Jerry Zou' },
     datePublished: new Date(article.date + ' 00:00:00 UTC').toISOString(),
-    ...(article.updated ? { dateModified: new Date(article.updated + ' 00:00:00 UTC').toISOString() } : {}),
     publisher: { '@type': 'Organization', name: 'The Margins' }
   }).replace(/</g, '\\u003c')}</script>` : '';
   return `<!DOCTYPE html>
