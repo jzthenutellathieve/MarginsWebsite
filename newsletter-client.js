@@ -29,9 +29,6 @@
   // static hosts. No email is saved to browser storage.
   const configuration = request().then(({ response, data }) => response.ok && data.ready === true)
     .catch(() => false);
-  configuration.then(ready => {
-    if (ready && !busy) status.textContent = 'Subscribe for new articles, or request another welcome email if you are already subscribed.';
-  });
 
   form.addEventListener('submit', async event => {
     event.preventDefault();

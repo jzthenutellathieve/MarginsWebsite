@@ -1,7 +1,7 @@
 {
   "id": "refugee-water-crisis-27000-problem",
   "title": "The $27,000 Problem: Musasa’s Broken Pump and the Cost of Waiting",
-  "subtitle": "Water trucks brought relief to Musasa in July. Residents still wanted the pump repaired. Reports from other settlements show why keeping water running takes more than an emergency delivery.",
+  "subtitle": "Water trucks brought relief to Musasa in July. Residents still wanted the pump repaired.",
   "tag": "Water",
   "date": "August 5, 2026",
   "readTime": "6 min",
@@ -108,7 +108,7 @@
     },
     {
       "type": "paragraph",
-      "text": "That is useful, but a detected fault still needs someone able to act on it. A sensor cannot supply a replacement motor, arrange its delivery or fund a technician. DRIP’s partners describe financing and service arrangements alongside the technology for that reason. For a refugee settlement considering a similar approach, the questions would be practical: who receives the alert, who is responsible for the repair, and what money can that person use without waiting for another emergency appeal?",
+      "text": "A sensor cannot supply a replacement motor, arrange its delivery or fund a technician. DRIP’s partners describe financing and service arrangements alongside the technology for that reason. For a refugee settlement considering a similar approach, the questions would be practical: who receives the alert, who is responsible for the repair, and what money can that person use without waiting for another emergency appeal?",
       "sources": [
         9,
         10
@@ -190,7 +190,7 @@
       "url": "https://www.unhcr.org/us/news/speeches-and-statements/high-commissioner-s-statement-launch-kenya-s-shirika-plan"
     }
   ],
-  "updated": "September 27, 2026",
+  "updated": "November 3, 2026",
   "correctionNote": "Updated September 6, 2026: added the July water deliveries at Musasa; corrected the Jordan funding comparison and the distinction between budgets and spending; dated funding forecasts; and clarified interview attribution. Unverified repair metrics and programme-specific funding-cut claims have been removed.",
   "displayTitle": "The $27,000 Problem",
   "deck": "Musasa’s Broken Pump and the Cost of Waiting",
