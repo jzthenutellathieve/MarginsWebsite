@@ -3,16 +3,20 @@
 
   const account = document.querySelector('#community-account');
   const feed = document.querySelector('#community-feed');
+  const noteWriter = document.querySelector('[data-note-composer]');
+  const composeDetails = noteWriter?.closest('details');
   const accountLinks = [...document.querySelectorAll('[data-community-account]')];
   const contributeLinks = [...document.querySelectorAll('[data-community-contribute]')];
-  const originalLinks = new Map([...accountLinks, ...contributeLinks].map(link => [link, {href:link.getAttribute('href'), text:link.textContent}]));
   const availability = document.querySelector('[data-community-status]');
   const state = {ready:false, user:null, notes:new Map()};
   const visibleNotes = new Set();
   const acceptedImages = new Set(['image/jpeg', 'image/png', 'image/webp']);
   let fieldSequence = 0;
   let accountUI;
-  let disposeLogin;
+  const loginCleanups = new WeakMap();
+  const editorBindings = new WeakMap();
+  let sessionGeneration = 0, sessionKnown = false, unavailable = false;
+  let notesStarted = false;
   let observer;
 
   function element(tag, text, className) {
@@ -59,6 +63,7 @@
         const detail = typeof data.error === 'string' ? data.error : typeof data.message === 'string' ? data.message : '';
         const error = new Error(detail || (response.status === 401 ? 'Please sign in again to continue.' : 'This service is temporarily unavailable. Please try again.'));
         error.status = response.status;
+        if (response.status===401 && state.user && !['session','verify','request-code'].includes(action)) void syncSession();
         throw error;
       }
       return data;
@@ -155,18 +160,17 @@
     return article;
   }
 
-  function updateAccountLinks() {
+  function updateAccountLinks(signedIn=!!state.user) {
+    const value=signedIn ? 'member' : 'guest';
+    if (document.documentElement) document.documentElement.dataset.viewer=value;
+    // A presentation preference only. Authentication stays in HttpOnly cookies.
+    try { document.cookie='__Host-margins-ui='+value+'; Path=/; Max-Age=31536000; SameSite=Lax; Secure'; } catch {}
     accountLinks.forEach(link => {
-      if (state.ready) {
-        link.href = '/account/';
-        link.textContent = state.user ? 'My profile' : 'Log in / Sign up';
-      } else {
-        link.setAttribute('href', originalLinks.get(link).href);
-        link.textContent = originalLinks.get(link).text;
-      }
+      link.href = '/account/';
+      if (!link.querySelector('[data-account-label]')) link.textContent = signedIn ? 'My profile' : 'Log in / Sign up';
     });
     contributeLinks.forEach(link => {
-      link.setAttribute('href', state.ready ? '/account/#share-a-note' : originalLinks.get(link).href);
+      link.setAttribute('href','/field-notes/#share-a-note');
     });
   }
 
@@ -176,14 +180,17 @@
 
   function showUnavailable(text) {
     state.ready = false;
-    updateAccountLinks();
+    unavailable=true;
     document.querySelectorAll('[data-note-interactions]').forEach(item => { item.hidden = true; });
     if (availability) message(availability, text);
-    if (account && !availability) {
-      accountUI = accountUI || element('div', null, 'community-ui');
-      accountUI.replaceChildren(element('p', text, 'community-status'));
-      account.append(accountUI);
-    }
+    const host = account || noteWriter;
+    if (!host) return;
+    host.setAttribute('aria-busy','false');
+    if (host.querySelector('.community-retry')) return;
+    const retry=button('Retry'), notice=element('div',null,'community-retry');
+    if (!availability) notice.append(element('p',text,'community-status'));
+    retry.addEventListener('click',()=>{notice.remove();syncSession();});
+    notice.append(retry); host.append(notice);
   }
 
   function signInPrompt(target) {
@@ -387,23 +394,22 @@
       attachNotes();
       if (anchorTarget) anchorTarget.scrollIntoView({block:'start'});
     } catch {
-      if (availability) message(availability, 'Member field notes could not be loaded. Please try again later; you can still contribute by email.');
+      if (availability) message(availability, 'Notes could not be loaded. Please try again.');
     }
   }
 
-  function renderLogin() {
+  function renderLogin(host) {
     const heading = element('h2', 'Join or log in');
     heading.id = 'membership'; // Keep existing links to this account section working.
-    const intro = element('p', 'Create a free member account or log in with an email code. Once your email is verified, you can write a note, upload photos, and leave comments.', 'community-help');
     const requestForm = element('form', null, 'community-form');
-    const emailField = field('Email address', 'email', {required:true, autoComplete:'email', maxLength:254});
+    const emailField = field('Email address', 'email', {required:true, autocomplete:'email', maxLength:254});
     const requestButton = button('Email me a code', 'submit');
     const feedback = status();
     requestForm.append(emailField.wrap, requestButton, feedback);
     const verifyForm = element('form', null, 'community-form');
     verifyForm.hidden = true;
     const destination = element('p', '', 'community-code-destination');
-    const code = field('Code from your email', 'text', {required:true, minLength:6, maxLength:10, inputMode:'numeric', autoComplete:'one-time-code', pattern:'[0-9]{6,10}'});
+    const code = field('Code from your email', 'text', {required:true, minLength:6, maxLength:10, inputMode:'numeric', autocomplete:'one-time-code', pattern:'[0-9]{6,10}'});
     const deliveryHelp = element('p', 'Look for an email from accounts@themarginsjournals.com, including in Spam or All Mail. Codes expire after 10 minutes.', 'community-help');
     const name = field('Display name (optional)', 'text', {maxLength:80, autocomplete:'nickname'});
     const nameHelp = element('p', 'New here? Choose the name to show with your notes and comments. Leave this blank to keep your existing name.', 'community-help');
@@ -432,7 +438,7 @@
         updateResend();
       }, 60000);
     }
-    disposeLogin = () => window.clearTimeout(resendTimer);
+    loginCleanups.set(host, () => window.clearTimeout(resendTimer));
     requestForm.addEventListener('submit', async event => {
       event.preventDefault();
       if (requestButton.disabled || !requestForm.reportValidity()) return;
@@ -487,12 +493,11 @@
         state.user = result.user || (result.id ? result : null);
         if (!state.user) state.user = (await api('session')).user;
         if (!state.user) throw new Error('Sign-in could not be confirmed. Please request a new code.');
-        updateAccountLinks();
-        renderAccount();
+        acceptAuthChange(state.user);
       } catch (error) { message(verifyFeedback, errorMessage(error), true); }
       finally { verifyButton.disabled = false; changeEmail.disabled = false; updateResend(); }
     });
-    accountUI.append(heading, intro, requestForm, verifyForm);
+    host.append(heading, requestForm, verifyForm);
   }
 
   function fileBase64(file) {
@@ -519,6 +524,48 @@
       wrap.setAttribute('aria-hidden', 'true');
     }
     return wrap;
+  }
+
+  function paintProfile(summary,user) {
+    const banner=element('div',null,'community-profile-banner');
+    banner.style.setProperty('--profile-color',/^#[0-9a-f]{6}$/i.test(user.backgroundColor||'') ? user.backgroundColor : '#e5ece7');
+    const src=safeImageURL(user.background);
+    if (src) { const img=element('img'); img.src=src; img.alt=''; banner.append(img); }
+    const identity=element('div',null,'community-profile-identity');
+    const info=element('div'); info.append(element('h2',user.name));
+    if (user.bio) info.append(element('p',user.bio,'community-profile-bio'));
+    identity.append(portrait(user),info); summary.replaceChildren(banner,identity);
+  }
+
+  function appearanceForm() {
+    const owner=state.user.id, form=element('form',null,'community-form community-appearance');
+    const bio=field('Short bio','textarea',{maxLength:240,rows:2,value:state.user.bio||''});
+    const color=field('Background color','color',{value:state.user.backgroundColor||'#e5ece7'});
+    const photo=field('Background photo (optional)','file',{accept:'image/jpeg,image/png,image/webp'});
+    const remove=button('Remove background photo'); remove.classList.add('community-button-quiet'); remove.hidden=!state.user.background;
+    const save=button('Save appearance','submit'), feedback=status(); let erase=false;
+    const actions=element('div',null,'community-form-actions'); actions.append(save,remove);
+    form.append(element('h3','Profile appearance'),bio.wrap,color.wrap,photo.wrap,element('p','JPG, PNG or WebP, up to 2 MB.','community-help'),actions,feedback);
+    photo.input.addEventListener('change',()=>{ erase=false; message(feedback,''); });
+    remove.addEventListener('click',()=>{ erase=true; photo.input.value=''; message(feedback,'Save appearance to remove the background photo.'); });
+    form.addEventListener('submit',async event=>{
+      event.preventDefault(); if (save.disabled || state.user?.id!==owner || !form.reportValidity()) return;
+      const file=photo.input.files?.[0];
+      if (file && (!acceptedImages.has(file.type)||file.size>2*1024*1024||!file.size)) { message(feedback,'Choose a JPG, PNG or WebP photo up to 2 MB.',true); return; }
+      const controls=[save,remove,bio.input,color.input,photo.input]; controls.forEach(c=>{c.disabled=true;});
+      try {
+        const body={bio:bio.input.value.trim(),backgroundColor:color.input.value};
+        if (file) body.background={base64:await fileBase64(file),mime:file.type}; else if (erase) body.background=null;
+        if (state.user?.id!==owner) return;
+        const result=await api('appearance',body);
+        if (result.user?.id!==owner || state.user?.id!==owner) throw new Error('Please reload your profile.');
+        state.user=result.user;
+        paintProfile(accountUI.querySelector('.community-profile-summary'),state.user);
+        photo.input.value=''; bio.input.value=state.user.bio||''; color.input.value=state.user.backgroundColor; remove.hidden=!state.user.background; erase=false;
+        message(feedback,'Appearance saved.');
+      } catch (error) {message(feedback,errorMessage(error),true);} finally {controls.forEach(c=>{c.disabled=false;});}
+    });
+    return form;
   }
 
   function renderProfile() {
@@ -569,12 +616,13 @@
         const body = {name:displayName};
         if (file) body.avatar = {mime:file.type,base64:await fileBase64(file)};
         else if (removePhoto) body.avatar = null;
+        if (state.user?.id!==userId) return;
         const result = await api('profile',body);
         if (!result.user || result.user.id !== userId) throw new Error('The profile update could not be confirmed. Please reload and try again.');
         if (state.user?.id !== userId) return;
         state.user = result.user;
         const summary = accountUI.querySelector('.community-profile-summary');
-        if (summary) summary.replaceChildren(portrait(state.user),element('h2',state.user.name));
+        if (summary) paintProfile(summary,state.user);
         name.input.value = state.user.name;
         photo.input.value = '';
         remove.hidden = !state.user.avatar;
@@ -583,15 +631,14 @@
       } catch (error) { message(feedback,errorMessage(error),true); }
       finally { save.disabled = remove.disabled = photo.input.disabled = name.input.disabled = false; }
     });
-    section.append(form);
+    section.append(form,appearanceForm());
     return section;
   }
 
-  function renderEditor(refreshMine) {
+  function renderEditor(refreshMine,inline=false) {
     const section = element('section', null, 'community-editor');
-    section.id = 'share-a-note';
+    section.id = inline ? 'notes-composer' : 'share-a-note';
     const heading = element('h2', 'Write a note');
-    const intro = element('p', 'A few photos and a few words about what you noticed. Each submission is read before it appears.', 'community-help');
     const form = element('form', null, 'community-form');
     const title = field('Title', 'text', {required:true, maxLength:120});
     const text = field('What did you notice?', 'textarea', {maxLength:4000, rows:7});
@@ -605,17 +652,44 @@
     permission.required = true;
     permissionWrap.append(permission, element('span', 'I wrote this note and own these photos, or have permission to share them on The Margins.'));
     const submit = button('Submit for review', 'submit');
+    const discard = button('Discard draft'); discard.classList.add('community-button-quiet');
     const feedback = status();
     let entries = [];
-    let submitting = false;
+    let submitting = false, owner=null;
+    const key=()=> 'margins.note-draft.v1:'+owner;
+    function writeDraft() {
+      if (!owner || state.user?.id!==owner) return;
+      const draft={title:title.input.value,text:text.input.value,date:date.input.value,
+        photos:entries.filter(e=>e.path).map(e=>({path:e.path,name:e.name,alt:e.alt.value}))};
+      try { if (draft.title||draft.text||draft.date||draft.photos.length) window.localStorage.setItem(key(),JSON.stringify(draft)); else window.localStorage.removeItem(key()); } catch {}
+    }
+    function bind(id) {
+      if (!id || owner===id) return;
+      owner=id;
+      let draft;
+      try { draft=JSON.parse(window.localStorage.getItem(key())); } catch {}
+      if (draft && typeof draft==='object') {
+        for (const [input,k,max] of [[title.input,'title',120],[text.input,'text',4000],[date.input,'date',10]]) {
+          if (!input.value && typeof draft[k]==='string') input.value=draft[k].slice(0,max);
+        }
+        for (const img of (Array.isArray(draft.photos)?draft.photos:[]).slice(0,4)) {
+          if (typeof img?.path==='string' && img.path.startsWith(id+'/') && /^[a-f0-9-]+\/[a-f0-9-]+\.(jpg|png|webp)$/.test(img.path)) addEntry(null,img);
+        }
+      }
+      writeDraft(); updateSubmit();
+    }
+    editorBindings.set(section,{get owner(){return owner;},bind});
     function updateSubmit() {
-      submit.disabled = submitting || entries.some(entry => !entry.path);
-      photos.input.disabled = submitting;
+      const active=!!owner && state.user?.id===owner;
+      submit.disabled = !active || submitting || entries.some(entry => !entry.path);
+      photos.input.disabled = !active || submitting;
+      discard.disabled=submitting;
     }
     function removeEntry(entry) {
       entries = entries.filter(item => item !== entry);
       entry.removed = true;
       entry.row.remove();
+      writeDraft();
       updateSubmit();
     }
     async function upload(entry) {
@@ -626,11 +700,12 @@
       updateSubmit();
       try {
         const base64 = await fileBase64(entry.file);
-        if (entry.removed) return;
+        if (entry.removed || state.user?.id!==owner) return;
         message(entry.progress, 'Uploading…');
         const result = await api('upload', {base64, mime:entry.file.type});
         if (typeof result.path !== 'string' || !result.path) throw new Error('The upload was not confirmed. Please try again.');
         entry.path = result.path;
+        writeDraft();
         message(entry.progress, 'Uploaded');
       } catch (error) {
         message(entry.progress, errorMessage(error), true);
@@ -649,10 +724,13 @@
         return;
       }
       message(feedback, '');
-      selected.forEach(file => {
+      selected.forEach(file => addEntry(file));
+    });
+    function addEntry(file,stored) {
+        const name=String(stored?.name || file?.name || 'Photo').slice(0,255);
         const row = element('li', null, 'community-upload');
-        const caption = element('p', file.name, 'community-upload-name');
-        const alt = field('Image description for ' + file.name, 'text', {required:true, maxLength:300});
+        const caption = element('p', name, 'community-upload-name');
+        const alt = field('Image description for ' + name, 'text', {required:true, maxLength:300,value:String(stored?.alt||'').slice(0,300)});
         const progress = status();
         const remove = button('Remove photo');
         const retry = button('Retry upload');
@@ -661,18 +739,30 @@
         const actions = element('div', null, 'community-form-actions');
         actions.append(retry, remove);
         row.append(caption, alt.wrap, progress, actions);
-        const entry = {file, row, alt:alt.input, progress, retry, path:'', removed:false};
+        const entry = {file,name,row,alt:alt.input,progress,retry,path:stored?.path||'',removed:false};
         remove.addEventListener('click', () => removeEntry(entry));
         retry.addEventListener('click', () => upload(entry));
         entries.push(entry);
         photoList.append(row);
-        upload(entry);
-      });
+        if (file) upload(entry); else message(progress,'Uploaded');
+    }
+    function clearDraft() {
+      entries.forEach(entry => { entry.removed = true; }); entries=[]; photoList.replaceChildren(); form.reset();
+      // Reset values explicitly as well for restored fields and the permission checkbox.
+      title.input.value=text.input.value=date.input.value=''; permission.checked=false;
+      if (owner) try { window.localStorage.removeItem(key()); } catch {}
+      updateSubmit();
+    }
+    discard.addEventListener('click',()=>{
+      if (!submitting && window.confirm('Discard this draft?')) { clearDraft(); message(feedback,''); }
     });
-    form.append(title.wrap, text.wrap, date.wrap, photos.wrap, photoHelp, photoList, permissionWrap, submit, feedback);
+    form.addEventListener('input',writeDraft);
+    form.addEventListener('change',writeDraft);
+    const controls=element('div',null,'community-form-actions'); controls.append(submit,discard);
+    form.append(title.wrap, text.wrap, date.wrap, photos.wrap, photoHelp, photoList, permissionWrap, controls, feedback);
     form.addEventListener('submit', async event => {
       event.preventDefault();
-      if (submitting || !form.reportValidity()) return;
+      if (!owner || state.user?.id!==owner || submitting || !form.reportValidity()) return;
       if (entries.some(entry => !entry.path)) { message(feedback, 'Wait for every photo to finish uploading, or remove any failed upload.', true); return; }
       if (!permission.checked) { message(feedback, 'Please confirm that you have permission to share this note.', true); return; }
       if (!title.input.value.trim() || (!text.input.value.trim() && !entries.length)) { message(feedback, 'Please add a title, and either a photo or a few words about your observation.', true); return; }
@@ -684,16 +774,15 @@
           title:title.input.value.trim(), text:text.input.value.trim(), date:date.input.value, permission:permission.checked,
           media:entries.map(entry => ({path:entry.path, alt:entry.alt.value.trim()}))
         });
-        entries.forEach(entry => { entry.removed = true; });
-        entries = [];
-        photoList.replaceChildren();
-        form.reset();
-        message(feedback, 'Your note was submitted for review. It is not public yet.');
+        clearDraft();
+        message(feedback, 'Submitted for review.');
         refreshMine();
       } catch (error) { message(feedback, errorMessage(error), true); }
       finally { submitting = false; updateSubmit(); }
     });
-    section.append(heading, intro, form);
+    if (!inline) section.append(heading);
+    section.append(form);
+    bind(state.user?.id); updateSubmit();
     return section;
   }
 
@@ -787,14 +876,15 @@
 
   function renderAccount() {
     if (!account) return;
-    if (disposeLogin) { disposeLogin(); disposeLogin = null; }
     accountUI = accountUI || element('div', null, 'community-ui');
+    loginCleanups.get(accountUI)?.(); loginCleanups.delete(accountUI);
     accountUI.replaceChildren();
     account.append(accountUI);
-    if (!state.user) { renderLogin(); return; }
+    account.setAttribute('aria-busy','false');
+    if (!state.user) { renderLogin(accountUI); return; }
     const top = element('div', null, 'community-account-heading');
     const summary = element('div',null,'community-profile-summary');
-    summary.append(portrait(state.user),element('h2',state.user.name));
+    paintProfile(summary,state.user);
     top.append(summary);
     const signOut = button('Sign out');
     signOut.classList.add('community-button-quiet');
@@ -814,10 +904,8 @@
       signOut.disabled = true;
       try {
         await api('logout', {});
-        state.user = null;
-        updateAccountLinks();
-        renderAccount();
-      } catch (error) { message(feedback, errorMessage(error), true); signOut.disabled = false; }
+        acceptAuthChange(null);
+      } catch (error) { message(feedback, errorMessage(error), true); signOut.disabled = false; syncSession(); }
     });
     if (canContribute()) {
       const mine = renderMine();
@@ -832,41 +920,102 @@
     accountUI.append(articleHelp);
   }
 
-  async function start() {
-    try {
-      const config = await api('status');
-      if (!config.ready) {
-        showUnavailable('Online accounts are not available yet. You can share a field note or join The Margins by email.');
-        return;
+  function renderNotesWriter() {
+    if (!noteWriter || !composeDetails?.open) return;
+    const existing=noteWriter.querySelector('.community-editor');
+    const hinted=document.documentElement?.dataset.viewer==='member';
+    if (state.user || (!sessionKnown && !unavailable && hinted)) {
+      if (existing) {
+        const binding=editorBindings.get(existing);
+        if (!binding.owner || binding.owner===state.user?.id) { binding.bind(state.user?.id); return; }
       }
-      const session = await api('session');
-      state.ready = true;
-      state.user = session.user || null;
-      if (availability) message(availability, '');
-      updateAccountLinks();
-      renderAccount();
-      if ('IntersectionObserver' in window) {
-        observer = new window.IntersectionObserver(entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting && entry.intersectionRatio > 0) {
-              visibleNotes.add(entry.target);
-              if (isVisible()) loadNote(state.notes.get(entry.target.dataset.noteId));
-            } else visibleNotes.delete(entry.target);
-          });
-        }, {threshold:[0, 0.1]});
-      }
-      attachNotes();
-      loadFeed();
-      const resume = () => {
-        if (!isVisible()) return;
-        visibleNotes.forEach(article => loadNote(state.notes.get(article.dataset.noteId)));
-      };
-      document.addEventListener('visibilitychange', resume);
-      document.addEventListener('prerenderingchange', resume);
-    } catch {
-      showUnavailable('Community accounts could not be reached. Please try again later, or send your field note by email.');
+      loginCleanups.get(noteWriter)?.(); loginCleanups.delete(noteWriter);
+      noteWriter.replaceChildren(renderEditor(()=>{},true));
+    } else if (state.ready && (!noteWriter.querySelector('form') || existing)) {
+      noteWriter.replaceChildren(); renderLogin(noteWriter);
     }
   }
 
-  start();
+  function clearPrivateUI() {
+    for (const host of [accountUI,noteWriter]) if (host) {
+      loginCleanups.get(host)?.(); loginCleanups.delete(host); host.replaceChildren();
+    }
+    for (const item of state.notes.values()) {
+      if (item.commentsPanel) { item.commentsPanel.replaceChildren(); item.commentsPanel.hidden=true; item.commentsButton.setAttribute('aria-expanded','false'); }
+      if (item.data) { item.data.liked=false; updateCounts(item); }
+    }
+  }
+  function acceptAuthChange(user) {
+    ++sessionGeneration; clearPrivateUI(); state.user=user; state.ready=true; sessionKnown=true; unavailable=false;
+    updateAccountLinks(); renderAccount(); renderNotesWriter();
+    try {window.localStorage.setItem('margins.auth.changed',(user?'member:':'guest:')+Date.now());} catch {}
+  }
+  function startNotes() {
+    if (!feed || notesStarted) return;
+    notesStarted=true;
+    if ('IntersectionObserver' in window) {
+      observer = new window.IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && entry.intersectionRatio > 0) {
+            visibleNotes.add(entry.target);
+            if (isVisible()) loadNote(state.notes.get(entry.target.dataset.noteId));
+          } else visibleNotes.delete(entry.target);
+        });
+      }, {threshold:[0, 0.1]});
+    }
+    attachNotes(); loadFeed();
+    const resume = () => {
+      if (isVisible()) visibleNotes.forEach(article => loadNote(state.notes.get(article.dataset.noteId)));
+    };
+    document.addEventListener('visibilitychange', resume);
+    document.addEventListener('prerenderingchange', resume);
+  }
+  async function syncSession() {
+    const generation=++sessionGeneration;
+    const full=Boolean(account||feed||noteWriter);
+    try {
+      const session=await api('session',undefined,account ? {} : {view:full?'writer':'nav'});
+      if (generation!==sessionGeneration) return;
+      if (session.ready===false) {showUnavailable('Accounts are temporarily unavailable.');return;}
+      const previous=state.user?.id;
+      const render=!sessionKnown || !state.ready || previous!==(session.user?.id);
+      if (full && previous && previous!==session.user?.id) clearPrivateUI();
+      state.user=session.user||null; state.ready=sessionKnown=true; unavailable=false;
+      updateAccountLinks(full ? !!state.user : session.signedIn===true);
+      if (availability) message(availability,'');
+      for (const host of [account,noteWriter]) if(host) { host.setAttribute('aria-busy','false'); host.querySelector('.community-retry')?.remove(); }
+      if (render) renderAccount();
+      renderNotesWriter(); startNotes();
+    } catch {
+      if (generation===sessionGeneration) showUnavailable('Your account could not be reached.');
+    }
+  }
+  function openComposerAtHash() {
+    if (composeDetails && window.location.hash==='#share-a-note') { composeDetails.open=true; renderNotesWriter(); }
+  }
+  composeDetails?.addEventListener('toggle',()=>{
+    if (composeDetails.open && window.location.hash!=='#share-a-note') window.history.replaceState(null,'','#share-a-note');
+    else if (!composeDetails.open && window.location.hash==='#share-a-note') window.history.replaceState(null,'',window.location.pathname+window.location.search);
+    renderNotesWriter();
+  });
+  window.addEventListener('hashchange',openComposerAtHash); openComposerAtHash();
+  window.addEventListener('pageshow',event=>{
+    if (!event.persisted) return;
+    // A restored page can belong to a different or signed-out member. Reconfirm
+    // its private contents; a transient error never rewrites the remembered label.
+    ++sessionGeneration; state.user=null; state.ready=false; sessionKnown=false; clearPrivateUI();
+    if (document.documentElement) {
+      let viewer='pending'; try {viewer=document.cookie.match(/(?:^|; *)__Host-margins-ui=(member|guest)(?:;|$)/)?.[1]||viewer;} catch {}
+      document.documentElement.dataset.viewer=viewer;
+    }
+    syncSession();
+  });
+  window.addEventListener('storage',event=>{
+    if (event.key!=='margins.auth.changed') return;
+    ++sessionGeneration; state.user=null; state.ready=false; sessionKnown=false; clearPrivateUI();
+    // The hint can select a label; the server must confirm the new user's identity before restoring a draft or profile.
+    if (document.documentElement) document.documentElement.dataset.viewer=String(event.newValue).startsWith('guest:')?'guest':'pending';
+    syncSession();
+  });
+  syncSession();
 })();

@@ -77,7 +77,7 @@ test('verify sets only secure HttpOnly cookies, validates provider identity, and
   const db=backend();const fn=handler(db);
   const result=await call(fn,'verify',{method:'POST',body:{email:'member@example.com',token:'123456',name:'Reader'}});
   assert.equal(result.statusCode,200);
-  assert.deepEqual(result.body,{user:{id:userId,name:'Reader',avatar:null,isAdmin:false,membership:'approved',isMember:true}});
+  assert.deepEqual(result.body,{user:{id:userId,name:'Reader',avatar:null,bio:'',backgroundColor:'#e5ece7',background:null,isAdmin:false,membership:'approved',isMember:true}});
   assert.equal(result.headers['Set-Cookie'].length,2);
   for(const cookie of result.headers['Set-Cookie']) assert.match(cookie,/^__Host-.*; Path=\/; Max-Age=\d+; HttpOnly; Secure; SameSite=Lax$/);
   const bad=handler(backend({getUser:async () => ({id:userId,email:'member@example.com',email_confirmed_at:null})}));
@@ -272,4 +272,40 @@ test('email throttling is reported as a retry error instead of implying a code w
     assert.equal(response.statusCode,200);
     assert.doesNotMatch(JSON.stringify(response.body),/already exists|not found/);
   }
+});
+
+test('navigation confirms a real session, rotates a persistent refresh cookie, and treats a UI hint as anonymous', async () => {
+  let refreshCount=0, profileReads=0;
+  const db=backend({getUser:async token=>{if(token!=='new') throw new ProviderError(403); return {id:userId,email:'reader@example.test',email_confirmed_at:'2026-09-01'};},
+    refresh:async token=>{assert.equal(token,'refresh-ok');refreshCount++;return {access_token:'new',refresh_token:'rotated',expires_in:3600};},
+    profile:async()=>{profileReads++;return {user_id:userId,name:'Reader'};}});
+  const fn=handler(db), nav=opts=>call(fn,'session',{query:'&view=nav',...opts});
+  assert.deepEqual((await nav({headers:{cookie:'__Host-margins-ui=member'}})).body,{ready:true,signedIn:false});
+  const result=await nav({headers:{cookie:'__Host-margins-access=expired; __Host-margins-refresh=refresh-ok'}});
+  assert.deepEqual(result.body,{ready:true,signedIn:true});assert.equal(profileReads,0);assert.equal(refreshCount,1);
+  assert.match(result.headers['Set-Cookie'][1],/Max-Age=31536000; HttpOnly; Secure; SameSite=Lax/);
+  const temporary=handler(backend({getUser:async()=>{throw new ProviderError(503);}}));
+  const failure=await call(temporary,'session',{auth:true,query:'&view=nav'});
+  assert.equal(failure.statusCode,503);assert.equal(failure.headers['Set-Cookie'],undefined);
+  assert.equal((await call(fn,'appearance',{method:'POST',headers:{cookie:'__Host-margins-ui=member'},body:{}})).statusCode,401);
+});
+
+test('appearance belongs to the verified account and persists without publishing its photo', async()=>{
+  const db=backend({updateAppearance:async(id,bio,color,file,change)=>{
+    const row=db._profiles.get(id)||{user_id:id,name:'Reader'};const old=row.background_path||null;
+    Object.assign(row,{bio,background_color:color,background_path:change?file:old});db._profiles.set(id,row);
+    return {previous_path:old,background_path:row.background_path};
+  }}), fn=handler(db);
+  const body={bio:'I photograph my neighborhood.',backgroundColor:'#4F6071',background:{mime:'image/png',base64:png}};
+  assert.equal((await call(fn,'appearance',{method:'POST',body})).statusCode,401);
+  for (const extra of [{user_id:otherId},{backgroundColor:'url(evil)'},{bio:'x'.repeat(241)},{background:{mime:'image/jpeg',base64:png}},{background:otherId+'/fake.jpg'}]) {
+    assert.equal((await call(fn,'appearance',{method:'POST',auth:true,body:{...body,...extra}})).statusCode,400);
+  }
+  const saved=await call(fn,'appearance',{method:'POST',auth:true,body});assert.equal(saved.statusCode,200);
+  assert.match(saved.body.user.background,/object\/sign\/community-avatars\//);assert.equal(saved.body.user.backgroundColor,'#4f6071');
+  assert.equal((await call(fn,'session',{auth:true})).body.user.bio,body.bio);
+  const colors={bio:'Updated',backgroundColor:'#123456'};
+  assert.equal((await call(fn,'appearance',{method:'POST',auth:true,body:colors})).body.user.background,saved.body.user.background);
+  assert.equal((await call(fn,'appearance',{method:'POST',auth:true,body:{...colors,background:null}})).body.user.background,null);
+  assert.equal(db._avatars.size,0);
 });

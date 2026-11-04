@@ -10,6 +10,8 @@ const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-
 const NOTE_ID = /^[a-z0-9][a-z0-9-]{0,99}$/;
 const ACCESS = '__Host-margins-access';
 const REFRESH = '__Host-margins-refresh';
+const REFRESH_LIFETIME = 365 * 24 * 60 * 60;
+const DEFAULT_BACKGROUND = '#e5ece7';
 const OWNER_EMAIL = 'xingtong.themargins@gmail.com';
 const ORIGINS = new Set(['https://themarginsjournals.com', 'https://www.themarginsjournals.com']);
 class PublicError extends Error {
@@ -112,7 +114,7 @@ function cookies(req) {
   return result;
 }
 function setSession(res, session) {
-  const entries = session ? [[ACCESS, session.access_token, Math.min(Number(session.expires_in) || 3600, 86400)], [REFRESH, session.refresh_token, 2592000]] : [[ACCESS,'',0],[REFRESH,'',0]];
+  const entries = session ? [[ACCESS, session.access_token, Math.min(Number(session.expires_in) || 3600, 86400)], [REFRESH, session.refresh_token, REFRESH_LIFETIME]] : [[ACCESS,'',0],[REFRESH,'',0]];
   if (session && entries.some(([,value]) => typeof value !== 'string' || !value || value.length > 3800)) throw new Error('Invalid auth session');
   res.setHeader('Set-Cookie', entries.map(([name,value,age]) => `${name}=${encodeURIComponent(value)}; Path=/; Max-Age=${age}; HttpOnly; Secure; SameSite=Lax`));
 }
@@ -138,9 +140,10 @@ function createBackend({env = process.env, fetchImpl = fetch} = {}) {
     getUser:token => request('/auth/v1/user', {auth:true,token}),
     refresh:token => request('/auth/v1/token?grant_type=refresh_token', {method:'POST',auth:true,body:{refresh_token:token}}),
     logout:token => request('/auth/v1/logout?scope=local', {method:'POST',auth:true,token}),
-    profile:async id => (await table('community_profiles', 'select=user_id,name,avatar_path&user_id=eq.' + id + '&limit=1'))[0] || null,
+    profile:async id => (await table('community_profiles', 'select=user_id,name,avatar_path,bio,background_color,background_path&user_id=eq.' + id + '&limit=1'))[0] || null,
     saveProfile:(id,name) => table('community_profiles', 'on_conflict=user_id', {method:'POST',headers:{Prefer:'resolution=merge-duplicates,return=minimal'},body:{user_id:id,name}}),
     updateProfile:(id,name,avatarPath,changeAvatar) => rpc('community_update_profile', {p_user_id:id,p_name:name,p_avatar_path:avatarPath,p_change_avatar:changeAvatar}),
+    updateAppearance:(id,bio,color,background,change) => rpc('community_update_appearance', {p_user_id:id,p_bio:bio,p_color:color,p_background:background,p_change:change}),
     uploadAvatar:(objectPath,info) => request('/storage/v1/object/' + AVATARS + '/' + objectPath, {method:'POST',body:info,binary:true,headers:{'x-upsert':'false'}}),
     deleteAvatar:objectPath => request('/storage/v1/object/' + AVATARS, {method:'DELETE',body:{prefixes:[objectPath]}}),
     syncOwner:() => rpc('community_sync_owner', {}),
@@ -184,20 +187,28 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
     const isAdmin = user.email?.toLowerCase() === OWNER_EMAIL && await backend.isAdmin(user.id);
     // Every verified account is a member. Editorial access still requires the
     // verified owner email and an administrator record; a display name cannot grant it.
-    return {id:user.id,name:profile.name,avatarPath:profile.avatar_path || null,isAdmin,membership:'approved',isMember:true};
+    return {id:user.id,name:profile.name,avatarPath:profile.avatar_path || null,bio:profile.bio || '',backgroundColor:profile.background_color || DEFAULT_BACKGROUND,backgroundPath:profile.background_path || null,isAdmin,membership:'approved',isMember:true};
   }
-  async function identity(req,res) {
+  async function verifiedSession(req,res) {
     const jar = cookies(req); let token = jar[ACCESS]; let user;
     if (token && token.length <= 3800) {
       try { user = await backend.getUser(token); }
-      catch (error) { if (![401,403].includes(error.status)) throw error; }
+      catch (error) { if (![400,401,403].includes(error.status)) throw error; }
     }
     if (!user && jar[REFRESH] && jar[REFRESH].length <= 3800) {
-      try { const session = await backend.refresh(jar[REFRESH]); token = session.access_token; user = await backend.getUser(token); setSession(res,session); }
+      let renewed;
+      try { renewed = await backend.refresh(jar[REFRESH]); }
       catch (error) { if (![400,401,403].includes(error.status)) throw error; setSession(res,null); }
+      if (renewed) { setSession(res,renewed); token = renewed.access_token; user = await backend.getUser(token); }
     }
     if (!user) return null;
     if (!UUID.test(user.id || '') || !user.email_confirmed_at) return null;
+    return {user,token};
+  }
+  async function identity(req,res) {
+    const session=await verifiedSession(req,res);
+    if (!session) return null;
+    const {user,token}=session;
     const profile = await backend.profile(user.id);
     if (!profile) return null;
     return {...await account(user,profile),token};
@@ -207,12 +218,13 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
   }
   async function publicUser(user) {
     if (!user) return null;
-    let avatar = null;
-    if (user.avatarPath) {
-      if (!ownImagePath(user.id,user.avatarPath)) throw new Error('Invalid stored avatar');
-      avatar = await backend.sign(user.avatarPath,AVATARS);
-    }
-    return {id:user.id,name:user.name,avatar,isAdmin:user.isAdmin,membership:user.membership,isMember:user.isMember};
+    const sign = async p => {
+      if (!p) return null;
+      if (!ownImagePath(user.id,p)) throw new Error('Invalid stored profile image');
+      return backend.sign(p,AVATARS);
+    };
+    const [avatar,background]=await Promise.all([sign(user.avatarPath),sign(user.backgroundPath)]);
+    return {id:user.id,name:user.name,avatar,bio:user.bio,backgroundColor:user.backgroundColor,background,isAdmin:user.isAdmin,membership:user.membership,isMember:user.isMember};
   }
   async function target(value) {
     if (typeof value !== 'string' || !NOTE_ID.test(value)) fail(400,'Invalid field note');
@@ -254,12 +266,21 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
         if (req.method === 'GET' && action === 'feed') return reply(res,200,{ready:false,notes:[]});
         fail(503,'Member features are not available yet');
       }
+      const nav = action === 'session' && url.searchParams.get('view') === 'nav';
+      if (req.method === 'GET' && action === 'session') {
+        const jar=cookies(req);
+        if (!jar[ACCESS] && !jar[REFRESH]) return reply(res,200,nav ? {ready:true,signedIn:false} : {ready:true,user:null});
+      }
       const client = req.headers['x-vercel-forwarded-for'] || req.socket?.remoteAddress || 'unknown';
       await limit('ip:' + client + ':' + (req.method === 'GET' ? 'read' : action), action === 'request-code' ? 5 : action === 'verify' ? 12 : action === 'upload' ? 20 : 180, action === 'request-code' || action === 'verify' ? 600 : action === 'upload' ? 3600 : 60);
       if (req.method === 'GET') {
         if (!['session','feed','note','mine','review'].includes(action)) fail(404,'Unknown action');
+        if (nav) return reply(res,200,{ready:true,signedIn:!!await verifiedSession(req,res)});
         const user = action === 'feed' ? null : await identity(req,res);
-        if (action === 'session') return reply(res,200,{user:await publicUser(user)});
+        if (action === 'session') {
+          const writer=url.searchParams.get('view')==='writer';
+          return reply(res,200,{ready:true,user:writer ? (user && {id:user.id,name:user.name,isMember:true}) : await publicUser(user)});
+        }
         if (action === 'feed') return reply(res,200,{notes:await notesFor('feed',null)});
         if (action === 'note') {
           const id = await target(url.searchParams.get('id'));
@@ -274,8 +295,8 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
         const comments = await Promise.all((await backend.listComments(null,true)).map(async c => ({id:c.id,noteId:c.note_id,name:await authorName(c.author_id,names),text:c.text,createdAt:c.created_at,status:c.status})));
         return reply(res,200,{notes:await notesFor('review',user),comments});
       }
-      if (!['request-code','verify','logout','like','comment','view','upload','submit','moderate','profile'].includes(action)) fail(404,'Unknown action');
-      const body = await readBody(req,['upload','profile'].includes(action) ? MAX_BODY : 32000);
+      if (!['request-code','verify','logout','like','comment','view','upload','submit','moderate','profile','appearance'].includes(action)) fail(404,'Unknown action');
+      const body = await readBody(req,['upload','profile','appearance'].includes(action) ? MAX_BODY : 32000);
       if (action === 'request-code') {
         const address = email(body.email); await limit('email:' + address,3,600);
         try { await backend.requestCode(address); }
@@ -315,7 +336,23 @@ function createHandler({env = process.env, backend = createBackend({env}), ids =
       }
       const user = await identity(req,res);
       if (!user) fail(401,'Sign in to continue');
-      await limit('user:' + user.id + ':' + action, action === 'submit' ? 10 : ['upload','comment','profile'].includes(action) ? 20 : 120, ['submit','upload','comment','profile'].includes(action) ? 3600 : 60);
+      await limit('user:' + user.id + ':' + action, action === 'submit' ? 10 : ['upload','comment','profile','appearance'].includes(action) ? 20 : 120, ['submit','upload','comment','profile','appearance'].includes(action) ? 3600 : 60);
+      if (action === 'appearance') {
+        if (Object.keys(body).some(k => !['bio','backgroundColor','background'].includes(k))) fail(400,'Invalid profile setting');
+        const bio=text(body.bio,240,false), color=body.backgroundColor;
+        if (typeof color!=='string' || !/^#[0-9a-f]{6}$/i.test(color)) fail(400,'Choose a background color');
+        const change=Object.hasOwn(body,'background'); let next=null;
+        if (change && body.background!==null) {
+          const info=imageInfo(body.background?.base64,body.background?.mime);
+          next=user.id+'/'+uuid()+'.'+info.ext;
+          await backend.uploadAvatar(next,info);
+        }
+        const result=await backend.updateAppearance(user.id,bio,color.toLowerCase(),next,change);
+        if (change && ownImagePath(user.id,result.previous_path) && result.previous_path!==result.background_path && result.previous_path!==user.avatarPath) {
+          try { await backend.deleteAvatar(result.previous_path); } catch { /* Private superseded asset; retention can retry. */ }
+        }
+        return reply(res,200,{user:await publicUser({...user,bio,backgroundColor:color.toLowerCase(),backgroundPath:result.background_path})});
+      }
       if (action === 'profile') {
         if (Object.keys(body).some(key => !['name','avatar'].includes(key))) fail(400,'Only your name and photo can be changed here');
         const name = text(body.name,80);

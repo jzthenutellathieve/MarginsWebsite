@@ -9,6 +9,8 @@ const { renderHome, collectionPages, readNext } = require('./editorial.cjs');
 const root = path.resolve(__dirname, '..');
 const out = path.join(root, 'dist');
 const read = name => fs.readFileSync(path.join(root, name), 'utf8');
+const assetVersion = name => require('node:crypto').createHash('sha256').update(read('public/'+name)).digest('hex').slice(0,10);
+const communityAssets = {css:assetVersion('community.css'),js:assetVersion('community.js')};
 const config = JSON.parse(read('content/site.json'));
 const assets = JSON.parse(read('content/assets.json'));
 const imageLayouts = JSON.parse(read('content/image-layouts.json'));
@@ -20,6 +22,7 @@ const fieldNotes = fs.readdirSync(path.join(root, 'content/field-notes')).filter
 const snippets = Object.fromEntries(['header', 'footer', 'newsletter', 'collaboration', 'device-figure', 'device-video']
   .map(name => [name, read(`templates/${name}.html`)]));
 const description = 'The Margins publishes reporting, photographs and personal accounts of displacement, alongside projects on housing and water access.';
+const accountLabels = '<span class="account-labels"><span data-account-label="guest">Log in / Sign up</span><span data-account-label="member">My profile</span><span data-account-label="pending"><span class="md-sr-only">Account</span><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="3.5"/><path d="M4 21c0-5 3.5-7.5 8-7.5s8 2.5 8 7.5"/></svg></span></span>';
 const legacyRoutes = Object.fromEntries(Object.entries(pages).map(([name, page]) => [name, page.path]));
 legacyRoutes[''] = '/';
 const seen = new Set();
@@ -50,6 +53,7 @@ for (const article of articles) {
 }
 function hydrateCommunity(html) {
   return html.replace('{{fieldNotes}}', () => renderNotes(fieldNotes, members))
+    .replaceAll('{{accountLabels}}', accountLabels)
     .replace('{{members}}', () => renderMembers(members))
     .replace('{{fieldNotePreview}}', () => renderNotePreview(fieldNotes, members))
     .replaceAll('{{contributeUrl}}', escapeText(contributeUrl))
@@ -66,6 +70,7 @@ function hydrateImages(html) {
 function documentFor({ title, pathname, body, active, summary = description, article }) {
   const canonical = config.siteUrl + pathname;
   const header = snippets.header.replace(new RegExp(`data-mj-view="${active}"`, 'g'), '$& aria-current="page"')
+    .replaceAll('{{accountLabels}}', accountLabels)
     .replaceAll('{{joinUrl}}', escapeText(joinUrl));
   const metadata = article ? `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'Article', headline: article.title,
@@ -85,6 +90,7 @@ function documentFor({ title, pathname, body, active, summary = description, art
 <meta name="color-scheme" content="only light">
 <meta name="theme-color" content="#ffffff">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<script>document.documentElement.dataset.viewer='pending';try{const m=document.cookie.match(/(?:^|; *)__Host-margins-ui=(member|guest)(?:;|$)/);if(m)document.documentElement.dataset.viewer=m[1]}catch{}</script>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-square-32.png">
 <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon-square.svg">
 <title>${escapeText(title)}</title>
@@ -97,7 +103,7 @@ function documentFor({ title, pathname, body, active, summary = description, art
 ${article && article.content.find(b => b.type === 'image') ? `<meta property="og:image" content="${config.siteUrl}${assets[article.content.find(b => b.type === 'image').src].src}">` : ''}
 <link rel="alternate" type="application/rss+xml" title="The Margins — new articles" href="/feed.xml">
 <link rel="stylesheet" href="/site.css">
-<link rel="stylesheet" href="/community.css">
+<link rel="stylesheet" href="/community.css?v=${communityAssets.css}">
 ${pathname === '/account/' ? '<meta name="robots" content="noindex">' : ''}
 ${metadata}
 <script id="legacy-routes" type="application/json">${JSON.stringify(legacyRoutes)}</script>
@@ -113,7 +119,7 @@ ${snippets.footer}
 </div>
 <script src="/site.js" defer></script>
 <script src="/newsletter-client.js" defer></script>
-<script src="/community.js" defer></script>
+<script src="/community.js?v=${communityAssets.js}" defer></script>
 ${article ? '<script src="/article-views.js" defer></script>' : ''}
 ${body.includes('data-article-view-summary=') ? '<script src="/view-summaries.js" defer></script>' : ''}
 </body>

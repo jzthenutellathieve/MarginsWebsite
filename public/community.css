@@ -65,3 +65,27 @@
   .community-views { margin-left:0; }
   .community-account-heading { align-items:flex-start; }
 }
+
+/* Both labels occupy the same space. A previously verified reader sees My profile on the first paint. */
+.account-labels { display:inline-grid; align-items:center; justify-items:start; }
+.account-labels > span { grid-area:1 / 1; }
+.account-labels [data-account-label="member"], .account-labels [data-account-label="pending"] { visibility:hidden; }
+html[data-viewer="member"] .account-labels [data-account-label="guest"], html[data-viewer="pending"] .account-labels [data-account-label="guest"] { visibility:hidden; }
+html[data-viewer="member"] .account-labels [data-account-label="member"], html[data-viewer="pending"] .account-labels [data-account-label="pending"] { visibility:visible; }
+.notes-compose { margin:20px 0 28px; border-block:1px solid var(--md-line,#b9bfba); }
+.notes-compose > summary { width:fit-content; padding:13px 2px; cursor:pointer; color:var(--md-blue,#35584f); font:600 15px/1.5 Arial,Helvetica,sans-serif; }
+.notes-compose .community-ui { margin:0 0 24px; }
+.notes-compose .community-editor { margin:0; padding:0; border:0; }
+.notes-compose .community-form { margin-top:12px; }
+.notes-compose > [aria-busy="true"]:empty, #community-account[aria-busy="true"] { min-height:48px; }
+.community-account-heading { align-items:end; gap:14px; }
+.community-profile-summary { display:block; flex:1 1 100%; overflow:hidden; border:1px solid var(--md-line,#b9bfba); }
+.community-profile-banner { height:clamp(90px,18vw,160px); background:var(--profile-color,#e5ece7); }
+.community-profile-banner img { display:block; width:100%; height:100%; object-fit:cover; }
+.community-profile-identity { display:flex; align-items:center; gap:18px; padding:15px 20px; min-width:0; }
+.community-profile-identity > div { min-width:0; }
+.community-profile-identity .community-avatar { border:3px solid white; }
+.community-profile-bio { margin:7px 0 0!important; white-space:pre-wrap; overflow-wrap:anywhere; font:14px/1.6 Arial,Helvetica,sans-serif!important; }
+.community-appearance { border-top:1px solid var(--md-line,#b9bfba); padding-top:24px; }
+.community-appearance input[type="color"] { width:70px; height:42px; padding:3px; }
+.community-appearance textarea { min-height:74px; }

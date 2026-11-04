@@ -2,7 +2,14 @@
 
 The static journal remains usable without any community service. Account features are **disabled by default in code** and require the production configuration below. They were enabled on the production website on October 7, 2026; previews remain disabled.
 
-## Provisioning status — October 7, 2026 (UTC)
+## Navigation, Notes and profile appearance — November 2026
+
+- All pages render the account link with a pre-paint display hint, `__Host-margins-ui`. It contains only `member` or `guest`. Access and refresh credentials remain `HttpOnly; Secure; SameSite=Lax`. A hint can change a label but can never unlock a draft, private profile, upload, or submission. Navigation uses one session call (`view=nav` on reading pages), without a status ping or profile/media lookup on ordinary reading pages. A transient error does not convert the last confirmed member into a guest. Active sessions renew their persistent refresh cookie for up to one year on rotation; provider expiry or revocation remains authoritative.
+- On `/field-notes/#share-a-note`, verified readers compose and submit inline. Guests verify their email there, without a round trip to My profile. The account composer remains available. Draft text, date, title and references to completed private photo uploads stay in this browser under a verified user ID. Permission must be checked again. Successful submission or explicit discard clears that account's draft.
+- Applied migration `20261104004044_member_profile_appearance` adds private `bio`, `background_color`, and `background_path` fields and a service-only, invoker-rights RPC. `appearance {bio,backgroundColor,background?}` saves profile decoration. Omit `background` to preserve the photo, send `null` to remove it, or send a validated image (JPEG, PNG, WebP up to 2 MiB). Like avatars, cover photos are private objects with signed URLs returned to the owner. The site does not expose member account profiles in the public directory.
+- Run `npm test` for handler, client and page tests. `npm run test:journey` builds the actual pages and drives their DOM, cookie jar and server handler against an isolated provider: inline login, first paint during delayed session checks, cross-page drafts and photos, refresh-token rotation, profile appearance, pending submissions, logout and a second account. This sends no production email or public test posts.
+
+## Initial provisioning — October 7, 2026 (UTC)
 
 - Supabase project: `the-margins`, reference `tmnblxehnfonitechaay`, region `us-west-1`, in the owner's Free-plan organization `fxauxryzxkwhdpwtedgd`.
 - Dashboard: https://supabase.com/dashboard/project/tmnblxehnfonitechaay
@@ -52,7 +59,7 @@ Rate limits are shared in Postgres across server instances. Likes use a unique a
 
 ## Verification completed locally
 
-`node --test test/community.test.cjs test/community-client.test.cjs` tests the handler with injected providers and client behavior: disabled and preview behavior, provider/schema failure, Origin and JSON checks, verified-user requirements, metadata role rejection, automatic verified membership without editor privileges, retired application endpoints, ordinary-member submissions, secure cookies, unpublished content isolation, account-owned media, moderation boundaries, profile ownership, avatar upload/removal, returning-user profile persistence, draft preservation, code destination and resend cooldown, provider throttling, text-as-data, limits, retry semantics and atomic-RPC routing. No real OTP emails are sent by these tests. Both migrations have now executed successfully in the project above, and database access and storage privacy were checked directly. Resend has confirmed receiving-server delivery for one real signup message. Real code verification, account operations and uploads still require the owner to complete email verification.
+`node --test test/community.test.cjs test/community-client.test.cjs` tests the handler with injected providers and client behavior: disabled and preview behavior, provider/schema failure, Origin and JSON checks, verified-user requirements, metadata role rejection, automatic verified membership without editor privileges, retired application endpoints, ordinary-member submissions, secure cookies, unpublished content isolation, account-owned media, moderation boundaries, profile ownership, avatar upload/removal, returning-user profile persistence, draft preservation, code destination and resend cooldown, provider throttling, text-as-data, limits, retry semantics and atomic-RPC routing. No real OTP emails are sent by these tests. The original migrations and the November appearance migration have executed in the project above. Database access and storage privacy were checked directly. The live browser has confirmed an authenticated reader session; the automated member journey uses isolated data.
 
 Official setup references:
 

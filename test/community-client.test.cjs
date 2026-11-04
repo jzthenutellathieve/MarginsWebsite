@@ -158,12 +158,11 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
   document.body = body;
   document.append(body);
   const header = create('header');
-  const join = create('a', { href: 'mailto:xingtong.themargins@gmail.com?subject=Joining%20The%20Margins', 'data-community-account': '' }, 'Join us');
+  const join = create('a', { href: '/account/', 'data-community-account': '' }, 'Account');
   const accountLink = join;
-  const contributeLink = create('a', {href:'mailto:xingtong.themargins@gmail.com?subject=Field%20Note', 'data-community-contribute':''}, 'Share a field note');
+  const contributeLink = create('a', {href:'/field-notes/#share-a-note', 'data-community-contribute':''}, 'Share a field note');
   header.append(join, contributeLink);
   const account = create('section', { id: 'community-account' });
-  const fallback = create('p', { 'data-community-fallback': '' }, 'Send a Field Note by email.');
   const status = create('p', { 'data-community-status': '' });
   const feed = create('section', { id: 'community-feed' });
   const staticNotes = [
@@ -176,7 +175,7 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
     feed.append(article);
     return article;
   });
-  account.append(fallback, status);
+  account.append(status);
   body.append(header, account, feed);
   const requests = [];
   const resendTimers = new Map();
@@ -197,7 +196,7 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
     let payload;
     if (Object.hasOwn(responses, action)) payload = typeof responses[action] === 'function' ? responses[action]() : responses[action];
     else if (action === 'status') payload = { ready };
-    else if (action === 'session') payload = { user };
+    else if (action === 'session') payload = { ready,user };
     else if (action === 'feed') payload = { notes };
     else if (action === 'note') payload = { likes: 0, liked: false, views: 0, comments: [], canModerate: false, ...noteDetails };
     else if (action === 'mine') payload = {notes:[]};
@@ -213,28 +212,27 @@ function page({ ready = true, unavailable = false, notes = [], noteDetails = {},
   }
   vm.runInNewContext(source, { document, window, location: window.location, fetch, URL, URLSearchParams, FileReader,
     AbortController, AbortSignal, setTimeout, clearTimeout, console, crypto: window.crypto });
-  return { document, feed, account, accountLink, contributeLink, fallback, status, join, staticNotes, requests,
+  return { document, feed, account, accountLink, contributeLink, status, join, staticNotes, requests,
     expireResendTimer() { for (const [id, callback] of resendTimers) { resendTimers.delete(id); callback(); } },
     async settle() { for (let index = 0; index < 6; index++) await new Promise(resolve => setImmediate(resolve)); } };
 }
 
 for (const scenario of [{ name: 'unconfigured storage', ready: false }, { name: 'network failure', unavailable: true }]) {
-  test(scenario.name + ' preserves published notes and the header email link while hiding account interactions', async () => {
+  test(scenario.name + ' preserves published notes and the account link without signing a member out', async () => {
     const app = page(scenario);
     await app.settle();
     assert.deepEqual(app.feed.querySelectorAll('article[data-note-id]'), app.staticNotes);
     assert.match(app.feed.textContent, /The original published note remains readable/);
-    assert.equal(new URL(app.join.href).pathname, 'xingtong.themargins@gmail.com');
-    assert.equal(new URL(app.join.href).protocol, 'mailto:');
-    assert.equal(new URL(app.contributeLink.href).protocol, 'mailto:');
+    assert.equal(app.join.href, '/account/');
+    assert.ok(app.account.querySelector('.community-retry'));
+    assert.equal(app.contributeLink.href, '/field-notes/#share-a-note');
     assert.equal(app.join.hidden, false);
     assert.equal(app.account.hidden, false);
     assert.equal(app.account.querySelectorAll('form').length, 0);
     assert.equal(app.accountLink.hidden, false);
     assert.ok(app.staticNotes.every(note => note.querySelector('[data-note-interactions]').hidden));
-    assert.equal(app.fallback.hidden, false);
     assert.equal(app.requests.length, 1);
-    assert.equal(new URL(app.requests[0].url, 'https://themargins.example').searchParams.get('action'), 'status');
+    assert.equal(new URL(app.requests[0].url, 'https://themargins.example').searchParams.get('action'), 'session');
   });
 }
 
@@ -287,7 +285,7 @@ test('a verified account opens the note composer without a membership applicatio
   const app = page({user:{id:'reader-id', name:'Jerry', isAdmin:false, isMember:false, membership:'none'}});
   await app.settle();
   assert.equal(app.accountLink.textContent, 'My profile');
-  assert.equal(app.contributeLink.href, '/account/#share-a-note');
+  assert.equal(app.contributeLink.href, '/field-notes/#share-a-note');
   assert.ok(app.account.querySelector('.community-editor'));
   assert.ok(app.account.querySelector('.community-mine'));
   assert.ok(app.requests.some(request => request.url.includes('action=mine')));
@@ -330,7 +328,7 @@ test('email verification opens posting and offers full article submission by ema
   assert.ok(app.account.querySelector('.community-editor'));
   assert.ok(app.account.querySelector('.community-mine'));
   assert.equal(app.account.querySelector('.community-review'), null);
-  assert.equal(app.contributeLink.href, '/account/#share-a-note');
+  assert.equal(app.contributeLink.href, '/field-notes/#share-a-note');
   const article = app.account.querySelectorAll('a').find(a => a.href?.startsWith('mailto:'));
   assert.equal(article.textContent, 'Send a full-length article to the editor');
   const destination = new URL(article.href);
