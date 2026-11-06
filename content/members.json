@@ -6,7 +6,7 @@
     "avatar": "/members/jason.webp",
     "avatarColor": "#35584f",
     "initial": "J",
-    "role": "Member"
+    "role": "Admin"
   },
   {
     "id": "jerry-zou",
@@ -15,7 +15,7 @@
     "avatar": "/members/jerry-zou.png",
     "avatarColor": "#35584f",
     "initial": "J",
-    "role": "Founder & editor"
+    "role": "Editor-in-Chief"
   },
   {
     "id": "emily-lin",
@@ -24,7 +24,7 @@
     "avatar": null,
     "avatarColor": "#80524f",
     "initial": "E",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "rhombus-xing",
@@ -33,7 +33,7 @@
     "avatar": null,
     "avatarColor": "#4d6682",
     "initial": "R",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "john-x",
@@ -42,7 +42,7 @@
     "avatar": null,
     "avatarColor": "#66558a",
     "initial": "J",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "barry",
@@ -51,7 +51,7 @@
     "avatar": null,
     "avatarColor": "#8a662f",
     "initial": "B",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "steven-h",
@@ -60,7 +60,7 @@
     "avatar": null,
     "avatarColor": "#39756c",
     "initial": "S",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "billie-zhu",
@@ -69,7 +69,7 @@
     "avatar": "/members/billie-zhu.jpg",
     "avatarColor": "#35584f",
     "initial": "B",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "zachary-lai",
@@ -78,7 +78,7 @@
     "avatar": "/members/zachary-lai.png",
     "avatarColor": "#42566d",
     "initial": "Z",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "pang-huaiyu",
@@ -87,7 +87,7 @@
     "avatar": "/members/pang-huaiyu.png",
     "avatarColor": "#9b6b78",
     "initial": "P",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "weilingluo0925",
@@ -96,7 +96,7 @@
     "avatar": null,
     "avatarColor": "#967158",
     "initial": "W",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "mikkl-yiu",
@@ -105,7 +105,7 @@
     "avatar": null,
     "avatarColor": "#4d6682",
     "initial": "M",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "benjid-816",
@@ -114,7 +114,7 @@
     "avatar": null,
     "avatarColor": "#8a662f",
     "initial": "B",
-    "role": "Member"
+    "role": "Writer"
   },
   {
     "id": "zoherpro",
@@ -123,6 +123,6 @@
     "avatar": null,
     "avatarColor": "#66558a",
     "initial": "Z",
-    "role": "Member"
+    "role": "Writer"
   }
 ]
