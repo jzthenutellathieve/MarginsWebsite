@@ -15,7 +15,22 @@
   "date": "November 7, 2026",
   "coverageDate": "August 2024",
   "coverageMonth": "2024-08",
+  "coverageCutoff": "2024-08-31",
   "content": [
+    {
+      "type": "image",
+      "src": "/assets/new-articles/hk-sunday-central-footbridge-2012.jpg",
+      "alt": "People sit behind cardboard partitions along both sides of a covered footbridge, leaving an open walkway through the middle.",
+      "caption": "Cardboard partitions line a footbridge on Connaught Road Central, Hong Kong, December 9, 2012.",
+      "photographer": "Epattloamer",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Epattloamer",
+      "source": "Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:HK_Central_footbridge_Sunday_holiday_visitors_Fibra_paper_booths_Winter_wind_Dec-2012.JPG",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0/",
+      "changes": "Resized and compressed.",
+      "eager": true
+    },
     {
       "type": "paragraph",
       "text": "Shoes at the edge of the cardboard mats indicated the boundaries of different areas. As noted by the designer Evelyn Kwok, during her Central observations conducted from 2012 to 2015, these groups screened themselves from passers-by using cartons and umbrellas. Some setups used tape and zip ties, with strings attaching the walls to walkway railings. People could sit inside while the others passed by.",
@@ -92,5 +107,7 @@
       "text": "Lisa Law. Urban Studies 39(9),1625–1645. Defying disappearance: cosmopolitan public spaces in Hong Kong. 2002.",
       "url": "https://researchonline.jcu.edu.au/11613/"
     }
-  ]
+  ],
+  "thumbnail": "/assets/new-articles/hk-sunday-central-footbridge-2012.jpg",
+  "thumbnailAlt": "People sit behind cardboard partitions along both sides of a covered footbridge, leaving an open walkway through the middle."
 }

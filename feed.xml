@@ -7,34 +7,6 @@
     <language>en</language>
     <atom:link href="https://themarginsjournals.com/feed.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Sant Antoni: A Leisure Spot</title>
-      <link>https://themarginsjournals.com/articles/barcelona-streets-after-the-works/</link>
-      <guid isPermaLink="false">urn:the-margins:article:barcelona-streets-after-the-works</guid>
-      <pubDate>Sun, 08 Nov 2026 03:07:56 GMT</pubDate>
-      <description>Researchers monitored people's activities while they rested, shopped or walked in the streets of Barcelona. Very few were doing strenuous physical activity.</description>
-    </item>
-    <item>
-      <title>Missing Ownership Papers</title>
-      <link>https://themarginsjournals.com/articles/ukraine-replacement-home/</link>
-      <guid isPermaLink="false">urn:the-margins:article:ukraine-replacement-home</guid>
-      <pubDate>Sun, 08 Nov 2026 02:40:40 GMT</pubDate>
-      <description>Ukraine's housing compensation scheme in June 2026 depended on evidence of ownership, damage assessments and funds to pay approved claims.</description>
-    </item>
-    <item>
-      <title>The Room on the Form</title>
-      <link>https://themarginsjournals.com/articles/hong-kong-live-in-private-space/</link>
-      <guid isPermaLink="false">urn:the-margins:article:hong-kong-live-in-private-space</guid>
-      <pubDate>Sun, 08 Nov 2026 02:37:47 GMT</pubDate>
-      <description>Hong Kong maintains documents regarding the sleeping space of foreign domestic workers. Issues like storage places, laundry, and cameras may impact this space.</description>
-    </item>
-    <item>
-      <title>Sunday Rooms in Central</title>
-      <link>https://themarginsjournals.com/articles/sunday-rooms-central/</link>
-      <guid isPermaLink="false">urn:the-margins:article:sunday-rooms-central</guid>
-      <pubDate>Sun, 08 Nov 2026 02:29:32 GMT</pubDate>
-      <description>Cartons provided Filipina domestic workers with a place to rest on Central’s walkways.</description>
-    </item>
-    <item>
       <title>When Federal Funding Cuts Reach Refugees’ Everyday Lives</title>
       <link>https://themarginsjournals.com/articles/after-cws-orange-county/</link>
       <guid isPermaLink="false">urn:the-margins:article:after-cws-orange-county</guid>
@@ -42,11 +14,25 @@
       <description>After CWS announced its Orange County office would close, I traced how the suspension of refugee admissions and federal funding changes contributed to the decision, and what the closure means for families relying on help with housing, benefit applications and everyday life in Southern California.</description>
     </item>
     <item>
+      <title>Sant Antoni: A Leisure Spot</title>
+      <link>https://themarginsjournals.com/articles/barcelona-streets-after-the-works/</link>
+      <guid isPermaLink="false">urn:the-margins:article:barcelona-streets-after-the-works</guid>
+      <pubDate>Sun, 08 Nov 2026 03:07:56 GMT</pubDate>
+      <description>Researchers monitored people's activities while they rested, shopped or walked in the streets of Barcelona. Very few were doing strenuous physical activity.</description>
+    </item>
+    <item>
       <title>The $27,000 Problem: Musasa’s Broken Pump and the Cost of Waiting</title>
       <link>https://themarginsjournals.com/articles/refugee-water-crisis-27000-problem/</link>
       <guid isPermaLink="false">urn:the-margins:article:refugee-water-crisis-27000-problem</guid>
       <pubDate>Wed, 05 Aug 2026 00:00:00 GMT</pubDate>
       <description>In June, a Musasa resident described spending 210,000 Burundian francs a month on water after a pump failure. Emergency deliveries arrived in July. Residents were still asking for the pump to be repaired.</description>
+    </item>
+    <item>
+      <title>Missing Ownership Papers</title>
+      <link>https://themarginsjournals.com/articles/ukraine-replacement-home/</link>
+      <guid isPermaLink="false">urn:the-margins:article:ukraine-replacement-home</guid>
+      <pubDate>Sun, 08 Nov 2026 02:40:40 GMT</pubDate>
+      <description>Ukraine's housing compensation scheme in June 2026 depended on evidence of ownership, damage assessments and funds to pay approved claims.</description>
     </item>
     <item>
       <title>Water by Hand: A Human-Powered UV Device and Questions for a Field Trial</title>
@@ -82,6 +68,20 @@
       <guid isPermaLink="false">urn:the-margins:article:sand-cartels-southeast-asia</guid>
       <pubDate>Wed, 28 May 2025 00:00:00 GMT</pubDate>
       <description>How sand extraction and the trade supplying land reclamation affect riverbanks, coastlines and the people living there.</description>
+    </item>
+    <item>
+      <title>The Room on the Form</title>
+      <link>https://themarginsjournals.com/articles/hong-kong-live-in-private-space/</link>
+      <guid isPermaLink="false">urn:the-margins:article:hong-kong-live-in-private-space</guid>
+      <pubDate>Sun, 08 Nov 2026 02:37:47 GMT</pubDate>
+      <description>Hong Kong maintains documents regarding the sleeping space of foreign domestic workers. Issues like storage places, laundry, and cameras may impact this space.</description>
+    </item>
+    <item>
+      <title>Sunday Rooms in Central</title>
+      <link>https://themarginsjournals.com/articles/sunday-rooms-central/</link>
+      <guid isPermaLink="false">urn:the-margins:article:sunday-rooms-central</guid>
+      <pubDate>Sun, 08 Nov 2026 02:29:32 GMT</pubDate>
+      <description>Cartons provided Filipina domestic workers with a place to rest on Central’s walkways.</description>
     </item>
   </channel>
 </rss>

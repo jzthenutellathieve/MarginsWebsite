@@ -94,6 +94,25 @@ def publication_date(value, article_id):
     )
 
 
+def article_sort_date(article, published):
+    """Match the displayed article date without changing RSS publication dates."""
+    if (article.get("format") != "Retrospective" and
+            not any(key in article for key in ("coverageCutoff", "coverageMonth", "coverageDate"))):
+        return published
+    cutoff = article.get("coverageCutoff")
+    article_id = article.get("id")
+    if (article.get("format") != "Retrospective" or not isinstance(cutoff, str) or
+            not re.fullmatch(r"\d{4}-\d{2}-\d{2}", cutoff)):
+        raise ValueError(f"Article {article_id!r}: invalid retrospective coverage cutoff")
+    try:
+        covered = date.fromisoformat(cutoff)
+    except ValueError as error:
+        raise ValueError(f"Article {article_id!r}: invalid retrospective coverage cutoff") from error
+    if article.get("coverageMonth") != cutoff[:7] or covered > published:
+        raise ValueError(f"Article {article_id!r}: invalid retrospective coverage cutoff")
+    return covered
+
+
 def require_text(value, label):
     if not isinstance(value, str) or not value.strip():
         raise ValueError(f"{label} must be non-empty text")
@@ -165,6 +184,7 @@ def build_feed_from_articles(articles, site_url, today=None):
         seen.add(article_id)
         title = require_text(article.get("title"), f"Article {article_id!r} title")
         published = publication_date(article.get("date"), article_id)
+        ordered_date = article_sort_date(article, published)
         excerpt = article.get("excerpt") or article.get("subtitle")
         if not excerpt:
             excerpt = next((block.get("text") for block in article.get("content", [])
@@ -173,7 +193,7 @@ def build_feed_from_articles(articles, site_url, today=None):
         if not excerpt:
             raise ValueError(f"Article {article_id!r} excerpt contains no readable text")
         if published <= today:
-            prepared.append((published, article_id, title, excerpt))
+            prepared.append((ordered_date, article_id, published, title, excerpt))
 
     rss = ET.Element("rss", version="2.0")
     channel = ET.SubElement(rss, "channel")
@@ -183,7 +203,8 @@ def build_feed_from_articles(articles, site_url, today=None):
     ET.SubElement(channel, "language").text = "en"
     ET.SubElement(channel, f"{{{ATOM}}}link", {
         "href": site_url + "/feed.xml", "rel": "self", "type": "application/rss+xml"})
-    for published, article_id, title, excerpt in sorted(prepared, reverse=True):
+    for _, article_id, published, title, excerpt in sorted(
+            prepared, key=lambda item: (-item[0].toordinal(), item[1])):
         item = ET.SubElement(channel, "item")
         ET.SubElement(item, "title").text = title
         ET.SubElement(item, "link").text = site_url + "/articles/" + quote(article_id, safe="") + "/"

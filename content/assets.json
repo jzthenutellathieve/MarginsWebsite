@@ -108,5 +108,25 @@
     "src": "/assets/us-capitol-toni-smith-usgs.jpg",
     "width": 2592,
     "height": 1944
+  },
+  "/assets/new-articles/hk-sunday-central-footbridge-2012.jpg": {
+    "src": "/assets/new-articles/hk-sunday-central-footbridge-2012.jpg",
+    "width": 1800,
+    "height": 1344
+  },
+  "/assets/new-articles/hk-livein-hong-kong-apartments-2024.jpg": {
+    "src": "/assets/new-articles/hk-livein-hong-kong-apartments-2024.jpg",
+    "width": 1800,
+    "height": 1200
+  },
+  "/assets/new-articles/ukraine-irpin-damaged-apartments-2022.webp": {
+    "src": "/assets/new-articles/ukraine-irpin-damaged-apartments-2022.webp",
+    "width": 1800,
+    "height": 1268
+  },
+  "/assets/new-articles/barcelona-sant-antoni-leisure-2022.webp": {
+    "src": "/assets/new-articles/barcelona-sant-antoni-leisure-2022.webp",
+    "width": 1680,
+    "height": 1120
   }
 }

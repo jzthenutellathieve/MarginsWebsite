@@ -15,7 +15,22 @@
   "date": "November 7, 2026",
   "coverageDate": "June 2026",
   "coverageMonth": "2026-06",
+  "coverageCutoff": "2026-06-30",
   "content": [
+    {
+      "type": "image",
+      "src": "/assets/new-articles/ukraine-irpin-damaged-apartments-2022.webp",
+      "alt": "Damaged apartment building in Irpin with shattered windows and missing sections of its facade.",
+      "caption": "A damaged residential building in Irpin, Ukraine, photographed on April 27, 2022.",
+      "photographer": "Rasal Hague",
+      "photographerUrl": "https://commons.wikimedia.org/wiki/User:Rasal_Hague",
+      "source": "Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:A_damaged_building_in_Irpin_7.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "changes": "Resized and converted to WebP.",
+      "eager": true
+    },
     {
       "type": "paragraph",
       "text": "While fleeing Sievierodonetsk, Yevhen lost the ownership documents for the apartment he owned with his wife. Later, they found out the apartment had been damaged in a Russian attack. His application was rejected. The registry office burned down, and its files were not digitized. UNHCR made Yevhen's case public in October 2025.",
@@ -114,5 +129,7 @@
       "text": "Council of Europe Development Bank. CEB, EU and Italy step up support for Ukraine's housing recovery. June 26, 2026.",
       "url": "https://coebank.org/en/news-and-publications/news/ceb-eu-and-italy-step-up-support-for-ukraines-housing-recovery/"
     }
-  ]
+  ],
+  "thumbnail": "/assets/new-articles/ukraine-irpin-damaged-apartments-2022.webp",
+  "thumbnailAlt": "Damaged apartment building in Irpin with shattered windows and missing sections of its facade."
 }

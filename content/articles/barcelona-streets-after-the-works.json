@@ -15,7 +15,22 @@
   "date": "November 7, 2026",
   "coverageDate": "August 2026",
   "coverageMonth": "2026-08",
+  "coverageCutoff": "2026-08-31",
   "content": [
+    {
+      "type": "image",
+      "src": "/assets/new-articles/barcelona-sant-antoni-leisure-2022.webp",
+      "alt": "People sit on benches beside planters while others walk through the painted street space in Sant Antoni, Barcelona.",
+      "caption": "People sitting and walking in the Sant Antoni superblock, Barcelona, May 28, 2022.",
+      "photographer": "Alain Rouiller",
+      "photographerUrl": "https://www.flickr.com/people/rda-ch/",
+      "source": "Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Barcelone_Superil%C3%B4t_de_Sant_Antoni_94_33_(52646817680).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "changes": "Converted to WebP.",
+      "eager": true
+    },
     {
       "type": "paragraph",
       "text": "According to a study published in 2025, more than 900 people used the Sant Antoni superblock per hour during the observation period. People were resting or casually walking along the pedestrian zone.",
@@ -56,5 +71,7 @@
       "text": "Pérez, K., et al. Environmental and health effects of the Barcelona superblocks. BMC Public Health 25, 634. February 17, 2025. DOI: 10.1186/s12889-025-21835-z.",
       "url": "https://link.springer.com/article/10.1186/s12889-025-21835-z"
     }
-  ]
+  ],
+  "thumbnail": "/assets/new-articles/barcelona-sant-antoni-leisure-2022.webp",
+  "thumbnailAlt": "People sit on benches beside planters while others walk through the painted street space in Sant Antoni, Barcelona."
 }

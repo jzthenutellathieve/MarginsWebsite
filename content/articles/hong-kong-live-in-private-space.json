@@ -15,7 +15,22 @@
   "date": "November 7, 2026",
   "coverageDate": "January 2025",
   "coverageMonth": "2025-01",
+  "coverageCutoff": "2025-01-31",
   "content": [
+    {
+      "type": "image",
+      "src": "/assets/new-articles/hk-livein-hong-kong-apartments-2024.jpg",
+      "alt": "Rows of windows, air conditioners and external pipes on a brightly painted apartment building in Hong Kong.",
+      "caption": "Apartment windows in Hong Kong, March 15, 2024.",
+      "photographer": "Raita Futo",
+      "photographerUrl": "https://www.flickr.com/people/raita/",
+      "source": "Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Colorful_apartment_buildings_in_Hong_Kong.jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "changes": "Resized and compressed.",
+      "eager": true
+    },
     {
       "type": "paragraph",
       "text": "Employers are able to indicate where foreign domestic workers will sleep when filling out Hong Kong’s accommodation form. They can specify a separate room, a room shared with children, a partitioned area, or another arrangement. The revised form’s June 2024 edition asks for the flat size and number of residents. The form notes that flats are relatively small and separate rooms for workers are uncommon. It sets no minimum bedroom size. Whatever sleeping space is specified, it must be suitable and provide reasonable privacy.",
@@ -98,5 +113,7 @@
       "text": "St John’s Cathedral. Investigating Living Accommodation of Foreign Domestic Workers. In Touch, issue12, September–November2017, pp18–19. Contemporary account of the MFMW report.",
       "url": "https://www.stjohnscathedral.org.hk/files/site/4/Review/Issue%20012%20%28Autumn%202017%20%29.pdf"
     }
-  ]
+  ],
+  "thumbnail": "/assets/new-articles/hk-livein-hong-kong-apartments-2024.jpg",
+  "thumbnailAlt": "Rows of windows, air conditioners and external pipes on a brightly painted apartment building in Hong Kong."
 }

@@ -1,12 +1,11 @@
 const { escapeText: e, articlePath } = require('./site-utils.cjs');
 const { byline } = require('./article-authors.cjs');
-const { isoDate, displayDate, displayIsoDate, retrospectiveMonth } = require('./article-dates.cjs');
+const { isoDate, displayDate, displayIsoDate, retrospectiveMonth, sortArticles } = require('./article-dates.cjs');
 const fill = (template, values) => template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   if (!(key in values)) throw new Error(`Missing template value: ${key}`);
   return values[key];
 });
 const shortTitle = article => article.displayTitle || article.title;
-const sortArticles = articles => [...articles].sort((a, b) => isoDate(b).localeCompare(isoDate(a)) || a.id.localeCompare(b.id));
 const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const photoBlocks = article => article.content.filter(block => block.type === 'image');
 const cardPhoto = article => article.thumbnail ? {src:article.thumbnail, alt:article.thumbnailAlt || photoBlocks(article).find(p => p.src === article.thumbnail)?.alt || shortTitle(article), fit:article.thumbnailFit} : photoBlocks(article)[0];
@@ -82,17 +81,17 @@ function collectionPages(articles, templates, assets) {
     heading:'Articles', basePath:'/articles/', summary:countText(ordered.length),
     articles:ordered.map(a => listRow(a, assets)).join(''), pagination:''
   })}];
-  const years = [...new Set(ordered.map(a => isoDate(a).slice(0, 4)))];
+  const years = [...new Set(ordered.map(a => displayIsoDate(a).slice(0, 4)))];
   const archiveSize = 12;
   for (const year of ['', ...years]) {
-    const matches = year ? ordered.filter(a => isoDate(a).startsWith(year)) : ordered;
+    const matches = year ? ordered.filter(a => displayIsoDate(a).startsWith(year)) : ordered;
     const base = year ? `/archive/${year}/` : '/archive/';
     const total = Math.max(1, Math.ceil(matches.length / archiveSize));
     const navigation = ['', ...years].map(y => `<a href="${y ? `/archive/${y}/` : '/archive/'}"${year === y ? ' aria-current="page"' : ''}>${y || 'All years'}</a>`).join('');
     for (let page = 1; page <= total; page++) {
       let currentYear;
       const rows = matches.slice((page - 1) * archiveSize, page * archiveSize).map(article => {
-        const y = isoDate(article).slice(0, 4);
+        const y = displayIsoDate(article).slice(0, 4);
         const heading = y !== currentYear ? `<h2 class="md-archive-year">${y}</h2>` : '';
         currentYear = y;
         const dateLabel = retrospectiveMonth(article) ? displayDate(article) : article.date.replace(', ' + y, '');
