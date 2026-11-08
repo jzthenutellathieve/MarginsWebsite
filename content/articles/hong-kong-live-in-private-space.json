@@ -1,0 +1,102 @@
+{
+  "id": "hong-kong-live-in-private-space",
+  "title": "The Room on the Form",
+  "subtitle": "Hong Kong maintains documents regarding the sleeping space of foreign domestic workers. Issues like storage places, laundry, and cameras may impact this space.",
+  "excerpt": "Hong Kong maintains documents regarding the sleeping space of foreign domestic workers. Issues like storage places, laundry, and cameras may impact this space.",
+  "tag": "Housing",
+  "region": "Hong Kong",
+  "format": "Retrospective",
+  "authors": [
+    {
+      "name": "JSON",
+      "type": "Person"
+    }
+  ],
+  "date": "November 7, 2026",
+  "coverageDate": "January 2025",
+  "coverageMonth": "2025-01",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Employers are able to indicate where foreign domestic workers will sleep when filling out Hong Kong’s accommodation form. They can specify a separate room, a room shared with children, a partitioned area, or another arrangement. The revised form’s June 2024 edition asks for the flat size and number of residents. The form notes that flats are relatively small and separate rooms for workers are uncommon. It sets no minimum bedroom size. Whatever sleeping space is specified, it must be suitable and provide reasonable privacy.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Foreign domestic workers normally have to live at the employer’s address. A private agreement between an employer and a foreign domestic worker is generally insufficient to permit living elsewhere. Accommodation is a part of the job, so any person interested in such a position should know about the sleeping space in this household.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A 2017 report, titled Pictures from the Inside, by the Mission for Migrant Workers, states that 43% of the surveyed workers did not have their own room. Among those who had a room, 33% said the room was also used for other household purposes, such as storage, laundry and ironing.",
+      "sources": [
+        3,
+        5
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "These data are based on a survey conducted among 3,075 Filipino and Indonesian domestic workers in December 2016–January 2017. The researchers also held separate focus groups. This information cannot establish the living conditions of all Hong Kong foreign domestic workers as of January 2025. For this sample, having a room and using it exclusively were two different things because household goods and laundry gave other people reasons to enter the sleeping place. Counting only rooms will not give information about other activities that take place in some workers' rooms.",
+      "sources": [
+        3,
+        5
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Who Uses the Sleeping Space"
+    },
+    {
+      "type": "paragraph",
+      "text": "According to the Labour Department's 2019 employer's guide, when considering hiring a foreign domestic worker, families should assess the appropriateness of the accommodation and create a place for personal belongings. At the same time, families should evaluate whether household routines may intrude on the worker's privacy, for example, when other household members enter the sleeping place for laundry or to store goods.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The housing form indicates that makeshift corridor beds with little privacy and rooms shared with adults or teens of the opposite sex are unsuitable. Essential facilities to be provided free of charge include a bed with bedding, a wardrobe, water, lighting, and bathroom access. Substantial changes to the household, accommodation, or duties require a revised accommodation schedule signed by both parties. The employer must notify the worker about the change and submit a copy to the Immigration Department.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "It becomes important to consider bed placement when households put up a camera. A camera is able to monitor the sleeping space in the process of monitoring other parts of the room. According to the Labour Department's 2023 handbook, there are guidelines for surveillance: an employer should inform the worker before surveillance begins and should not record activities in bathrooms or the worker's private space used for rest after work.",
+      "sources": [
+        4
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "Hong Kong Immigration Department. Revised Schedule of Accommodation and Domestic Duties, ID 407G (06/2024), sections 2–3 and 7.",
+      "url": "https://www.immd.gov.hk/pdforms/id407g.pdf"
+    },
+    {
+      "num": 2,
+      "text": "Hong Kong Labour Department. Handy Guide for Employers of Foreign Domestic Helpers, February 2019, sections 1.2, 3.2–3.2.3 and 4.8.",
+      "url": "https://www.fdh.labour.gov.hk/res/pdf/Handy_Guide_FDHs_eng.pdf"
+    },
+    {
+      "num": 3,
+      "text": "Mission for Migrant Workers. Pictures from the Inside: Investigating Living Accommodation of Women Migrant Domestic Workers Towards Advocacy and Action. May 2017, methodology and survey findings.",
+      "url": "https://www.ohchr.org/sites/default/files/Documents/Issues/Migration/CFI-COVID/SubmissionsCOVID/CSO/Pictures.pdf"
+    },
+    {
+      "num": 4,
+      "text": "Hong Kong Labour Department. Be Prepared for Employment in Hong Kong: A Handbook for Foreign Domestic Helpers, 2023, section 5.2.2, Right to privacy.",
+      "url": "https://www.fdh.labour.gov.hk/res/pdf/Be_Prepared_for_Employment_in_HK_handbook_FDH_English.pdf"
+    },
+    {
+      "num": 5,
+      "text": "St John’s Cathedral. Investigating Living Accommodation of Foreign Domestic Workers. In Touch, issue12, September–November2017, pp18–19. Contemporary account of the MFMW report.",
+      "url": "https://www.stjohnscathedral.org.hk/files/site/4/Review/Issue%20012%20%28Autumn%202017%20%29.pdf"
+    }
+  ]
+}
