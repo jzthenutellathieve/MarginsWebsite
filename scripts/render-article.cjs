@@ -1,9 +1,12 @@
 const { escapeText } = require('./site-utils.cjs');
 const { shortTitle, displayDate } = require('./editorial.cjs');
+const { byline: articleByline } = require('./article-authors.cjs');
+const { displayIsoDate, retrospectiveMonth } = require('./article-dates.cjs');
 function renderArticle(article, snippets, assets) {
   const id = article.id;
   const isDevice = id === 'tehg-uv-water-access';
-  const byline = isDevice ? 'Xingtong Zou & Xingwei Wang' : 'Xingtong Jerry Zou';
+  const byline = articleByline(article);
+  const dateline = retrospectiveMonth(article) ? '<time datetime="'+displayIsoDate(article)+'">'+escapeText(displayDate(article))+'</time>' : escapeText(displayDate(article));
   const collaboration = isDevice ? snippets.collaboration : '';
   const diagram = isDevice ? snippets['device-figure'] : '';
   const embeddedVideo = isDevice ? snippets['device-video'] : '';
@@ -42,6 +45,6 @@ function renderArticle(article, snippets, assets) {
     }).join('');
     const contents = article.content.map((block, index) => block.type === 'heading' ? '<li><a href="#section-'+index+'">'+escapeText(block.text)+'</a></li>' : '').join('');
     const toolbar = '<div class="md-reader-tools">'+(contents ? '<details class="md-contents"><summary>In this article</summary><ol>'+contents+'<li><a href="#article-sources">Sources</a></li></ol></details>' : '<a href="#article-sources">Sources ↓</a>')+'<button type="button" data-mj-copy-link hidden>Copy article link ↗</button></div>';
-    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+escapeText(displayDate(article))+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+projectNote+reportingNote+toolbar+projectLinks+'</header><div class="mj-reader-body">'+diagram+blocks+collaboration+correction+publicationNote+'<section class="mj-sources" id="article-sources"><h2>Sources</h2><ol>'+sources+'</ol></section></div>';
+    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+dateline+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+projectNote+reportingNote+toolbar+projectLinks+'</header><div class="mj-reader-body">'+diagram+blocks+collaboration+correction+publicationNote+'<section class="mj-sources" id="article-sources"><h2>Sources</h2><ol>'+sources+'</ol></section></div>';
 }
 module.exports = { renderArticle };

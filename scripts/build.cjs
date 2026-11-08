@@ -2,6 +2,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const { escapeText, pages, articlePath } = require('./site-utils.cjs');
 const { renderArticle } = require('./render-article.cjs');
+const { schemaAuthors } = require('./article-authors.cjs');
+const { schemaDates } = require('./article-dates.cjs');
 const { contributeUrl, joinUrl, renderNotes, renderMembers, renderNotePreview } = require('./field-notes.cjs');
 const { prepareNoteMedia } = require('./prepare-note-media.cjs');
 const { estimateReadingTime } = require('./reading-time.cjs');
@@ -75,10 +77,8 @@ function documentFor({ title, pathname, body, active, summary = description, art
   const metadata = article ? `<script type="application/ld+json">${JSON.stringify({
     '@context': 'https://schema.org', '@type': 'Article', headline: article.title,
     description: summary, mainEntityOfPage: canonical,
-    author: article.id === 'tehg-uv-water-access' ? [
-      { '@type': 'Person', name: 'Xingtong Zou' }, { '@type': 'Person', name: 'Xingwei Wang' }
-    ] : { '@type': 'Person', name: 'Xingtong Jerry Zou' },
-    datePublished: new Date(article.date + ' 00:00:00 UTC').toISOString(),
+    author: schemaAuthors(article),
+    ...schemaDates(article),
     publisher: { '@type': 'Organization', name: 'The Margins' }
   }).replace(/</g, '\\u003c')}</script>` : '';
   return `<!DOCTYPE html>

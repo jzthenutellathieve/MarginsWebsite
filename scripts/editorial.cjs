@@ -1,13 +1,11 @@
 const { escapeText: e, articlePath } = require('./site-utils.cjs');
+const { byline } = require('./article-authors.cjs');
+const { isoDate, displayDate, displayIsoDate, retrospectiveMonth } = require('./article-dates.cjs');
 const fill = (template, values) => template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   if (!(key in values)) throw new Error(`Missing template value: ${key}`);
   return values[key];
 });
 const shortTitle = article => article.displayTitle || article.title;
-const byline = article => article.id === 'tehg-uv-water-access' ? 'Xingtong Zou & Xingwei Wang' : 'Xingtong Jerry Zou';
-const isoDate = article => new Date(article.date + ' 00:00:00 UTC').toISOString().slice(0, 10);
-const displayDate = article => 'Published ' + article.date;
-const displayIsoDate = article => isoDate(article);
 const sortArticles = articles => [...articles].sort((a, b) => isoDate(b).localeCompare(isoDate(a)) || a.id.localeCompare(b.id));
 const slug = value => value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 const photoBlocks = article => article.content.filter(block => block.type === 'image');
@@ -97,7 +95,8 @@ function collectionPages(articles, templates, assets) {
         const y = isoDate(article).slice(0, 4);
         const heading = y !== currentYear ? `<h2 class="md-archive-year">${y}</h2>` : '';
         currentYear = y;
-        return `${heading}<article class="md-archive-row"><time datetime="${isoDate(article)}">${e(article.date.replace(', ' + y, ''))}</time><div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3><p>${e(article.deck || article.subtitle)}</p></div></article>`;
+        const dateLabel = retrospectiveMonth(article) ? displayDate(article) : article.date.replace(', ' + y, '');
+        return `${heading}<article class="md-archive-row"><time datetime="${displayIsoDate(article)}">${e(dateLabel)}</time><div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3><p>${e(article.deck || article.subtitle)}</p></div></article>`;
       }).join('');
       results.push({pathname: pagePath(base, page), title: `${year ? year + ' — ' : ''}Article archive${page > 1 ? ' — Page ' + page : ''} | The Margins`, active:'archive', body:fill(templates.archive, {years:navigation, summary:rangeText(page, archiveSize, matches.length), articles:rows, pagination:pagination(base,page,total,'Archive pages')})});
     }
