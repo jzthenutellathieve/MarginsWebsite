@@ -5,12 +5,12 @@ const { byline, schemaAuthors } = require('../scripts/article-authors.cjs');
 const { renderArticle } = require('../scripts/render-article.cjs');
 const { collectionPages, searchIndex } = require('../scripts/editorial.cjs');
 
-test('existing articles retain their original named authors', () => {
+test('existing articles use the approved public author names', () => {
   for (const id of ['after-cws-orange-county', 'refugee-water-crisis-27000-problem',
     'after-wang-fuk-court', 'cws-after-the-la-fires', 'after-the-fire-before-a-lease',
     'sand-cartels-southeast-asia']) {
-    assert.equal(byline({ id }), 'Xingtong Jerry Zou');
-    assert.deepEqual(schemaAuthors({ id }), { '@type': 'Person', name: 'Xingtong Jerry Zou' });
+    assert.equal(byline({ id }), 'Xingtong Zou');
+    assert.deepEqual(schemaAuthors({ id }), { '@type': 'Person', name: 'Xingtong Zou' });
   }
   assert.equal(byline({ id: 'tehg-uv-water-access' }), 'Xingtong Zou & Xingwei Wang');
   assert.deepEqual(schemaAuthors({ id: 'tehg-uv-water-access' }), [

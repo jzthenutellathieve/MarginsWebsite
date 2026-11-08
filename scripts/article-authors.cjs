@@ -1,11 +1,11 @@
 const legacyAuthors = {
-  'after-cws-orange-county': ['Xingtong Jerry Zou'],
-  'refugee-water-crisis-27000-problem': ['Xingtong Jerry Zou'],
+  'after-cws-orange-county': ['Xingtong Zou'],
+  'refugee-water-crisis-27000-problem': ['Xingtong Zou'],
   'tehg-uv-water-access': ['Xingtong Zou', 'Xingwei Wang'],
-  'after-wang-fuk-court': ['Xingtong Jerry Zou'],
-  'cws-after-the-la-fires': ['Xingtong Jerry Zou'],
-  'after-the-fire-before-a-lease': ['Xingtong Jerry Zou'],
-  'sand-cartels-southeast-asia': ['Xingtong Jerry Zou']
+  'after-wang-fuk-court': ['Xingtong Zou'],
+  'cws-after-the-la-fires': ['Xingtong Zou'],
+  'after-the-fire-before-a-lease': ['Xingtong Zou'],
+  'sand-cartels-southeast-asia': ['Xingtong Zou']
 };
 
 function articleAuthors(article) {
