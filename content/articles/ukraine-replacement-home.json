@@ -1,0 +1,118 @@
+{
+  "id": "ukraine-replacement-home",
+  "title": "Missing Ownership Papers",
+  "subtitle": "Ukraine's housing compensation scheme in June 2026 depended on evidence of ownership, damage assessments and funds to pay approved claims.",
+  "excerpt": "Ukraine's housing compensation scheme in June 2026 depended on evidence of ownership, damage assessments and funds to pay approved claims.",
+  "tag": "Housing",
+  "region": "Ukraine",
+  "format": "Retrospective",
+  "authors": [
+    {
+      "name": "Michael",
+      "type": "Person"
+    }
+  ],
+  "date": "November 7, 2026",
+  "coverageDate": "June 2026",
+  "coverageMonth": "2026-06",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "While fleeing Sievierodonetsk, Yevhen lost the ownership documents for the apartment he owned with his wife. Later, they found out the apartment had been damaged in a Russian attack. His application was rejected. The registry office burned down, and its files were not digitized. UNHCR made Yevhen's case public in October 2025.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Right to Protection, an NGO working together with UNHCR, helped Yevhen prepare a legal claim to prove ownership of the property and obtain a waiver of court fees. Both Yevhen and his wife were pensioners with low incomes. It took six months to get the ownership documents in order. “We still don’t know if we will have compensation or not for our damaged home,” he said in UNHCR's account.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "A claim requires consideration"
+    },
+    {
+      "type": "paragraph",
+      "text": "Training planned in June 2026 for specialists dealing with the housing compensation scheme covered proving ownership, appealing claim rejections and enforcing court decisions. A notice from the Council of Europe on June 5 invited compensation commission members, registrars, notaries and administrative workers to workshops scheduled for June 9 to 18. The planned discussions included applicants' and officials' mistakes that could lead to legal disputes.",
+      "sources": [
+        3
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Compensation commissions also had to assess the state of buildings. An assessment published by the Danish Refugee Council in February 2026 showed heavy workloads, access issues and ownership problems in communities in Kharkiv, Donetsk, Sumy and Kherson regions. Shelling increased property damage and hampered inspections.",
+      "sources": [
+        4
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "On May 11, 2026, the government reported that more than 56 thousand families had certificates to purchase homes, while more than 31 thousand families had already purchased homes. More than 138 thousand families had received repair payments. These figures did not show the time needed to resolve ownership issues and conduct inspections.",
+      "sources": [
+        5,
+        3,
+        4
+      ]
+    },
+    {
+      "type": "heading",
+      "text": "Financing in June 2026"
+    },
+    {
+      "type": "paragraph",
+      "text": "A joint assessment published in February 2026 estimated housing recovery and reconstruction needs at almost $90 billion. The data covered damage through December 2025, when 14 percent of Ukrainian housing had been damaged or destroyed, affecting more than three million households.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "On June 26, the Council of Europe Development Bank signed a €100 million loan agreement with Ukraine for the HOME programme, including a €50 million contribution from Italy. The bank expected the financing to help up to 3,000 additional households in 2026.",
+      "sources": [
+        6
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "There was also a €10.7 million grant from the European Union announced alongside the loan. It was intended to strengthen the capacity of Ukraine's Ministry for Development of Communities and Territories and local compensation commissions, and support compensation arrangements for rebuilding private houses.",
+      "sources": [
+        6
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "Tetiana Kuras and Elisabeth Haslund, UNHCR. Restoring documents, rebuilding hope: how UNHCR legal aid helps displaced Ukrainians. October 20, 2025.",
+      "url": "https://www.unhcr.org/ua/en/news/stories/restoring-documents-rebuilding-hope-how-unhcr-legal-aid-helps-displaced-ukrainians"
+    },
+    {
+      "num": 2,
+      "text": "Government of Ukraine, World Bank Group, European Commission and United Nations. Updated Ukraine Recovery and Reconstruction Needs Assessment Released (RDNA5). February 23, 2026.",
+      "url": "https://www.worldbank.org/en/news/press-release/2026/02/23/updated-ukraine-recovery-and-reconstruction-needs-assessment-released"
+    },
+    {
+      "num": 3,
+      "text": "Council of Europe Office in Ukraine. Invitation to online practical workshops on compensation for destroyed housing. June 5, 2026.",
+      "url": "https://www.coe.int/en/web/kyiv/-/invitation-to-online-practical-workshops-on-compensation-for-destroyed-housing"
+    },
+    {
+      "num": 4,
+      "text": "Danish Refugee Council. Ukraine: Rapid Protection Assessment—Access to Compensation Mechanisms for Damaged and Destroyed Housing. February 1, 2026.",
+      "url": "https://drc.ngo/en/documents/ukraine-rapid-protection-assessment-access-to-compensation-mechanisms-for-damaged-and-destroyed-housing/"
+    },
+    {
+      "num": 5,
+      "text": "Cabinet of Ministers of Ukraine. Nearly 200,000 Ukrainian families have received housing compensation over the three years the eVidnovlennia programme has been in operation. May 11, 2026.",
+      "url": "https://www.kmu.gov.ua/en/news/yuliia-svyrydenko-maizhe-200-tys-ukrainskykh-rodyn-otrymaly-kompensatsii-za-zhytlo-za-try-roky-dii-prohramy-ievidnovlennia"
+    },
+    {
+      "num": 6,
+      "text": "Council of Europe Development Bank. CEB, EU and Italy step up support for Ukraine's housing recovery. June 26, 2026.",
+      "url": "https://coebank.org/en/news-and-publications/news/ceb-eu-and-italy-step-up-support-for-ukraines-housing-recovery/"
+    }
+  ]
+}
