@@ -35,7 +35,7 @@ function retrospectiveMonth(article) {
 // Publication metadata continues to use isoDate, never the retrospective cutoff.
 const displayIsoDate = article => retrospectiveMonth(article) ? article.coverageCutoff : isoDate(article);
 const displayDate = article => retrospectiveMonth(article)
-  ? new Date(article.coverageCutoff + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }) + ' · Retrospective'
+  ? new Date(article.coverageCutoff + 'T00:00:00Z').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
   : 'Published ' + article.date;
 const sortArticles = articles => articles.map(article => ({ article, date: displayIsoDate(article) }))
   .sort((a, b) => b.date.localeCompare(a.date) || a.article.id.localeCompare(b.article.id))

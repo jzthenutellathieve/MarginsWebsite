@@ -7,9 +7,9 @@ const { renderArticle } = require('../scripts/render-article.cjs');
 const historical = { id: 'historical-article', title: 'Historical coverage', subtitle: 'A summary', date: 'November 7, 2026',
   coverageDate: 'August 2024', coverageMonth: '2024-08', coverageCutoff: '2024-08-31', format: 'Retrospective', readTime: '3 min', content: [], citations: [] };
 
-test('retrospective coverage is visibly separate from actual publication metadata', () => {
+test('coverage datelines show only the date while actual publication metadata stays separate', () => {
   assert.deepEqual(schemaDates(historical), { datePublished: '2026-11-07T00:00:00.000Z', temporalCoverage: '2024-08' });
-  const expectedTime = '<time datetime="2024-08-31">August 31, 2024 · Retrospective</time>';
+  const expectedTime = '<time datetime="2024-08-31">August 31, 2024</time>';
   assert.ok(renderArticle(historical, {}, {}).includes(expectedTime));
   const templates = Object.fromEntries(['reporting', 'archive'].map(name =>
     [name, fs.readFileSync('content/pages/' + name + '.html', 'utf8')]));
@@ -21,7 +21,7 @@ test('retrospective coverage is visibly separate from actual publication metadat
   assert.ok(pages.some(page => page.pathname === '/archive/2024/'));
   assert.ok(!pages.some(page => page.pathname === '/archive/2026/'));
   const [indexed] = searchIndex([historical], {}).articles;
-  assert.equal(indexed.date, 'August 31, 2024 · Retrospective');
+  assert.equal(indexed.date, 'August 31, 2024');
   assert.equal(indexed.isoDate, '2024-08-31');
   assert.deepEqual(sortArticles([{ ...historical, id: 'ordinary', date: 'October 1, 2026', coverageDate: undefined,
     coverageMonth: undefined, coverageCutoff: undefined, format: 'Essay' }, historical]).map(article => article.id), ['ordinary', 'historical-article']);

@@ -104,7 +104,7 @@ function collectionPages(articles, templates, assets) {
 }
 function searchIndex(articles, assets) {
   const pageSize = Math.max(1, articles.length);
-  return {pageSize, articles:sortArticles(articles).map(a => ({id:a.id, url:articlePath(a), title:shortTitle(a), fullTitle:a.title, deck:a.deck || '', summary:a.subtitle, cardNote:a.cardNote || '', tag:a.tag, format:a.format || a.tag, region:a.region || a.tag, author:byline(a), date:displayDate(a), isoDate:displayIsoDate(a), readTime:a.readTime, photo:cardPhoto(a) ? {src:assets[cardPhoto(a).src].src, alt:cardPhoto(a).alt, fit:cardPhoto(a).fit} : null}))};
+  return {pageSize, articles:sortArticles(articles).map(a => ({id:a.id, url:articlePath(a), title:shortTitle(a), fullTitle:a.title, deck:a.deck || '', summary:a.subtitle, cardNote:a.cardNote || '', tag:a.tag, format:retrospectiveMonth(a) ? a.tag : a.format || a.tag, region:a.region || a.tag, author:byline(a), date:displayDate(a), isoDate:displayIsoDate(a), readTime:a.readTime, photo:cardPhoto(a) ? {src:assets[cardPhoto(a).src].src, alt:cardPhoto(a).alt, fit:cardPhoto(a).fit} : null}))};
 }
 function readNext(article, articles, assets) {
   const others = sortArticles(articles).filter(a => a.id !== article.id).slice(0,2);
