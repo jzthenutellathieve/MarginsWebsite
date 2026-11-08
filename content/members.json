@@ -1,7 +1,7 @@
 [
   {
     "id": "jason",
-    "name": "JSON",
+    "name": "Jason Jin",
     "username": "json",
     "avatar": "/members/jason.webp",
     "avatarColor": "#35584f",
@@ -55,7 +55,7 @@
   },
   {
     "id": "steven-h",
-    "name": "Steven H",
+    "name": "Steven Ho",
     "username": "stevenh",
     "avatar": null,
     "avatarColor": "#39756c",
@@ -100,7 +100,7 @@
   },
   {
     "id": "mikkl-yiu",
-    "name": "mikkl_yiu",
+    "name": "Michael Yiu",
     "username": "mikkl_yiu",
     "avatar": null,
     "avatarColor": "#4d6682",
