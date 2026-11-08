@@ -79,7 +79,7 @@ test('all reader collections interleave the four retrospectives with original ar
       expected.filter(id => displayIsoDate(articles.find(a => a.id === id)).startsWith(year)));
   }
   const home = renderHome('{{featured}}{{recent}}', articles, { featuredArticles: [...expected].reverse() }, assets, {});
-  assert.deepEqual(linkedIds(home), [...expected, ...expected]);
+  assert.deepEqual(linkedIds(home), [...expected, ...expected.slice(0, 7)]);
   assert.deepEqual(searchIndex(articles, assets).articles.map(a => a.id), expected);
   const newest = articles.find(a => a.id === expected[0]);
   assert.deepEqual(linkedIds(readNext(newest, articles, assets)), expected.slice(1, 3));

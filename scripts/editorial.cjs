@@ -50,7 +50,7 @@ function renderHome(template, articles, config, assets, snippets) {
   const featured = ordered.filter(article => featuredIds.includes(article.id));
   if (!featured.length && ordered.length) featured.push(ordered[0]);
   if (!featured.length) throw new Error('The journal needs a published article');
-  return fill(template, {featured: featured.map(a => story(a, assets, true)).join(''), recent: ordered.map(a => compactStory(a, assets)).join(''), video: snippets['device-video'], collaboration: snippets.collaboration});
+  return fill(template, {featured: featured.map(a => story(a, assets, true)).join(''), recent: ordered.slice(0, 7).map(a => compactStory(a, assets)).join(''), video: snippets['device-video'], collaboration: snippets.collaboration});
 }
 function listRow(article, assets) {
   const photo = cardPhoto(article);
@@ -72,13 +72,11 @@ function pagination(base, page, total, label = 'Article pages') {
   const numbers = nearby.map(n => { const gap = previous && n - previous > 1 ? '<span aria-hidden="true">…</span>' : ''; previous = n; return gap + `<a href="${pagePath(base, n)}"${n === page ? ' aria-current="page"' : ''} aria-label="Page ${n}">${n}</a>`; }).join('');
   return `<nav class="md-pagination" aria-label="${label}">${page > 1 ? `<a rel="prev" href="${pagePath(base, page - 1)}">← Previous</a>` : '<span></span>'}<div>${numbers}</div>${page < total ? `<a rel="next" href="${pagePath(base, page + 1)}">Next →</a>` : '<span></span>'}</nav>`;
 }
-const countText = n => `${n} article${n === 1 ? '' : 's'}`;
-const rangeText = (page, size, total) => total ? `${(page - 1) * size + 1}–${Math.min(page * size, total)} of ${countText(total)}` : 'No articles yet';
 function collectionPages(articles, templates, assets) {
   const pageSize = Math.max(1, articles.length);
   const ordered = sortArticles(articles);
   const results = [{pathname:'/articles/', title:'Articles | The Margins', active:'reporting', body:fill(templates.reporting, {
-    heading:'Articles', basePath:'/articles/', summary:countText(ordered.length),
+    heading:'Articles', basePath:'/articles/',
     articles:ordered.map(a => listRow(a, assets)).join(''), pagination:''
   })}];
   const years = [...new Set(ordered.map(a => displayIsoDate(a).slice(0, 4)))];
@@ -97,7 +95,7 @@ function collectionPages(articles, templates, assets) {
         const dateLabel = retrospectiveMonth(article) ? displayDate(article) : article.date.replace(', ' + y, '');
         return `${heading}<article class="md-archive-row"><time datetime="${displayIsoDate(article)}">${e(dateLabel)}</time><div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3><p>${e(article.deck || article.subtitle)}</p></div></article>`;
       }).join('');
-      results.push({pathname: pagePath(base, page), title: `${year ? year + ' — ' : ''}Article archive${page > 1 ? ' — Page ' + page : ''} | The Margins`, active:'archive', body:fill(templates.archive, {years:navigation, summary:rangeText(page, archiveSize, matches.length), articles:rows, pagination:pagination(base,page,total,'Archive pages')})});
+      results.push({pathname: pagePath(base, page), title: `${year ? year + ' — ' : ''}Article archive${page > 1 ? ' — Page ' + page : ''} | The Margins`, active:'archive', body:fill(templates.archive, {years:navigation, articles:rows, pagination:pagination(base,page,total,'Archive pages')})});
     }
   }
   return results;

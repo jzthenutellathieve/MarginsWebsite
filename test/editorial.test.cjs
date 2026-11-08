@@ -31,15 +31,15 @@ test('all articles remain on one page without topic divisions as the journal gro
   assert.ok(!main[0].body.includes('md-topics'));
 });
 
-test('homepage features both selected stories and lists every article newest first', () => {
+test('homepage features selected stories and previews the seven newest articles', () => {
   const html = renderHome(read('content/pages/home.html').replace('{{fieldNotePreview}}', ''), fixtures,
     {featuredArticles:['fixture-24','fixture-1']}, assets,
     {'device-video':'<p>Video</p>',collaboration:'<p>Collaboration</p>'});
-  assert.equal((html.match(/data-mj-story>/g) || []).length,27);
+  assert.equal((html.match(/data-mj-story>/g) || []).length,9);
   assert.equal((html.match(/class="md-lead-story"/g) || []).length,2);
   const titles = [...html.matchAll(/<h3><a[^>]+href="\/articles\/(fixture-\d+)\/"/g)].map(match => match[1]);
   assert.deepEqual(titles.slice(0,2), ['fixture-24','fixture-1']);
-  assert.deepEqual(titles.slice(2), [...fixtures].reverse().map(article => article.id));
+  assert.deepEqual(titles.slice(2), [...fixtures].reverse().slice(0, 7).map(article => article.id));
   assert.match(html, /data-mj-pause/);
   const index = searchIndex(fixtures,assets);
   assert.equal(index.articles.length,25);
