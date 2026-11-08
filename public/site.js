@@ -72,21 +72,6 @@
     updatePause();
   });
 
-  const copy = root.querySelector('[data-mj-copy-link]');
-  if (copy && navigator.clipboard) {
-    copy.hidden = false;
-    copy.addEventListener('click', async () => {
-      const url = document.querySelector('link[rel="canonical"]').href;
-      try {
-        await navigator.clipboard.writeText(url);
-        copy.textContent = 'Link copied';
-        if (notice) notice.textContent = 'Article link copied.';
-        setTimeout(() => { copy.textContent = 'Copy article link'; }, 2500);
-      } catch {
-        if (notice) notice.textContent = 'Copy the article address from your browser to share it.';
-      }
-    });
-  }
   const progress = root.querySelector('[data-mj-reading-progress]');
   const body = root.querySelector('.mj-reader-body');
   if (progress && body) {

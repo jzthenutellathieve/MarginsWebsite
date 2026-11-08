@@ -25,7 +25,6 @@ function renderArticle(article, snippets, assets) {
     const projectNote = article.projectNote ? '<p class="md-update-date">'+escapeText(article.projectNote)+'</p>' : '';
     const reportingNote = article.reportingNote ? '<div class="md-reporting-note"><p>'+escapeText(article.reportingNote)+'</p>'+(article.acknowledgements ? '<p class="md-acknowledgements">'+escapeText(article.acknowledgements)+'</p>' : '')+'</div>' : '';
     const correction = article.correctionNote ? '<p class="md-update-note">'+escapeText(article.correctionNote)+'</p>' : '';
-    const publicationNote = article.publicationNote ? '<aside class="md-publication-note" aria-label="Publication note"><h2>Publication note</h2><p>'+escapeText(article.publicationNote)+'</p></aside>' : '';
     const blocks = article.content.map((block, index) => {
       if (block.type === 'paragraph') return '<p>'+escapeText(block.text)+sourceRefs(block)+'</p>';
       if (block.type === 'heading') return (isDevice && block.text === 'One lamp, two electrical demands' ? embeddedVideo : '')+'<h2 id="section-'+index+'">'+escapeText(block.text)+'</h2>';
@@ -49,8 +48,7 @@ function renderArticle(article, snippets, assets) {
       const label = escapeText(citation.text);
       return '<li id="source-'+citation.num+'" value="'+citation.num+'">'+(/^https:\/\//.test(citation.url || '') ? '<a href="'+escapeText(citation.url)+'" target="_blank" rel="noopener noreferrer">'+label+'</a>' : label)+'</li>';
     }).join('');
-    const contents = article.content.map((block, index) => block.type === 'heading' ? '<li><a href="#section-'+index+'">'+escapeText(block.text)+'</a></li>' : '').join('');
-    const toolbar = '<div class="md-reader-tools">'+(contents ? '<details class="md-contents"><summary>In this article</summary><ol>'+contents+'<li><a href="#article-sources">Sources</a></li></ol></details>' : '<a href="#article-sources">Sources ↓</a>')+'<button type="button" data-mj-copy-link hidden>Copy article link ↗</button></div>';
-    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+dateline+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+projectNote+reportingNote+toolbar+projectLinks+'</header><div class="mj-reader-body">'+diagram+blocks+collaboration+correction+publicationNote+'<section class="mj-sources" id="article-sources"><h2>Sources</h2><ol>'+sources+'</ol></section></div>';
+    const toolbar = '<div class="md-reader-tools"><a href="#article-sources">Sources ↓</a></div>';
+    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+dateline+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+projectNote+reportingNote+toolbar+projectLinks+'</header><div class="mj-reader-body">'+diagram+blocks+collaboration+correction+'<section class="mj-sources" id="article-sources"><h2>Sources</h2><ol>'+sources+'</ol></section></div>';
 }
 module.exports = { renderArticle };

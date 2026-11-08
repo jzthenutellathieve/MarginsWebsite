@@ -162,12 +162,6 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
 .md-reporting-note { margin-top:24px; max-width:720px; font-size:15px; line-height:1.8; color:#555c58; }
 .md-reporting-note .md-acknowledgements { margin-top:12px; font-size:12px; color:var(--md-muted); }
 .md-reader-tools { border-top:1px solid var(--md-faint); border-bottom:1px solid var(--md-faint); margin-top:26px; padding:13px 0; display:flex; align-items:start; justify-content:space-between; gap:20px; font-size:12px; }
-.md-reader-tools button { font:inherit; background:none; border:0; padding:0; }
-.md-contents { max-width:70%; }
-.md-contents summary { cursor:pointer; }
-.md-contents ol { padding:10px 0 5px 18px; margin:0; }
-.md-contents li { margin:8px 0; }
-.md-contents a { text-decoration:none; }
 .md-reading-progress { position:fixed; top:0; left:0; height:2px; width:100%; background:var(--md-blue); transform:scaleX(0); transform-origin:left; z-index:30; }
 .mj-reader-body { max-width:680px; margin:0 auto; font:19px/1.85 var(--md-serif); }
 .mj-reader-body p { margin-bottom:25px; }
@@ -303,7 +297,6 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
  .mj-reader-meta { font-size:11px; }
  .mj-reader-body { font-size:18px; line-height:1.8; }
  .mj-reader-body h2 { font-size:27px; }
- .md-contents { max-width:60%; }
  .md-reader-tools { font-size:11px; }
  .md-read-next .md-list-story { grid-template-columns:95px 1fr; }
  .md-page-heading { font-size:38px; }
@@ -460,6 +453,3 @@ figcaption { font:11px/1.55 Arial,sans-serif; color:var(--md-muted); padding-top
 .md-compact-photo img.md-photo-contain, .md-list-photo img.md-photo-contain { object-fit:contain; background:#fff; }
 
 /* Context about a publication sits below the article, apart from its headline. */
-.md-publication-note { margin:32px 0; padding-top:20px; border-top:1px solid var(--md-line); }
-.mj-reader-body .md-publication-note h2 { font-size:18px; margin:0 0 12px; }
-.mj-reader-body .md-publication-note p { font-size:15px; line-height:1.7; }
