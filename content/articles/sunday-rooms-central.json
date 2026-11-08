@@ -1,0 +1,96 @@
+{
+  "id": "sunday-rooms-central",
+  "title": "Sunday Rooms in Central",
+  "subtitle": "Cartons provided Filipina domestic workers with a place to rest on Central’s walkways.",
+  "excerpt": "Cartons provided Filipina domestic workers with a place to rest on Central’s walkways.",
+  "tag": "Urban studies",
+  "region": "Hong Kong",
+  "format": "Retrospective",
+  "authors": [
+    {
+      "name": "JSON",
+      "type": "Person"
+    }
+  ],
+  "date": "November 7, 2026",
+  "coverageDate": "August 2024",
+  "coverageMonth": "2024-08",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Shoes at the edge of the cardboard mats indicated the boundaries of different areas. As noted by the designer Evelyn Kwok, during her Central observations conducted from 2012 to 2015, these groups screened themselves from passers-by using cartons and umbrellas. Some setups used tape and zip ties, with strings attaching the walls to walkway railings. People could sit inside while the others passed by.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "According to the terms stated in the Labour Department’s 2023 handbook, foreign domestic workers had to reside at their employer’s residence specified in the contract. Suitable accommodation with reasonable privacy was to be provided by an employer. A worker was entitled to at least one rest day within seven days that lasted no less than 24 consecutive hours. The day could vary. Under the live-in rule, their home was also their workplace.",
+      "sources": [
+        3
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Friends who worked in different households would meet outside. In her MIT planning thesis presented in 2011, Jasmine Susanna Tillu mentions the fact that such groups would gather at the same location every week. It is easier for them to come to the same place rather than try to find the location of their gathering. They could organize their meeting before erecting the cardboard walls.",
+      "sources": [
+        4
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Chater Road was available according to a published schedule. According to Transport Department's notice active since May 5, 2017, the area of Chater Road between Pedder Street and Jackson Road was closed to any vehicle without permits from 7 a.m. to midnight on Sundays and public holidays. During this period pedestrians had access to this road.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Kwok recorded dancing on Chater Road, parcel packing near Connaught Road Central, eating and sleeping on raised walkways. In broader spaces, groups sat on both sides with a free passage in the middle, while in narrower ones, pedestrians passed between the sitting people.",
+      "sources": [
+        1
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "Access for walking and permission to stay were separate questions. Lisa Law in her Urban Studies article from 2002 raises the topic of Sunday gatherings and Hongkong Land, a major Central landlord, in the context of conflicts regarding the usage of public spaces. A pathway accessible to pedestrians could still be managed by a commercial property owner.",
+      "sources": [
+        5
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "The cardboard previously served to transport goods for sale to Central’s retailers. According to Kwok, local suppliers delivered these materials to the domestic workers in the morning and collected them in the evening.",
+      "sources": [
+        1
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "Evelyn Kwok. IDEA Journal. Agency In Appropriation: The informal territory of foreign domestic helpers in Hong Kong. 2015.",
+      "url": "https://journal.idea-edu.com/index.php/home/article/view/57"
+    },
+    {
+      "num": 2,
+      "text": "Hong Kong Transport Department. Prohibited Zones in Central. 2017-05-05.",
+      "url": "https://www.td.gov.hk/en/traffic_notices/index_id_48993.html"
+    },
+    {
+      "num": 3,
+      "text": "Hong Kong Labour Department. Be Prepared for Employment in Hong Kong: A Handbook for Foreign Domestic Helpers. 2023.",
+      "url": "https://www.fdh.labour.gov.hk/res/pdf/Be_Prepared_for_Employment_in_HK_handbook_FDH_English.pdf"
+    },
+    {
+      "num": 4,
+      "text": "Jasmine Susanna Tillu. Massachusetts Institute of Technology, Department of Urban Studies and Planning. Spatial empowerment: the appropriation of public spaces by Filipina domestic workers in Hong Kong. 2011.",
+      "url": "https://dspace.mit.edu/entities/publication/41deee48-4de7-4730-840e-f7fce424733c"
+    },
+    {
+      "num": 5,
+      "text": "Lisa Law. Urban Studies 39(9),1625–1645. Defying disappearance: cosmopolitan public spaces in Hong Kong. 2002.",
+      "url": "https://researchonline.jcu.edu.au/11613/"
+    }
+  ]
+}
