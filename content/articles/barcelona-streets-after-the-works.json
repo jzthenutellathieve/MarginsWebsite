@@ -1,0 +1,60 @@
+{
+  "id": "barcelona-streets-after-the-works",
+  "title": "Sant Antoni: A Leisure Spot",
+  "subtitle": "Researchers monitored people's activities while they rested, shopped or walked in the streets of Barcelona. Very few were doing strenuous physical activity.",
+  "excerpt": "Researchers monitored people's activities while they rested, shopped or walked in the streets of Barcelona. Very few were doing strenuous physical activity.",
+  "tag": "Cities",
+  "region": "Barcelona",
+  "format": "Retrospective",
+  "authors": [
+    {
+      "name": "Steven H",
+      "type": "Person"
+    }
+  ],
+  "date": "November 7, 2026",
+  "coverageDate": "August 2026",
+  "coverageMonth": "2026-08",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "According to a study published in 2025, more than 900 people used the Sant Antoni superblock per hour during the observation period. People were resting or casually walking along the pedestrian zone.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "There were many older people but relatively few young people there. Some chose the location because they found it pleasant. Some vehicles exceeded the 10 km/h limit, though families found it easier to walk about. Parents appreciated the zone but were concerned about traffic.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "In Horta, cars stopped on the former sidewalks of the main entrance street. Pedestrians had to walk around them. Some felt less safe, especially when accompanied by a child. Despite the level pavement, drivers behaved as though they had priority.",
+      "sources": [
+        2
+      ]
+    },
+    {
+      "type": "paragraph",
+      "text": "A May 2026 City of Barcelona assessment of green corridors mentioned another problem with cleaning pedestrian zones: crews had difficulty working amid the heavy foot traffic. Benches and other pieces of street furniture made it complicated to place bins. Although there were fewer bins, residents felt there were more. City authorities linked this perception to bins being placed along blocks rather than at street corners.",
+      "sources": [
+        1
+      ]
+    }
+  ],
+  "citations": [
+    {
+      "num": 1,
+      "text": "Barcelona City Council. Funcionament del Pla de millora dels eixos verds. Public information session, May 18, 2026; especially pages 23–30 and the action plan.",
+      "url": "https://media-edg.barcelona.cat/wp-content/uploads/2026/05/18223335/260518_Pla-Millores-Eixos-Verds-Tancament.pdf"
+    },
+    {
+      "num": 2,
+      "text": "Pérez, K., et al. Environmental and health effects of the Barcelona superblocks. BMC Public Health 25, 634. February 17, 2025. DOI: 10.1186/s12889-025-21835-z.",
+      "url": "https://link.springer.com/article/10.1186/s12889-025-21835-z"
+    }
+  ]
+}
