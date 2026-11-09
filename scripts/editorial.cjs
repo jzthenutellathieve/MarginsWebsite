@@ -17,9 +17,17 @@ function imageTag(photo, assets, eager = false) {
 function gallery(article, assets, eager = false) {
   const photos = photoBlocks(article).slice(0, 2);
   if (!photos.length) return '';
+  const creditLink = (label, url) => {
+    if (url && !/^https:\/\//.test(url)) throw new Error('Invalid photo credit URL in ' + article.id);
+    return url ? `<a href="${e(url)}" target="_blank" rel="noopener noreferrer">${e(label)}</a>` : e(label);
+  };
+  const credit = photo => (photo.photographer ? creditLink(photo.photographer, photo.photographerUrl) + ' / ' : '')
+    + creditLink(photo.source, photo.sourceUrl)
+    + (photo.license ? ' · ' + creditLink(photo.license, photo.licenseUrl) : '')
+    + (photo.changes ? '. ' + e(photo.changes) : '');
   return `<div class="md-gallery" data-mj-gallery role="region" aria-roledescription="carousel" aria-label="${e(shortTitle(article))} photographs">
     <div class="md-gallery-stage">${photos.map((photo, i) => `<a class="md-gallery-slide${i === 0 ? ' is-active' : ''}${photo.preserveInGallery ? ' md-gallery-full-image' : ''}" data-mj-slide href="${articlePath(article)}" aria-label="Read ${e(shortTitle(article))}"${i ? ' aria-hidden="true" tabindex="-1"' : ''}>${imageTag(photo, assets, eager && i === 0)}</a>`).join('')}</div>
-    <div class="md-gallery-bottom"><div class="md-gallery-captions">${photos.map((photo, i) => `<p data-mj-caption${i ? ' hidden' : ''}>${e(photo.caption)} <span>${e(photo.source)}</span></p>`).join('')}</div>
+    <div class="md-gallery-bottom"><div class="md-gallery-captions">${photos.map((photo, i) => `<p data-mj-caption${i ? ' hidden' : ''}>${e(photo.caption)} <span>${credit(photo)}</span></p>`).join('')}</div>
     ${photos.length > 1 ? `<div class="md-gallery-controls" data-mj-gallery-controls hidden><button type="button" data-mj-prev aria-label="Previous photograph">←</button><span data-mj-counter>01 / ${String(photos.length).padStart(2, '0')}</span><button type="button" data-mj-next aria-label="Next photograph">→</button><button type="button" data-mj-pause aria-label="Pause slideshow">Pause</button></div>` : ''}</div>
   </div>`;
 }

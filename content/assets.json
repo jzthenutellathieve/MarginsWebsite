@@ -128,5 +128,10 @@
     "src": "/assets/new-articles/barcelona-sant-antoni-leisure-2022.webp",
     "width": 1680,
     "height": 1120
+  },
+  "/assets/new-articles/midterms-capitol-2026.jpg": {
+    "src": "/assets/new-articles/midterms-capitol-2026.jpg",
+    "width": 2400,
+    "height": 1350
   }
 }
