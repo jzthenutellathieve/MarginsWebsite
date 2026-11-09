@@ -61,6 +61,20 @@
       ]
     },
     {
+      "type": "image",
+      "src": "/assets/new-articles/midterms-voters-washington-2024.jpg",
+      "alt": "Voters queue at registration desks inside a Washington, D.C., polling station in a gymnasium.",
+      "caption": "Voters check in at a polling station in Washington, D.C., on November 5, 2024.",
+      "photographer": "OSCE Parliamentary Assembly",
+      "photographerUrl": "https://www.flickr.com/people/oscepa/",
+      "source": "Wikimedia Commons",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voters_check_in_at_a_polling_station_in_Washington_DC,_5_Nov._2024.jpg",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/",
+      "captureDate": "2024-11-05",
+      "changes": "Resized and compressed."
+    },
+    {
       "type": "heading",
       "text": "Legal Bases of the 17,500 Cap of Admissions"
     },

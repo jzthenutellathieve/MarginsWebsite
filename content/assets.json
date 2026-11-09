@@ -133,5 +133,10 @@
     "src": "/assets/new-articles/midterms-capitol-2026.jpg",
     "width": 2400,
     "height": 1350
+  },
+  "/assets/new-articles/midterms-voters-washington-2024.jpg": {
+    "src": "/assets/new-articles/midterms-voters-washington-2024.jpg",
+    "width": 2400,
+    "height": 1600
   }
 }
