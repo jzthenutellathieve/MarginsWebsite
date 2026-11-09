@@ -6,6 +6,7 @@
   "tag": "Policy",
   "region": "United States",
   "format": "Analysis",
+  "readingTimeExtraMinutes": 1,
   "authors": [
     {
       "name": "Xuanyi Zhu",

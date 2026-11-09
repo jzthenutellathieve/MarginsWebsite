@@ -1,10 +1,10 @@
 // Include the opening note, body, image captions and embedded figure text.
 // Exclude navigation, bibliographies and the time spent watching videos.
 const WORDS_PER_MINUTE = 200;
-// Allow an additional minute to pause over photographs and the argument.
-const READING_BUFFER_MINUTES = 1;
+// Allow time to pause over photographs and the argument.
+const READING_BUFFER_MINUTES = 2;
 
-function estimateReadingTime(html, openingNote = '') {
+function estimateReadingTime(html, openingNote = '', additionalMinutes = 0) {
   const body = html.split('<div class="mj-reader-body">')[1]?.split('<section class="mj-sources"')[0];
   if (body === undefined) throw new Error('Article body is missing when calculating reading time');
   const entities = {amp:'&',quot:'"',apos:"'",lt:'<',gt:'>',nbsp:' '};
@@ -16,7 +16,7 @@ function estimateReadingTime(html, openingNote = '') {
     .replace(/&([a-z]+);/gi, (_, name) => entities[name.toLowerCase()] || ' ')
     .replace(/\[\d+\]/g, ' ');
   const words = (text.match(/[\p{L}\p{N}]+(?:[’'.,-][\p{L}\p{N}]+)*/gu) || []).length;
-  const minutes = Math.max(1, Math.ceil(words / WORDS_PER_MINUTE)) + READING_BUFFER_MINUTES;
+  const minutes = Math.max(1, Math.ceil(words / WORDS_PER_MINUTE)) + READING_BUFFER_MINUTES + additionalMinutes;
   return {words, minutes, label:`${minutes} min`};
 }
 

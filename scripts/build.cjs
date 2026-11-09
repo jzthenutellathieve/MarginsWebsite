@@ -50,7 +50,7 @@ for (const article of articles) {
     article.content = content;
     article.thumbnail = layout[0]?.src || article.thumbnail;
   }
-  article.readTime = estimateReadingTime(renderArticle(article, snippets, assets), article.reportingNote).label;
+  article.readTime = estimateReadingTime(renderArticle(article, snippets, assets), article.reportingNote, article.readingTimeExtraMinutes || 0).label;
   legacyRoutes[`reporting/${article.id}`] = articlePath(article);
 }
 function hydrateCommunity(html) {
