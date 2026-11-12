@@ -36,14 +36,14 @@
     },
     {
       "type": "paragraph",
-      "text": "Prior to the final vote count, it seemed that the Democrats had a chance to win both chambers. According to FiftyPlusOne on November 3, the probability of Democratic control of the House of Representatives was 99% and that of the Senate was 79%. These probabilities refer to control of each chamber rather than to the percentage of the vote cast.",
+      "text": "Before the election results were announced, FiftyPlusOne predicted on November 3rd that Democrats had a 99% chance of winning the House of Representatives and a 79% chance of winning the Senate. These figures refer to which party gains a majority of seats, not the Democratic vote share.",
       "sources": [
         17
       ]
     },
     {
       "type": "paragraph",
-      "text": "The Associated Press called the Senate for Democrats on November 3 and the House of Representatives on November 4. The Democrats will take control at the beginning of the new term starting on January 3, 2027. The interim measures of funding passed prior to the election will stay in force until December 11, or until replaced by new legislation. Thus, the outgoing Congress will have to make a decision on funding.",
+      "text": "The Associated Press announced the Democratic victory in the Senate on November 3rd and in the House the following day. The new congressional term begins on January 3, 2027. However, the next federal funding decision will still be handled by the outgoing Congress. The current temporary funding law is valid until December 11th unless the corresponding funding is replaced by a new law earlier.",
       "sources": [
         1,
         2,
@@ -52,7 +52,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Congress has a right to change legislation on immigration, fund the programs, and to check actions of the executive branch of government. The main question is what powers the Democrats will have to influence refugee admissions policy while the incumbent president remains in office. The cap, suspension of entry, and funding are regulated by different laws. Election results cannot influence these laws directly. The proposal will need to indicate which laws are to be changed and the passing of the proposal will depend on votes.",
+      "text": "This gives Democrats the opportunity to amend laws, decide on funding, and conduct committee investigations. Trump remains president and can still veto bills. Annual admission caps, orders suspending entry, and funding to support related work each have their own legal basis. They need to be addressed separately.",
       "sources": [
         4,
         5,
@@ -77,19 +77,18 @@
     },
     {
       "type": "heading",
-      "text": "Legal Bases of the 17,500 Cap of Admissions"
+      "text": "Who decides the 17,500-person cap?"
     },
     {
       "type": "paragraph",
-      "text": "By his decision of September 25, 2026, the president set the refugee admission cap for fiscal year 2027 at 17,500, the major part of which is allocated to Afrikaners from South Africa. This is a maximum number with no obligation to fill all places. Additional restrictions exist due to executive orders and directives. The executive order No. 14163 suspended the entry of refugees. An allocation under the cap does not ensure admission of refugees.",
+      "text": "On September 25, 2026, the President capped refugee admissions for fiscal year 2027 at 17,500, primarily allocating places to Afrikaners from South Africa. This cap allows the government to accept this many people without requiring it to use all available places.",
       "sources": [
-        6,
-        7
+        6
       ]
     },
     {
       "type": "paragraph",
-      "text": "The ceiling of refugee admissions per year is set according to Section 207 of the Immigration and Nationality Act (INA). It is determined by the president after discussion with Congress, when the data on refugees' needs, allocations, and associated costs are presented. However, it does not mean that the judiciary committees have the right to either approve or disapprove this decision through consultation. Thus, the change of members of these committees does not itself change the decision of September 25, 2026.",
+      "text": "Section 207 of the Immigration and Nationality Act puts the annual cap in the president’s hands, “after appropriate consultation” with Congress. Cabinet-level representatives must meet members of the House and Senate Judiciary committees in person. Discussions must cover refugee needs, quota allocation, and costs. This process provides Congress with an opportunity to question and exert pressure, but does not grant the Judiciary committees the power to approve or veto the cap. Changing the committee will not automatically alter the September 25 decision.",
       "sources": [
         5,
         6
@@ -97,7 +96,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The authority to issue Executive Order 14163 is based on Section 212(f) of the Immigration and Nationality Act (INA), which gives the president the right to suspend entry to the USA if he finds entry detrimental to U.S. interests. The considerations of national security, available resources, assimilation, and responsibilities of states and local governments are mentioned. The secretaries of State and Homeland Security may jointly, at their discretion, authorize an individual’s admission if it serves the national interest and does not threaten U.S. security or welfare.",
+      "text": "The suspension of admissions is based on other grounds. Section 212(f) allows the President to restrict the entry of certain categories of aliens when he determines that their entry is detrimental to U.S. interests. Executive Order 14163 invokes this power, listing considerations including national security, reception capacity, resources, social integration, and the responsibilities of state and local governments. The Secretary of State and the Secretary of Homeland Security can jointly approve individual exceptions at their discretion, provided that entry is in the national interest and does not threaten U.S. security or well-being.",
       "sources": [
         7,
         8
@@ -105,7 +104,7 @@
     },
     {
       "type": "paragraph",
-      "text": "On May 3, 2021, President Biden used emergency powers given in Section 207(b) and increased the cap of annual admission from 15,000 to 62,500. On May 21, 2026, President Trump, using the same Section 207(b), raised the ceiling of FY2026 from 7,500 to 17,500 and allocated extra places to Afrikaners. Congress may try to negotiate a new decision with the president, but the mandatory increase in the cap will require the new law.",
+      "text": "The president can also raise the cap during their term. Biden invoked Section 207(b) emergency powers on May 3, 2021, raising the annual cap from 15,000 to 62,500. Trump invoked the same provision on May 21, 2026, raising the fiscal year 2026 cap from 7,500 to 17,500, allocating the additional seats to Afrikaners. Congress can request further adjustments from the president; mandating a cap increase requires new legislation. This is a different path from a president making a voluntary new decision.",
       "sources": [
         9,
         10,
@@ -114,11 +113,11 @@
     },
     {
       "type": "heading",
-      "text": "Funding considerations in December"
+      "text": "December Appropriations Decision"
     },
     {
       "type": "paragraph",
-      "text": "December 11 will be the deadline for the upcoming funding decision of the outgoing Congress. Congress may agree on a new deal or on prolongation of interim funding. In case of the prolongation which will be extended to the period after January 3, the next decision could fall to the next Congress. A deal covering the whole year would settle more spending for fiscal year 2027 before Democrats take control. Both of these decisions give Congress the possibility to pass the new legislation later.",
+      "text": "The December 11 deadline leaves different options for the new and old Congresses. The current Congress can pass full-year appropriations or extend the temporary funding. If the new deadline falls after January 3rd, the next decision may go to the new Democratic-controlled Congress; if a full-year plan is passed now, further spending for fiscal year 2027 will be determined before the Democrats take over.",
       "sources": [
         2,
         3,
@@ -127,7 +126,7 @@
     },
     {
       "type": "paragraph",
-      "text": "The current temporary funding measure generally keeps funding levels of fiscal year 2026 and the conditions which existed at that time. The measure restricts initiation or resumption of programs and activities without corresponding fiscal year 2026 appropriation, funds or authorization. A proposal to expand processing must clarify which accounts will be used, how they may be used, and which terms will need exceptions. December 11 is not the expiration date for all appropriations on refugee matters.",
+      "text": "The temporary funding law essentially continues the amounts and conditions of fiscal year 2026 and restricts the initiation or resumption of projects without corresponding fiscal year 2026 appropriations, funding, or authorization. To expand refugee claim processing, lawmakers need to clarify which account the money will come from, what it can be used for, and which restrictions require exceptions. December 11th is not a uniform due date for all refugee-related funding. Different accounts and funding deadlines still need to be reviewed separately.",
       "sources": [
         3,
         11,
@@ -136,14 +135,14 @@
     },
     {
       "type": "paragraph",
-      "text": "The majority will give Democrats the chance to pass the new legislation and to perform committee work. But to pass any proposal, Congress has to approve it in both chambers and to submit it to the president. The president has the right to sign or to veto this bill. The veto may be overridden by a two-thirds majority in each chamber. Having the majority does not mean that the veto will be overridden.",
+      "text": "A majority of seats makes it easier for Democrats to schedule hearings and push through legislation. However, a bill still needs to pass both houses of Congress before being sent to the president for signature. If Trump vetoes it, a two-thirds majority in both houses is needed to override the veto. Democrats could win the election but still lack those votes.",
       "sources": [
         4
       ]
     },
     {
       "type": "paragraph",
-      "text": "However, in the Senate there exists one more aspect of distinction between the majority and the bill approval. Three-fifths of the senators duly chosen and sworn, usually 60, are generally needed to end debate on ordinary legislation. Cloture is not identical to the final voting on the bill. Even in case of majority support, it may be stopped on the procedural basis. The idea that the new majority can automatically overturn the admissions policy ignores this procedure and veto power of the president.",
+      "text": "The Senate faces another hurdle. Ending debate on an ordinary bill typically requires a three-fifths majority vote of senators duly chosen and sworn, usually 60 votes. The vote to end debate is different from the vote to pass the bill. Simply counting those who support a bill may overlook situations where it never even makes it to the final vote.",
       "sources": [
         4,
         12
@@ -151,7 +150,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Congress has a right to negotiate appropriations which set the spending and impose the conditions and requirements on distribution of some funds. Congress may also change the underlying admissions legislation. Conditions of appropriations are applicable only to funds and periods specified in the act. The statutory amendment can set the continuing requirement. The draft must specify clearly its impact because only an increase of funding does not eliminate the president's entry suspension authority.",
+      "text": "Lawmakers can restrict the use of funds in appropriations laws or directly amend refugee admissions laws. The former applies to designated funds during the periods stated in the law; the latter can change rules that continue to apply. Therefore, proposals need to specify which power or obligation is being changed. Simply increasing the budget does not eliminate the president's statutory power to suspend entry.",
       "sources": [
         4,
         8,
@@ -160,18 +159,18 @@
     },
     {
       "type": "heading",
-      "text": "Oversight and evidence"
+      "text": "What answers can Congress demand?"
     },
     {
       "type": "paragraph",
-      "text": "The admissions legislation provides a basis for comprehensive review. According to Section 207(d), reports on the global refugee situation and proposals of admissions must be submitted before each fiscal year. Progress in admissions and possible reallocations are periodically discussed with the judiciary committees. According to Section 207(e), information about proposals of admissions, countries of origin, cost, domestic impacts, and involvement of other countries must be submitted. The new committee chairmen may use these requirements to conduct hearings regarding specific decisions.",
+      "text": "Even if a new bill doesn't immediately have enough votes, Congress has readily available oversight mechanisms. Section 207(d) requires the government to submit a report on the global refugee situation and admission proposals before the start of each fiscal year and to regularly discuss progress and quota adjustments with the Judiciary committees. Section 207(e) lists the information required for consultations, including country of origin, costs, impact on the United States, and participation from other countries. The annual proposal must also be reviewed at a hearing unless public disclosure would jeopardize lives or safety. New committee chairs can use these existing requirements to question specific decisions.",
       "sources": [
         5
       ]
     },
     {
       "type": "paragraph",
-      "text": "One of the issues is the population selection for admissions. The government could be asked to explain the evidence supporting allocation of places to Afrikaners, assessment of other populations, and how this selection corresponds to statutory categories. Congress may review these criteria and evidence without assuming that nationality alone makes people eligible.",
+      "text": "A specific issue is how the quotas are allocated. Congress can require the government to explain why Afrikaners are prioritized, what evidence was used in assessing other groups, and how these choices meet the legal definition of refugee. Reviewing this basis does not presume that people of a particular nationality are inherently eligible or ineligible.",
       "sources": [
         5,
         6,
@@ -180,7 +179,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Another issue is exceptions to the entry suspension. Congress may request summarized statistics of the number of requests, decisions made, approvals issued, and number of arrivals. The breakdown by period and stages of processing may help to detect delays. The sensitive information in individual files must be protected. An increase in approvals does not necessarily mean an increase in arrivals when travel is pending.",
+      "text": "Exceptions to the suspension order can also be reviewed separately. How many requests has the government received? How many have been approved? How many have actually arrived? Breaking these figures down by month and processing stage can show where delays occurred while protecting sensitive information in individual files. Those still awaiting travel arrangements after approval should not be counted as having arrived.",
       "sources": [
         5,
         7
@@ -188,7 +187,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Oversight may distinguish refugee admissions from asylum. According to Section 208, individuals in the USA or arriving at its borders may apply for asylum according to the statutory requirements and restrictions. Asylum decisions under Section 208 do not count against the cap on U.S. refugee admissions under Section 207. Combining these numbers can complicate the distinction between the policies evaluated and the laws requiring amendments.",
+      "text": "Refugee admissions should also be distinguished from asylum applications. Under Section 208, those already in the U.S. or at the border can apply for asylum under the conditions and restrictions stipulated by law. Asylum decisions made under Section 208 do not count against the refugee admission quotas under Section 207. Adding the two sets of figures together does not indicate whether the annual admission cap has been enforced and can obscure which law needs to be amended.",
       "sources": [
         5,
         15
@@ -196,14 +195,14 @@
     },
     {
       "type": "paragraph",
-      "text": "The decision of the Ninth Circuit Court of Appeals in the case of Pacito v. Trump dated March 5, 2026, is an example of the drafting problem. In reviewing appeals on preliminary injunctions, the court recognized wide presidential authority on the suspension of refugee entry and reversed some points of preliminary injunctions concerning admissions, processing, and overseas funding. The court interpreted Section 207 as setting a cap and not as a minimum number of admissions. The opinion does not resolve the dispute completely.",
+      "text": "In its March 5, 2026 decision in Pacito v. Trump, the Ninth Circuit Court of Appeals reviewed appeals from preliminary injunctions against the government. The court recognized the president's broad powers in suspending refugee admissions and overturned parts of the injunction concerning admissions, processing, and overseas funding. The ruling also interpreted Section 207 as a cap on admissions, rather than a minimum required. This was a preliminary relief ruling and did not close the case.",
       "sources": [
         16
       ]
     },
     {
       "type": "paragraph",
-      "text": "It means that for people who want to end the entry suspension, an increase of the cap alone could be insufficient. Thus, the legislative proposals must clarify the relation between Sections 207 and 212(f), besides any new obligations lawmakers impose on officials concerning processing. Lawmakers may also consider whether modification is required in rules on exceptions, deadlines, and judicial review. If these questions are ignored, an increase in the cap can coexist with the same restrictions which now do not allow entry.",
+      "text": "Therefore, lawmakers hoping to restore refugee admissions may need to address the relationship between Section 207 and Section 212(f), as well as the specific obligations the government bears in processing applications. Exceptions, time limits, and judicial review may also need to be included in the plan. Otherwise, even with an increased annual cap, the existing entry restrictions may still apply.",
       "sources": [
         8,
         16
@@ -288,7 +287,7 @@
     },
     {
       "num": 16,
-      "text": "U.S. Court of Appeals for the Ninth Circuit. Pacito v. Trump, Nos. 25-1313 and 25-1939. March 5, 2026, especially pages 69 and 75–76.",
+      "text": "U.S. Court of Appeals for the Ninth Circuit. Pacito v. Trump, Nos. 25-1313 and 25-1939. March 5, 2026, especially pages 38 and 75–76.",
       "url": "https://cdn.ca9.uscourts.gov/datastore/opinions/2026/03/05/25-1313.pdf"
     },
     {
