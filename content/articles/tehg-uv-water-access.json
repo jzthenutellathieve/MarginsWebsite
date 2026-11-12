@@ -10,14 +10,14 @@
   "content": [
     {
       "type": "paragraph",
-      "text": "In Dabat Bosin, Sudan, people received four liters of water per person per day in 2024, according to UNHCR. That is one-fifth of the agency's post-emergency minimum of 20 liters. A household has to divide that supply among drinking, cooking and hygiene.",
+      "text": "According to UNHCR, residents in Dabat Bosin, Sudan received four liters of water per person daily in 2024 – 20 percent of the twenty liters per person per day stipulated as the minimum for post-emergency circumstances. Within 24 hours, every individual had four liters allotted for drinking, washing, and preparing meals.",
       "sources": [
         2
       ]
     },
     {
       "type": "paragraph",
-      "text": "TEHG-UV addresses the treatment of water a household already has. Described in ACS Nano in February 2026, the human-powered prototype uses ultraviolet light to inactivate microorganisms.",
+      "text": "Published in ACS Nano in February 2026, this paper describes a manual prototype, TEHG-UV, utilizing ultraviolet light to inactivate microorganisms in water a household already has.",
       "sources": [
         1,
         2
@@ -25,25 +25,25 @@
     },
     {
       "type": "paragraph",
-      "text": "The researchers combine a hand crank or pedal drive with two kinds of generator to power an ultraviolet mercury lamp. Their results suggest a way to disinfect small batches without grid electricity. Whether that would help a particular displaced community depends on its water source, the alternatives already available, and the work required to use the device every day.",
+      "text": "Combining manual power (pedaling or hand cranking), a triboelectric nanogenerator (TENG), and electromagnetic generator (EMG) provides sufficient power to operate a UV mercury lamp. The researchers tested batch disinfection without grid electricity.",
       "sources": [
         1
       ]
     },
     {
       "type": "heading",
-      "text": "What a household device could address"
+      "text": "Addressing Household Water Challenges"
     },
     {
       "type": "paragraph",
-      "text": "In Chad, emergency systems provided nearly 13 liters per person per day after more than 239,000 Sudanese refugees arrived, according to UNHCR's 2024 WASH report. Treatment could help where that water is contaminated; shortages would still require work on wells, deliveries or other sources.",
+      "text": "As documented in UNHCR’s 2024 WASH report, emergency installations in Chad provided nearly 13 liters per person per day after more than 239 thousand Sudanese refugees arrived. Where water from the installed facilities is contaminated, the technology may help. In addition, shortages necessitate further remedies for water collection, distribution, and infrastructure improvements.",
       "sources": [
         2
       ]
     },
     {
       "type": "paragraph",
-      "text": "A household may already boil its water, use a chemical disinfectant or own a portable UV device. Each option has requirements to check locally, from fuel or electricity to dosing and contact time. Chlorination can also leave a disinfectant residual that helps protect stored water against recontamination. UV treatment requires sufficiently clear water and careful storage afterward.",
+      "text": "A household may practice boiling, chlorinating water, using portable UV light, or combining methods. Individuals must evaluate each solution based on energy requirements, proper dosages, contact time, and others. Chlorination can leave disinfectants for residual protection of stored water. UV disinfection requires sufficiently clear water prior to treatment and appropriate storage after treatment.",
       "sources": [
         5
       ]
@@ -54,14 +54,14 @@
     },
     {
       "type": "paragraph",
-      "text": "Igniting a UV mercury lamp requires a different electrical output from keeping it lit. The team used a triboelectric nanogenerator, or TENG, alongside an electromagnetic generator, or EMG, so their combined output could meet those changing demands.",
+      "text": "Mercury lamp activation and continued operation require distinct electrical outputs. By merging a triboelectric nanogenerator (TENG) and electromagnetic generator (EMG), researchers developed a system capable of meeting these demands.",
       "sources": [
         1
       ]
     },
     {
       "type": "paragraph",
-      "text": "The TENG uses contact between polyurethane and PTFE to generate charge. The EMG uses electromagnetic induction: mechanical rotation changes the magnetic flux through coils and generates an electrical output. The two generators serve complementary roles, with the TENG providing high voltage and the EMG supplying the greater current needed during operation. A transmission connects them to the user's motion.",
+      "text": "Contact between polyurethane and PTFE surfaces generates charges within TENG. Meanwhile, mechanical rotations alter magnetic flux through coils in the EMG, generating electricity. While TENG produces higher voltage output, EMG delivers greater current output after ignition. A transmission connects both generators to the user's motion.",
       "sources": [
         1,
         4
@@ -69,7 +69,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Portable UV treatment is already available in battery-operated devices. This design offers a different power source: human effort. That could be useful where access to electricity or replacement batteries is unreliable.",
+      "text": "Existing UV disinfection equipment is available in battery-powered forms.",
       "sources": [
         1,
         5
@@ -77,25 +77,25 @@
     },
     {
       "type": "heading",
-      "text": "What the experiments show"
+      "text": "Experimental Results"
     },
     {
       "type": "paragraph",
-      "text": "The paper reports an eight-log reduction in the test microorganisms when treating two liters for 25 minutes by hand cranking, or ten liters for 15 minutes with the pedal configuration. That means a 100-million-fold decrease, equivalent to 99.999999 percent, under the reported test conditions. Whether treated water is safe to drink also depends on what else is in the source water and what happens during use and storage.",
+      "text": "Laboratory tests demonstrate a 25-minute hand-cranked disinfection achieving eight log reductions in the test microorganisms for 2-liter batches and a 15-minute pedaled disinfection reaching eight log reductions for ten-liter batches. Eight log reductions imply a reduction by a factor of one hundred million (99.999999%) under the reported test conditions. Safety assessments should factor in quality of source water and post-disinfection water management practices.",
       "sources": [
         1
       ]
     },
     {
       "type": "paragraph",
-      "text": "A separate experiment in the supporting information tested 500-milliliter samples at 80 revolutions per minute, with five replicates. E. coli, B. subtilis and MS2 bacteriophage each reached an eight-log reduction within five minutes.",
+      "text": "Supplementary tests using 500 mL batches, with five replicates, demonstrated an eight-log reduction within five minutes of mechanical action (80 RPM) in each of three organisms (E.coli, B.subtilis, and MS2 Bacteriophage).",
       "sources": [
         4
       ]
     },
     {
       "type": "paragraph",
-      "text": "The river-water samples came from the Tsinghua River in Beijing. For the November samples, the supplementary table records turbidity of 2.6 to 2.8 NTU. Much cloudier water would need further assessment because particles can interfere with UV treatment.",
+      "text": "Source water samples were taken from the Tsinghua River in Beijing. For the November samples, the extra tables list the turbidity levels ranging from 2.6 NTU to 2.8 NTU. Much cloudier water needs further testing because particles can interfere with UV treatment.",
       "sources": [
         4,
         5
@@ -103,18 +103,18 @@
     },
     {
       "type": "paragraph",
-      "text": "WHO's highest household-treatment performance category requires reductions of at least four logs for bacteria, five for viruses and four for protozoa. Assessing a device against those criteria requires evidence for the relevant organism groups and test conditions. The reported eight-log results alone do not establish a WHO classification for TEHG-UV.",
+      "text": "WHO guidelines define the highest household drinking-water treatment performance category as requiring at least 4-log reduction of bacteria, 5 logs of viruses, and 4 logs of protozoa. Assessment requires evidence for these organism groups under the relevant test conditions. Eight-log results alone do not establish a WHO classification for this invention.",
       "sources": [
         3
       ]
     },
     {
       "type": "heading",
-      "text": "What the cost estimate includes"
+      "text": "Cost Assessments"
     },
     {
       "type": "paragraph",
-      "text": "The authors’ estimate of about $8.57 per person per year comes from a levelized-cost model. The supporting tables include component and fabrication costs, with assumptions about replacement intervals. It is a useful starting point for a budget, though it is neither a purchase price nor a cost measured in a humanitarian programme.",
+      "text": "Estimated annual cost using levelized-cost analyses is approximately eight US dollars and fifty-seven cents per person per year. Tables include detailed costs for parts and production, with component replacement frequency estimates. The estimate is not a purchase price or a measured cost from a humanitarian project.",
       "sources": [
         1,
         4
@@ -122,29 +122,29 @@
     },
     {
       "type": "paragraph",
-      "text": "A pilot budget would need local costs for manufacture or purchase, transport, replacement parts, training and water-quality checks. It would also need to revisit the assumed component lifetimes as evidence from use became available.",
+      "text": "A pilot budget would incorporate local manufacturing or purchase costs, transportation expenses, replacement costs, training for users, water sample testing, expected component life-span revisions based on evidence from use, among others.",
       "sources": [
         4
       ]
     },
     {
       "type": "heading",
-      "text": "What would need testing outside the laboratory"
+      "text": "Needs for Field Tests"
     },
     {
       "type": "paragraph",
-      "text": "A proposed site would first need a water assessment. UV disinfection leaves dissolved chemical contaminants and heavy metals in the water. Pre-filtration may improve UV treatment by reducing particles; chemical contamination needs treatment suited to the substances present. An ordinary sand filter cannot be assumed to address that problem.",
+      "text": "Analyzing the water condition at proposed sites would come first. This approach does not remove dissolved chemical contaminants and heavy metals from water. Pre-filtration may improve UV disinfection effectiveness by reducing particle content. However, eliminating chemical contaminants needs removal treatments suited to the substances present. Common sand filtration cannot be assumed to address the issue.",
       "sources": [
         6
       ]
     },
     {
       "type": "paragraph",
-      "text": "A trial should establish whether users can sustain the required motion and finish a treatment cycle consistently, including people whose strength or mobility is limited. It should also check what happens when cranking stops early, how users recognize a fault, and whether they can obtain a replacement lamp or repair a worn component."
+      "text": "Can users consistently keep cranking or pedaling for the full treatment time? The trial would need to include people with limited strength or mobility. It should check what happens if someone stops early, how users spot a fault, and whether spare lamps and repairs are available."
     },
     {
       "type": "paragraph",
-      "text": "UV does not leave a protective disinfectant residual in the water, so storage and dispensing need to prevent recontamination. The mercury lamp would also require protection from breakage and a suitable collection and disposal arrangement; shielding users from harmful UV exposure belongs in the design assessment.",
+      "text": "UV treatment does not leave a protective disinfectant residual in water. After treatment, storage and dispensing require adequate precautions against recontamination. The design also needs protection against harmful UV exposure and mercury lamp breakage, plus a way to collect and dispose of used lamps.",
       "sources": [
         4,
         5,
@@ -153,7 +153,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Related research is already exploring other ways to power disinfection. Jeon and colleagues reviewed triboelectric approaches across several applications in Micromachines in 2025. Kim and colleagues reported a walking-powered water-bottle system in Nature Water in 2024, while Huo and colleagues discussed contact electrification for personal sanitation in a 2025 commentary. These papers provide useful context, but they are not field validation of the TEHG-UV.",
+      "text": "Other publications explore alternatives for powering water-disinfection tools. For instance, in 2025, Jeon et al., investigated triboelectric power generation in their Micromachines review article. Also in 2024, Kim et al., examined a walking-powered water-bottle system in Nature Water. 2025 Huo et al., published a commentary article about contact electrification technology for personal sanitation applications. These publications do not report field-test results for TEHG-UV.",
       "sources": [
         8,
         9,
@@ -162,22 +162,18 @@
     },
     {
       "type": "heading",
-      "text": "Author’s note — Jerry Zou"
+      "text": "Author’s Note — Xingtong Zou"
     },
     {
       "type": "paragraph",
-      "text": "The researchers developed the device and conducted the experiments. I am working with the group to consider its possible use after displacement and to explain the research to humanitarian organizations. This work is at the stage of assessing possible uses; a field trial remains to be designed."
+      "text": "Researchers developed this prototype and conducted experiments. I am collaborating with the team to assess possibilities for humanitarian uses of the technology after displacement and sharing information with humanitarian organizations. Currently we are evaluating usage scenarios; a field trial remains to be designed."
     },
     {
       "type": "paragraph",
-      "text": "The study’s authors and funding acknowledgements are listed in the CityUHK publication record.",
+      "text": "CityUHK lists the study's authors and funding.",
       "sources": [
         11
       ]
-    },
-    {
-      "type": "paragraph",
-      "text": "My next step is to discuss a particular water problem with researchers, water-service staff and prospective users. That discussion would help compare the device with the options already available and decide whether a trial is worth pursuing."
     }
   ],
   "citations": [
