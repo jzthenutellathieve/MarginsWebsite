@@ -39,7 +39,7 @@ test('article bodies and citations are present without JavaScript', () => {
     }
     for (const citation of article.citations) assert.ok(html.includes(escapeText(citation.text)));
     if (article.award) assert.ok(html.includes(escapeText(article.award)));
-    if (article.correctionNote) assert.ok(html.includes(escapeText(article.correctionNote)));
+    assert.ok(!html.includes('class="md-update-note"'));
     for (const other of articles.filter(a => a.id !== article.id)) {
       assert.ok(!html.includes(escapeText(other.content.find(b => b.type === 'paragraph').text)));
     }
