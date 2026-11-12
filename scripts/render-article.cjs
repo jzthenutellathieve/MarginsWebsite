@@ -1,12 +1,11 @@
 const { escapeText } = require('./site-utils.cjs');
-const { shortTitle, displayDate } = require('./editorial.cjs');
+const { shortTitle, datelineHtml } = require('./editorial.cjs');
 const { byline: articleByline } = require('./article-authors.cjs');
-const { displayIsoDate, retrospectiveMonth } = require('./article-dates.cjs');
 function renderArticle(article, snippets, assets) {
   const id = article.id;
   const isDevice = id === 'tehg-uv-water-access';
   const byline = articleByline(article);
-  const dateline = retrospectiveMonth(article) ? '<time datetime="'+displayIsoDate(article)+'">'+escapeText(displayDate(article))+'</time>' : escapeText(displayDate(article));
+  const dateline = datelineHtml(article);
   const collaboration = isDevice ? snippets.collaboration : '';
   const diagram = isDevice ? snippets['device-figure'] : '';
   const embeddedVideo = isDevice ? snippets['device-video'] : '';

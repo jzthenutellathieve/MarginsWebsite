@@ -40,12 +40,26 @@ const displayDate = article => retrospectiveMonth(article)
 const sortArticles = articles => articles.map(article => ({ article, date: displayIsoDate(article) }))
   .sort((a, b) => b.date.localeCompare(a.date) || a.article.id.localeCompare(b.article.id))
   .map(entry => entry.article);
+function updatedIsoDate(article) {
+  if (!article.updatedDate) return null;
+  const value = validIsoDate(article.updatedDate, 'update date', article);
+  if (value < isoDate(article)) throw new Error('Update precedes publication: ' + article.id);
+  return value;
+}
+const displayUpdatedDate = article => {
+  const value = updatedIsoDate(article);
+  return value ? 'Updated ' + new Date(value + 'T00:00:00Z').toLocaleDateString('en-US', {
+    month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC'
+  }) : '';
+};
 function schemaDates(article) {
   const month = retrospectiveMonth(article);
+  const updated = updatedIsoDate(article);
   return {
     datePublished: isoDate(article) + 'T00:00:00.000Z',
+    ...(updated ? { dateModified: updated + 'T00:00:00.000Z' } : {}),
     ...(month ? { temporalCoverage: month } : {})
   };
 }
 
-module.exports = { isoDate, displayDate, displayIsoDate, retrospectiveMonth, schemaDates, sortArticles };
+module.exports = { isoDate, displayDate, displayIsoDate, updatedIsoDate, displayUpdatedDate, retrospectiveMonth, schemaDates, sortArticles };

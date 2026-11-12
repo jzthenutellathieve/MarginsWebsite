@@ -1,6 +1,11 @@
 const { escapeText: e, articlePath } = require('./site-utils.cjs');
 const { byline } = require('./article-authors.cjs');
-const { isoDate, displayDate, displayIsoDate, retrospectiveMonth, sortArticles } = require('./article-dates.cjs');
+const { isoDate, displayDate, displayIsoDate, updatedIsoDate, displayUpdatedDate, retrospectiveMonth, sortArticles } = require('./article-dates.cjs');
+function datelineHtml(article) {
+  const published = `<time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time>`;
+  const updated = updatedIsoDate(article);
+  return published + (updated ? ` · <time datetime="${updated}">${e(displayUpdatedDate(article))}</time>` : '');
+}
 const fill = (template, values) => template.replace(/\{\{(\w+)\}\}/g, (_, key) => {
   if (!(key in values)) throw new Error(`Missing template value: ${key}`);
   return values[key];
@@ -40,7 +45,7 @@ function story(article, assets, featured = false) {
     ${article.deck ? `<p class="md-deck">${e(article.deck)}</p>` : ''}
     <p class="md-description">${e(article.subtitle)}</p>
     ${featured && article.homeNoteText ? `<p class="md-story-note md-home-source-note"><strong>${article.homeNoteTitle ? `${e(article.homeNoteTitle)} ` : ''}${e(article.homeNoteText)}</strong></p>` : ''}
-    <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time><span> · ${e(article.readTime)} read</span><span data-article-view-summary="${e(article.id)}" hidden></span></p>
+    <p class="md-meta">${e(byline(article))}<br>${datelineHtml(article)}<span> · ${e(article.readTime)} read</span><span data-article-view-summary="${e(article.id)}" hidden></span></p>
     ${article.award ? `<p class="md-award">${e(article.award)}</p>` : ''}</div></article>`;
 }
 function compactStory(article, assets) {
@@ -49,7 +54,7 @@ function compactStory(article, assets) {
     ${photo ? `<a class="md-compact-photo" href="${articlePath(article)}" tabindex="-1" aria-hidden="true">${imageTag(photo, assets)}</a>` : ''}
     <div><h3><a class="md-title-link" href="${articlePath(article)}">${e(shortTitle(article))}</a></h3>
     <p class="md-compact-deck">${e(article.deck || article.subtitle)}</p>
-    <p class="md-meta">${e(byline(article))}<br><time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time> · ${e(article.readTime)} read</p></div>
+    <p class="md-meta">${e(byline(article))}<br>${datelineHtml(article)} · ${e(article.readTime)} read</p></div>
   </article>`;
 }
 function renderHome(template, articles, config, assets, snippets) {
@@ -69,7 +74,7 @@ function listRow(article, assets) {
     ${article.deck ? `<p class="md-list-deck">${e(article.deck)}</p>` : ''}
     <p class="md-list-summary">${e(article.subtitle)}</p>
     ${article.cardNote ? `<p class="md-story-note">${e(article.cardNote)}</p>` : ''}
-    <p class="md-meta">${e(byline(article))} · <time datetime="${displayIsoDate(article)}">${e(displayDate(article))}</time> · ${e(article.readTime)} read</p></div>
+    <p class="md-meta">${e(byline(article))} · ${datelineHtml(article)} · ${e(article.readTime)} read</p></div>
     <a class="md-list-arrow" href="${articlePath(article)}" aria-label="Read ${e(shortTitle(article))}">↗</a></article>`;
 }
 const pagePath = (base, page) => page === 1 ? base : `${base}page/${page}/`;
@@ -116,4 +121,4 @@ function readNext(article, articles, assets) {
   const others = sortArticles(articles).filter(a => a.id !== article.id).slice(0,2);
   return `<aside class="md-read-next" aria-labelledby="read-next-title"><div class="md-section-rule"><h2 id="read-next-title">Keep reading</h2><a href="/articles/">All articles →</a></div>${others.map(a => listRow(a,assets)).join('')}</aside>`;
 }
-module.exports = { fill, shortTitle, byline, isoDate, displayDate, slug, sortArticles, renderHome, collectionPages, searchIndex, readNext, pagePath, gallery };
+module.exports = { fill, shortTitle, byline, isoDate, displayDate, datelineHtml, slug, sortArticles, renderHome, collectionPages, searchIndex, readNext, pagePath, gallery };
