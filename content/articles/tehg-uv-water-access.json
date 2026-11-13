@@ -223,5 +223,6 @@
   "format": "Research notes",
   "region": "Water access",
   "thumbnailAlt": "TEHG-UV schematic showing hand-crank and pedal inputs powering UV water treatment",
-  "thumbnailFit": "contain"
+  "thumbnailFit": "contain",
+  "reportingNote": "Xingwei Wang and his colleagues developed TEHG-UV and carried out the laboratory experiments described here."
 }
