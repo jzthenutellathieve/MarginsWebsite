@@ -30,7 +30,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Ms. Chu's story is revealed in a report by the Hong Kong Red Cross where she is identified by her pseudonym.",
+      "text": "“Remembering what happened gives me a headache and makes my heart race,” she says in the Hong Kong Red Cross’s account, translated from Chinese. The organization identifies her by the pseudonym Ms. Chu.",
       "sources": [
         1
       ]
@@ -55,7 +55,7 @@
     },
     {
       "type": "paragraph",
-      "text": "According to Habitat for Humanity Hong Kong, their efforts in providing relief include the distribution of household items, such as beds, wardrobes, tables, chairs, kettles, and rice cookers to the affected families. Moreover, Habitat for Humanity Hong Kong talks about the development of a three-year housing assistance program with input from social workers, housing operators and residents. Despite the fact that these items are basic household necessities, their procurement requires certain amount of money, delivery and space in the new apartment.",
+      "text": "Beds, wardrobes, tables, chairs, kettles and rice cookers were among the items Habitat for Humanity Hong Kong distributed to affected families. The organization also describes a three-year housing assistance program being developed with input from social workers, housing operators and residents. Even basic furniture costs money, needs delivery and takes up space in a new flat.",
       "sources": [
         2
       ]
@@ -138,9 +138,5 @@
       "text": "Reuters. Police arrest construction firm bosses over Hong Kong fire. Updated November 28, 2025. Historical comparison: Hong Kong’s deadliest fire since 1948.",
       "url": "https://www.reuters.com/world/china/hong-kong-tower-fire-toll-rises-44-police-arrest-three-2025-11-26/"
     }
-  ],
-  "reportingNote": "Months after the fire at Wang Fuk Court, I contacted the Hong Kong Red Cross to find out how people who had lost relatives or been forced from their homes were doing: whether they could access financial assistance, find suitable accommodation and begin to return to everyday life. This article draws on published personal accounts made available by the Red Cross and other organisations, alongside government records.",
-  "acknowledgements": "Thanks to the Hong Kong Red Cross for making these personal accounts publicly available.",
-  "cardNote": "For this independent follow-up, I contacted the Hong Kong Red Cross about the recovery and examined published personal accounts alongside government records.",
-  "homeNoteText": "Following contact with the Hong Kong Red Cross, this article draws on personal accounts they made available."
+  ]
 }

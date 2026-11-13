@@ -10,7 +10,7 @@
   "content": [
     {
       "type": "paragraph",
-      "text": "According to UNHCR, residents in Dabat Bosin, Sudan received four liters of water per person daily in 2024 – 20 percent of the twenty liters per person per day stipulated as the minimum for post-emergency circumstances. Within 24 hours, every individual had four liters allotted for drinking, washing, and preparing meals.",
+      "text": "Four liters a day had to cover drinking, washing and cooking for each resident of Dabat Bosin, Sudan, in 2024, according to UNHCR. That is 20 percent of its 20-liter daily minimum for post-emergency conditions.",
       "sources": [
         2
       ]
@@ -114,7 +114,7 @@
     },
     {
       "type": "paragraph",
-      "text": "Estimated annual cost using levelized-cost analyses is approximately eight US dollars and fifty-seven cents per person per year. Tables include detailed costs for parts and production, with component replacement frequency estimates. The estimate is not a purchase price or a measured cost from a humanitarian project.",
+      "text": "The researchers put the annual cost at about $8.57 per person, using a levelized-cost model that includes parts, production and expected replacement intervals. The estimate is not a purchase price or a measured cost from a humanitarian project.",
       "sources": [
         1,
         4
@@ -153,18 +153,11 @@
     },
     {
       "type": "paragraph",
-      "text": "Other publications explore alternatives for powering water-disinfection tools. For instance, in 2025, Jeon et al., investigated triboelectric power generation in their Micromachines review article. Also in 2024, Kim et al., examined a walking-powered water-bottle system in Nature Water. 2025 Huo et al., published a commentary article about contact electrification technology for personal sanitation applications. These publications do not report field-test results for TEHG-UV.",
+      "text": "A 2025 review by Jeon et al. in Micromachines examines triboelectric power generation for disinfection. Kim et al. studied a walking-powered water-bottle system in Nature Water in 2024, while Huo et al. discussed contact electrification for personal sanitation in a 2025 commentary. None of these papers reports field-test results for TEHG-UV.",
       "sources": [
         8,
         9,
         10
-      ]
-    },
-    {
-      "type": "paragraph",
-      "text": "CityUHK lists the study's authors and funding.",
-      "sources": [
-        11
       ]
     }
   ],

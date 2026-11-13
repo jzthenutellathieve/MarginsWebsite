@@ -46,7 +46,6 @@ test('article bodies and citations are present without JavaScript', () => {
   }
   const water = output('/articles/tehg-uv-water-access/');
   assert.match(water, /youtube\.com\/embed\/mozEaIGmTiw/);
-  assert.match(water, /data-mj-collaboration/);
   assert.match(water, /TEHG-UV schematic/);
 });
 

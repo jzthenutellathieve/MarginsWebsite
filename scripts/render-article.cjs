@@ -6,7 +6,6 @@ function renderArticle(article, snippets, assets) {
   const isDevice = id === 'tehg-uv-water-access';
   const byline = articleByline(article);
   const dateline = datelineHtml(article);
-  const collaboration = isDevice ? snippets.collaboration : '';
   const diagram = isDevice ? snippets['device-figure'] : '';
   const embeddedVideo = isDevice ? snippets['device-video'] : '';
   const projectLinks = isDevice ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/water/">Read the full water project →</a><a href="/projects/water/#laboratory-video">Watch the laboratory video ↓</a></div>' : id === 'after-cws-orange-county' ? '<div class="md-project-links"><a class="md-nav-link" href="/projects/housing/">Read the housing navigation notes →</a></div>' : '';
@@ -22,7 +21,7 @@ function renderArticle(article, snippets, assets) {
       }).join(' ')+'</span>';
     };
     const projectNote = article.projectNote ? '<p class="md-update-date">'+escapeText(article.projectNote)+'</p>' : '';
-    const reportingNote = article.reportingNote ? '<div class="md-reporting-note"><p>'+escapeText(article.reportingNote)+'</p>'+(article.acknowledgements ? '<p class="md-acknowledgements">'+escapeText(article.acknowledgements)+'</p>' : '')+'</div>' : '';
+    const sourceNote = article.reportingNote ? '<p>'+escapeText(article.reportingNote)+'</p>' : '';
     const blocks = article.content.map((block, index) => {
       if (block.type === 'paragraph') return '<p>'+escapeText(block.text)+sourceRefs(block)+'</p>';
       if (block.type === 'heading') return (isDevice && block.text === 'One lamp, two electrical demands' ? embeddedVideo : '')+'<h2 id="section-'+index+'">'+escapeText(block.text)+'</h2>';
@@ -46,7 +45,6 @@ function renderArticle(article, snippets, assets) {
       const label = escapeText(citation.text);
       return '<li id="source-'+citation.num+'" value="'+citation.num+'">'+(/^https:\/\//.test(citation.url || '') ? '<a href="'+escapeText(citation.url)+'" target="_blank" rel="noopener noreferrer">'+label+'</a>' : label)+'</li>';
     }).join('');
-    const toolbar = '<div class="md-reader-tools"><a href="#article-sources">Sources ↓</a></div>';
-    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+dateline+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+projectNote+reportingNote+toolbar+projectLinks+'</header><div class="mj-reader-body">'+diagram+blocks+collaboration+'<section class="mj-sources" id="article-sources"><h2>Sources</h2><ol>'+sources+'</ol></section></div>';
+    return '<header class="mj-reader-head"><h1>'+escapeText(shortTitle(article))+'</h1>'+(article.deck ? '<p class="mj-reader-subhead">'+escapeText(article.deck)+'</p>' : '')+'<p class="mj-reader-deck">'+escapeText(article.subtitle)+'</p><div class="mj-reader-meta">'+escapeText(byline)+' · '+dateline+' · '+escapeText(article.readTime)+' read<span data-article-views="'+escapeText(id)+'" hidden></span>'+(article.award ? '<br>'+escapeText(article.award) : '')+'</div>'+projectNote+projectLinks+'</header><div class="mj-reader-body">'+diagram+blocks+'<section class="mj-sources" id="article-sources"><h2>Sources</h2>'+sourceNote+'<ol>'+sources+'</ol></section></div>';
 }
 module.exports = { renderArticle };
